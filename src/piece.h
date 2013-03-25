@@ -18,29 +18,26 @@ typedef struct
 
     int posX; // Son ordonnée dans l'aire de jeu
     int posY; // Son abscisse dans l'aire de jeu
-
-
-
 }Piece;
 
     Piece();
     Piece(int k, int o);
     Piece(const Piece &p);
 
-    void setKind(int k);
-    void setOrientation(int o);
+    void setKind(Piece piece,int kind);
+    int getKind(Piece piece);
 
-    int getKind();
-    int getOrientation();
+    void setOrientation(Piece piece,int orientation);
+    int getOrientation(Piece piece);
 
-    void setColor(int c);
-    int getColor();
+    void setColor(Piece piece,int color);
+    int getColor(Piece piece);
 
-    void setPosX(int x);
-    int getPosX();
+    void setPosX(Piece piece,int x);
+    int getPosX(Piece piece);
 
-    void setPosY(int y);
-    int getPosY();
-};
+    void setPosY(Piece piece,int y);
+    int getPosY(Piece piece);
+
 
 #endif

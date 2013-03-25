@@ -37,7 +37,7 @@ int getKind(Piece piece)
     return piece.kind;
 }
 
-int etOrientation(Piece piece)
+int getOrientation(Piece piece)
 {
     return piece.orientation;
 }
@@ -67,7 +67,7 @@ void setPosY(Piece piece,int y)
     piece.posY = y;
 }
 
-int getPosY()
+int getPosY(Piece piece)
 {
     return piece.posY;
 }

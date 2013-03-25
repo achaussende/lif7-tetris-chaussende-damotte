@@ -35,8 +35,25 @@
 		<Linker>
 			<Add option="`sdl-config --libs`" />
 		</Linker>
+		<Unit filename="binarytrees.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="binarytrees.h" />
+		<Unit filename="board.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="board.h" />
 		<Unit filename="cb.bmp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="piece.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="piece.h" />
+		<Unit filename="player.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="player.h" />
+		<Unit filename="shapes.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
