@@ -35,10 +35,6 @@
 		<Linker>
 			<Add option="`sdl-config --libs`" />
 		</Linker>
-		<Unit filename="LoopTETRIS_SDL.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="LoopTETRIS_SDL.h" />
 		<Unit filename="binarytrees.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -58,6 +54,7 @@
 		</Unit>
 		<Unit filename="player.h" />
 		<Unit filename="shapes.h" />
+		<Unit filename="tetris.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
