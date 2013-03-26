@@ -3,7 +3,7 @@
 
 #include "player.h"
 
-/* Structure Node */
+/* ============= Structure Node ============== */
 
 typedef struct Node
 {
@@ -12,7 +12,7 @@ typedef struct Node
     struct Node * right_child;
 }Node;
 
-/* Node : Mutateurs & Accesseurs */
+/* ====== Node : Mutateurs & Accesseurs ======= */
 
 void setNodeValue (Node * node, const Player player);
 Player getNodeValue(const Node * node);
@@ -23,14 +23,14 @@ Node * getNodeLeft_Child(const Node * node);
 void setNodeRight_Child(Node * node, const Node * pnode);
 Node * getNodeRight_Child(const Node * node);
 
-/* Node : Méthodes */
+/* ============= Node : Méthodes ============== */
 
 void initNode(Node * node, const Player player);
 Node * createNode(const Player player);
 
 void freeNode(Node * node);
 
-/* Structure : Tree */
+/* ============ Structure : Tree ============== */
 
 typedef struct
 {
@@ -38,7 +38,7 @@ typedef struct
     int nb_elements;
 }Tree;
 
-/* Tree : Mutateurs & Accesseurs */
+/* ======= Tree : Mutateurs & Accesseurs ======= */
 
 void setTreeRoot(Tree * tree, const Node * root);
 Node * getTreeRoot(const Tree * tree);
@@ -46,13 +46,14 @@ Node * getTreeRoot(const Tree * tree);
 void setTreeNb_Elements(Tree * tree, const unsigned int n);
 int getTreeNb_Elements(const Tree * tree);
 
-/* Tree : Méthodes */
+/* ============= Tree : Méthodes =============== */
 
 void initTree (Tree * tree);
 
-void freeTree_recursion(Node * node);
+static void freeTree_recursion(Node * node);
 void freeTree (Tree * tree);
 
-void sortTreeByScore(Tree * tree);
+static void insertPlayerInTree_recursion(Node * node, Player player);
+void insertPlayerInTree(Tree * tree, Player player);
 
 #endif

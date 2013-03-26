@@ -4,16 +4,16 @@
 #include "binarytrees.h"
 #include "board.h"
 
-/* Fonctions de test */
+/* ============ Fonctions de test ============= */
 
 Bool testFallPiece(const Piece piece);
 Bool testRotationPiece(const Piece piece);
-Bool testLineFilled(const unsigned int posY);
+Bool testLineFilled(Board * board, const unsigned int posY);
 Bool testCollision(const Piece piece);
-Bool testLineEmpty(const unsigned int posY);
+Bool testLineEmpty(Board * board, const unsigned int posY);
 
 
-/* Methodes */
+/* ================ Méthodes ==================  */
 
 void fallPiece(Piece * piece);
 void rotationPiece(Piece * piece);
@@ -24,7 +24,8 @@ void drawPiece(Piece * ppiece);
 void clearPiece(Piece * ppiece);
 
 int calcScore(const unsigned int currentScore, const unsigned int n_lines);
-void displayScore(const Tree tree);
+void displayScore_recursion(const Node * node);
+void displayScore(const Tree * scoreTree);
 
 void openScoreData(Tree * ptree, const char filename[]);
 void saveScoreData(const Tree * ptree, const char filename[]);

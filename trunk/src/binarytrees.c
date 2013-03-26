@@ -6,6 +6,8 @@
 
 #include "binarytrees.h"
 
+/* ======== Mutateurs et Accesseurs ========== */
+
 void setNodeValue (Node * node, const Player player)
 {
     node->value = player;
@@ -56,11 +58,13 @@ int getTreeNb_Elements(const Tree * tree)
     return tree->nb_elements;
 }
 
+/* ================ Méthodes ================= */
+
 void initNode(Node * node, const Player player)
 {
     /* Vérification fiche joueur valide */
 
-    assert(player.score >= 0 && strlen(player.name[25])>0);
+    assert(player.score >= 0 && strlen(player.name)>0);
 
     /* Initialisation */
 
@@ -93,7 +97,7 @@ void initTree (Tree * tree)
     setTreeNb_Elements(tree, 1);
 }
 
-void freeTree_recursion(Node * node)
+static void freeTree_recursion(Node * node)
 {
     freeTree_recursion(node->left_child);
     freeTree_recursion(node->right_child);
@@ -105,3 +109,26 @@ void freeTree (Tree * tree)
     freeTree_recursion(tree->root);
 }
 
+static void insertPlayerInTree_recursion(Node * node, Player player)
+{
+    if(node == NULL)
+    {
+        node = createNode(player);
+    }
+    else
+    {
+        if(player.score >= node->value.score)
+        {
+            insertPlayerInTree_recursion(node->right_child, player);
+        }
+        else
+        {
+            insertPlayerInTree_recursion(node->left_child, player);
+        }
+    }
+}
+void insertPlayerInTree(Tree * tree, Player player)
+{
+    insertPlayerInTree_recursion((*tree).root, player);
+    tree->nb_elements++;
+}

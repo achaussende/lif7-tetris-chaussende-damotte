@@ -4,10 +4,10 @@
 
 #include "shapes.h"
 
-typedef enum { CYAN = 1, BLUE = 2, ORANGE = 3 , YELLOW = 4, GREEN = 5, PURPLE = 6, RED = 7} Color; // Les couleurs de chaque pièce, GHOST est pour la pièce fantôme
+/* Couleur de chaque pièce */
 
-/* Les coordonnées du point de pivot de la pièce */
-
+typedef enum { CYAN = 1, BLUE = 2, ORANGE = 3 , YELLOW = 4,
+                        GREEN = 5, PURPLE = 6, RED = 7} Color;
 
 typedef struct
 {
@@ -18,10 +18,6 @@ typedef struct
     unsigned int posX; // Son ordonnée dans l'aire de jeu
     unsigned int posY; // Son abscisse dans l'aire de jeu
 }Piece;
-
-    /*Piece();
-    Piece(int k, int o);
-    Piece(const Piece &p);*/
 
     void initPiece(Piece * piece, const unsigned int kind, const Color color, const unsigned int orientation);
     Piece * createPiece(const unsigned int kind, const Color color, const unsigned int orientation);
