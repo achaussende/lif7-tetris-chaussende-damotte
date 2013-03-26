@@ -19,7 +19,7 @@ void setScore (Player player, int score)
     player.score = score;
 }
 
-int getScore (const PLayer player)
+int getScore (const Player player)
 {
     return player.score;
 }

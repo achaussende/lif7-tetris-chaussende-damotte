@@ -1,73 +1,76 @@
 /* piece.cpp */
 #include "piece.h"
 
-// *************** A regarder ****************
-/*Piece()
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+
+
+void initPiece(Piece * piece, unsigned int kind, const Color color, unsigned int orientation)
 {
-    // Rien à faire
+    setColor(piece, color);
+    setKind(piece, kind);
+    setOrientation(piece, orientation);
 }
 
-Piece(int k, int o)
+Piece * createPiece(unsigned int kind, const Color color, unsigned int orientation)
 {
-    kind = k;
-    orientation = o;
+    Piece* piece=(Piece*)malloc(sizeof(Piece));
+    initPiece(piece, kind, color, orientation);
 }
 
-Piece(const Piece &p)
+void freePiece(Piece * piece)
 {
-    kind = p.kind;
-    orientation = p.orientation;
-    color = p.color;
-    posX = p.posX;
-    posY = p.posY;
-}*/
-
-void setKind(Piece piece,int kind)
-{
-    piece.kind = k;
+    free(piece);
 }
 
-void setOrientation(Piece piece,int orientation)
+
+void setKind(Piece * piece,int kind)
 {
-    piece.orientation = orientation;
+    piece->kind = kind;
 }
 
-int getKind(Piece piece)
+void setOrientation(Piece * piece,int orientation)
 {
-    return piece.kind;
+    piece->orientation = orientation;
 }
 
-int getOrientation(Piece piece)
+int getKind(const Piece * piece)
 {
-    return piece.orientation;
+    return piece->kind;
 }
 
-void setColor(Piece piece,int color)
+int getOrientation(const Piece * piece)
 {
-    piece.color = color;
+    return piece->orientation;
 }
 
-int getColor(Piece piece)
+void setColor(Piece * piece,int color)
 {
-    return piece.color;
+    piece->color = color;
 }
 
-void setPosX(Piece piece,int x)
+int getColor(const Piece * piece)
 {
-    piece.posX = x;
+    return piece->color;
 }
 
-int getPosX(Piece piece)
+void setPosX(Piece * piece,int x)
 {
-    return piece.posX;
+    piece->posX = x;
 }
 
-void setPosY(Piece piece,int y)
+int getPosX(const Piece * piece)
 {
-    piece.posY = y;
+    return piece->posX;
 }
 
-int getPosY(Piece piece)
+void setPosY(Piece * piece,int y)
 {
-    return piece.posY;
+    piece->posY = y;
+}
+
+int getPosY(const Piece * piece)
+{
+    return piece->posY;
 }

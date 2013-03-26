@@ -10,7 +10,7 @@ const int GRIDGE_Y = 20;
 typedef struct
 {
     Piece currentPiece; // Pièce actuellement sur la grille
-    int gridge[GRIDGE_X][GRIDGE_Y]; //grille de taille GRIDGE_X par GRIDGE_Y ----- Erreur : variably modified 'gridge' at file scope
+    int gridge[10][20]; //grille de taille GRIDGE_X par GRIDGE_Y ----- Erreur : variably modified 'gridge' at file scope
 }Board;
 
 /* Mutateurs & Accesseurs */
