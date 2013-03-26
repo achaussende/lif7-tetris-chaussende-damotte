@@ -5,7 +5,7 @@
 
 typedef struct
 {
-    char name;
+    char name[25];
     int score; //long or short int ?
 }Player;
 

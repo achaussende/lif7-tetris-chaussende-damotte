@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <assert.h>
+#include <assert.h> /* Pour la fonction assert */
+#include <string.h> /* Pour les fonctions sur les chaines de caractères */
 
 #include "binarytrees.h"
 
@@ -57,6 +58,12 @@ int getTreeNb_Elements(const Tree * tree)
 
 void initNode(Node * node, const Player player)
 {
+    /* Vérification fiche joueur valide */
+
+    assert(player.score >= 0 && strlen(player.name[25])>0);
+
+    /* Initialisation */
+
     setNodeValue(node, player);
     setNodeLeft_Child(node, NULL);
     setNodeRight_Child(node, NULL);
@@ -86,14 +93,15 @@ void initTree (Tree * tree)
     setTreeNb_Elements(tree, 1);
 }
 
-/*void freeTree (Tree * tree)
+void freeTree_recursion(Node * node)
 {
-    Tree * t;
+    freeTree_recursion(node->left_child);
+    freeTree_recursion(node->right_child);
+    free(node);
+}
 
-
-}*/
-
-/*void sortTreeByScore(Tree * tree)
+void freeTree (Tree * tree)
 {
+    freeTree_recursion(tree->root);
+}
 
-}*/
