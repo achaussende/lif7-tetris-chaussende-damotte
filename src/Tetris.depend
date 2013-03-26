@@ -228,3 +228,8 @@
 	<assert.h>
 	"player.h"
 
+1364291590 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/LoopTETRIS_SDL.c
+	<time.h>
+	"loopTETRIS_SDL.h"
+	<SDL/SDL_ttf.h>
+

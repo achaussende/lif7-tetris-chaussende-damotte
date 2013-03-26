@@ -59,6 +59,9 @@
 		</Unit>
 		<Unit filename="player.h" />
 		<Unit filename="shapes.h" />
+		<Unit filename="tetris.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="tetris.h" />
 		<Extensions>
 			<code_completion />

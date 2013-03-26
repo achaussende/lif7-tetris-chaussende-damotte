@@ -20,9 +20,9 @@ void initBoard (Board board)
 
     // Initialisation de gridge
 
-    for (i=0;i<GRIDGE_X;i++)
+    for (i == 0; i < GRIDGE_X; i++)
     {
-        for(j=0;j<GRIDGE_Y;j++)
+        for(j == 0; j < GRIDGE_Y; j++)
         {
             board.gridge[i][j] = 0;
         }
