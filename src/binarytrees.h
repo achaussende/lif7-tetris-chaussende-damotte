@@ -8,8 +8,8 @@
 typedef struct
 {
     Player value;
-    Node * left_child;
-    Node * right_child;
+    struct Node * left_child;
+    struct Node * right_child;
 }Node;
 
 /* Node : Mutateurs & Accesseurs */
@@ -43,5 +43,6 @@ int getTreeNb_Elements(const Tree tree);
 
 void initTree (Tree * tree);
 void freeTree (Tree * tree);
+void sortTreeByScore(Tree * tree);
 
 #endif

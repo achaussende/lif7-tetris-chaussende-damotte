@@ -54,7 +54,7 @@ int getTreeNb_Elements(const Tree tree)
     return tree.nb_elements;
 }
 
-void initTree (Tree * tree)
+/*void initTree (Tree * tree)
 {
     Node * pnode;
     pnode = (Node *) malloc(sizeof(Node));
@@ -62,5 +62,10 @@ void initTree (Tree * tree)
 //    setTreeRoot(&tree, pnode); // Soucis pour le type d'arguments => cf tp LIF5
 
 
-}
+}*/
 //void freeTree (Tree * tree);
+
+/*void sortTreeByScore(Tree * tree)
+{
+
+}*/
