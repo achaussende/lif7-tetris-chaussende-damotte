@@ -8,9 +8,9 @@
 
 bool testFallPiece(const Piece piece);
 bool testRotationPiece(const Piece piece);
-bool testLineFilled(const int posY);
+bool testLineFilled(const unsigned int posY);
 bool testCollision(const Piece piece);
-bool testLineEmpty(const int posY)
+bool testLineEmpty(const unsigned int posY)
 
 
 /* Methodes */
