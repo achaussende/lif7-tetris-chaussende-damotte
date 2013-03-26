@@ -6,19 +6,19 @@
 
 /* Fonctions de test */
 
-bool testFallPiece(const Piece piece);
-bool testRotationPiece(const Piece piece);
-bool testLineFilled(const unsigned int posY);
-bool testCollision(const Piece piece);
-bool testLineEmpty(const unsigned int posY)
+Bool testFallPiece(const Piece piece);
+Bool testRotationPiece(const Piece piece);
+Bool testLineFilled(const unsigned int posY);
+Bool testCollision(const Piece piece);
+Bool testLineEmpty(const unsigned int posY);
 
 
 /* Methodes */
 
-void fallPiece(Piece piece);
-void rotationPiece(Piece piece);
+void fallPiece(Piece * piece);
+void rotationPiece(Piece * piece);
 
-int destructLines(Board board);
+int destructLines(Board * board);
 
 void drawPiece(Piece * ppiece);
 void clearPiece(Piece * ppiece);
