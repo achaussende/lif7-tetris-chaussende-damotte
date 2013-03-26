@@ -17,6 +17,7 @@ Piece * createPiece(unsigned int kind, const Color color, unsigned int orientati
 {
     Piece* piece=(Piece*)malloc(sizeof(Piece));
     initPiece(piece, kind, color, orientation);
+    return piece;
 }
 
 void freePiece(Piece * piece)

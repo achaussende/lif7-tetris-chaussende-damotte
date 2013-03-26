@@ -7,8 +7,7 @@
 typedef enum { CYAN = 1, BLUE = 2, ORANGE = 3 , YELLOW = 4, GREEN = 5, PURPLE = 6, RED = 7} Color; // Les couleurs de chaque pièce, GHOST est pour la pièce fantôme
 
 /* Les coordonnées du point de pivot de la pièce */
-const int PIVOT_X = 1;
-const int PIVOT_Y = 2;
+
 
 typedef struct
 {
