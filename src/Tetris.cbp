@@ -47,6 +47,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="board.h" />
+		<Unit filename="bool.h" />
 		<Unit filename="cb.bmp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="piece.c">

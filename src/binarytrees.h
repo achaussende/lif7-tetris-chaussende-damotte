@@ -27,6 +27,7 @@ Node * getNodeRight_Child(const Node * node);
 
 void initNode(Node * node, const Player player);
 Node * createNode(const Player player);
+
 void freeNode(Node * node);
 
 /* Structure : Tree */
@@ -48,7 +49,10 @@ int getTreeNb_Elements(const Tree * tree);
 /* Tree : Méthodes */
 
 void initTree (Tree * tree);
+
+void freeTree_recursion(Node * node);
 void freeTree (Tree * tree);
+
 void sortTreeByScore(Tree * tree);
 
 #endif
