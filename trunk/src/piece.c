@@ -13,10 +13,55 @@ void initPiece(Piece * piece, unsigned int kind, const Color color, unsigned int
     setOrientation(piece, orientation);
 }
 
-Piece * createPiece(unsigned int kind, const Color color, unsigned int orientation)
+Piece * createPiece(unsigned int kind, unsigned int orientation)
 {
     Piece* piece=(Piece*)malloc(sizeof(Piece));
-    initPiece(piece, kind, color, orientation);
+
+    switch (k) {
+
+        case 0:
+        {
+            initPiece(piece, kind, YELLOW, orientation);
+        }
+        break;
+
+        case 1:
+        {
+            initPiece(piece, kind, CYAN orientation);
+        }
+        break;
+        case 2:
+        {
+            initPiece(piece, kind, GREEN, orientation);
+        }
+        break;
+        case 3:
+        {
+            initPiece(piece, kind, RED, orientation);
+        }
+        break;
+        case 4:
+        {
+            initPiece(piece, kind, ORANGE, orientation);
+        }
+        break;
+        case 5:
+        {
+            initPiece(piece, kind, BLUE, orientation);
+        }
+        break;
+        case 6:
+        {
+            initPiece(piece, kind, PURPLE, orientation);
+        }
+        break;
+        default:
+        {
+           printf("Erreur. \n");
+        }
+        break;
+}
+    /*initPiece(piece, kind, color, orientation);*/
     return piece;
 }
 

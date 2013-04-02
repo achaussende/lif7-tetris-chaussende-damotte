@@ -30,6 +30,8 @@ void initBoard (Board board)
 
     // intialisation currentPiece avec une piece au hasard
 
+    /*board->currentPiece = createPiece(rand() % 7, rand() % 4)*/
+
 }
 
 void freeBoard (Board board)

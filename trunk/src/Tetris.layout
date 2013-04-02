@@ -2,13 +2,13 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
 	<File name="binarytrees.c" open="0" top="0" tabpos="2">
-		<Cursor position="454" topLine="111" />
+		<Cursor position="1551" topLine="75" />
 	</File>
 	<File name="binarytrees.h" open="0" top="0" tabpos="1">
 		<Cursor position="1404" topLine="24" />
 	</File>
-	<File name="board.c" open="0" top="0" tabpos="0">
-		<Cursor position="392" topLine="11" />
+	<File name="board.c" open="1" top="1" tabpos="1">
+		<Cursor position="596" topLine="17" />
 	</File>
 	<File name="board.h" open="0" top="0" tabpos="0">
 		<Cursor position="208" topLine="0" />
@@ -16,19 +16,25 @@
 	<File name="bool.h" open="0" top="0" tabpos="6">
 		<Cursor position="135" topLine="0" />
 	</File>
-	<File name="piece.h" open="0" top="0" tabpos="7">
-		<Cursor position="223" topLine="20" />
+	<File name="main.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="0" topLine="43" />
+	</File>
+	<File name="piece.c" open="1" top="0" tabpos="2">
+		<Cursor position="327" topLine="9" />
+	</File>
+	<File name="piece.h" open="1" top="0" tabpos="3">
+		<Cursor position="371" topLine="12" />
 	</File>
 	<File name="player.h" open="0" top="0" tabpos="5">
 		<Cursor position="314" topLine="0" />
 	</File>
 	<File name="shapes.h" open="0" top="0" tabpos="4">
-		<Cursor position="306" topLine="0" />
+		<Cursor position="1446" topLine="192" />
 	</File>
-	<File name="tetris.c" open="1" top="1" tabpos="0">
-		<Cursor position="2917" topLine="108" />
+	<File name="tetris.c" open="1" top="0" tabpos="4">
+		<Cursor position="2583" topLine="138" />
 	</File>
 	<File name="tetris.h" open="0" top="0" tabpos="3">
-		<Cursor position="674" topLine="11" />
+		<Cursor position="162" topLine="6" />
 	</File>
 </CodeBlocks_layout_file>
