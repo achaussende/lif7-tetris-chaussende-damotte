@@ -4,27 +4,27 @@
 
 #include "board.h"
 
-void setCurrentPiece (Board board, const Piece piece)
+void setCurrentPiece (Board * board, const Piece * piece)
 {
-    board.currentPiece = piece;
+    board->currentPiece = piece;
 }
 
-Piece getCurrentPiece (const Board board)
+Piece * getCurrentPiece (const Board * board)
 {
-    return board.currentPiece;
+    return board->currentPiece;
 }
 
-void initBoard (Board board)
+void initBoard (Board * board)
 {
     int i, j;
 
     // Initialisation de gridge
 
-    for (i == 0; i < GRIDGE_X; i++)
+    for (i == 0; i < 20; i++)
     {
-        for(j == 0; j < GRIDGE_Y; j++)
+        for(j == 0; j < 10; j++)
         {
-            board.gridge[i][j] = 0;
+            board->gridge[i][j] = 0;
         }
     }
 
@@ -34,7 +34,9 @@ void initBoard (Board board)
 
 }
 
-void freeBoard (Board board)
+void freeBoard (Board * board)
 {
-
+    setCurrentPiece(board, NULL);
+    initBoard(board);
+    free(board);
 }

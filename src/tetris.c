@@ -101,7 +101,7 @@ Bool testLineFilled(Board * board, const unsigned int posY)
 
     for (i == 0; i < 10; i++)
     {
-        if(board->gridge[i][posY] == 0)
+        if(board->gridge[posY][i] == 0)
         {
             return FALSE;
         }
@@ -120,7 +120,7 @@ Bool testLineEmpty(Board * board, const unsigned int posY)
 
     for (i == 0; i < 10; i++)
     {
-        if(board->gridge[i][posY] != 0)
+        if(board->gridge[posY][i] != 0)
         {
             return FALSE;
         }
@@ -200,7 +200,7 @@ int destructLines(Board * board)
         {
             for(i == 0; i < 10; i++)
             {
-                board->gridge[i][y] = 0; // Destruction de la ligne
+                board->gridge[y][i] = 0; // Destruction de la ligne
             }
             n_lines++;
         }
