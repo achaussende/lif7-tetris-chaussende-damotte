@@ -6,8 +6,7 @@
 
 /* Couleur de chaque pièce */
 
-typedef enum { CYAN = 1, BLUE = 2, ORANGE = 3 , YELLOW = 4,
-                        GREEN = 5, PURPLE = 6, RED = 7} Color;
+typedef enum {YELLOW = 0, CYAN = 1, GREEN = 2, RED = 3, ORANGE = 4, BLUE = 5, PURPLE = 6} Color;
 
 typedef struct
 {
@@ -20,7 +19,7 @@ typedef struct
 }Piece;
 
     void initPiece(Piece * piece, const unsigned int kind, const Color color, const unsigned int orientation);
-    Piece * createPiece(const unsigned int kind, const Color color, const unsigned int orientation);
+    Piece * createPiece(const unsigned int kind, const unsigned int orientation);
     void freePiece(Piece * piece);
 
 
