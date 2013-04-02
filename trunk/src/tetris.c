@@ -16,9 +16,11 @@
 * o: pour orientation, l'orientation de la pièce
 * value: valeur avec laquelle remplir l'aire de jeu
 */
-void flood(Board * board,int i, int j, int px, int py, int k, int o, int value, Bool visited[][SIZE])
+void flood(Board * board,int i, int j, int px, int py, int k, int o,
+           int value, Bool visited[][SIZE])
 {
-    assert(px < 0 || px >= SIZE || py < 0 || py >= SIZE || visited[px][py] || PIECES[k][o][px][py] == FREE);
+    assert(px < 0 || px >= SIZE || py < 0 || py >= SIZE || visited[px][py] ||
+           PIECES[k][o][px][py] == FREE);
 
     visited[px][py] = TRUE;
     board->gridge[j][i] = value; // On remplit la case de la valeur dans l'aire
@@ -30,7 +32,8 @@ void flood(Board * board,int i, int j, int px, int py, int k, int o, int value, 
 }
 
 /* Cette fonction ne fait qu'appeler le flood */
-void floodFill(Board * board,int i, int j, int px, int py, int k, int o, int value)
+void floodFill(Board * board,int i, int j, int px, int py, int k, int o,
+               int value)
 {
     bool visited[SIZE][SIZE];
 
@@ -65,7 +68,7 @@ Bool isCurrentPieceMovable(const Board * board, const int x, const int y)
     int orientation = getOrientation(board->currentPiece); // ... et l'orientation de la pièce
 
    /* On fait notre flood fill */
-    flood(x, y, 2, 1, kind, orientation, movable, visited);
+    flood(x, y, 1, 2, kind, orientation, movable, visited);
 
     drawPiece(currentPiece); // On redessine notre pièce
 
@@ -88,7 +91,8 @@ Bool testRotationPiece(const Board * board)
     int kind = getKind(board->currentPiece);
     int orientation = getOrientation(board->currentPiece);
 
-    flood(getPosX(board->currentPiece), getPosY(board->currentPiece), 2, 1, kind, orientation, rotable, visited);
+    flood(getPosX(board->currentPiece), getPosY(board->currentPiece), 2, 1,
+          kind, orientation, rotable, visited);
 
     drawPiece(board->currentPiece);
 
@@ -225,45 +229,24 @@ int destructLines(Board * board)
     */
 }
 
-void drawPiece(Piece * piece)
+void drawPiece(Board * board)
 {
-    int i = getPosX(piece); // On récupère les ...
-    int j = getPosY(piece); // ... coordonnées de la pièce
+    Piece * p;
+    p = board->currentPiece;
+    int i = getPosX(p); // On récupère les ...
+    int j = getPosY(p); // ... coordonnées de la pièce
 
-    int k = getKind(piece); // On récupère son type
-    int o = getOrientation(piece); // et sa rotation
+    int kind = getKind(p); // On récupère son type
+    int orientation = getOrientation(p); // et sa rotation
 
-    switch(k) // En fonction de son type
-    {
-        case 1:
-            setColor(piece, CYAN); // On lui affecte la couleur appropriée
-            break;
-        case 5:
-            setColor(piece, BLUE);
-            break;
-        case 4:
-            setColor(piece, ORANGE);
-            break;
-        case 0:
-            setColor(piece, YELLOW);
-            break;
-        case 2:
-            setColor(piece, GREEN);
-            break;
-        case 6:
-            setColor(piece, PURPLE);
-            break;
-        case 3:
-            setColor(piece, RED);
-            break;
-        default:
-            break;
-    }
+
 
     /*Flood fill*/
 
-    floodFill(i, j, 2, 1, k, o, getColor(piece));
+    floodFill(board, i, j, 1, 2, kind, orientation, getColor(p));
 }
+
+
 void newPiece(Board * board,Piece * piece)
 {
     setPosX(piece, 5); // On donne à la pièce les coordonnées ...
@@ -274,22 +257,31 @@ void newPiece(Board * board,Piece * piece)
     setCurrentPiece(board, piece); // On déclare cette pièce comme pièce courante de l'aire de jeu
 }
 
-void clearPiece(Piece * piece)
+void clearPiece(Board * board)
 {
-    int i = getPosX(piece);
-    int j = getPosY(piece);
+    int i = getPosX(board->currentPiece);
+    int j = getPosY(board->currentPiece);
 
-    int k = getKind(piece);
-    int o = getOrientation(piece);
+    int kind = getKind(board->currentPiece);
+    int orientation = getOrientation(board->currentPiece);
 
     /*Flood fill*/
 
-    floodFill(i, j, PIVOT_X, PIVOT_Y, k, o, FREE);
+    floodFill(board, i, j, 1, 2, kind, orientation, FREE);
 }
 
 int calcScore(const unsigned int currentScore, const unsigned int n_lines)
 {
+    int i;
+    unsigned int score;
+    score = currentScore;
 
+    for(i=0 ; i<n_lines;i++)
+    {
+        score = score + 3000 + i*1000;
+    }
+
+    return score;
 }
 
 void displayScore_recursion(const Node * node)

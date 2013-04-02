@@ -9,7 +9,7 @@
 * FREE : indique que le point du tableau est vide
 * FILLED: indique que le point du tableau contient un bloc (1 ou 2)
 */
-typedef enum  { FREE,  FILLED }Fill;
+enum  { FREE = 0,  FILLED };
 
 
 /* Taille de la grille */
