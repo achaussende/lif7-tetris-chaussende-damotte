@@ -19,7 +19,7 @@ void flood(Board * board,int i, int j, int px, int py, int k, int o, int value, 
 {
     assert(px < 0 || px >= SIZE || py < 0 || py >= SIZE || visited[px][py] || PIECES[k][o][px][py] == FREE);
 
-    visited[px][py] = true;
+    visited[px][py] = TRUE;
     board->gridge[j][i] = value; // On remplit la case de la valeur dans l'aire
 
     flood(i, j - 1, px, - 1, k, o, value, visited);
@@ -35,21 +35,65 @@ void floodFill(Board * board,int i, int j, int px, int py, int k, int o, int val
 
     for(int l = 0; l < SIZE; ++l)
         for(int m = 0; m < SIZE; ++m)
-            visited[l][m] = false;
+            visited[l][m] = FALSE;
 
     flood(i, j, px, py, k, o, value, visited);
 }
 
 /* ============ Fonctions de test ============= */
 
-Bool testFallPiece(const Piece piece)
+/*Bool testFallPiece(const Piece piece)
 {
 
-}
-Bool testRotationPiece(const Piece piece)
-{
+}*/
 
+Bool isCurrentPieceMovable(Board * board,Piece * piece, int x, int y)
+{
+    clearPiece(Piece); // D'abord on efface la pièce courante
+
+    Bool movable = TRUE; // On suppose au départ qu'on peut bouger la pièce
+
+   /* On déclare et initialise le tableau visited pour le flood fill */
+    Bool visited[SIZE][SIZE];
+
+    for(int l = 0; l < SIZE; ++l)
+        for(int m = 0; m < SIZE; ++m)
+            visited[l][m] = FALSE;
+
+    int kind = getKind(piece); // On récupère le type ...
+    int orientation = getOrientation(piece); // ... et l'orientation de la pièce
+
+   /* On fait notre flood fill */
+    flood(x, y, 2, 1, kind, orientation, movable, visited);
+
+    drawPiece(currentPiece); // On redessine notre pièce
+
+    return movable; // On renvoie le résultat
 }
+
+
+Bool testRotationPiece(const Piece * piece)
+{
+    clearPiece(piece);
+
+    Bool rotable = TRUE;
+
+    Bool visited[SIZE][SIZE];
+
+    for(int i = 0; i < SIZE; ++i)
+        for(int j = 0; j < SIZE; ++j)
+            visited[i][j] = FALSE;
+
+    int kind = getKind(piece);
+    int orientation = getKind(orientation);
+
+    flood(getPosX(piece), getPosY(piece), 2, 1, kind, orientation, rotable, visited);
+
+    drawPiece(piece);
+
+    return rotable;
+}
+
 Bool testLineFilled(Board * board, const unsigned int posY)
 {
     int i;
@@ -64,10 +108,11 @@ Bool testLineFilled(Board * board, const unsigned int posY)
 
     return TRUE;
 }
-Bool testCollision(const Piece piece);
+/*Bool testCollision(const Piece piece);
 {
 
-}
+}*/
+
 Bool testLineEmpty(Board * board, const unsigned int posY)
 {
     int i;
@@ -85,14 +130,61 @@ Bool testLineEmpty(Board * board, const unsigned int posY)
 
 /* ================ Méthodes ==================  */
 
-void fallPiece(Piece * piece)
+void moveCurrentPieceDown(Board * board, Piece *piece)
 {
+    int y = getPosY(piece);
 
+    if(isCurrentPieceMovable(board, piece,x , y + 1)) // Si on peut bouger la pièce vers le bas
+    {
+        clearPiece(piece); // On efface la pièce de son ancienne position
+        setPosX(piece, y + 1); // On incrémente son ordonnée
+
+        drawPiece(piece); // On la redessine à la nouvelle position
+    }
+}
+
+void moveCurrentPieceLeft(Board * board, Piece *piece)
+{
+    int x = getPosX(piece);
+
+    if(isCurrentPieceMovable(board, piece, x - 1 , y ))
+    {
+        clearPiece(piece);
+        setPosY(piece, x - 1);
+
+        drawPiece(piece);
+    }
+}
+
+void moveCurrentPieceRight(Board * board, Piece *piece)
+{
+    int x = getPosX(piece);
+
+    if(isCurrentPieceMovable(board, piece, x + 1 , y ))
+    {
+        clearPiece(piece);
+        setPosY(piece, x + 1);
+
+        drawPiece(piece);
+    }
 }
 
 void rotationPiece(Piece * piece)
 {
+    int orientation = getOrientation(piece);
 
+    if(orientation < NB_ROTATIONS - 1) // Si on n'est pas sur la dernière orientation
+        orientation++; // On peut incrémenter orientation
+    else // Si non
+        orientation = 0; // On passe à la 1ère orientation
+
+    if(isCurrentPieceRotable(o))
+    {
+        clearPiece(piece);
+
+        setOrientation(piece, orientation);
+        drawPiece(piece);
+    }
 }
 
 int destructLines(Board * board)
@@ -132,36 +224,36 @@ int destructLines(Board * board)
     */
 }
 
-void drawPiece(Piece * ppiece)
+void drawPiece(Piece * piece)
 {
-    int i = piece.getPosX(); // On récupère les ...
-    int j = piece.getPosY(); // ... coordonnées de la pièce
+    int i = getPosX(piece); // On récupère les ...
+    int j = getPosY(piece); // ... coordonnées de la pièce
 
-    int k = piece.getKind(); // On récupère son type
-    int o = piece.getOrientation(); // et sa rotation
+    int k = getKind(piece); // On récupère son type
+    int o = getOrientation(piece); // et sa rotation
 
     switch(k) // En fonction de son type
     {
-        case I:
-            piece.setColor(CYAN); // On lui affecte la couleur appropriée
+        case 1:
+            setColor(piece, CYAN); // On lui affecte la couleur appropriée
             break;
-        case J:
-            piece.setColor(BLUE);
+        case 5:
+            setColor(piece, BLUE);
             break;
-        case L:
-            piece.setColor(ORANGE);
+        case 4:
+            setColor(piece, ORANGE);
             break;
-        case O:
-            piece.setColor(YELLOW);
+        case 0:
+            setColor(piece, YELLOW);
             break;
-        case S:
-            piece.setColor(GREEN);
+        case 2:
+            setColor(piece, GREEN);
             break;
-        case T:
-            piece.setColor(PURPLE);
+        case 6:
+            setColor(piece, PURPLE);
             break;
-        case Z:
-            piece.setColor(RED);
+        case 3:
+            setColor(piece, RED);
             break;
         default:
             break;
@@ -169,15 +261,15 @@ void drawPiece(Piece * ppiece)
 
     /*Flood fill*/
 
-    floodFill(i, j, PIVOT_X, PIVOT_Y, k, o, piece.getColor());
+    floodFill(i, j, PIVOT_X, PIVOT_Y, k, o, getColor(piece));
 }
-void clearPiece(Piece * ppiece)
+void clearPiece(Piece * piece)
 {
-    int i = piece.getPosX();
-    int j = piece.getPosY();
+    int i = getPosX(piece);
+    int j = getPosY(piece);
 
-    int k = piece.getKind();
-    int o = piece.getOrientation();
+    int k = getKind(piece);
+    int o = getOrientation(piece);
 
     /*Flood fill*/
 
