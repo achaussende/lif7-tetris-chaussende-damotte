@@ -11,20 +11,21 @@ Bool testRotationPiece(const Piece * piece);
 Bool testLineFilled(Board * board, const unsigned int posY);
 //Bool testCollision(const Piece * piece);
 Bool testLineEmpty(Board * board, const unsigned int posY);
-Bool isCurrentPieceMovable(Board * board, Piece * piece, int x, int y);
+Bool isCurrentPieceMovable(const Board * board, const int x, const int y);
 
 
 /* ================ Méthodes ==================  */
 
-void moveCurrentPieceDown(Board * board, Piece *piece);
-void moveCurrentPieceLeft(Board * board, Piece *piece);
-void moveCurrentPieceRight(Board * board, Piece *piece);
-void rotationPiece(Piece * piece);
+void moveCurrentPieceDown(Board * board);
+void moveCurrentPieceLeft(Board * board);
+void moveCurrentPieceRight(Board * board);
+void rotationPiece(Board * board);
 
 int destructLines(Board * board);
 
-void drawPiece(Piece * ppiece);
-void clearPiece(Piece * ppiece);
+void drawPiece(Piece * piece);
+void clearPiece(Piece * piece);
+void newPiece(Board *board, Piece * piece);
 
 int calcScore(const unsigned int currentScore, const unsigned int n_lines);
 void displayScore_recursion(const Node * node);
