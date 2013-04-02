@@ -195,17 +195,24 @@ void rotationPiece(Board * board)
 int destructLines(Board * board)
 {
     int y = 0;
-    int i;
+    int i, j;
     int n_lines = 0;
 
     while(testLineEmpty(board, y) == FALSE )
     {
-        if(testLineFilled(board, y) == TRUE)
+        while(testLineFilled(board, y) == TRUE)
         {
             for(i == 0; i < 10; i++)
             {
                 board->gridge[y][i] = 0; // Destruction de la ligne
             }
+            /*for(int j = y; j > 0; --j)
+            {
+                for(int i = 0; i < 20; ++i)
+                {
+                   board->area[i][j] = board->area[i][j-1];
+                }
+            }*/ //TODO
             n_lines++;
         }
         y++;

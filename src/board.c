@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <time.h>
 
 #include "board.h"
+
 
 void setCurrentPiece (Board * board, const Piece * piece)
 {
@@ -17,20 +19,23 @@ Piece * getCurrentPiece (const Board * board)
 void initBoard (Board * board)
 {
     int i, j;
+    Piece * p;
 
-    // Initialisation de gridge
+    srand(time(NULL)); // initialisation de rand
 
-    for (i == 0; i < 20; i++)
+    /* Initialisation de gridge */
+
+    for (i = 0; i < 20; i++)
     {
-        for(j == 0; j < 10; j++)
+        for(j = 0; j < 10; j++)
         {
             board->gridge[i][j] = 0;
         }
     }
+    /* Initialisation currentPiece avec une piece au hasard */
 
-    // intialisation currentPiece avec une piece au hasard
-
-    /*board->currentPiece = createPiece(rand() % 7, rand() % 4)*/
+    p = createPiece(rand() % 7, rand() % 4);
+    setCurrentPiece(board, p);
 
 }
 
