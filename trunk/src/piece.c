@@ -61,7 +61,6 @@ Piece * createPiece(unsigned int kind, unsigned int orientation)
         }
         break;
 }
-    /*initPiece(piece, kind, color, orientation);*/
     return piece;
 }
 

@@ -33,6 +33,5 @@ Piece * getCurrentPiece (const Board * board);
 void initBoard (Board * board);
 void freeBoard (Board * board);
 
-//Fonction d'initialisation de gridge ?
 
 #endif

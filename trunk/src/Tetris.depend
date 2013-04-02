@@ -233,3 +233,15 @@
 	"loopTETRIS_SDL.h"
 	<SDL/SDL_ttf.h>
 
+1364310965 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/binarytrees.c
+	<stdlib.h>
+	<stdio.h>
+	<assert.h>
+	<string.h>
+	"binarytrees.h"
+
+1364308496 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/binarytrees.h
+	"player.h"
+
+1364293960 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/player.h
+
