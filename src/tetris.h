@@ -24,7 +24,7 @@ void rotationPiece(Board * board);
 int destructLines(Board * board);
 
 void drawPiece(Piece * piece);
-void clearPiece(Piece * piece);
+void clearPiece(Board * board);
 void newPiece(Board *board, Piece * piece);
 
 int calcScore(const unsigned int currentScore, const unsigned int n_lines);
