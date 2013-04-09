@@ -5,7 +5,7 @@
 
 #include "player.h"
 
-void setName (Player player, const char * name[])
+void setName (Player player, const char * name)
 {
     assert(strlen(name) <= 25);
     strcpy(player.name, name);
