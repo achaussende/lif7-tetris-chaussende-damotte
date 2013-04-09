@@ -1,38 +1,58 @@
-#include <assert.h>
 #include <time.h>
-#include "loopTETRIS_SDL.h"
+#include "LoopTETRIS_SDL.h"
 #include <SDL/SDL_ttf.h>
+#include <assert.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-const int TAILLE_SPRITE=32;
 
-void sdljeuInit(sdlTetris *pSdlTetris)
+
+void sdljeuInit(SDL *sdl)
 {
-    Tetris *pTetris;
-    int dimx, dimy;
+    SDL_Surface *surface_screen = NULL, *rectangle = NULL;
+    SDL_Rect position;
 
-    pTetris = &(pSdlTetris->tetris);
-    jeuInit(pTetris);
+    assert(SDL_Init(SDL_INIT_EVERYTHING)!= -1); // Démarrage de la SDL
+    surface_screen = SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF);
+    // Allocation de la surface
+    rectangle = SDL_CreateRGBSurface(SDL_HWSURFACE, 220, 180, 32, 0, 0, 0, 0);
+    SDL_WM_SetCaption("LegendaryTetris", NULL);
 
-    assert(   SDL_Init( SDL_INIT_EVERYTHING )!= -1 );
+    // Coloration de la surface ecran en bleu-vert
+    SDL_FillRect(surface_screen, NULL, SDL_MapRGB(surface_screen->format, 17, 206, 112));
 
-    dimx = 10 * TAILLE_SPRITE;
-	dimy = 20 * TAILLE_SPRITE;
-	pSdlJeu->surface_screen = SDL_SetVideoMode(   dimx, dimy, 32, SDL_SWSURFACE );
-	assert( pSdlJeu->surface_screen!=NULL);
-	SDL_WM_SetCaption( "Tetris v0.1", NULL );
+    SDL_Flip(ecran); /* Mise à jour de l'écran avec sa nouvelle couleur */
 
+    pause();
 
 
 }
 
-
+/*
 void sdljeuBoucle(sdlTetris *)
 {
 
 }
+*/
 
-
-void sdljeuLibere(sdlTetris *)
+void sdljeuLibere(SDL *sdl)
 {
+    SDL_Quit(); // Arrêt de la SDL (libération de la mémoire)
+    return EXIT_SUCCESS; // Fermeture du programme
+}
 
+void pause()
+{
+    int continuer = 1;
+    SDL_Event event;
+
+    while (continuer)
+    {
+        SDL_WaitEvent(&event);
+        switch(event.type)
+        {
+            case SDL_QUIT:
+                continuer = 0;
+        }
+    }
 }

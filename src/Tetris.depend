@@ -245,3 +245,76 @@
 
 1364293960 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/player.h
 
+1365491261 source:/home/alan/Documents/LIF7/Tetris/src/LoopTETRIS_SDL.c
+	<assert.h>
+	<time.h>
+	"LoopTETRIS_SDL.h"
+	<SDL/SDL_ttf.h>
+	<assert.h>
+	<stdlib.h>
+	<stdio.h>
+
+1365491856 /home/alan/Documents/LIF7/Tetris/src/LoopTETRIS_SDL.h
+	<SDL/SDL.h>
+	"tetris.h"
+
+1365490790 /home/alan/Documents/LIF7/Tetris/src/tetris.h
+	"bool.h"
+	"binarytrees.h"
+	"board.h"
+
+1364884346 /home/alan/Documents/LIF7/Tetris/src/bool.h
+
+1364884346 /home/alan/Documents/LIF7/Tetris/src/binarytrees.h
+	"player.h"
+
+1365491663 /home/alan/Documents/LIF7/Tetris/src/player.h
+
+1364896030 /home/alan/Documents/LIF7/Tetris/src/board.h
+	"piece.h"
+
+1364890143 /home/alan/Documents/LIF7/Tetris/src/piece.h
+	"shapes.h"
+
+1364884346 /home/alan/Documents/LIF7/Tetris/src/shapes.h
+
+1364884346 source:/home/alan/Documents/LIF7/Tetris/src/binarytrees.c
+	<stdlib.h>
+	<stdio.h>
+	<assert.h>
+	<string.h>
+	"binarytrees.h"
+
+1364896030 source:/home/alan/Documents/LIF7/Tetris/src/board.c
+	<stdio.h>
+	<stdlib.h>
+	<assert.h>
+	<time.h>
+	"board.h"
+
+1365491473 source:/home/alan/Documents/LIF7/Tetris/src/main.c
+	<stdlib.h>
+	<stdio.h>
+	<time.h>
+	"LoopTETRIS_SDL.h"
+	"tetris.h"
+	<SDL/SDL_ttf.h>
+
+1364884346 source:/home/alan/Documents/LIF7/Tetris/src/main.cpp
+	<cstdlib>
+	<stdlib.h>
+	<SDL/SDL.h>
+	<SDL.h>
+
+1365491525 source:/home/alan/Documents/LIF7/Tetris/src/piece.c
+	"piece.h"
+	<stdio.h>
+	<stdlib.h>
+	<assert.h>
+
+1365491709 source:/home/alan/Documents/LIF7/Tetris/src/player.c
+	<stdio.h>
+	<stdlib.h>
+	<assert.h>
+	"player.h"
+

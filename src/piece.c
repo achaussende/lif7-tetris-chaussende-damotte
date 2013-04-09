@@ -17,7 +17,7 @@ Piece * createPiece(unsigned int kind, unsigned int orientation)
 {
     Piece* piece=(Piece*)malloc(sizeof(Piece));
 
-    switch (k) {
+    switch (kind) {
 
         case 0:
         {
@@ -27,7 +27,7 @@ Piece * createPiece(unsigned int kind, unsigned int orientation)
 
         case 1:
         {
-            initPiece(piece, kind, CYAN orientation);
+            initPiece(piece, kind, CYAN, orientation);
         }
         break;
         case 2:
