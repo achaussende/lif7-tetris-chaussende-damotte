@@ -6,15 +6,15 @@
 typedef struct
 {
     char name[25];
-    int score; //long or short int ?
+    unsigned int score;
 }Player;
 
 /* Mutateurs & Accesseurs */
 
-void setName (Player player, char name);
+void setName (Player player, const char * name[]);
 char getName (Player player);
 
-void setScore (Player player, int score);
-int getScore (Player player);
+void setScore (Player player, unsigned int score);
+unsigned int getScore (Player player);
 
 #endif
