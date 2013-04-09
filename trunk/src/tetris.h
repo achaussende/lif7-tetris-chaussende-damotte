@@ -4,6 +4,22 @@
 #include "binarytrees.h"
 #include "board.h"
 
+/* ============ Flood Fill ============ */
+
+/*
+* Fonction flood :
+* (i, j): Les coordonnées de la case à partir de laquelle floodfiller dans l'aire de jeu
+* (px, py): Les coordonnées de la case à partir de laquelle floodfiller dans la matrice de la pièce
+* k: pour kind (type), le type de la pièce
+* o: pour orientation, l'orientation de la pièce
+* value: valeur avec laquelle remplir l'aire de jeu
+*/
+void flood(Board * board,int i, int j, int px, int py, int k, int o,
+           int value, Bool visited[4][4]);
+
+/* Appel de flood + initialisation de visited */
+void floodFill(Board * board, int i, int j, int px, int py, int k, int o,
+               int value);
 
 typedef struct
 {
@@ -11,6 +27,7 @@ typedef struct
 	Piece piece;
 
 } Tetris;
+
 
 /* ============ Fonctions de test ============= */
 
