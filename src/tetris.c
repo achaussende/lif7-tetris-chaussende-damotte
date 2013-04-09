@@ -48,13 +48,16 @@ Bool isCurrentPieceMovable(const Board * board, const int x, const int y)
 {
     int kind, orientation;
     int l, m;
+    Bool visited[4][4];
 
-    clearPiece(board->currentPiece); // D'abord on efface la pièce courante
+    kind = getKind(board->currentPiece); // On récupère le type ...
+    orientation = getOrientation(board->currentPiece); // ... et l'orientation de la pièce
+
+    clearPiece(board); // D'abord on efface la pièce courante
 
     Bool movable = TRUE; // On suppose au départ qu'on peut bouger la pièce
 
-   /* On déclare et initialise le tableau visited pour le flood fill */
-    Bool visited[4][4];
+   /* On initialise le tableau visited pour le flood fill */
 
     for(l = 0; l < 4; l++)
     {
@@ -64,9 +67,6 @@ Bool isCurrentPieceMovable(const Board * board, const int x, const int y)
         }
     }
 
-
-    kind = getKind(board->currentPiece); // On récupère le type ...
-    orientation = getOrientation(board->currentPiece); // ... et l'orientation de la pièce
 
    /* On fait notre flood fill */
     flood(x, y, 1, 2, kind, orientation, movable, visited);
@@ -79,11 +79,12 @@ Bool isCurrentPieceMovable(const Board * board, const int x, const int y)
 
 Bool testRotationPiece(const Board * board)
 {
-    clearPiece(board->currentPiece);
-
+    int kind = getKind(board->currentPiece);
+    int orientation = getOrientation(board->currentPiece);
     Bool rotable = TRUE;
-
     Bool visited[4][4];
+
+    clearPiece(board);
 
     for(int i = 0; i < 4; ++i)
     {
@@ -94,14 +95,10 @@ Bool testRotationPiece(const Board * board)
 
     }
 
-
-    int kind = getKind(board->currentPiece);
-    int orientation = getOrientation(board->currentPiece);
-
     flood(getPosX(board->currentPiece), getPosY(board->currentPiece), 2, 1,
           kind, orientation, rotable, visited);
 
-    drawPiece(board->currentPiece);
+    drawPiece(board);
 
     return rotable;
 }
@@ -145,10 +142,10 @@ void moveCurrentPieceDown(Board * board)
 
     if(isCurrentPieceMovable(board, x , y + 1)) // Si on peut bouger la pièce vers le bas
     {
-        clearPiece(board->currentPiece); // On efface la pièce de son ancienne position
+        clearPiece(board); // On efface la pièce de son ancienne position
         setPosX(board->currentPiece, y + 1); // On incrémente son ordonnée
 
-        drawPiece(board->currentPiece); // On la redessine à la nouvelle position
+        drawPiece(board); // On la redessine à la nouvelle position
     }
 }
 
@@ -159,10 +156,9 @@ void moveCurrentPieceLeft(Board * board)
 
     if(isCurrentPieceMovable(board, x - 1 , y ))
     {
-        clearPiece(board->currentPiece);
+        clearPiece(board);
         setPosY(board->currentPiece, x - 1);
-
-        drawPiece(board->currentPiece);
+        drawPiece(board);
     }
 }
 
@@ -171,12 +167,11 @@ void moveCurrentPieceRight(Board * board)
     int x = getPosX(board->currentPiece);
     int y = getPosY(board->currentPiece);
 
-    if(isCurrentPieceMovable(board, x + 1 , y ))
+    if(isCurrentPieceMovable(board, x + 1 , y))
     {
-        clearPiece(board->currentPiece);
+        clearPiece(board);
         setPosY(board->currentPiece, x + 1);
-
-        drawPiece(board->currentPiece);
+        drawPiece(board);
     }
 }
 
@@ -191,10 +186,9 @@ void rotationPiece(Board * board)
 
     if(testRotationPiece(board))
     {
-        clearPiece(board->currentPiece);
-
+        clearPiece(board);
         setOrientation(board->currentPiece, orientation);
-        drawPiece(board->currentPiece);
+        drawPiece(board);
     }
 }
 
@@ -228,18 +222,10 @@ int destructLines(Board * board)
 
                 }
             }
-            /*for(int j = y; j > 0; --j)
-            {
-                for(int i = 0; i < 20; ++i)
-                {
-                   board->area[i][j] = board->area[i][j-1];
-                }
-            }*/ //TODO
             n_lines++;
         }
         y++;
     }
-    // TODO : - Chute des blocs supérieurs de 1 en ordonnée Y
     return n_lines;
 
     /*

@@ -11,7 +11,7 @@ typedef struct
 
 /* Mutateurs & Accesseurs */
 
-void setName (Player player, const char * name[]);
+void setName (Player player, const char * name);
 char getName (Player player);
 
 void setScore (Player player, unsigned int score);

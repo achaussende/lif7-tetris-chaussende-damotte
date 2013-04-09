@@ -4,6 +4,9 @@
 	<File name="LoopTETRIS_SDL.c" open="0" top="0" tabpos="0">
 		<Cursor position="38" topLine="0" />
 	</File>
+	<File name="LoopTETRIS_SDL.h" open="0" top="0" tabpos="0">
+		<Cursor position="53" topLine="0" />
+	</File>
 	<File name="binarytrees.c" open="0" top="0" tabpos="2">
 		<Cursor position="454" topLine="111" />
 	</File>
@@ -28,17 +31,17 @@
 	<File name="piece.h" open="0" top="0" tabpos="3">
 		<Cursor position="1178" topLine="19" />
 	</File>
-	<File name="player.c" open="1" top="0" tabpos="5">
-		<Cursor position="184" topLine="4" />
+	<File name="player.c" open="0" top="0" tabpos="5">
+		<Cursor position="147" topLine="0" />
 	</File>
-	<File name="player.h" open="1" top="1" tabpos="6">
-		<Cursor position="198" topLine="0" />
+	<File name="player.h" open="0" top="0" tabpos="6">
+		<Cursor position="195" topLine="0" />
 	</File>
 	<File name="shapes.h" open="0" top="0" tabpos="4">
 		<Cursor position="306" topLine="0" />
 	</File>
-	<File name="tetris.c" open="1" top="0" tabpos="3">
-		<Cursor position="6070" topLine="100" />
+	<File name="tetris.c" open="1" top="1" tabpos="3">
+		<Cursor position="7547" topLine="309" />
 	</File>
 	<File name="tetris.h" open="1" top="0" tabpos="4">
 		<Cursor position="1866" topLine="40" />
