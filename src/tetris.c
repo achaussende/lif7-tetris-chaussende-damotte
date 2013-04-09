@@ -209,7 +209,7 @@ void rotationPiece(Board * board)
     else // Si non
         orientation = 0; // On passe à la 1ère orientation
 
-    if(testRotationPiece(board))
+    if(testRotationPiece(board) == TRUE)
     {
         clearPiece(board);
         setOrientation(board->currentPiece, orientation);
@@ -227,46 +227,19 @@ int destructLines(Board * board)
     {
         while(testLineFilled(board, y) == TRUE)
         {
-            for(i = 0; i < 10; i++)
+            for(int j = y; j > 0; j--)
             {
-                board->gridge[y][i] = 0; // Destruction de la ligne
-            }
-
-            for(i = 0; i < 10; i++)
-            {
-                for(j = y; j < 20 ; j++)
+                for(int i = 0; i < 20; i++)
                 {
-                    if(j != 19)
-                    {
-                        board->gridge[j][i] = board->gridge[j+1][i];
-                    }
-                    else
-                    {
-                        board->gridge[y][i] = 0;
-                    }
-
+                    board->gridge[i][j] = board->gridge[i-1][j];
                 }
             }
+
             n_lines++;
         }
         y++;
     }
     return n_lines;
-
-    /*
-    clearPiece(currentPiece); // On efface d'abord la pièce courante
-
-         On déplace toutes les lignes à partir de y vers le haut
-         d'une case vers le bas
-
-    for(int j = y; j > 0; --j)
-    {
-        for(int i = 0; i < GRIDGE_Y; ++i)
-            board->area[i][j] = board->area[i][j-1];
-    }
-
-    drawPiece(currentPiece);  On la redessine
-    */
 }
 
 void drawPiece(Board * board)
@@ -353,4 +326,31 @@ void openScoreData(Tree * ptree, const char filename[])
 void saveScoreData(const Tree * ptree, const char filename[])
 {
 
+}
+
+/* HARD-DROP */
+void dropCurrentPiece(Board * board)
+{
+    int x = getPosX(board->currentPiece);
+    int y = getPosY(board->currentPiece);
+
+    while(isCurrentPieceMovable(board, x, y++)) // Tant qu'on peut toujours bouger la pièce vers le bas
+    {
+        moveCurrentPieceDown(board);
+    }
+}
+
+Bool testGameOver(Board * board)
+{
+    int i;
+
+    for(i = 0; i < 10; ++i)
+    {
+        if(area[0][i] != FREE) // Si il y a un bloc sur la première ligne de l'aire
+        {
+            return TRUE; // C'est que la partie est finie
+        }
+    }
+
+    return FALSE;
 }
