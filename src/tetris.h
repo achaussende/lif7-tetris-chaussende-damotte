@@ -17,6 +17,9 @@
 void flood(Board * board,int i, int j, int px, int py, int k, int o,
            int value, Bool visited[4][4]);
 
+void flood2(Board * board, int i, int j, int px, int py, int k, int o,
+           Bool * flag, Bool visited[4][4]);
+
 /* Appel de flood + initialisation de visited */
 void floodFill(Board * board, int i, int j, int px, int py, int k, int o,
                int value);
@@ -48,7 +51,7 @@ void rotationPiece(Board * board);
 
 int destructLines(Board * board);
 
-void drawPiece(Piece * piece);
+void drawPiece(Board * board);
 void clearPiece(Board * board);
 void newPiece(Board *board, Piece * piece);
 
