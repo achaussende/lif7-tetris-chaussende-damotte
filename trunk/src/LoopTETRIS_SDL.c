@@ -9,6 +9,7 @@
 
 void sdljeuInit(SDL *sdl)
 {
+
     SDL_Surface *surface_screen = NULL, *rectangle = NULL;
     SDL_Rect position;
 
@@ -36,12 +37,52 @@ void sdljeuInit(SDL *sdl)
 
 }
 
-/*
+
 void sdljeuBoucle(sdlTetris *)
 {
+    //*************** Boucle d'évènement, à compléter *******************
+    //** Gestion des touches
+    //** Affichage pièce
+    //** Gestion Lignes
+    //** Etc...
+    int next=1;
+    SDL_Surface *surface_screen = NULL;
+     while (next)
+    {
+        SDL_WaitEvent(&event);
+        switch(event.type)
+        {
+            case SDL_QUIT:
+                next = 0;
+                break;
+            case SDL_KEYDOWN:
+                switch(event.key.keysym.sym)
+                {
+                    case SDLK_UP: // Flèche haut
+                        rotationPiece(board);
+                        break;
+                    case SDLK_DOWN: // Flèche bas
+                        moveCurrentPieceDown(board);
+                        break;
+                    case SDLK_RIGHT: // Flèche droite
+                        moveCurrentPieceRight(board);
+                        break;
+                    case SDLK_LEFT: // Flèche gauche
+                        moveCurrentPieceLeft(board);
+                        break;
+                }
+                break;
+        }
 
+        /* On efface l'écran */
+        //SDL_FillRect(surface_screen, NULL, SDL_MapRGB(surface_screen->format, 255, 255, 255));
+        /* On place Zozor à sa nouvelle position */
+        //SDL_BlitSurface(zozor, NULL, surface_screen, &positionZozor);
+        /* On met à jour l'affichage */
+        //SDL_Flip(ecran);
+    }
 }
-*/
+
 
 void sdljeuLibere(SDL *sdl)
 {
