@@ -243,8 +243,25 @@
 1364308496 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/binarytrees.h
 	"player.h"
 
-1364293960 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/player.h
+1365491756 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/player.h
 
+<<<<<<< .mine
+1364894788 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/board.c
+	<stdio.h>
+	<stdlib.h>
+	<assert.h>
+	<time.h>
+	"board.h"
+
+1365489161 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/board.h
+	"piece.h"
+
+1364888447 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/piece.h
+	"shapes.h"
+
+1364295382 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/shapes.h
+
+=======
 1365491261 source:/home/alan/Documents/LIF7/Tetris/src/LoopTETRIS_SDL.c
 	<assert.h>
 	<time.h>
@@ -318,3 +335,4 @@
 	<assert.h>
 	"player.h"
 
+>>>>>>> .r31

@@ -9,23 +9,16 @@
 
 /* ============ Flood Fill ============ */
 
-/*
-* (i, j): Les coordonnées de la case à partir de laquelle floodfiller dans l'aire de jeu
-* (px, py): Les coordonnées de la case à partir de laquelle floodfiller dans la matrice de la pièce
-* k: pour kind (type), le type de la pièce
-* o: pour orientation, l'orientation de la pièce
-* value: valeur avec laquelle remplir l'aire de jeu
-*/
 void flood(Board * board,int i, int j, int px, int py, int k, int o,
-           int value, Bool visited[][SIZE])
+           int value, Bool visited[4][4])
 {
-    assert(px < 0 || px >= SIZE || py < 0 || py >= SIZE || visited[px][py] ||
+    assert(px < 0 || px >= 4 || py < 0 || py >= 4 || visited[px][py] == TRUE ||
            PIECES[k][o][px][py] == FREE);
 
-    visited[px][py] = TRUE;
+    visited[py][px] = TRUE;
     board->gridge[j][i] = value; // On remplit la case de la valeur dans l'aire
 
-    flood(i, j - 1, px, - 1, k, o, value, visited);
+    flood(i, j - 1, px, py - 1, k, o, value, visited);
     flood(i + 1, j, px + 1, py, k, o, value, visited);
     flood(i, j + 1, px, py + 1, k, o, value, visited);
     flood(i - 1, j, px - 1, py, k, o, value, visited);
@@ -35,37 +28,45 @@ void flood(Board * board,int i, int j, int px, int py, int k, int o,
 void floodFill(Board * board,int i, int j, int px, int py, int k, int o,
                int value)
 {
-    bool visited[SIZE][SIZE];
+    bool visited[4][4];
+    int l, m;
 
-    for(int l = 0; l < SIZE; ++l)
-        for(int m = 0; m < SIZE; ++m)
+    for(l = 0; l < 4 ; l++)
+    {
+        for(m = 0; m < 4; m++)
+        {
             visited[l][m] = FALSE;
+        }
+    }
 
     flood(i, j, px, py, k, o, value, visited);
 }
 
 /* ============ Fonctions de test ============= */
 
-/*Bool testFallPiece(const Piece piece)
-{
-
-}*/
-
 Bool isCurrentPieceMovable(const Board * board, const int x, const int y)
 {
+    int kind, orientation;
+    int l, m;
+
     clearPiece(board->currentPiece); // D'abord on efface la pièce courante
 
     Bool movable = TRUE; // On suppose au départ qu'on peut bouger la pièce
 
    /* On déclare et initialise le tableau visited pour le flood fill */
-    Bool visited[SIZE][SIZE];
+    Bool visited[4][4];
 
-    for(int l = 0; l < SIZE; ++l)
-        for(int m = 0; m < SIZE; ++m)
+    for(l = 0; l < 4; l++)
+    {
+        for(m = 0; m < 4; m++)
+        {
             visited[l][m] = FALSE;
+        }
+    }
 
-    int kind = getKind(board->currentPiece); // On récupère le type ...
-    int orientation = getOrientation(board->currentPiece); // ... et l'orientation de la pièce
+
+    kind = getKind(board->currentPiece); // On récupère le type ...
+    orientation = getOrientation(board->currentPiece); // ... et l'orientation de la pièce
 
    /* On fait notre flood fill */
     flood(x, y, 1, 2, kind, orientation, movable, visited);
@@ -113,10 +114,6 @@ Bool testLineFilled(Board * board, const unsigned int posY)
 
     return TRUE;
 }
-/*Bool testCollision(const Piece piece);
-{
-
-}*/
 
 Bool testLineEmpty(Board * board, const unsigned int posY)
 {
@@ -202,9 +199,25 @@ int destructLines(Board * board)
     {
         while(testLineFilled(board, y) == TRUE)
         {
-            for(i == 0; i < 10; i++)
+            for(i = 0; i < 10; i++)
             {
                 board->gridge[y][i] = 0; // Destruction de la ligne
+            }
+
+            for(i = 0; i < 10; i++)
+            {
+                for(j = y; j < 20 ; j++)
+                {
+                    if(j != 19)
+                    {
+                        board->gridge[j][i] = board->gridge[j+1][i];
+                    }
+                    else
+                    {
+                        board->gridge[y][i] = 0;
+                    }
+
+                }
             }
             /*for(int j = y; j > 0; --j)
             {
@@ -240,13 +253,13 @@ void drawPiece(Board * board)
 {
     Piece * p;
     p = board->currentPiece;
+
     int i = getPosX(p); // On récupère les ...
     int j = getPosY(p); // ... coordonnées de la pièce
 
     int kind = getKind(p); // On récupère son type
-    int orientation = getOrientation(p); // et sa rotation
-
-
+    int orientation = getOrientation(p); // son orientation
+    int color = getColor(p); // et sa couleur
 
     /*Flood fill*/
 

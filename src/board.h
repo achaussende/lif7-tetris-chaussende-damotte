@@ -11,16 +11,10 @@
 */
 enum  { FREE = 0,  FILLED };
 
-
-/* Taille de la grille */
-const int GRIDGE_X = 10;
-const int GRIDGE_Y = 20;
-
-
 typedef struct
 {
     Piece * currentPiece; // Pièce actuellement sur la grille
-    int gridge[20][10]; //grille de taille GRIDGE_X par GRIDGE_Y ----- Erreur : variably modified 'gridge' at file scope
+    int gridge[20][10]; // Grille de jeu
 }Board;
 
 /* Mutateurs & Accesseurs */
