@@ -23,6 +23,6 @@ void SDL_apply_surface( SDL_Surface* source, SDL_Surface* destination, int x, in
 SDL_Surface *SDL_load_image(const char* filename );
 
 void pause();
-
+void sdltestRegression(SDL *sdl);
 
 #endif

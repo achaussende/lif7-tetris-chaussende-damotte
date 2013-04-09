@@ -50,10 +50,10 @@ int getTreeNb_Elements(const Tree * tree);
 
 void initTree (Tree * tree);
 
-static void freeTree_recursion(Node * node);
+void freeTree_recursion(Node * node);
 void freeTree (Tree * tree);
 
-static void insertPlayerInTree_recursion(Node * node, Player player);
+void insertPlayerInTree_recursion(Node * node, Player player);
 void insertPlayerInTree(Tree * tree, Player player);
 
 #endif

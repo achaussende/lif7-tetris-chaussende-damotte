@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -18,17 +19,41 @@ void flood(Board * board,int i, int j, int px, int py, int k, int o,
     visited[py][px] = TRUE;
     board->gridge[j][i] = value; // On remplit la case de la valeur dans l'aire
 
-    flood(i, j - 1, px, py - 1, k, o, value, visited);
-    flood(i + 1, j, px + 1, py, k, o, value, visited);
-    flood(i, j + 1, px, py + 1, k, o, value, visited);
-    flood(i - 1, j, px - 1, py, k, o, value, visited);
+    flood(board, i, j - 1, px, py - 1, k, o, value, visited);
+    flood(board, i + 1, j, px + 1, py, k, o, value, visited);
+    flood(board, i, j + 1, px, py + 1, k, o, value, visited);
+    flood(board, i - 1, j, px - 1, py, k, o, value, visited);
+}
+
+void flood2(Board * board, int i, int j, int px, int py, int k, int o,
+           Bool * flag, Bool visited[4][4])
+{
+    assert(px < 0 || px >= 4 || py < 0 || py >= 4 || visited[px][py] == TRUE ||
+        PIECES[k][o][px][py] == FREE);
+
+
+    visited[px][py] = TRUE;
+
+   /* Si on dépasse les limites de l'aire de jeu
+    * ou si la case sur laquelle on est n'est pas vide
+    */
+    if(i < 0 || i >= 10 || j < 0 || j >= 20 || board->gridge[j][i] != FREE)
+    {
+        flag = FALSE; // on met flag à false
+        return;
+    }
+
+    flood2(board, i, j - 1, px, py - 1, k, o, flag, visited);
+    flood2(board, i + 1, j, px + 1, py, k, o, flag, visited);
+    flood2(board, i, j + 1, px, py + 1, k, o, flag, visited);
+    flood2(board, i - 1, j, px - 1, py, k, o, flag, visited);
 }
 
 /* Cette fonction ne fait qu'appeler le flood */
 void floodFill(Board * board,int i, int j, int px, int py, int k, int o,
                int value)
 {
-    bool visited[4][4];
+    Bool visited[4][4];
     int l, m;
 
     for(l = 0; l < 4 ; l++)
@@ -39,7 +64,7 @@ void floodFill(Board * board,int i, int j, int px, int py, int k, int o,
         }
     }
 
-    flood(i, j, px, py, k, o, value, visited);
+    flood(board, i, j, px, py, k, o, value, visited);
 }
 
 /* ============ Fonctions de test ============= */
@@ -69,7 +94,7 @@ Bool isCurrentPieceMovable(const Board * board, const int x, const int y)
 
 
    /* On fait notre flood fill */
-    flood(x, y, 1, 2, kind, orientation, movable, visited);
+    flood2(board,x, y, 1, 2, kind, orientation, &movable, visited);
 
     drawPiece(board); // On redessine notre pièce
 
@@ -83,20 +108,20 @@ Bool testRotationPiece(const Board * board)
     int orientation = getOrientation(board->currentPiece);
     Bool rotable = TRUE;
     Bool visited[4][4];
-
+    int i,j;
     clearPiece(board);
 
-    for(int i = 0; i < 4; ++i)
+    for(i = 0; i < 4; i++)
     {
-        for(int j = 0; j < 4; ++j)
+        for(j = 0; j < 4; j++)
         {
                visited[i][j] = FALSE;
         }
 
     }
 
-    flood(getPosX(board->currentPiece), getPosY(board->currentPiece), 2, 1,
-          kind, orientation, rotable, visited);
+    flood2(board, getPosX(board->currentPiece), getPosY(board->currentPiece), 2, 1,
+          kind, orientation, &rotable, visited);
 
     drawPiece(board);
 
@@ -258,7 +283,7 @@ void drawPiece(Board * board)
 
     /*Flood fill*/
 
-    floodFill(board, i, j, 1, 2, kind, orientation, getColor(p));
+    floodFill(board, i, j, 1, 2, kind, orientation, color);
 }
 
 
@@ -266,10 +291,9 @@ void newPiece(Board * board,Piece * piece)
 {
     setPosX(piece, 5); // On donne à la pièce les coordonnées ...
     setPosY(piece, 0); // de l'origine
-
-    drawPiece(piece); // On la dessine
-
     setCurrentPiece(board, piece); // On déclare cette pièce comme pièce courante de l'aire de jeu
+    drawPiece(board); // On la dessine
+
 }
 
 void clearPiece(Board * board)
@@ -313,7 +337,7 @@ void displayScore(const Tree * scoreTree)
 {
     if(node == NULL)
     {
-        printf("Pas encore de scores etablis.") // à remplacer par la fonction d'affichage adaptée
+        printf("Pas encore de scores etablis."); // à remplacer par la fonction d'affichage adaptée
     }
     else
     {

@@ -97,7 +97,7 @@ void initTree (Tree * tree)
     setTreeNb_Elements(tree, 1);
 }
 
-static void freeTree_recursion(Node * node)
+void freeTree_recursion(Node * node)
 {
     freeTree_recursion(node->left_child);
     freeTree_recursion(node->right_child);
@@ -109,7 +109,7 @@ void freeTree (Tree * tree)
     freeTree_recursion(tree->root);
 }
 
-static void insertPlayerInTree_recursion(Node * node, Player player)
+void insertPlayerInTree_recursion(Node * node, Player player)
 {
     if(node == NULL)
     {
