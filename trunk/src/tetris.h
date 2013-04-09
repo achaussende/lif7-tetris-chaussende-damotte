@@ -62,5 +62,6 @@ void displayScore(const Tree * scoreTree);
 void openScoreData(Tree * ptree, const char filename[]);
 void saveScoreData(const Tree * ptree, const char filename[]);
 
-
+void dropCurrentPiece(Board * board);
+void testGameOver(Board * board);
 #endif
