@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>
 
 #include "player.h"
 
-void setName (Player player, const char name)
+void setName (Player player, const char * name[])
 {
-    player.name = name;
+    assert(strlen(name) <= 25);
+    strcpy(player.name, name);
 }
 
 char getName (const Player player)
@@ -14,12 +16,12 @@ char getName (const Player player)
     return player.name;
 }
 
-void setScore (Player player, int score)
+void setScore (Player player, unsigned int score)
 {
     player.score = score;
 }
 
-int getScore (const Player player)
+unsigned int getScore (const Player player)
 {
     return player.score;
 }
