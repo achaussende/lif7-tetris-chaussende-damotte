@@ -1,8 +1,16 @@
 #ifndef TETRIS_H
 #define TETRIS_H
-
+#include "bool.h"
 #include "binarytrees.h"
 #include "board.h"
+
+
+typedef struct
+{
+	Board board;
+	Piece piece;
+
+} Tetris;
 
 /* ============ Fonctions de test ============= */
 
