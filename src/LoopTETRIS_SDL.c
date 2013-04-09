@@ -21,9 +21,17 @@ void sdljeuInit(SDL *sdl)
     // Coloration de la surface ecran en bleu-vert
     SDL_FillRect(surface_screen, NULL, SDL_MapRGB(surface_screen->format, 17, 206, 112));
 
-    SDL_Flip(ecran); /* Mise à jour de l'écran avec sa nouvelle couleur */
+    position.x = (640 / 2) - (220 / 2);
+    position.y = (480 / 2) - (180 / 2);
+    // Remplissage de la surface avec du blanc
+    SDL_FillRect(rectangle, NULL, SDL_MapRGB(surface_screen->format, 255, 255, 255));
+    SDL_BlitSurface(rectangle, NULL, surface_screen, &position); // Collage de la surface sur l'écran
+
+    SDL_Flip(surface_screen); // Mise à jour de l'écran
 
     pause();
+
+     SDL_Quit(); // Arrêt de la SDL (libération de la mémoire)
 
 
 }
@@ -38,7 +46,12 @@ void sdljeuBoucle(sdlTetris *)
 void sdljeuLibere(SDL *sdl)
 {
     SDL_Quit(); // Arrêt de la SDL (libération de la mémoire)
-    return EXIT_SUCCESS; // Fermeture du programme
+
+}
+
+void sdltestRegression(SDL *sdl)
+{
+    sdljeuInit(sdl);
 }
 
 void pause()
