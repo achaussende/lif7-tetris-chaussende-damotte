@@ -71,7 +71,7 @@ Bool isCurrentPieceMovable(const Board * board, const int x, const int y)
    /* On fait notre flood fill */
     flood(x, y, 1, 2, kind, orientation, movable, visited);
 
-    drawPiece(currentPiece); // On redessine notre pièce
+    drawPiece(board); // On redessine notre pièce
 
     return movable; // On renvoie le résultat
 }
@@ -83,11 +83,17 @@ Bool testRotationPiece(const Board * board)
 
     Bool rotable = TRUE;
 
-    Bool visited[SIZE][SIZE];
+    Bool visited[4][4];
 
-    for(int i = 0; i < SIZE; ++i)
-        for(int j = 0; j < SIZE; ++j)
-            visited[i][j] = FALSE;
+    for(int i = 0; i < 4; ++i)
+    {
+        for(int j = 0; j < 4; ++j)
+        {
+               visited[i][j] = FALSE;
+        }
+
+    }
+
 
     int kind = getKind(board->currentPiece);
     int orientation = getOrientation(board->currentPiece);
@@ -104,7 +110,7 @@ Bool testLineFilled(Board * board, const unsigned int posY)
 {
     int i;
 
-    for (i == 0; i < 10; i++)
+    for (i = 0; i < 10; i++)
     {
         if(board->gridge[posY][i] == 0)
         {
@@ -119,7 +125,7 @@ Bool testLineEmpty(Board * board, const unsigned int posY)
 {
     int i;
 
-    for (i == 0; i < 10; i++)
+    for (i = 0; i < 10; i++)
     {
         if(board->gridge[posY][i] != 0)
         {
@@ -135,6 +141,7 @@ Bool testLineEmpty(Board * board, const unsigned int posY)
 void moveCurrentPieceDown(Board * board)
 {
     int y = getPosY(board->currentPiece);
+    int x = getPosX(board->currentPiece);
 
     if(isCurrentPieceMovable(board, x , y + 1)) // Si on peut bouger la pièce vers le bas
     {
@@ -148,6 +155,7 @@ void moveCurrentPieceDown(Board * board)
 void moveCurrentPieceLeft(Board * board)
 {
     int x = getPosX(board->currentPiece);
+    int y = getPosY(board->currentPiece);
 
     if(isCurrentPieceMovable(board, x - 1 , y ))
     {
@@ -161,6 +169,7 @@ void moveCurrentPieceLeft(Board * board)
 void moveCurrentPieceRight(Board * board)
 {
     int x = getPosX(board->currentPiece);
+    int y = getPosY(board->currentPiece);
 
     if(isCurrentPieceMovable(board, x + 1 , y ))
     {
@@ -175,12 +184,12 @@ void rotationPiece(Board * board)
 {
     int orientation = getOrientation(board->currentPiece);
 
-    if(orientation < NB_ROTATIONS - 1) // Si on n'est pas sur la dernière orientation
+    if(orientation < 4 - 1) // Si on n'est pas sur la dernière orientation
         orientation++; // On peut incrémenter orientation
     else // Si non
         orientation = 0; // On passe à la 1ère orientation
 
-    if(isCurrentPieceRotable(orientation))
+    if(testRotationPiece(board))
     {
         clearPiece(board->currentPiece);
 
