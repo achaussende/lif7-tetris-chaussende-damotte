@@ -5,7 +5,7 @@
 
 typedef struct
 {
-    char name[25];
+    char name[26]; // 25 caractères + \0
     unsigned int score;
 }Player;
 

@@ -35,7 +35,7 @@ void freeNode(Node * node);
 typedef struct
 {
     Node * root;
-    int nb_elements;
+    unsigned int nb_elements;
 }Tree;
 
 /* ======= Tree : Mutateurs & Accesseurs ======= */
@@ -44,7 +44,7 @@ void setTreeRoot(Tree * tree, const Node * root);
 Node * getTreeRoot(const Tree * tree);
 
 void setTreeNb_Elements(Tree * tree, const unsigned int n);
-int getTreeNb_Elements(const Tree * tree);
+unsigned int getTreeNb_Elements(const Tree * tree);
 
 /* ============= Tree : Méthodes =============== */
 
