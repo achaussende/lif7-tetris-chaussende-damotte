@@ -38,7 +38,7 @@ void sdljeuInit(SDL *sdl)
 }
 
 
-void sdljeuBoucle(sdlTetris *)
+void sdljeuBoucle(SDL *)
 {
     //*************** Boucle d'évènement, à compléter *******************
     //** Gestion des touches

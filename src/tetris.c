@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
@@ -165,7 +164,7 @@ void moveCurrentPieceDown(Board * board)
     int y = getPosY(board->currentPiece);
     int x = getPosX(board->currentPiece);
 
-    if(isCurrentPieceMovable(board, x , y + 1)) // Si on peut bouger la pièce vers le bas
+    if(isCurrentPieceMovable(board, x , y + 1) == TRUE) // Si on peut bouger la pièce vers le bas
     {
         clearPiece(board); // On efface la pièce de son ancienne position
         setPosX(board->currentPiece, y + 1); // On incrémente son ordonnée
@@ -179,7 +178,7 @@ void moveCurrentPieceLeft(Board * board)
     int x = getPosX(board->currentPiece);
     int y = getPosY(board->currentPiece);
 
-    if(isCurrentPieceMovable(board, x - 1 , y ))
+    if(isCurrentPieceMovable(board, x - 1 , y ) == TRUE)
     {
         clearPiece(board);
         setPosY(board->currentPiece, x - 1);
@@ -192,7 +191,7 @@ void moveCurrentPieceRight(Board * board)
     int x = getPosX(board->currentPiece);
     int y = getPosY(board->currentPiece);
 
-    if(isCurrentPieceMovable(board, x + 1 , y))
+    if(isCurrentPieceMovable(board, x + 1 , y) == TRUE)
     {
         clearPiece(board);
         setPosY(board->currentPiece, x + 1);
@@ -227,9 +226,9 @@ int destructLines(Board * board)
     {
         while(testLineFilled(board, y) == TRUE)
         {
-            for(int j = y; j > 0; j--)
+            for(j = y; j > 0; j--)
             {
-                for(int i = 0; i < 20; i++)
+                for(i = 0; i < 20; i++)
                 {
                     board->gridge[i][j] = board->gridge[i-1][j];
                 }
@@ -301,7 +300,7 @@ void displayScore_recursion(const Node * node)
     if(node != NULL)
     {
         displayScore_recursion(node->right_child);
-        printf("%s  %d \n",node->value.name[], node->value.score);
+        printf("%s  %u \n",node->value.name[], node->value.score);
         displayScore_recursion(node->left_child);
     }
 
@@ -321,10 +320,69 @@ void displayScore(const Tree * scoreTree)
 
 void openScoreData(Tree * ptree, const char filename[])
 {
+    FILE * f;
+    f=fopen(filename, "r");
 
+    Player player;
+
+    unsigned int nb_elem, score;
+    int i;
+    char * nickname;
+
+    if(f == NULL)
+    {
+        printf("Erreur lors de l'ouverture du fichier de scores %s \n",
+                filename);
+        assert(f);
+    }
+
+    assert( fscanf( f , "PS \n%u \nEnd \n", &nb_elem ) == 1 );
+
+
+    initTree(ptree);
+
+    for(i = 0; i < ptree->nb_elements; i++)
+    {
+        assert(fscanf(f, "%s %u", nickname, &score) == 2 ||
+                strlen(nickname) <= 25);
+        setTreeNb_Elements(ptree, nb_elem);
+        setName (player, nickname);
+        setScore (player, score);
+        insertPlayerInTree(ptree, player);
+    }
+
+    fclose(f);
+    printf("Lecture des scores %s ... OK \n", filename);
+}
+
+void saveScoreData_Node(const Node * pnode, FILE * f)
+{
+    if(pnode != NULL)
+    {
+        saveScoreData_Node(Node->left_child, f);
+        fprintf(f, "%s %u \n", Node->value.name, Node->value.score);
+        saveScoreData_Node(Node->right_child, f);
+    }
 }
 void saveScoreData(const Tree * ptree, const char filename[])
 {
+    FILE * f;
+
+    f = fopen(filename, "w");
+
+    if(f == NULL)
+    {
+        printf("Erreur lors de l'ouverture du fichier de scores %s\n", filename);
+        assert( f );
+    }
+
+    fprintf(f, "PS \n"); //Players et scores
+    fprintf(f, "%u \n", getTreeNb_Elements(ptree) ); // Nombres de Players/Scores
+    saveScoreData_Node(Tree->root, f);
+    fprintf(f, "End \n");
+
+    printf("Sauvegarde des scores dans %s ...OK\n", filename);
+    fclose(f);
 
 }
 

@@ -60,6 +60,7 @@ void displayScore_recursion(const Node * node);
 void displayScore(const Tree * scoreTree);
 
 void openScoreData(Tree * ptree, const char filename[]);
+void saveScoreData_Node(const Node * pnode, FILE * f);
 void saveScoreData(const Tree * ptree, const char filename[]);
 
 void dropCurrentPiece(Board * board);
