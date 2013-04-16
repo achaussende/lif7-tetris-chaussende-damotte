@@ -112,7 +112,7 @@ void freeTree (Tree * tree)
     freeTree_recursion(tree->root);
 }
 
-/*void insertPlayerInTree_recursion(Node * node, Player player)
+void insertPlayerInTree_recursion(Node * node, Player player)
 {
     if(node == NULL)
     {
@@ -129,8 +129,8 @@ void freeTree (Tree * tree)
             insertPlayerInTree_recursion(node->left_child, player);
         }
     }
-}*/
-/*void insertPlayerInTree (Tree * tree, Player player)
+}
+void insertPlayerInTree (Tree * tree, Player player)
 {
     insertPlayerInTree_recursion((*tree).root, player);
     tree->nb_elements++;
@@ -140,7 +140,7 @@ void freeTree (Tree * tree)
         deleteTreeMin(tree);
         tree->nb_elements--;
     }
-}*/
+}
 
 void deleteTreeMin(Tree * tree)
 {
