@@ -35,6 +35,8 @@
 		<Linker>
 			<Add option="`sdl-config --libs`" />
 		</Linker>
+		<Unit filename="../data/gridge.bmp" />
+		<Unit filename="../data/piece.bmp" />
 		<Unit filename="LoopTETRIS_SDL.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -52,7 +54,6 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="main.cpp" />
 		<Unit filename="piece.c">
 			<Option compilerVar="CC" />
 		</Unit>
