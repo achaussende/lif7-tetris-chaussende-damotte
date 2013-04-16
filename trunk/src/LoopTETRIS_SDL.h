@@ -1,6 +1,6 @@
 #ifndef _LOOPTETRIS_SDL_H
 #define _LOOPTETRIS_SDL_H
-
+#include <SDL/SDL_image.h>
 #include <SDL/SDL.h>
 #include "tetris.h"
 
