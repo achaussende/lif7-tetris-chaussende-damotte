@@ -56,4 +56,7 @@ void freeTree (Tree * tree);
 void insertPlayerInTree_recursion(Node * node, Player player);
 void insertPlayerInTree(Tree * tree, Player player);
 
+void deleteTreeMin_Node(Node * node);
+void deleteTreeMin(Tree * tree);
+
 #endif

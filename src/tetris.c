@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <string.h>_
 
 #include "bool.h"
 #include "binarytrees.h"
@@ -300,14 +301,14 @@ void displayScore_recursion(const Node * node)
     if(node != NULL)
     {
         displayScore_recursion(node->right_child);
-        printf("%s  %u \n",node->value.name[], node->value.score);
+        printf("%s  %u \n",node->value.name, node->value.score);
         displayScore_recursion(node->left_child);
     }
 
 }
 void displayScore(const Tree * scoreTree)
 {
-    if(node == NULL)
+    if(scoreTree->root == NULL)
     {
         printf("Pas encore de scores etablis."); // à remplacer par la fonction d'affichage adaptée
     }
@@ -359,9 +360,9 @@ void saveScoreData_Node(const Node * pnode, FILE * f)
 {
     if(pnode != NULL)
     {
-        saveScoreData_Node(Node->left_child, f);
-        fprintf(f, "%s %u \n", Node->value.name, Node->value.score);
-        saveScoreData_Node(Node->right_child, f);
+        saveScoreData_Node(pnode->left_child, f);
+        fprintf(f, "%s %u \n", pnode->value.name, pnode->value.score);
+        saveScoreData_Node(pnode->right_child, f);
     }
 }
 void saveScoreData(const Tree * ptree, const char filename[])
@@ -378,10 +379,11 @@ void saveScoreData(const Tree * ptree, const char filename[])
 
     fprintf(f, "PS \n"); //Players et scores
     fprintf(f, "%u \n", getTreeNb_Elements(ptree) ); // Nombres de Players/Scores
-    saveScoreData_Node(Tree->root, f);
+    saveScoreData_Node(ptree->root, f);
     fprintf(f, "End \n");
 
     printf("Sauvegarde des scores dans %s ...OK\n", filename);
+
     fclose(f);
 
 }
@@ -404,7 +406,7 @@ Bool testGameOver(Board * board)
 
     for(i = 0; i < 10; ++i)
     {
-        if(area[0][i] != FREE) // Si il y a un bloc sur la première ligne de l'aire
+        if(board->gridge[0][i] != FREE) // Si il y a un bloc sur la première ligne de l'aire
         {
             return TRUE; // C'est que la partie est finie
         }
