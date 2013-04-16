@@ -6,8 +6,8 @@
 //const int NB_ROTATIONS = 4; // Le nombre de rotations de chaque pièce
 //const int SIZE = 4; // La taille de la matrice de chaque rotation
 
-const int PIVOT_X = 1;
-const int PIVOT_Y = 2;
+/* const int PIVOT_X = 1;
+const int PIVOT_Y = 2; */
 
 static int PIECES[7][4][4][4] =
 {

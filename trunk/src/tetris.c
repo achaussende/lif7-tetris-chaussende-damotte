@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include <string.h>_
-
+#include <string.h>
+#include "tetris.h"
 #include "bool.h"
 #include "binarytrees.h"
 #include "board.h"
@@ -69,7 +69,7 @@ void floodFill(Board * board,int i, int j, int px, int py, int k, int o,
 
 /* ============ Fonctions de test ============= */
 
-Bool isCurrentPieceMovable(const Board * board, const int x, const int y)
+Bool isCurrentPieceMovable(Board * board, const int x, const int y)
 {
     int kind, orientation;
     int l, m;
@@ -102,7 +102,7 @@ Bool isCurrentPieceMovable(const Board * board, const int x, const int y)
 }
 
 
-Bool testRotationPiece(const Board * board)
+Bool testRotationPiece(Board * board)
 {
     int kind = getKind(board->currentPiece);
     int orientation = getOrientation(board->currentPiece);
@@ -165,12 +165,12 @@ void moveCurrentPieceDown(Board * board)
     int y = getPosY(board->currentPiece);
     int x = getPosX(board->currentPiece);
 
-    if(isCurrentPieceMovable(board, x , y + 1) == TRUE) // Si on peut bouger la pièce vers le bas
+    if(isCurrentPieceMovable(board, x , y + 1) == TRUE) /* Si on peut bouger la pièce vers le bas*/
     {
-        clearPiece(board); // On efface la pièce de son ancienne position
-        setPosX(board->currentPiece, y + 1); // On incrémente son ordonnée
+        clearPiece(board); /* On efface la pièce de son ancienne position */
+        setPosX(board->currentPiece, y + 1); /* On incrémente son ordonnée */
 
-        drawPiece(board); // On la redessine à la nouvelle position
+        drawPiece(board); /* On la redessine à la nouvelle position */
     }
 }
 
@@ -204,10 +204,10 @@ void rotationPiece(Board * board)
 {
     int orientation = getOrientation(board->currentPiece);
 
-    if(orientation < 4 - 1) // Si on n'est pas sur la dernière orientation
-        orientation++; // On peut incrémenter orientation
-    else // Si non
-        orientation = 0; // On passe à la 1ère orientation
+    if(orientation < 4 - 1) /* Si on n'est pas sur la dernière orientation */
+        orientation++; /* On peut incrémenter orientation */
+    else /* Si non */
+        orientation = 0; /* On passe à la 1ère orientation*/
 
     if(testRotationPiece(board) == TRUE)
     {
@@ -247,12 +247,12 @@ void drawPiece(Board * board)
     Piece * p;
     p = board->currentPiece;
 
-    int i = getPosX(p); // On récupère les ...
-    int j = getPosY(p); // ... coordonnées de la pièce
+    int i = getPosX(p); /* On récupère les ...*/
+    int j = getPosY(p); /* ... coordonnées de la pièce */
 
-    int kind = getKind(p); // On récupère son type
-    int orientation = getOrientation(p); // son orientation
-    int color = getColor(p); // et sa couleur
+    int kind = getKind(p); /* On récupère son type */
+    int orientation = getOrientation(p); /*son orientation*/
+    int color = getColor(p); /* et sa couleur*/
 
     /*Flood fill*/
 
@@ -262,10 +262,10 @@ void drawPiece(Board * board)
 
 void newPiece(Board * board,Piece * piece)
 {
-    setPosX(piece, 5); // On donne à la pièce les coordonnées ...
-    setPosY(piece, 0); // de l'origine
-    setCurrentPiece(board, piece); // On déclare cette pièce comme pièce courante de l'aire de jeu
-    drawPiece(board); // On la dessine
+    setPosX(piece, 5); /* On donne à la pièce les coordonnées ...*/
+    setPosY(piece, 0); /* de l'origine */
+    setCurrentPiece(board, piece); /* On déclare cette pièce comme pièce courante de l'aire de jeu*/
+    drawPiece(board); /* On la dessine*/
 
 }
 
@@ -319,7 +319,7 @@ void displayScore(const Tree * scoreTree)
 
 }
 
-void openScoreData(Tree * ptree, const char filename[])
+/*void openScoreData(Tree * ptree, const char filename[])
 {
     FILE * f;
     f=fopen(filename, "r");
@@ -355,7 +355,8 @@ void openScoreData(Tree * ptree, const char filename[])
     fclose(f);
     printf("Lecture des scores %s ... OK \n", filename);
 }
-
+*/
+/*
 void saveScoreData_Node(const Node * pnode, FILE * f)
 {
     if(pnode != NULL)
@@ -364,7 +365,8 @@ void saveScoreData_Node(const Node * pnode, FILE * f)
         fprintf(f, "%s %u \n", pnode->value.name, pnode->value.score);
         saveScoreData_Node(pnode->right_child, f);
     }
-}
+}*/
+/*
 void saveScoreData(const Tree * ptree, const char filename[])
 {
     FILE * f;
@@ -387,7 +389,7 @@ void saveScoreData(const Tree * ptree, const char filename[])
     fclose(f);
 
 }
-
+*/
 /* HARD-DROP */
 void dropCurrentPiece(Board * board)
 {
