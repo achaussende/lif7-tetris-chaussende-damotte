@@ -26,8 +26,8 @@ void floodFill(Board * board, int i, int j, int px, int py, int k, int o,
 
 typedef struct
 {
-	Board board;
-	Piece piece;
+	Board* board;
+	Piece* piece;
 
 } Tetris;
 

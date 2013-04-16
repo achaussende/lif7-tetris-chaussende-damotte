@@ -1,6 +1,8 @@
 #include <time.h>
 #include "LoopTETRIS_SDL.h"
 #include <SDL/SDL_ttf.h>
+#include <SDL/SDL.h>
+#include "SDL.h"
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -38,7 +40,7 @@ void sdljeuInit(SDL *sdl)
 }
 
 
-void sdljeuBoucle(SDL *)
+void sdljeuBoucle(SDL *sdl)
 {
     //*************** Boucle d'évènement, à compléter *******************
     //** Gestion des touches
@@ -46,7 +48,14 @@ void sdljeuBoucle(SDL *)
     //** Gestion Lignes
     //** Etc...
     int next=1;
+
     SDL_Surface *surface_screen = NULL;
+    //SDL_Surface *surface_gridge = NULL;
+    SDL_Event event;
+    Board* board;
+    board = sdl->tetris.board;
+
+     SDL_EnableKeyRepeat(10, 10);
      while (next)
     {
         SDL_WaitEvent(&event);
@@ -70,9 +79,15 @@ void sdljeuBoucle(SDL *)
                     case SDLK_LEFT: // Flèche gauche
                         moveCurrentPieceLeft(board);
                         break;
+                    default:
+                        break;
                 }
                 break;
+                default:
+                    break;
         }
+
+        SDL_Flip(surface_screen);
 
         /* On efface l'écran */
         //SDL_FillRect(surface_screen, NULL, SDL_MapRGB(surface_screen->format, 255, 255, 255));
