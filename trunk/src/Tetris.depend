@@ -228,7 +228,7 @@
 	<assert.h>
 	"player.h"
 
-1366094413 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/LoopTETRIS_SDL.c
+1366098157 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/LoopTETRIS_SDL.c
 	<time.h>
 	"LoopTETRIS_SDL.h"
 	<SDL/SDL_ttf.h>
@@ -238,14 +238,14 @@
 	<stdlib.h>
 	<stdio.h>
 
-1366096487 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/binarytrees.c
+1366101585 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/binarytrees.c
 	<stdlib.h>
 	<stdio.h>
 	<assert.h>
 	<string.h>
 	"binarytrees.h"
 
-1366093854 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/binarytrees.h
+1366101558 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/binarytrees.h
 	"player.h"
 
 1366096545 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/player.h
@@ -379,4 +379,13 @@
 	<assert.h>
 	<string.h>
 	"player.h"
+
+1366101811 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/tetris.c
+	<stdio.h>
+	<stdlib.h>
+	<assert.h>
+	<string.h>
+	"bool.h"
+	"binarytrees.h"
+	"board.h"
 

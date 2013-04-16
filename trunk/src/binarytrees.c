@@ -142,25 +142,14 @@ void insertPlayerInTree (Tree * tree, Player player)
     }
 }
 
-/*Node * deleteTreeMin_Node(Node * node)
-{
-    Node * p;
-    p = node->right_child;
-
-    if(node->left_child == NULL)
-    {
-        return p;
-    }
-    else
-    {
-        deleteTreeMin_Node(node->left_child);
-    }
-}
-
 void deleteTreeMin(Tree * tree)
 {
     Node * n;
     n = tree->root;
+
+    Node * p;
+    p = NULL;
+
 
     while(n->left_child != NULL)
     {
@@ -169,10 +158,13 @@ void deleteTreeMin(Tree * tree)
 
     if(n->right_child == NULL)
     {
-        free(n);
+        freeNode(n);
     }
     else
     {
+        p = n->right_child;
+        n = p;
+        freeNode(p);
 
     }
-}*/
+}
