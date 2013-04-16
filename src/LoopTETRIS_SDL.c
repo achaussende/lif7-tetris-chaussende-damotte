@@ -7,35 +7,47 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+void SDL_apply_surface( SDL_Surface* source, SDL_Surface* destination, int positionX, int positionY )
+{
+    /* Make a temporary rectangle to hold the offsets */
+	SDL_Rect offset;
 
+	/* Give the offsets to the rectangle */
+	offset.x = positionX;
+	offset.y = positionY;
+
+	/* Blit the surface */
+	SDL_BlitSurface( source, NULL, destination, &offset );
+}
 
 void sdljeuInit(SDL *sdl)
 {
 
-    SDL_Surface *surface_screen = NULL, *rectangle = NULL;
-    SDL_Rect position;
+    SDL_Surface *surface_screen = NULL;
+    SDL_Surface *gridge;
+    SDL_Rect positiongridge;
 
     assert(SDL_Init(SDL_INIT_EVERYTHING)!= -1); // Démarrage de la SDL
+
+    positiongridge.x = surface_screen->w / 2 - gridge->w / 2;
+    positiongridge.y = surface_screen->h / 2 - gridge->h / 2;
+
+    gridge = SDL_LoadBMP("gridge.bmp");
+    SDL_SetColorKey(gridge, SDL_SRCCOLORKEY, SDL_MapRGB(gridge->format, 0, 0, 255));
+
     surface_screen = SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF);
-    // Allocation de la surface
-    rectangle = SDL_CreateRGBSurface(SDL_HWSURFACE, 220, 180, 32, 0, 0, 0, 0);
+
     SDL_WM_SetCaption("LegendaryTetris", NULL);
 
-    // Coloration de la surface ecran en bleu-vert
-    SDL_FillRect(surface_screen, NULL, SDL_MapRGB(surface_screen->format, 17, 206, 112));
+    // Coloration de la surface ecran en gris
+    SDL_FillRect(surface_screen, NULL, SDL_MapRGB(surface_screen->format, 31, 31, 31));
 
-    position.x = (640 / 2) - (220 / 2);
-    position.y = (480 / 2) - (180 / 2);
-    // Remplissage de la surface avec du blanc
-    SDL_FillRect(rectangle, NULL, SDL_MapRGB(surface_screen->format, 255, 255, 255));
-    SDL_BlitSurface(rectangle, NULL, surface_screen, &position); // Collage de la surface sur l'écran
 
-    SDL_Flip(surface_screen); // Mise à jour de l'écran
-
-    pause();
-
-     SDL_Quit(); // Arrêt de la SDL (libération de la mémoire)
-
+    /*if(TTF_Init() == -1)
+{
+    fprintf(stderr, "Erreur d'initialisation de TTF_Init : %s\n", TTF_GetError());
+    exit(EXIT_FAILURE);
+}*/
 
 }
 
@@ -50,7 +62,9 @@ void sdljeuBoucle(SDL *sdl)
     int next=1;
 
     SDL_Surface *surface_screen = NULL;
-    //SDL_Surface *surface_gridge = NULL;
+   /* SDL_Surface *surface_gridge = NULL;
+    SDL_Surface *surface_piece = NULL;
+	SDL_Surface *surface_score = NULL;*/
     SDL_Event event;
     Board* board;
     board = sdl->tetris.board;
@@ -101,6 +115,7 @@ void sdljeuBoucle(SDL *sdl)
 
 void sdljeuLibere(SDL *sdl)
 {
+
     SDL_Quit(); // Arrêt de la SDL (libération de la mémoire)
 
 }
