@@ -27,9 +27,19 @@ void floodFill(Board * board, int i, int j, int px, int py, int k, int o,
 typedef struct
 {
 	Board* board;
-	Piece* piece;
+	Piece* nextpiece;
+	Tree * treescores;
 
 } Tetris;
+
+/* ========== Mutateurs & Accesseurs ==========  */
+
+void setTetrisBoard(Tetris * tetris, const Board * board);
+Board * getTetrisBoard(const Tetris * tetris);
+void setTetrisNextPiece(Tetris * tetris, const Piece * piece);
+Piece * getTetrisNextPiece(const Tetris * tetris);
+void setTetrisTreeScores(Tetris * tetris, const Tree * tree);
+Tree * getTetrisTreeScores(const Tetris * tetris);
 
 
 /* ============ Fonctions de test ============= */
@@ -43,6 +53,10 @@ Bool isCurrentPieceMovable(Board * board, const int x, const int y);
 
 
 /* ================ Méthodes ==================  */
+
+void initTetris(Tetris * tetris, Board * board, Piece * piece, Tree * tree);
+void freeTetris(Tetris * tetris);
+void createTetris(Board * board, Piece * piece, Tree * tree);
 
 void moveCurrentPieceDown(Board * board);
 void moveCurrentPieceLeft(Board * board);
@@ -65,4 +79,7 @@ void saveScoreData(const Tree * ptree, const char filename[]);
 
 void dropCurrentPiece(Board * board);
 Bool testGameOver(Board * board);
+
+/* Test régression des fonctions */
+void tetrisTestRegression(Tetris * tetris);
 #endif

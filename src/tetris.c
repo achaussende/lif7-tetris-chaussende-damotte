@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
+
 #include "tetris.h"
 #include "bool.h"
-#include "binarytrees.h"
-#include "board.h"
 
 
 /* ============ Flood Fill ============ */
@@ -65,6 +64,38 @@ void floodFill(Board * board,int i, int j, int px, int py, int k, int o,
     }
 
     flood(board, i, j, px, py, k, o, value, visited);
+}
+
+/* ========== Mutateurs & Accesseurs ==========  */
+
+void setTetrisBoard(Tetris * tetris, const Board * board)
+{
+    tetris->board = board;
+}
+
+Board * getTetrisBoard(const Tetris * tetris)
+{
+    return tetris->board;
+}
+
+void setTetrisNextPiece(Tetris * tetris, const Piece * piece)
+{
+    tetris->nextpiece = piece;
+}
+
+Piece * getTetrisNextPiece(const Tetris * tetris)
+{
+    return tetris->nextpiece;
+}
+
+void setTetrisTreeScores(Tetris * tetris, const Tree * tree)
+{
+    tetris->treescores = tree;
+}
+
+Tree * getTetrisTreeScores(const Tetris * tetris)
+{
+    return tetris->treescores;
 }
 
 /* ============ Fonctions de test ============= */
@@ -159,6 +190,30 @@ Bool testLineEmpty(Board * board, const unsigned int posY)
 }
 
 /* ================ Méthodes ==================  */
+
+/* initTetris : initialise les champs de la structure tetris */
+
+void initTetris(Tetris * tetris, Board * board, Piece * piece, Tree * tree)
+{
+    setTetrisBoard(board);
+    setTetrisNextPiece(piece);
+    setTetrisTreeScores(tree);
+}
+
+void freeTetris(Tetris * tetris)
+{
+    freeBoard(tetris->board);
+    freePiece(tetris->nextpiece);
+    freeTree(tetris->t_scores);
+    free(tetris);
+}
+
+void createTetris(Board * board, Piece * piece, Tree * tree)
+{
+    Tetris * tetris = (Tetris *)malloc(sizeof(Tetris));
+
+    initTetris(tetris, board, piece, tree);
+}
 
 void moveCurrentPieceDown(Board * board)
 {
@@ -319,7 +374,7 @@ void displayScore(const Tree * scoreTree)
 
 }
 
-/*void openScoreData(Tree * ptree, const char filename[])
+void openScoreData(Tree * ptree, const char filename[])
 {
     FILE * f;
     f=fopen(filename, "r");
@@ -328,7 +383,7 @@ void displayScore(const Tree * scoreTree)
 
     unsigned int nb_elem, score;
     int i;
-    char * nickname;
+    char * nickname = NULL;
 
     if(f == NULL)
     {
@@ -355,8 +410,8 @@ void displayScore(const Tree * scoreTree)
     fclose(f);
     printf("Lecture des scores %s ... OK \n", filename);
 }
-*/
-/*
+
+
 void saveScoreData_Node(const Node * pnode, FILE * f)
 {
     if(pnode != NULL)
@@ -365,8 +420,8 @@ void saveScoreData_Node(const Node * pnode, FILE * f)
         fprintf(f, "%s %u \n", pnode->value.name, pnode->value.score);
         saveScoreData_Node(pnode->right_child, f);
     }
-}*/
-/*
+}
+
 void saveScoreData(const Tree * ptree, const char filename[])
 {
     FILE * f;
@@ -389,7 +444,7 @@ void saveScoreData(const Tree * ptree, const char filename[])
     fclose(f);
 
 }
-*/
+
 /* HARD-DROP */
 void dropCurrentPiece(Board * board)
 {
@@ -415,4 +470,9 @@ Bool testGameOver(Board * board)
     }
 
     return FALSE;
+}
+
+void tetrisTestRegression(Tetris * tetris)
+{
+
 }

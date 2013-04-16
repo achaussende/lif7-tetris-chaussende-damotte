@@ -32,6 +32,7 @@ void initBoard (Board * board)
             board->gridge[i][j] = 0;
         }
     }
+
     /* Initialisation currentPiece avec une piece au hasard */
 
     p = createPiece(rand() % 7, rand() % 4);
@@ -41,7 +42,7 @@ void initBoard (Board * board)
 
 void freeBoard (Board * board)
 {
-    setCurrentPiece(board, NULL);
-    initBoard(board);
+    initBoard(board); //mets toutes les cases de gridge à 0
+    freePiece(board->currentPiece);
     free(board);
 }
