@@ -228,11 +228,12 @@
 	<assert.h>
 	"player.h"
 
-1366102270 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/LoopTETRIS_SDL.c
+1366106632 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/LoopTETRIS_SDL.c
 	<time.h>
 	"LoopTETRIS_SDL.h"
 	<SDL/SDL_ttf.h>
 	<SDL/SDL.h>
+	<SDL/SDL_image.h>
 	"SDL.h"
 	<assert.h>
 	<stdlib.h>
@@ -252,14 +253,14 @@
 
 1365491756 ne
 
-1364894788 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/board.c
+1366120779 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/board.c
 	<stdio.h>
 	<stdlib.h>
 	<assert.h>
-	<time.h>
 	"board.h"
 
-1365489161 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/board.h
+1366120778 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/board.h
+	<time.h>
 	"piece.h"
 
 1364888447 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/piece.h
@@ -342,18 +343,19 @@
 
 1365491709 1
 
-1365499254 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/LoopTETRIS_SDL.h
+1366106632 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/LoopTETRIS_SDL.h
+	<SDL/SDL_image.h>
 	<SDL/SDL.h>
 	"tetris.h"
 
-1366102270 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/tetris.h
+1366120937 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/tetris.h
 	"bool.h"
 	"binarytrees.h"
 	"board.h"
 
 1364295131 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/bool.h
 
-1365494295 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/main.c
+1366119874 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/main.c
 	<stdlib.h>
 	<stdio.h>
 	<time.h>
@@ -380,7 +382,7 @@
 	<string.h>
 	"player.h"
 
-1366103550 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/tetris.c
+1366121019 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/tetris.c
 	<stdio.h>
 	<stdlib.h>
 	<assert.h>
