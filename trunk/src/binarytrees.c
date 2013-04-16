@@ -130,8 +130,49 @@ void insertPlayerInTree_recursion(Node * node, Player player)
         }
     }
 }
-void insertPlayerInTree(Tree * tree, Player player)
+void insertPlayerInTree (Tree * tree, Player player)
 {
     insertPlayerInTree_recursion((*tree).root, player);
     tree->nb_elements++;
+
+    if(tree->nb_elements > 50)
+    {
+        deleteTreeMin(tree);
+        tree->nb_elements--;
+    }
 }
+
+/*Node * deleteTreeMin_Node(Node * node)
+{
+    Node * p;
+    p = node->right_child;
+
+    if(node->left_child == NULL)
+    {
+        return p;
+    }
+    else
+    {
+        deleteTreeMin_Node(node->left_child);
+    }
+}
+
+void deleteTreeMin(Tree * tree)
+{
+    Node * n;
+    n = tree->root;
+
+    while(n->left_child != NULL)
+    {
+        n = n->left_child;
+    }
+
+    if(n->right_child == NULL)
+    {
+        free(n);
+    }
+    else
+    {
+
+    }
+}*/

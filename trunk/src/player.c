@@ -11,7 +11,7 @@ void setName (Player player, const char * name)
     strcpy(player.name, name);
 }
 
-char getName (const Player player)
+char * getName (const Player player)
 {
     return player.name;
 }

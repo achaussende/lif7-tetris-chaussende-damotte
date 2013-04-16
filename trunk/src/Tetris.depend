@@ -228,22 +228,27 @@
 	<assert.h>
 	"player.h"
 
-1364291590 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/LoopTETRIS_SDL.c
+1366094413 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/LoopTETRIS_SDL.c
 	<time.h>
-	"loopTETRIS_SDL.h"
+	"LoopTETRIS_SDL.h"
 	<SDL/SDL_ttf.h>
+	<SDL/SDL.h>
+	"SDL.h"
+	<assert.h>
+	<stdlib.h>
+	<stdio.h>
 
-1364310965 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/binarytrees.c
+1366096487 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/binarytrees.c
 	<stdlib.h>
 	<stdio.h>
 	<assert.h>
 	<string.h>
 	"binarytrees.h"
 
-1364308496 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/binarytrees.h
+1366093854 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/binarytrees.h
 	"player.h"
 
-1365493425 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/player.h
+1366096545 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/player.h
 
 1365491756 ne
 
@@ -336,4 +341,42 @@
 	"player.h"
 
 1365491709 1
+
+1365499254 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/LoopTETRIS_SDL.h
+	<SDL/SDL.h>
+	"tetris.h"
+
+1366094413 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/tetris.h
+	"bool.h"
+	"binarytrees.h"
+	"board.h"
+
+1364295131 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/bool.h
+
+1365494295 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/main.c
+	<stdlib.h>
+	<stdio.h>
+	<time.h>
+	"LoopTETRIS_SDL.h"
+	"tetris.h"
+	<SDL/SDL_ttf.h>
+
+1362478667 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/main.cpp
+	<cstdlib>
+	<stdlib.h>
+	<SDL/SDL.h>
+	<SDL.h>
+
+1365492773 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/piece.c
+	"piece.h"
+	<stdio.h>
+	<stdlib.h>
+	<assert.h>
+
+1366096536 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/player.c
+	<stdio.h>
+	<stdlib.h>
+	<assert.h>
+	<string.h>
+	"player.h"
 
