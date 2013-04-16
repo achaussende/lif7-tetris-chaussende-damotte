@@ -35,11 +35,11 @@ typedef struct
 /* ============ Fonctions de test ============= */
 
 //Bool testFallPiece(const Piece * piece);
-Bool testRotationPiece(const Piece * piece);
+Bool testRotationPiece(Board * board);
 Bool testLineFilled(Board * board, const unsigned int posY);
 //Bool testCollision(const Piece * piece);
 Bool testLineEmpty(Board * board, const unsigned int posY);
-Bool isCurrentPieceMovable(const Board * board, const int x, const int y);
+Bool isCurrentPieceMovable(Board * board, const int x, const int y);
 
 
 /* ================ Méthodes ==================  */
@@ -64,5 +64,5 @@ void saveScoreData_Node(const Node * pnode, FILE * f);
 void saveScoreData(const Tree * ptree, const char filename[]);
 
 void dropCurrentPiece(Board * board);
-void testGameOver(Board * board);
+Bool testGameOver(Board * board);
 #endif

@@ -24,30 +24,26 @@ void sdljeuInit(SDL *sdl)
 {
 
     SDL_Surface *surface_screen = NULL;
-    SDL_Surface *gridge;
-    SDL_Rect positiongridge;
+    SDL_Surface *gridge = NULL;
+    SDL_Rect position1;
+    position1.x = 200;
+	position1.y = 20;
 
-    assert(SDL_Init(SDL_INIT_EVERYTHING)!= -1); // Démarrage de la SDL
-
-    positiongridge.x = surface_screen->w / 2 - gridge->w / 2;
-    positiongridge.y = surface_screen->h / 2 - gridge->h / 2;
-
-    gridge = SDL_LoadBMP("gridge.bmp");
-    SDL_SetColorKey(gridge, SDL_SRCCOLORKEY, SDL_MapRGB(gridge->format, 0, 0, 255));
-
-    surface_screen = SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF);
-
-    SDL_WM_SetCaption("LegendaryTetris", NULL);
+    /*assert(SDL_Init(SDL_INIT_EVERYTHING)!= -1); */
+    SDL_Init(SDL_INIT_VIDEO);
+    surface_screen = SDL_SetVideoMode(1280, 720, 32, SDL_SWSURFACE);
 
     // Coloration de la surface ecran en gris
     SDL_FillRect(surface_screen, NULL, SDL_MapRGB(surface_screen->format, 31, 31, 31));
+    gridge = SDL_LoadBMP("gridge.bmp");
+    SDL_BlitSurface(gridge, NULL, surface_screen, &position1);
+   /* SDL_apply_surface( gridge, surface_screen, 100, 100 );*/
 
+    SDL_WM_SetCaption("LegendaryTetris", NULL);
 
-    /*if(TTF_Init() == -1)
-{
-    fprintf(stderr, "Erreur d'initialisation de TTF_Init : %s\n", TTF_GetError());
-    exit(EXIT_FAILURE);
-}*/
+	SDL_Flip(surface_screen);
+	pause();
+
 
 }
 
