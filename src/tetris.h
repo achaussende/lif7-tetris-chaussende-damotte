@@ -56,7 +56,7 @@ Bool isCurrentPieceMovable(Board * board, const int x, const int y);
 
 void initTetris(Tetris * tetris, Board * board, Piece * piece, Tree * tree);
 void freeTetris(Tetris * tetris);
-void createTetris(Board * board, Piece * piece, Tree * tree);
+Tetris * createTetris(Board * board, Piece * piece, Tree * tree);
 
 void moveCurrentPieceDown(Board * board);
 void moveCurrentPieceLeft(Board * board);
@@ -81,5 +81,5 @@ void dropCurrentPiece(Board * board);
 Bool testGameOver(Board * board);
 
 /* Test régression des fonctions */
-void tetrisTestRegression(Tetris * tetris);
+void tetrisTestRegression();
 #endif

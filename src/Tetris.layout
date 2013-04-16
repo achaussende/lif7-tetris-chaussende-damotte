@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="LoopTETRIS_SDL.c" open="1" top="1" tabpos="6">
-		<Cursor position="3259" topLine="80" />
+	<File name="LoopTETRIS_SDL.c" open="0" top="0" tabpos="6">
+		<Cursor position="3259" topLine="0" />
 	</File>
-	<File name="LoopTETRIS_SDL.h" open="1" top="0" tabpos="5">
-		<Cursor position="78" topLine="0" />
+	<File name="LoopTETRIS_SDL.h" open="1" top="0" tabpos="9">
+		<Cursor position="52" topLine="0" />
 	</File>
 	<File name="binarytrees.c" open="0" top="0" tabpos="7">
 		<Cursor position="454" topLine="110" />
 	</File>
-	<File name="binarytrees.h" open="0" top="0" tabpos="8">
-		<Cursor position="283" topLine="28" />
+	<File name="binarytrees.h" open="1" top="0" tabpos="8">
+		<Cursor position="1192" topLine="33" />
 	</File>
-	<File name="board.c" open="1" top="0" tabpos="1">
-		<Cursor position="159" topLine="0" />
+	<File name="board.c" open="1" top="0" tabpos="7">
+		<Cursor position="59" topLine="0" />
 	</File>
-	<File name="board.h" open="1" top="0" tabpos="2">
-		<Cursor position="329" topLine="0" />
+	<File name="board.h" open="1" top="0" tabpos="3">
+		<Cursor position="32" topLine="0" />
 	</File>
 	<File name="bool.h" open="0" top="0" tabpos="6">
 		<Cursor position="135" topLine="0" />
 	</File>
-	<File name="main.c" open="1" top="0" tabpos="7">
-		<Cursor position="262" topLine="0" />
+	<File name="main.c" open="1" top="0" tabpos="5">
+		<Cursor position="267" topLine="0" />
 	</File>
 	<File name="piece.c" open="0" top="0" tabpos="2">
-		<Cursor position="517" topLine="4" />
+		<Cursor position="517" topLine="13" />
 	</File>
-	<File name="piece.h" open="0" top="0" tabpos="3">
-		<Cursor position="1178" topLine="0" />
+	<File name="piece.h" open="1" top="0" tabpos="4">
+		<Cursor position="1178" topLine="6" />
 	</File>
 	<File name="player.c" open="0" top="0" tabpos="5">
 		<Cursor position="147" topLine="0" />
@@ -37,13 +37,13 @@
 	<File name="player.h" open="0" top="0" tabpos="9">
 		<Cursor position="257" topLine="0" />
 	</File>
-	<File name="shapes.h" open="1" top="0" tabpos="8">
+	<File name="shapes.h" open="1" top="0" tabpos="6">
 		<Cursor position="312" topLine="0" />
 	</File>
-	<File name="tetris.c" open="1" top="0" tabpos="3">
-		<Cursor position="9635" topLine="203" />
+	<File name="tetris.c" open="1" top="1" tabpos="1">
+		<Cursor position="2027" topLine="474" />
 	</File>
-	<File name="tetris.h" open="1" top="0" tabpos="4">
-		<Cursor position="2063" topLine="40" />
+	<File name="tetris.h" open="1" top="0" tabpos="2">
+		<Cursor position="1900" topLine="48" />
 	</File>
 </CodeBlocks_layout_file>

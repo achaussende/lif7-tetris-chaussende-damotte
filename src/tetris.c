@@ -195,24 +195,26 @@ Bool testLineEmpty(Board * board, const unsigned int posY)
 
 void initTetris(Tetris * tetris, Board * board, Piece * piece, Tree * tree)
 {
-    setTetrisBoard(board);
-    setTetrisNextPiece(piece);
-    setTetrisTreeScores(tree);
+    setTetrisBoard(tetris, board);
+    setTetrisNextPiece(tetris, piece);
+    setTetrisTreeScores(tetris, tree);
 }
 
 void freeTetris(Tetris * tetris)
 {
     freeBoard(tetris->board);
     freePiece(tetris->nextpiece);
-    freeTree(tetris->t_scores);
+    freeTree(tetris->treescores);
     free(tetris);
 }
 
-void createTetris(Board * board, Piece * piece, Tree * tree)
+Tetris * createTetris(Board * board, Piece * piece, Tree * tree)
 {
     Tetris * tetris = (Tetris *)malloc(sizeof(Tetris));
 
     initTetris(tetris, board, piece, tree);
+
+    return tetris;
 }
 
 void moveCurrentPieceDown(Board * board)
@@ -472,7 +474,24 @@ Bool testGameOver(Board * board)
     return FALSE;
 }
 
-void tetrisTestRegression(Tetris * tetris)
+void tetrisTestRegression()
 {
+    Board * board = (Board *)malloc(sizeof(Board));
+    Piece * piece = NULL;
+    Tree * tree = (Tree *)malloc(sizeof(Tree));
+    Tetris * tetris;
 
+    srand(time(NULL));
+
+    initBoard(board);
+    printf("Création de la board + initialisation ... OK \n");
+    piece = createPiece(rand() % 7, rand() % 4);
+    printf("Création d'une piece de type : %u et d'orientation : %u \n",
+            piece->kind++, piece->orientation++);
+
+    tetris = createTetris(board, piece, tree);
+    printf("Création du Tetris ... OK \n");
+
+    freeTetris(tetris);
+    printf("Libération de tetris et de tout ses champs ... OK\n");
 }
