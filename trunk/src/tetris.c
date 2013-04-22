@@ -5,52 +5,58 @@
 
 #include "tetris.h"
 #include "bool.h"
+#include "shapes.h"
 
 
 /* ============ Flood Fill ============ */
 
-void flood(Board * board,int i, int j, int px, int py, int k, int o,
-           int value, Bool visited[4][4])
+void flood(Board * board,int i, int j, int py, int px, int k, int o,
+           Color color, Bool visited[4][4])
 {
-    assert(px < 0 || px >= 4 || py < 0 || py >= 4 || visited[px][py] == TRUE ||
-           PIECES[k][o][px][py] == FREE);
-
-    visited[py][px] = TRUE;
-    board->gridge[j][i] = value; // On remplit la case de la valeur dans l'aire
-
-    flood(board, i, j - 1, px, py - 1, k, o, value, visited);
-    flood(board, i + 1, j, px + 1, py, k, o, value, visited);
-    flood(board, i, j + 1, px, py + 1, k, o, value, visited);
-    flood(board, i - 1, j, px - 1, py, k, o, value, visited);
-}
-
-void flood2(Board * board, int i, int j, int px, int py, int k, int o,
-           Bool * flag, Bool visited[4][4])
-{
-    assert(px < 0 || px >= 4 || py < 0 || py >= 4 || visited[px][py] == TRUE ||
-        PIECES[k][o][px][py] == FREE);
-
-
-    visited[px][py] = TRUE;
-
-   /* Si on dépasse les limites de l'aire de jeu
-    * ou si la case sur laquelle on est n'est pas vide
-    */
-    if(i < 0 || i >= 10 || j < 0 || j >= 20 || board->gridge[j][i] != FREE)
+    if(px >= 0 && px < 4 && py >= 0 && py < 4 && visited[py][px] == FALSE &&
+            PIECES[k][o][py][px] != 0)
     {
-        flag = FALSE; // on met flag à false
-        return;
+        visited[py][px] = TRUE;
+        board->gridge[i][j] = color; // On remplit la case de la valeur dans l'aire
+
+        flood(board, i, j - 1, py, px - 1, k, o, color, visited);
+        flood(board, i + 1, j, py + 1, px, k, o, color, visited);
+        flood(board, i, j + 1, py, px + 1, k, o, color, visited);
+        flood(board, i - 1, j, py - 1, px, k, o, color, visited);
     }
 
-    flood2(board, i, j - 1, px, py - 1, k, o, flag, visited);
-    flood2(board, i + 1, j, px + 1, py, k, o, flag, visited);
-    flood2(board, i, j + 1, px, py + 1, k, o, flag, visited);
-    flood2(board, i - 1, j, px - 1, py, k, o, flag, visited);
+}
+
+void flood2(Board * board, int i, int j, int py, int px, int k, int o,
+           Bool * flag, Bool visited[4][4])
+{
+    if(px >= 0 && px < 4 && py >= 0 && py < 4 && visited[py][px] == FALSE &&
+            PIECES[k][o][py][px] != 0)
+    {
+        visited[py][px] = TRUE;
+
+       /* Si on est toujours dans l'aire de jeu
+       et si la case sur laquelle on est vide :
+       on continue le flood */
+
+        if(i >= 0 && i < 20 && j >= 0 && j < 10 && board->gridge[i][j] == FREE)
+        {
+            flood2(board, i, j - 1, py, px - 1, k, o, flag, visited);
+            flood2(board, i + 1, j, py + 1, px, k, o, flag, visited);
+            flood2(board, i, j + 1, py, px + 1, k, o, flag, visited);
+            flood2(board, i - 1, j, py - 1, px, k, o, flag, visited);
+        }
+        else
+        {
+            /* Sinon la pièce ne peut pas être bougée */
+            flag = FALSE;
+        }
+    }
 }
 
 /* Cette fonction ne fait qu'appeler le flood */
 void floodFill(Board * board,int i, int j, int px, int py, int k, int o,
-               int value)
+               Color color)
 {
     Bool visited[4][4];
     int l, m;
@@ -63,7 +69,7 @@ void floodFill(Board * board,int i, int j, int px, int py, int k, int o,
         }
     }
 
-    flood(board, i, j, px, py, k, o, value, visited);
+    flood(board, i, j, px, py, k, o, color, visited);
 }
 
 /* ========== Mutateurs & Accesseurs ==========  */
@@ -151,7 +157,7 @@ Bool testRotationPiece(Board * board)
 
     }
 
-    flood2(board, getPosX(board->currentPiece), getPosY(board->currentPiece), 2, 1,
+    flood2(board, getPosY(board->currentPiece), getPosX(board->currentPiece), 2, 1,
           kind, orientation, &rotable, visited);
 
     drawPiece(board);
@@ -313,7 +319,7 @@ void drawPiece(Board * board)
 
     /*Flood fill*/
 
-    floodFill(board, i, j, 1, 2, kind, orientation, color);
+    floodFill(board, i, j, 2, 1, kind, orientation, color);
 }
 
 
@@ -480,6 +486,7 @@ void tetrisTestRegression()
     Piece * piece = NULL;
     Tree * tree = (Tree *)malloc(sizeof(Tree));
     Tetris * tetris;
+    int i, j;
 
     srand(time(NULL));
 
@@ -487,10 +494,41 @@ void tetrisTestRegression()
     printf("Création de la board + initialisation ... OK \n");
     piece = createPiece(rand() % 7, rand() % 4);
     printf("Création d'une piece de type : %u et d'orientation : %u \n",
-            piece->kind++, piece->orientation++);
+            piece->kind + 1, piece->orientation + 1);
 
     tetris = createTetris(board, piece, tree);
     printf("Création du Tetris ... OK \n");
+
+    for(i = 0; i < 20; i++)
+    {
+        for(j = 0; j < 10; j++)
+        {
+            printf("%u ", tetris->board->gridge[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+    for(i = 0; i < 4; i++)
+    {
+        for(j = 0; j < 4; j++)
+        {
+            printf("%u ", PIECES[piece->kind][piece->orientation][i][j]);
+        }
+
+        printf("\n");
+    }
+    printf("\n");
+    drawPiece(tetris->board);
+
+    for(i = 0; i < 20; i++)
+    {
+        for(j = 0; j < 10; j++)
+        {
+            printf("%u ", tetris->board->gridge[i][j]);
+        }
+
+        printf("\n");
+    }
 
     freeTetris(tetris);
     printf("Libération de tetris et de tout ses champs ... OK\n");

@@ -36,6 +36,8 @@ void initBoard (Board * board)
     /* Initialisation currentPiece avec une piece au hasard */
 
     p = createPiece(rand() % 7, rand() % 4);
+    setPosX(p, 1);
+    setPosY(p, 5);
     setCurrentPiece(board, p);
 
 }

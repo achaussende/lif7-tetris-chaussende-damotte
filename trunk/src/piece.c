@@ -90,12 +90,12 @@ int getOrientation(const Piece * piece)
     return piece->orientation;
 }
 
-void setColor(Piece * piece,int color)
+void setColor(Piece * piece, Color color)
 {
     piece->color = color;
 }
 
-int getColor(const Piece * piece)
+Color getColor(const Piece * piece)
 {
     return piece->color;
 }

@@ -253,7 +253,7 @@
 
 1365491756 ne
 
-1366120779 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/board.c
+1366672050 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/board.c
 	<stdio.h>
 	<stdlib.h>
 	<assert.h>
@@ -263,10 +263,10 @@
 	<time.h>
 	"piece.h"
 
-1364888447 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/piece.h
+1366672696 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/piece.h
 	"shapes.h"
 
-1366102270 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/shapes.h
+1366672802 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/shapes.h
 
 1365491261 source:/home/alan/Documents/LIF7/Tetris/src/LoopTETRIS_SDL.c
 	<assert.h>
@@ -348,14 +348,14 @@
 	<SDL/SDL.h>
 	"tetris.h"
 
-1366120937 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/tetris.h
+1366672673 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/tetris.h
 	"bool.h"
 	"binarytrees.h"
 	"board.h"
 
 1364295131 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/bool.h
 
-1366119874 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/main.c
+1366673485 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/main.c
 	<stdlib.h>
 	<stdio.h>
 	<time.h>
@@ -369,7 +369,7 @@
 	<SDL/SDL.h>
 	<SDL.h>
 
-1365492773 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/piece.c
+1366672753 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/piece.c
 	"piece.h"
 	<stdio.h>
 	<stdlib.h>
@@ -382,11 +382,12 @@
 	<string.h>
 	"player.h"
 
-1366121019 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/tetris.c
+1366674362 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/tetris.c
 	<stdio.h>
 	<stdlib.h>
 	<assert.h>
 	<string.h>
 	"tetris.h"
 	"bool.h"
+	"shapes.h"
 
