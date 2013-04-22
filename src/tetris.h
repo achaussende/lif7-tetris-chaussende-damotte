@@ -12,17 +12,17 @@
 * (px, py): Les coordonnées de la case à partir de laquelle floodfiller dans la matrice de la pièce
 * k: pour kind (type), le type de la pièce
 * o: pour orientation, l'orientation de la pièce
-* value: valeur avec laquelle remplir l'aire de jeu
+* color: couleur avec laquelle remplir l'aire de jeu
 */
 void flood(Board * board,int i, int j, int px, int py, int k, int o,
-           int value, Bool visited[4][4]);
+           Color color, Bool visited[4][4]);
 
 void flood2(Board * board, int i, int j, int px, int py, int k, int o,
            Bool * flag, Bool visited[4][4]);
 
 /* Appel de flood + initialisation de visited */
 void floodFill(Board * board, int i, int j, int px, int py, int k, int o,
-               int value);
+               Color color);
 
 typedef struct
 {

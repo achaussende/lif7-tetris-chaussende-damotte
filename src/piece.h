@@ -12,7 +12,7 @@ typedef struct
 {
     unsigned int kind; // Le type de la pièce
     unsigned int orientation; // Son orientation (sa rotation courante)
-    unsigned int color; // Sa couleur
+    Color color; // Sa couleur
 
     unsigned int posX; // Son ordonnée dans l'aire de jeu
     unsigned int posY; // Son abscisse dans l'aire de jeu
@@ -29,8 +29,8 @@ typedef struct
     void setOrientation(Piece * piece,int orientation);
     int getOrientation(const Piece * piece);
 
-    void setColor(Piece * piece,const int color);
-    int getColor(const Piece * piece);
+    void setColor(Piece * piece,const Color color);
+    Color getColor(const Piece * piece);
 
     void setPosX(Piece * piece,const int x);
     int getPosX(const Piece * piece);
