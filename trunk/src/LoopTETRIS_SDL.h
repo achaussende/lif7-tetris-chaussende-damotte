@@ -8,10 +8,10 @@
 typedef struct
 {
 	Tetris tetris;
-	SDL_Surface* surface_screen;
-	SDL_Surface* surface_piece;
-	SDL_Surface* surface_gridge;
-	SDL_Surface* surface_score;
+	SDL_Surface* screen;
+	SDL_Surface* piece;
+	SDL_Surface* gridge;
+	SDL_Surface* score;
 }SDL;
 
 void sdljeuInit(SDL *sdl);
