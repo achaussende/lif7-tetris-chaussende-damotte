@@ -18,7 +18,7 @@ void flood(Board * board,int i, int j, int px, int py, int k, int o,
            Color color, Bool visited[4][4]);
 
 void flood2(Board * board, int i, int j, int px, int py, int k, int o,
-           Bool * flag, Bool visited[4][4]);
+           Bool flag, Bool visited[4][4]);
 
 /* Appel de flood + initialisation de visited */
 void floodFill(Board * board, int i, int j, int px, int py, int k, int o,
