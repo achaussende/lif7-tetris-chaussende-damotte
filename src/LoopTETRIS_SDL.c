@@ -40,38 +40,62 @@ SDL_Surface* SDLChargeImage(const char* nomfichier){
 void sdljeuInit(SDL *sdl)
 {
 
-    SDL_Surface *surface_screen = NULL;
+    SDL_Surface *screen = NULL;
     SDL_Surface *gridge = NULL;
+    SDL_Surface *piece = NULL;
     SDL_Rect position1;
 
 
     /*assert(SDL_Init(SDL_INIT_EVERYTHING)!= -1); */
     SDL_Init(SDL_INIT_VIDEO);
-    surface_screen = SDL_SetVideoMode(1000, 600, 32, SDL_SWSURFACE| SDL_RESIZABLE | SDL_DOUBLEBUF);
+    screen = SDL_SetVideoMode(1000, 600, 32, SDL_SWSURFACE| SDL_RESIZABLE | SDL_DOUBLEBUF);
 
     // Coloration de la surface ecran en gris
-    SDL_FillRect(surface_screen, NULL, SDL_MapRGB(surface_screen->format, 31, 31, 31));
+    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 31, 31, 31));
     gridge = SDLChargeImage("../data/gridge.bmp");
+    piece = SDLChargeImage("../data/piece.bmp");
     // gridge = IMG_Load("gridge.png");
-    position1.x = surface_screen->w / 2 - gridge->w / 2;
-	position1.y = surface_screen->h / 2 - gridge->h / 2;
+    position1.x = screen->w / 2 - gridge->w / 2;
+	position1.y = screen->h / 2 - gridge->h / 2;
 
-    SDL_apply_surface(gridge,surface_screen, position1.x, position1.y);
+    SDL_apply_surface(gridge,screen, position1.x, position1.y);
 
 
-    SDL_Surface *surface_piece = NULL;
-    surface_piece = SDLChargeImage("../data/piece.bmp");
+    SDL_WM_SetCaption("LegendaryTetris", NULL);
 
+
+    //*************** Boucle d'évènement, à compléter *******************
+    //** Gestion des touches
+    //** Affichage pièce
+    //** Gestion Lignes
+    //** Etc...
+    /*SDL_Surface *screen;
+    screen = sdl->screen;
+    SDL_Surface *gridge;
+    gridge = sdl->gridge;
+    SDL_Surface *piece;
+    piece = sdl->piece;*/
     SDL_Rect positionpiece;
-    positionpiece.x = surface_screen->w / 2 - surface_piece->w / 2;
-    positionpiece.y = surface_screen->h / 2 - surface_piece->h / 2;
-    SDL_apply_surface(surface_piece,surface_screen, positionpiece.x, positionpiece.y);
+    //positionpiece.x = screen->w / 2 - piece->w / 2;
+	//positionpiece.y = screen->h / 2 - piece->h / 2;
+    positionpiece.x = position1.x;
+    positionpiece.y = position1.y;
+    Board* board;
+    board = sdl->tetris.board;
+    initBoard(board);
+	Piece * piece2;
+    piece2 = createPiece(rand()%7, 0);
+    /*setPosX(piece2, position1.x);
+    setPosY(piece2, position1.y);*/
+
+    newPiece(board, piece2);
+	//SDL_apply_surface(piece,screen, positionpiece.x, positionpiece.y);
+
 
     SDL_Event event;
-    /*Board* board;
-    board = sdl->tetris.board;*/
+
     int next = 1;
-     SDL_EnableKeyRepeat(10, 10);
+    //SDL_EnableKeyRepeat(10, 10);
      while (next)
     {
         SDL_WaitEvent(&event);
@@ -84,111 +108,68 @@ void sdljeuInit(SDL *sdl)
                 switch(event.key.keysym.sym)
                 {
                     case SDLK_UP: // Flèche haut
-                        positionpiece.y=positionpiece.y-20;
-                        SDL_Flip(surface_piece);
-                        //rotationPiece(board);
+                        //positionpiece.y=positionpiece.y-20;
+                        //SDL_apply_surface(piece,screen, positionpiece.x, positionpiece.y);
+                        //SDL_Flip(screen);
+
+                        rotationPiece(board);
+                        //positionpiece.x = (getPosX(piece2))*20;
+                        SDL_apply_surface(piece,screen, positionpiece.x, positionpiece.y);
+                        SDL_Flip(screen);
                         break;
                     case SDLK_DOWN: // Flèche bas
-                    positionpiece.y=positionpiece.y+20;
-                    SDL_Flip(surface_piece);
-                        //moveCurrentPieceDown(board);
+                        /*positionpiece.y=positionpiece.y+20;
+                        SDL_apply_surface(piece,screen, positionpiece.x, positionpiece.y);
+                        SDL_Flip(screen);*/
+
+                        moveCurrentPieceDown(board);
+                        positionpiece.y = (getPosY(piece2))*20;
+                        SDL_apply_surface(piece,screen, positionpiece.x, positionpiece.y);
+                        SDL_Flip(screen);
+
                         break;
                     case SDLK_RIGHT: // Flèche droite
-                    positionpiece.y=positionpiece.x-20;
-                    SDL_Flip(surface_piece);
-                        //moveCurrentPieceRight(board);
+                        //positionpiece.x=positionpiece.x+20;
+                        //
+                        moveCurrentPieceRight(board);
+                        positionpiece.x = (getPosX(piece2))*20;
+                        SDL_apply_surface(piece,screen, positionpiece.x, positionpiece.y);
+                        SDL_Flip(screen);
+
                         break;
                     case SDLK_LEFT: // Flèche gauche
-                    positionpiece.y=positionpiece.x+20;
-                    SDL_Flip(surface_piece);
-                        //moveCurrentPieceLeft(board);
+                        //positionpiece.x=positionpiece.x-20;
+                        //SDL_apply_surface(piece,screen, positionpiece.x, positionpiece.y);
+                        //SDL_Flip(screen);
+
+                        moveCurrentPieceLeft(board);
+                        positionpiece.x = (getPosX(piece2))*20;
+                        SDL_apply_surface(piece,screen, positionpiece.x, positionpiece.y);
+                        SDL_Flip(screen);
                         break;
+
                     default:
-                        break;
+                    break;
                 }
                 break;
+
                 default:
-                    break;
+                break;
         }
 
-        SDL_Flip(surface_screen);
+        SDL_Flip(screen);
     }
-    SDL_WM_SetCaption("LegendaryTetris", NULL);
-
-	SDL_Flip(surface_screen);
-	pause();
-
+pause();
+SDL_FreeSurface(piece);
+SDL_FreeSurface(screen);
+SDL_Quit(); // Arrêt de la SDL (libération de la mémoire)
 
 }
 
 
 void sdljeuBoucle(SDL *sdl)
 {
-    //*************** Boucle d'évènement, à compléter *******************
-    //** Gestion des touches
-    //** Affichage pièce
-    //** Gestion Lignes
-    //** Etc...
-    int next=1;
 
-    SDL_Surface *surface_screen = NULL;
-    SDL_Surface *surface_piece = NULL;
-    surface_piece = SDLChargeImage("../data/piece.bmp");
-
-    SDL_Rect positionpiece;
-    positionpiece.x = surface_screen->w / 2 - surface_piece->w / 2;
-    positionpiece.y = surface_screen->h / 2 - surface_piece->h / 2;
-    SDL_apply_surface(surface_piece,surface_screen, positionpiece.x, positionpiece.y);
-
-    SDL_Event event;
-    /*Board* board;
-    board = sdl->tetris.board;*/
-
-     SDL_EnableKeyRepeat(10, 10);
-     while (next)
-    {
-        SDL_WaitEvent(&event);
-        switch(event.type)
-        {
-            case SDL_QUIT:
-                next = 0;
-                break;
-            case SDL_KEYDOWN:
-                switch(event.key.keysym.sym)
-                {
-                    case SDLK_UP: // Flèche haut
-                        positionpiece.y=positionpiece.y-20;
-                        //rotationPiece(board);
-                        break;
-                    case SDLK_DOWN: // Flèche bas
-                    positionpiece.y=positionpiece.y+20;
-                        //moveCurrentPieceDown(board);
-                        break;
-                    case SDLK_RIGHT: // Flèche droite
-                    positionpiece.y=positionpiece.x-20;
-                        //moveCurrentPieceRight(board);
-                        break;
-                    case SDLK_LEFT: // Flèche gauche
-                    positionpiece.y=positionpiece.x+20;
-                        //moveCurrentPieceLeft(board);
-                        break;
-                    default:
-                        break;
-                }
-                break;
-                default:
-                    break;
-        }
-
-        SDL_Flip(surface_screen);
-
-        /* On efface l'écran */
-        //SDL_FillRect(surface_screen, NULL, SDL_MapRGB(surface_screen->format, 255, 255, 255));
-        /* On place Zozor à sa nouvelle position */
-        //SDL_BlitSurface(zozor, NULL, surface_screen, &positionZozor);
-        /* On met à jour l'affichage */
-        //SDL_Flip(ecran);
-    }
 }
 
 
@@ -202,6 +183,7 @@ void sdljeuLibere(SDL *sdl)
 void sdltestRegression(SDL *sdl)
 {
     sdljeuInit(sdl);
+    sdljeuBoucle(sdl);
 
 }
 
@@ -220,3 +202,4 @@ void pause()
         }
     }
 }
+
