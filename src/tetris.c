@@ -28,8 +28,8 @@ void flood(Board * board,int i, int j, int px, int py, int k, int o,
 
 }
 
-void flood2(Board * board, int i, int j, int py, int px, int k, int o,
-           Bool * flag, Bool visited[4][4])
+void flood2(Board * board, int i, int j, int px, int py, int k, int o,
+           Bool flag, Bool visited[4][4])
 {
 
 
@@ -42,12 +42,12 @@ void flood2(Board * board, int i, int j, int py, int px, int k, int o,
        et si la case sur laquelle on est vide :
        on continue le flood */
 
-        if(i >= 0 && i < 20 && j >= 0 && j < 10 && board->gridge[i][j] == FREE)
+        if(i >= 0 && i < 10 && j >= 0 && j < 20 && board->gridge[i][j] == FREE)
         {
-            flood2(board, i, j - 1, py, px - 1, k, o, flag, visited);
-            flood2(board, i + 1, j, py + 1, px, k, o, flag, visited);
-            flood2(board, i, j + 1, py, px + 1, k, o, flag, visited);
-            flood2(board, i - 1, j, py - 1, px, k, o, flag, visited);
+            flood2(board, i, j - 1, px, py - 1, k, o, flag, visited);
+            flood2(board, i + 1, j, px + 1, py, k, o, flag, visited);
+            flood2(board, i, j + 1, px, py + 1, k, o, flag, visited);
+            flood2(board, i - 1, j, px - 1, py, k, o, flag, visited);
         }
         else
         {
@@ -120,7 +120,8 @@ Bool isCurrentPieceMovable(Board * board, const int x, const int y)
 
     clearPiece(board); // D'abord on efface la pièce courante
 
-    Bool movable = TRUE; // On suppose au départ qu'on peut bouger la pièce
+    Bool movable;
+    movable = TRUE; // On suppose au départ qu'on peut bouger la pièce
 
    /* On initialise le tableau visited pour le flood fill */
 
@@ -134,7 +135,7 @@ Bool isCurrentPieceMovable(Board * board, const int x, const int y)
 
 
    /* On fait notre flood fill */
-    flood2(board,x, y, 1, 2, kind, orientation, &movable, visited);
+    flood2(board,x, y, 2, 1, kind, orientation, movable, visited);
 
     drawPiece(board); // On redessine notre pièce
 
@@ -161,7 +162,7 @@ Bool testRotationPiece(Board * board)
     }
 
     flood2(board, getPosY(board->currentPiece), getPosX(board->currentPiece), 2, 1,
-          kind, orientation, &rotable, visited);
+          kind, orientation, rotable, visited);
 
     drawPiece(board);
 
@@ -462,9 +463,10 @@ void dropCurrentPiece(Board * board)
     int x = getPosX(board->currentPiece);
     int y = getPosY(board->currentPiece);
 
-    while(isCurrentPieceMovable(board, x, y++)) // Tant qu'on peut toujours bouger la pièce vers le bas
+    while(isCurrentPieceMovable(board, x, y+1) == TRUE) // Tant qu'on peut toujours bouger la pièce vers le bas
     {
         moveCurrentPieceDown(board);
+
     }
 }
 
@@ -561,9 +563,9 @@ void tetrisTestRegression()
     printf("\n");
     printf("\n");
 
-    //dropCurrentPiece(tetris->board);
+    dropCurrentPiece(tetris->board);
 
-    /*for(i = 0; i < 20; i++) // affichage grille
+    for(i = 0; i < 20; i++) // affichage grille
     {
         for(j = 0; j < 10; j++)
         {
@@ -573,7 +575,7 @@ void tetrisTestRegression()
         printf("\n");
     }
     printf("\n");
-    printf("\n");*/
+    printf("\n");
 
     freeTetris(tetris);
     printf("Libération de tetris et de tout ses champs ... OK\n");

@@ -10,7 +10,7 @@
 int main()
 {
     SDL sdl;
-    sdltestRegression(&sdl);
+    //sdltestRegression(&sdl);
     /*sdljeuInit(&sdl);
     sdljeuBoucle(&sdl);
     sdljeuLibere(&sdl);*/
