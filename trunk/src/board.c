@@ -19,9 +19,6 @@ Piece * getCurrentPiece (const Board * board)
 void initBoard (Board * board)
 {
     int i, j;
-    Piece * p;
-
-    srand(time(NULL)); // initialisation de rand
 
     /* Initialisation de gridge */
 
@@ -33,12 +30,7 @@ void initBoard (Board * board)
         }
     }
 
-    /* Initialisation currentPiece avec une piece au hasard */
-
-    p = createPiece(rand() % 7, rand() % 4);
-    setPosX(p, 1);
-    setPosY(p, 5);
-    setCurrentPiece(board, p);
+    setCurrentPiece(board, NULL); // Pas de pièce de courante
 
 }
 
