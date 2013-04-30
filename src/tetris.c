@@ -10,19 +10,20 @@
 
 /* ============ Flood Fill ============ */
 
-void flood(Board * board,int i, int j, int py, int px, int k, int o,
+void flood(Board * board,int i, int j, int px, int py, int k, int o,
            Color color, Bool visited[4][4])
 {
+
     if(px >= 0 && px < 4 && py >= 0 && py < 4 && visited[py][px] == FALSE &&
-            PIECES[k][o][py][px] != 0)
+                PIECES[k][o][py][px] != 0)
     {
         visited[py][px] = TRUE;
-        board->gridge[i][j] = color; // On remplit la case de la valeur dans l'aire
+        board->gridge[j][i] = color; // On remplit la case de la valeur dans l'aire
 
-        flood(board, i, j - 1, py, px - 1, k, o, color, visited);
-        flood(board, i + 1, j, py + 1, px, k, o, color, visited);
-        flood(board, i, j + 1, py, px + 1, k, o, color, visited);
-        flood(board, i - 1, j, py - 1, px, k, o, color, visited);
+        flood(board, i -1 , j, px - 1, py, k, o, color, visited); // à gauche
+        flood(board, i + 1, j, px + 1, py, k, o, color, visited); // à droite
+        flood(board, i, j - 1, px, py - 1, k, o, color, visited); // en haut
+        flood(board, i, j + 1, px, py + 1, k, o, color, visited); // en bas (ces soirées là !)
     }
 
 }
@@ -30,6 +31,8 @@ void flood(Board * board,int i, int j, int py, int px, int k, int o,
 void flood2(Board * board, int i, int j, int py, int px, int k, int o,
            Bool * flag, Bool visited[4][4])
 {
+
+
     if(px >= 0 && px < 4 && py >= 0 && py < 4 && visited[py][px] == FALSE &&
             PIECES[k][o][py][px] != 0)
     {
@@ -61,9 +64,9 @@ void floodFill(Board * board,int i, int j, int px, int py, int k, int o,
     Bool visited[4][4];
     int l, m;
 
-    for(l = 0; l < 4 ; l++)
+    for(l = 0 ; l < 4 ; l++)
     {
-        for(m = 0; m < 4; m++)
+        for(m = 0 ; m < 4 ; m++)
         {
             visited[l][m] = FALSE;
         }
@@ -231,7 +234,7 @@ void moveCurrentPieceDown(Board * board)
     if(isCurrentPieceMovable(board, x , y + 1) == TRUE) /* Si on peut bouger la pièce vers le bas*/
     {
         clearPiece(board); /* On efface la pièce de son ancienne position */
-        setPosX(board->currentPiece, y + 1); /* On incrémente son ordonnée */
+        setPosY(board->currentPiece, y + 1); /* On incrémente son ordonnée */
 
         drawPiece(board); /* On la redessine à la nouvelle position */
     }
@@ -245,7 +248,7 @@ void moveCurrentPieceLeft(Board * board)
     if(isCurrentPieceMovable(board, x - 1 , y ) == TRUE)
     {
         clearPiece(board);
-        setPosY(board->currentPiece, x - 1);
+        setPosX(board->currentPiece, x - 1);
         drawPiece(board);
     }
 }
@@ -258,7 +261,7 @@ void moveCurrentPieceRight(Board * board)
     if(isCurrentPieceMovable(board, x + 1 , y) == TRUE)
     {
         clearPiece(board);
-        setPosY(board->currentPiece, x + 1);
+        setPosX(board->currentPiece, x + 1);
         drawPiece(board);
     }
 }
@@ -315,7 +318,7 @@ void drawPiece(Board * board)
 
     int kind = getKind(p); /* On récupère son type */
     int orientation = getOrientation(p); /*son orientation*/
-    int color = getColor(p); /* et sa couleur*/
+    Color color = getColor(p); /* et sa couleur*/
 
     /*Flood fill*/
 
@@ -325,7 +328,7 @@ void drawPiece(Board * board)
 
 void newPiece(Board * board,Piece * piece)
 {
-    setPosX(piece, 5); /* On donne à la pièce les coordonnées ...*/
+    setPosX(piece, 8); /* On donne à la pièce les coordonnées ...*/
     setPosY(piece, 0); /* de l'origine */
     setCurrentPiece(board, piece); /* On déclare cette pièce comme pièce courante de l'aire de jeu*/
     drawPiece(board); /* On la dessine*/
@@ -342,7 +345,7 @@ void clearPiece(Board * board)
 
     /*Flood fill*/
 
-    floodFill(board, i, j, 1, 2, kind, orientation, FREE);
+    floodFill(board, i, j, 2, 1, kind, orientation, FREE);
 }
 
 int calcScore(const unsigned int currentScore, const unsigned int n_lines)
@@ -492,14 +495,14 @@ void tetrisTestRegression()
 
     initBoard(board);
     printf("Création de la board + initialisation ... OK \n");
-    piece = createPiece(rand() % 7, rand() % 4);
+
+    piece = createPiece(rand() % 7, 0);
     printf("Création d'une piece de type : %u et d'orientation : %u \n",
             piece->kind + 1, piece->orientation + 1);
-
     tetris = createTetris(board, piece, tree);
     printf("Création du Tetris ... OK \n");
 
-    for(i = 0; i < 20; i++)
+    for(i = 0; i < 20; i++) // affichage grille
     {
         for(j = 0; j < 10; j++)
         {
@@ -508,7 +511,7 @@ void tetrisTestRegression()
         printf("\n");
     }
     printf("\n");
-    for(i = 0; i < 4; i++)
+    for(i = 0; i < 4; i++) //affichage pièce créée
     {
         for(j = 0; j < 4; j++)
         {
@@ -518,9 +521,9 @@ void tetrisTestRegression()
         printf("\n");
     }
     printf("\n");
-    drawPiece(tetris->board);
+    newPiece(tetris->board, piece);
 
-    for(i = 0; i < 20; i++)
+    for(i = 0; i < 20; i++) // affichage grille
     {
         for(j = 0; j < 10; j++)
         {
@@ -529,6 +532,48 @@ void tetrisTestRegression()
 
         printf("\n");
     }
+    printf("\n");
+    printf("\n");
+    moveCurrentPieceDown(tetris->board);
+
+    for(i = 0; i < 20; i++) // affichage grille
+    {
+        for(j = 0; j < 10; j++)
+        {
+            printf("%u ", tetris->board->gridge[i][j]);
+        }
+
+        printf("\n");
+    }
+    printf("\n");
+    printf("\n");
+    moveCurrentPieceRight(tetris->board);
+
+    for(i = 0; i < 20; i++) // affichage grille
+    {
+        for(j = 0; j < 10; j++)
+        {
+            printf("%u ", tetris->board->gridge[i][j]);
+        }
+
+        printf("\n");
+    }
+    printf("\n");
+    printf("\n");
+
+    //dropCurrentPiece(tetris->board);
+
+    /*for(i = 0; i < 20; i++) // affichage grille
+    {
+        for(j = 0; j < 10; j++)
+        {
+            printf("%u ", tetris->board->gridge[i][j]);
+        }
+
+        printf("\n");
+    }
+    printf("\n");
+    printf("\n");*/
 
     freeTetris(tetris);
     printf("Libération de tetris et de tout ses champs ... OK\n");
