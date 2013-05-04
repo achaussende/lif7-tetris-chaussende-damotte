@@ -42,7 +42,7 @@ void flood2(Board * board, int i, int j, int px, int py, int k, int o,
        et si la case sur laquelle on est vide :
        on continue le flood */
 
-        if(i >= 0 && i < 10 && j >= 0 && j < 20 && board->gridge[i][j] == FREE)
+        if(i >= 0 && i < 10 && j >= 0 && j < 20 && board->gridge[j][i] == FREE)
         {
             flood2(board, i, j - 1, px, py - 1, k, o, flag, visited);
             flood2(board, i + 1, j, px + 1, py, k, o, flag, visited);
@@ -466,9 +466,22 @@ void dropCurrentPiece(Board * board)
     int x = getPosX(board->currentPiece);
     int y = getPosY(board->currentPiece);
 
-    while(isCurrentPieceMovable(board, x, y+1) == TRUE) // Tant qu'on peut toujours bouger la pièce vers le bas
+    int i, j;
+
+    while(isCurrentPieceMovable(board, x-1, y) == TRUE) // Tant qu'on peut toujours bouger la pièce vers le bas
     {
-        moveCurrentPieceDown(board);
+        moveCurrentPieceLeft(board);
+        for(i = 0; i < 20; i++) // affichage grille
+        {
+            for(j = 0; j < 10; j++)
+            {
+                printf("%u ", board->gridge[i][j]);
+            }
+
+            printf("\n");
+        }
+        printf("\n");
+        printf("\n");
     }
 }
 
