@@ -29,7 +29,7 @@ void flood(Board * board,int i, int j, int px, int py, int k, int o,
 }
 
 void flood2(Board * board, int i, int j, int px, int py, int k, int o,
-           Bool flag, Bool visited[4][4])
+           Bool * flag, Bool visited[4][4])
 {
 
 
@@ -52,7 +52,7 @@ void flood2(Board * board, int i, int j, int px, int py, int k, int o,
         else
         {
             /* Sinon la pièce ne peut pas être bougée */
-            flag = FALSE;
+            *flag = FALSE;
         }
     }
 }
@@ -114,14 +114,15 @@ Bool isCurrentPieceMovable(Board * board, const int x, const int y)
     int kind, orientation;
     int l, m;
     Bool visited[4][4];
+    Bool * movable = (Bool *)malloc(sizeof(Bool));
+    *movable = TRUE; // On suppose au départ qu'on peut bouger la pièce
 
     kind = getKind(board->currentPiece); // On récupère le type ...
     orientation = getOrientation(board->currentPiece); // ... et l'orientation de la pièce
 
     clearPiece(board); // D'abord on efface la pièce courante
 
-    Bool movable;
-    movable = TRUE; // On suppose au départ qu'on peut bouger la pièce
+
 
    /* On initialise le tableau visited pour le flood fill */
 
@@ -139,7 +140,7 @@ Bool isCurrentPieceMovable(Board * board, const int x, const int y)
 
     drawPiece(board); // On redessine notre pièce
 
-    return movable; // On renvoie le résultat
+    return *movable; // On renvoie le résultat
 }
 
 
@@ -147,10 +148,12 @@ Bool testRotationPiece(Board * board)
 {
     int kind = getKind(board->currentPiece);
     int orientation = getOrientation(board->currentPiece);
-    Bool rotable = TRUE;
+    Bool * rotable = (Bool *)malloc(sizeof(Bool));
     Bool visited[4][4];
     int i,j;
     clearPiece(board);
+
+    *rotable = TRUE;
 
     for(i = 0; i < 4; i++)
     {
@@ -166,7 +169,7 @@ Bool testRotationPiece(Board * board)
 
     drawPiece(board);
 
-    return rotable;
+    return *rotable;
 }
 
 Bool testLineFilled(Board * board, const unsigned int posY)
@@ -466,7 +469,6 @@ void dropCurrentPiece(Board * board)
     while(isCurrentPieceMovable(board, x, y+1) == TRUE) // Tant qu'on peut toujours bouger la pièce vers le bas
     {
         moveCurrentPieceDown(board);
-
     }
 }
 
