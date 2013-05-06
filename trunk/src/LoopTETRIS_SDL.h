@@ -21,6 +21,7 @@ void sdljeuLibere(SDL *sdl);
 void sdljeuAff(SDL *sdl);
 void SDL_apply_surface( SDL_Surface* source, SDL_Surface* destination, int x, int y );
 SDL_Surface *SDL_load_image(const char* filename );
+SDL_Surface *SDLChargePiece(SDL_Surface* screen, SDL_Surface* kind, Piece* piece);
 
 void pause();
 void sdltestRegression(SDL *sdl);
