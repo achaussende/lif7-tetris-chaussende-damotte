@@ -34,10 +34,9 @@ void flood2(Board * board, int i, int j, int px, int py, int k, int o,
 
 
     if(px >= 0 && px < 4 && py >= 0 && py < 4 && visited[py][px] == FALSE &&
-            PIECES[k][o][py][px] != 0)
+            PIECES[k][o][py][px] != 0 && *flag != FALSE)
     {
         visited[py][px] = TRUE;
-
        /* Si on est toujours dans l'aire de jeu
        et si la case sur laquelle on est vide :
        on continue le flood */
@@ -116,13 +115,12 @@ Bool isCurrentPieceMovable(Board * board, const int x, const int y)
     Bool visited[4][4];
     Bool * movable = (Bool *)malloc(sizeof(Bool));
     *movable = TRUE; // On suppose au départ qu'on peut bouger la pièce
+    Bool movable2;
 
     kind = getKind(board->currentPiece); // On récupère le type ...
     orientation = getOrientation(board->currentPiece); // ... et l'orientation de la pièce
 
     clearPiece(board); // D'abord on efface la pièce courante
-
-
 
    /* On initialise le tableau visited pour le flood fill */
 
@@ -139,8 +137,10 @@ Bool isCurrentPieceMovable(Board * board, const int x, const int y)
     flood2(board,x, y, 2, 1, kind, orientation, movable, visited);
 
     drawPiece(board); // On redessine notre pièce
+    movable2 = *movable; // Q : le free nécessaire dans une fonction ?
+    free(movable);
 
-    return *movable; // On renvoie le résultat
+    return movable2; // On renvoie le résultat
 }
 
 
@@ -239,7 +239,6 @@ void moveCurrentPieceDown(Board * board)
     {
         clearPiece(board); /* On efface la pièce de son ancienne position */
         setPosY(board->currentPiece, y + 1); /* On incrémente son ordonnée */
-
         drawPiece(board); /* On la redessine à la nouvelle position */
     }
 }
@@ -332,7 +331,7 @@ void drawPiece(Board * board)
 
 void newPiece(Board * board,Piece * piece)
 {
-    setPosX(piece, 8); /* On donne à la pièce les coordonnées ...*/
+    setPosX(piece, 5); /* On donne à la pièce les coordonnées ...*/
     setPosY(piece, 0); /* de l'origine */
     setCurrentPiece(board, piece); /* On déclare cette pièce comme pièce courante de l'aire de jeu*/
     drawPiece(board); /* On la dessine*/
@@ -468,20 +467,12 @@ void dropCurrentPiece(Board * board)
 
     int i, j;
 
-    while(isCurrentPieceMovable(board, x-1, y) == TRUE) // Tant qu'on peut toujours bouger la pièce vers le bas
+    while(isCurrentPieceMovable(board, x, y + 1) == TRUE) // Tant qu'on peut toujours bouger la pièce vers le bas
     {
-        moveCurrentPieceLeft(board);
-        for(i = 0; i < 20; i++) // affichage grille
-        {
-            for(j = 0; j < 10; j++)
-            {
-                printf("%u ", board->gridge[i][j]);
-            }
-
-            printf("\n");
-        }
-        printf("\n");
-        printf("\n");
+        clearPiece(board);
+        setPosY(board->currentPiece, y + 1);
+        drawPiece(board);
+        y++;
     }
 }
 
@@ -578,7 +569,7 @@ void tetrisTestRegression()
     printf("\n");
     printf("\n");
 
-    dropCurrentPiece(tetris->board);
+   dropCurrentPiece(tetris->board);
 
     for(i = 0; i < 20; i++) // affichage grille
     {
