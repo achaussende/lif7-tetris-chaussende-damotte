@@ -44,10 +44,9 @@ Tree * getTetrisTreeScores(const Tetris * tetris);
 
 /* ============ Fonctions de test ============= */
 
-//Bool testFallPiece(const Piece * piece);
+Bool testFallPiece(Board * board);
 Bool testRotationPiece(Board * board, const int orientation);
 Bool testLineFilled(Board * board, const unsigned int posY);
-//Bool testCollision(const Piece * piece);
 Bool testLineEmpty(Board * board, const unsigned int posY);
 Bool isCurrentPieceMovable(Board * board, const int x, const int y);
 
@@ -57,6 +56,7 @@ Bool isCurrentPieceMovable(Board * board, const int x, const int y);
 void initTetris(Tetris * tetris, Board * board, Piece * piece, Tree * tree);
 void freeTetris(Tetris * tetris);
 Tetris * createTetris(Board * board, Piece * piece, Tree * tree);
+void gameStep(Tetris * tetris);
 
 void moveCurrentPieceDown(Board * board);
 void moveCurrentPieceLeft(Board * board);
