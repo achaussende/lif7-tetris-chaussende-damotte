@@ -45,7 +45,7 @@ Tree * getTetrisTreeScores(const Tetris * tetris);
 /* ============ Fonctions de test ============= */
 
 //Bool testFallPiece(const Piece * piece);
-Bool testRotationPiece(Board * board);
+Bool testRotationPiece(Board * board, const int orientation);
 Bool testLineFilled(Board * board, const unsigned int posY);
 //Bool testCollision(const Piece * piece);
 Bool testLineEmpty(Board * board, const unsigned int posY);
