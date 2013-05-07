@@ -108,6 +108,22 @@ Tree * getTetrisTreeScores(const Tetris * tetris)
 
 /* ============ Fonctions de test ============= */
 
+Bool testFallPiece(Board * board)
+{
+    int posx, posy, orientation;
+    posx = getPosX(board->currentPiece);
+    posY = getPosY(board->currentPiece);
+    orientation = getOrientation(board->currentPiece);
+    if(isCurrentPieceMovable(board, posx, posy + 1) == FALSE &&
+       isCurrentPieceMovable(board, posx + 1, posy) == FALSE &&
+       isCurrentPieceMovable(board, posx - 1, posy) == FALSE &&
+       testRotationPiece(board, orientation) == FALSE)
+    {
+        return TRUE;
+    }
+    return FALSE
+}
+
 Bool isCurrentPieceMovable(Board * board, const int x, const int y)
 {
     int kind, orientation;
@@ -170,11 +186,6 @@ Bool testRotationPiece(Board * board, const int orientation)
         }
 
     }
-    /*if(isCurrentPieceMovable(board, posx, posy + 1) == FALSE) //Marche pas pour le T
-    {
-        flood2(board, posx, posy-2, kind, orientation, rotable, visited)
-    }
-    else*/
     flood2(board, posx, posy, 2, 1, kind, orientation, rotable, visited);
 
     drawPiece(board);
@@ -238,6 +249,17 @@ Tetris * createTetris(Board * board, Piece * piece, Tree * tree)
     initTetris(tetris, board, piece, tree);
 
     return tetris;
+}
+
+void gameStep(Tetris * tetris)
+{
+    if(testFallPiece(tetris->board) == TRUE) //Si la pièce est tombée et ne peut plus bouger
+    {
+        freePiece(tetris->board->currentPiece);
+        setCurrentPiece(tetris->board, tetris->nextPiece);
+        freePiece(tetris->board->nextPiece);
+        setTetrisNextPiece(tetris, createPiece(rand()%7, 0));
+    }
 }
 
 void moveCurrentPieceDown(Board * board)
@@ -484,7 +506,8 @@ void dropCurrentPiece(Board * board)
 
     int i, j;
 
-    while(isCurrentPieceMovable(board, x, y + 1) == TRUE) // Tant qu'on peut toujours bouger la pièce vers le bas
+    // Tant qu'on peut toujours bouger la pièce vers le bas
+    while(isCurrentPieceMovable(board, x, y + 1) == TRUE)
     {
         clearPiece(board);
         setPosY(board->currentPiece, y + 1);
@@ -512,22 +535,23 @@ void tetrisTestRegression()
 {
     Board * board = (Board *)malloc(sizeof(Board));
     Piece * piece = NULL;
+    Piece * nextpiece = NULL;
     Tree * tree = (Tree *)malloc(sizeof(Tree));
     Tetris * tetris;
     int i, j;
 
     srand(time(NULL));
 
-    initBoard(board);
+    /*initBoard(board);
     printf("Création de la board + initialisation ... OK \n");
 
-    piece = createPiece(rand() % 7, 0);
+    nextpiece = createPiece(rand() % 7, 0);
     printf("Création d'une piece de type : %u et d'orientation : %u \n",
-            piece->kind + 1, piece->orientation + 1);
+            piece->kind, piece->orientation);
     tetris = createTetris(board, piece, tree);
     printf("Création du Tetris ... OK \n");
 
-    for(i = 0; i < 20; i++) // affichage grille
+   for(i = 0; i < 20; i++) // affichage grille
     {
         for(j = 0; j < 10; j++)
         {
@@ -599,7 +623,7 @@ void tetrisTestRegression()
         printf("\n");
     }
     printf("\n");
-    printf("\n");
+    printf("\n"); */
 
     freeTetris(tetris);
     printf("Libération de tetris et de tout ses champs ... OK\n");
