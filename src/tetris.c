@@ -112,7 +112,7 @@ Bool testFallPiece(Board * board)
 {
     int posx, posy, orientation;
     posx = getPosX(board->currentPiece);
-    posY = getPosY(board->currentPiece);
+    posy = getPosY(board->currentPiece);
     orientation = getOrientation(board->currentPiece);
     if(isCurrentPieceMovable(board, posx, posy + 1) == FALSE &&
        isCurrentPieceMovable(board, posx + 1, posy) == FALSE &&
@@ -121,7 +121,7 @@ Bool testFallPiece(Board * board)
     {
         return TRUE;
     }
-    return FALSE
+    return FALSE;
 }
 
 Bool isCurrentPieceMovable(Board * board, const int x, const int y)
@@ -251,7 +251,8 @@ Tetris * createTetris(Board * board, Piece * piece, Tree * tree)
     return tetris;
 }
 
-void gameStep(Tetris * tetris)
+// A debugger
+/*void gameStep(Tetris * tetris)
 {
     if(testFallPiece(tetris->board) == TRUE) //Si la pièce est tombée et ne peut plus bouger
     {
@@ -260,7 +261,7 @@ void gameStep(Tetris * tetris)
         freePiece(tetris->board->nextPiece);
         setTetrisNextPiece(tetris, createPiece(rand()%7, 0));
     }
-}
+}*/
 
 void moveCurrentPieceDown(Board * board)
 {
