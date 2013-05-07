@@ -105,11 +105,78 @@ SDL_Surface* SDLdisplayscreen(SDL_Surface* screen, SDL_Surface* gridge, SDL_Surf
         }
 }
 
+SDL_Surface* SDLdisplaypiece(SDL_Surface* screen, SDL_Surface* kind[6], Piece * piece, int positionX, int positionY)
+{
+    // SDL_apply_surface(gridge,screen, positionX, positionY);
+    int i,j;
+    for(j = 0; j < 4; j++)
+        {
+            for(i = 0; i < 4; i++)
+            {
+                if ((PIECES[piece->kind][piece->orientation][j][i])!=0)
+                {
+
+                switch (getKind(piece)) {
+
+        case 0:
+        {
+            SDL_apply_surface(kind[0],screen, positionX+(i*20), positionY+(j*20));
+
+        }
+        break;
+
+        case 1:
+        {
+            SDL_apply_surface(kind[1],screen, positionX+(i*20), positionY+(j*20));
+
+        }
+        break;
+        case 2:
+        {
+            SDL_apply_surface(kind[2],screen, positionX+(i*20), positionY+(j*20));
+
+        }
+        break;
+        case 3:
+        {
+            SDL_apply_surface(kind[3],screen, positionX+(i*20), positionY+(j*20));
+
+        }
+        break;
+        case 4:
+        {
+            SDL_apply_surface(kind[4],screen, positionX+(i*20), positionY+(j*20));
+
+        }
+        break;
+        case 5:
+        {
+            SDL_apply_surface(kind[5],screen, positionX+(i*20), positionY+(j*20));
+
+        }
+        break;
+        case 6:
+        {
+            SDL_apply_surface(kind[6],screen, positionX+(i*20), positionY+(j*20));
+
+        }
+        break;
+
+        default:
+        break;
+                }
+
+            }
+        }
+        }
+}
+
 
 void sdljeuInit(SDL *sdl)
 {
 
     SDL_Surface *screen = NULL;
+    SDL_Surface *screen2 = NULL;
     SDL_Surface *gridge = NULL;
     SDL_Surface *kind[7];
     SDL_Rect position1;
@@ -131,8 +198,11 @@ void sdljeuInit(SDL *sdl)
     kind[5]=SDLChargeImage("../data/piecebleue.bmp");
     kind[6]=SDLChargeImage("../data/pieceviolet.bmp");
 
+    screen2 = SDLChargeImage("../data/screen.bmp");
+    SDL_apply_surface(screen2,screen, 0, 0);
+
     position1.x = screen->w / 2 - gridge->w / 2;
-	position1.y = screen->h / 2 - gridge->h / 2;
+	position1.y = (screen->h / 2 - gridge->h / 2)-10;
 
     SDL_apply_surface(gridge,screen, position1.x, position1.y);
 
@@ -146,6 +216,7 @@ void sdljeuInit(SDL *sdl)
 
     Board * board = (Board *)malloc(sizeof(Board));
     Piece * piece = NULL;
+    Piece * nextpiece = NULL;
     Tree * tree = (Tree *)malloc(sizeof(Tree));
     Tetris * tetris;
     //board = sdl->tetris.board;
@@ -155,12 +226,14 @@ void sdljeuInit(SDL *sdl)
     printf("Création de la board + initialisation ... OK \n");
 
     piece = createPiece(rand() % 7, 0);
+    nextpiece = createPiece(rand() % 7, 0);
     printf("Création d'une piece de type : %u et d'orientation : %u \n",
             piece->kind + 1, piece->orientation + 1);
     tetris = createTetris(board, piece, tree);
     printf("Création du Tetris ... OK \n");
     newPiece(tetris->board, piece);
     SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
+    SDLdisplaypiece(screen, kind, nextpiece, position1.x+275,position1.y+50);
     SDL_Event event;
     int tempsPrecedent = 0, tempsActuel = 0;
 
