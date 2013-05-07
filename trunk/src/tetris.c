@@ -144,13 +144,20 @@ Bool isCurrentPieceMovable(Board * board, const int x, const int y)
 }
 
 
-Bool testRotationPiece(Board * board)
+Bool testRotationPiece(Board * board, const int orientation)
 {
     int kind = getKind(board->currentPiece);
-    int orientation = getOrientation(board->currentPiece);
-    Bool * rotable = (Bool *)malloc(sizeof(Bool));
-    Bool visited[4][4];
+    int posx, posy;
     int i,j;
+    Bool * rotable = (Bool *)malloc(sizeof(Bool));
+    Bool * rotable2 = (Bool *)malloc(sizeof(Bool));
+    Bool visited[4][4];
+
+    posx = getPosX(board->currentPiece);
+    posy = getPosY(board->currentPiece);
+    *rotable = TRUE;
+    *rotable2 =TRUE;
+
     clearPiece(board);
 
     *rotable = TRUE;
@@ -163,9 +170,12 @@ Bool testRotationPiece(Board * board)
         }
 
     }
-
-    flood2(board, getPosY(board->currentPiece), getPosX(board->currentPiece), 2, 1,
-          kind, orientation, rotable, visited);
+    /*if(isCurrentPieceMovable(board, posx, posy + 1) == FALSE) //Marche pas pour le T
+    {
+        flood2(board, posx, posy-2, kind, orientation, rotable, visited)
+    }
+    else*/
+    flood2(board, posx, posy, 2, 1, kind, orientation, rotable, visited);
 
     drawPiece(board);
 
@@ -273,12 +283,19 @@ void rotationPiece(Board * board)
 {
     int orientation = getOrientation(board->currentPiece);
 
-    if(orientation < 4 - 1) /* Si on n'est pas sur la dernière orientation */
-        orientation++; /* On peut incrémenter orientation */
-    else /* Si non */
+    /* Si on n'est pas sur la dernière orientation */
+    if(orientation < 3)
+    {
+        /* On peut incrémenter orientation */
+        orientation++;
+    }
+    /* Si non */
+    else
+    {
         orientation = 0; /* On passe à la 1ère orientation*/
+    }
 
-    if(testRotationPiece(board) == TRUE)
+    if(testRotationPiece(board, orientation) == TRUE)
     {
         clearPiece(board);
         setOrientation(board->currentPiece, orientation);
@@ -570,6 +587,7 @@ void tetrisTestRegression()
     printf("\n");
 
    dropCurrentPiece(tetris->board);
+   rotationPiece(tetris->board);
 
     for(i = 0; i < 20; i++) // affichage grille
     {
