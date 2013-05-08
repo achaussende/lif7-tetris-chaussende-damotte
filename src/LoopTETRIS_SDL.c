@@ -174,7 +174,7 @@ SDL_Surface* SDLdisplaypiece(SDL_Surface* screen, SDL_Surface* kind[6], Piece * 
 
 void sdljeuInit(SDL *sdl)
 {
-
+    // ------------------------ INIT -----------------------
     SDL_Surface *screen = NULL;
     SDL_Surface *screen2 = NULL;
     SDL_Surface *gridge = NULL;
@@ -197,12 +197,34 @@ void sdljeuInit(SDL *sdl)
     kind[4]=SDLChargeImage("../data/pieceorange.bmp");
     kind[5]=SDLChargeImage("../data/piecebleue.bmp");
     kind[6]=SDLChargeImage("../data/pieceviolet.bmp");
-
     screen2 = SDLChargeImage("../data/screen.bmp");
+
+    // ---------- Essai de Menu ----------------
+    /*int quit;
+    quit = 1;
+    SDL_Event event;
+    while(quit)
+    {
+        if( event.type == SDL_MOUSEBUTTONDOWN )
+        {
+          //les coordonnées de la souris
+          int x = event.button.x;
+          int y = event.button.y;
+
+          if ((x>245)&& (x<395) && (y>120) && (y<180))
+
+
+            if ( SDL_BUTTON_LEFT)
+              quit = 0;
+        }
+    }
+    */
+    //-------------------------------------------
+
     SDL_apply_surface(screen2,screen, 0, 0);
 
     position1.x = screen->w / 2 - gridge->w / 2;
-	position1.y = (screen->h / 2 - gridge->h / 2)-10;
+	position1.y = (screen->h / 2 - gridge->h / 2);
 
     SDL_apply_surface(gridge,screen, position1.x, position1.y);
 
@@ -234,6 +256,9 @@ void sdljeuInit(SDL *sdl)
     newPiece(tetris->board, piece);
     SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
     SDLdisplaypiece(screen, kind, nextpiece, position1.x+275,position1.y+50);
+
+
+    //--------------------- BOUCLE -----------------------
     SDL_Event event;
     int tempsPrecedent = 0, tempsActuel = 0;
 
@@ -298,10 +323,17 @@ void sdljeuInit(SDL *sdl)
             tempsPrecedent = tempsActuel; /* Le temps "actuel" devient le temps "precedent" pour nos futurs calculs */
         }
 
+        /*if(testFallPiece(tetris->board))
+        {
+            SDL_apply_surface(kind[1], screen, position1.x, position1.y );
+        }*/
+
         SDL_Flip(screen);
 
     }
 pause();
+
+// -------------------- FREE AND QUIT -----------------------
 SDL_FreeSurface(tetris);
 SDL_FreeSurface(gridge);
 SDL_FreeSurface(kind);
