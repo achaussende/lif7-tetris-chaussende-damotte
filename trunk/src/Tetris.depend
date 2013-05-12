@@ -228,7 +228,7 @@
 	<assert.h>
 	"player.h"
 
-1367911980 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/LoopTETRIS_SDL.c
+1368139507 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/LoopTETRIS_SDL.c
 	<time.h>
 	"LoopTETRIS_SDL.h"
 	<SDL/SDL_ttf.h>
@@ -239,7 +239,7 @@
 	<stdlib.h>
 	<stdio.h>
 
-1366103828 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/binarytrees.c
+1368140607 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/binarytrees.c
 	<stdlib.h>
 	<stdio.h>
 	<assert.h>
@@ -253,7 +253,7 @@
 
 1365491756 ne
 
-1367304813 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/board.c
+1368145258 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/board.c
 	<stdio.h>
 	<stdlib.h>
 	<assert.h>
@@ -263,7 +263,7 @@
 	<time.h>
 	"piece.h"
 
-1367912170 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/piece.h
+1368311650 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/piece.h
 	"shapes.h"
 
 1367912170 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/shapes.h
@@ -343,19 +343,19 @@
 
 1365491709 1
 
-1367911980 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/LoopTETRIS_SDL.h
+1368139507 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/LoopTETRIS_SDL.h
 	<SDL/SDL_image.h>
 	<SDL/SDL.h>
 	"tetris.h"
 
-1367912630 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/tetris.h
+1368312902 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/tetris.h
 	"bool.h"
 	"binarytrees.h"
 	"board.h"
 
 1367689388 /home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/bool.h
 
-1367315355 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/main.c
+1368140096 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/main.c
 	<stdlib.h>
 	<stdio.h>
 	<time.h>
@@ -382,7 +382,7 @@
 	<string.h>
 	"player.h"
 
-1367915455 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/tetris.c
+1368315278 source:/home/adrien/Documents/Cours/LIF7/lif7-tetris-chaussende-damotte/src/tetris.c
 	<stdio.h>
 	<stdlib.h>
 	<assert.h>
