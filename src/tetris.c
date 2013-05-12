@@ -252,11 +252,8 @@ Tetris * createTetris(Board * board, Piece * piece, Tree * tree)
     return tetris;
 }
 
-// A debugger
 void gameStep(Tetris * tetris)
 {
-    srand(time(NULL));
-
     Piece * piece;
     piece = createPiece(rand()%7, 0);
 
