@@ -24,6 +24,8 @@ void flood2(Board * board, int i, int j, int px, int py, int k, int o,
 void floodFill(Board * board, int i, int j, int px, int py, int k, int o,
                Color color);
 
+/* ========== Structure : Tetris ==============  */
+
 typedef struct
 {
 	Board* board;
@@ -80,6 +82,10 @@ void saveScoreData(const Tree * ptree, const char filename[]);
 void dropCurrentPiece(Board * board);
 Bool testGameOver(Board * board);
 
+/* Création d'un tetris */
+Tetris * startTetris();
+
 /* Test régression des fonctions */
 void tetrisTestRegression();
+
 #endif

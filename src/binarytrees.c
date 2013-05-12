@@ -90,11 +90,8 @@ void freeNode(Node * node)
 
 void initTree (Tree * tree)
 {
-    Node * pnode;
-    pnode = (Node *) malloc(sizeof(Node));
-
-    setTreeRoot(tree, pnode);
-    setTreeNb_Elements(tree, 1);
+    setTreeRoot(tree, NULL);
+    setTreeNb_Elements(tree, 0);
 }
 
 void freeTree_recursion(Node * node)

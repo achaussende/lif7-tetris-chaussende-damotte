@@ -114,6 +114,7 @@ Bool testFallPiece(Board * board)
     posx = getPosX(board->currentPiece);
     posy = getPosY(board->currentPiece);
     orientation = getOrientation(board->currentPiece);
+
     if(isCurrentPieceMovable(board, posx, posy + 1) == FALSE &&
        isCurrentPieceMovable(board, posx + 1, posy) == FALSE &&
        isCurrentPieceMovable(board, posx - 1, posy) == FALSE &&
@@ -252,16 +253,17 @@ Tetris * createTetris(Board * board, Piece * piece, Tree * tree)
 }
 
 // A debugger
-/*void gameStep(Tetris * tetris)
+void gameStep(Tetris * tetris)
 {
-    if(testFallPiece(tetris->board) == TRUE) //Si la pièce est tombée et ne peut plus bouger
-    {
-        freePiece(tetris->board->currentPiece);
-        setCurrentPiece(tetris->board, tetris->nextPiece);
-        freePiece(tetris->board->nextPiece);
-        setTetrisNextPiece(tetris, createPiece(rand()%7, 0));
-    }
-}*/
+    srand(time(NULL));
+
+    Piece * piece;
+    piece = createPiece(rand()%7, 0);
+
+    freePiece(tetris->board->currentPiece);
+    newPiece(tetris->board, tetris->nextpiece);
+    setTetrisNextPiece(tetris, piece);
+}
 
 void moveCurrentPieceDown(Board * board)
 {
@@ -532,16 +534,75 @@ Bool testGameOver(Board * board)
     return FALSE;
 }
 
+/* startGame : renvoie un pointeur sur Tetris. Crée une structure tetris
+avec une board initialisée (gridge vide, et une nouvelle currentPiece),
+nextpiece créée, et un arbre initialisé */
+
+Tetris * startTetris()
+{
+    srand(time(NULL));
+
+    Board * board = (Board *)malloc(sizeof(Board));
+    Tree * tree = (Tree *)malloc(sizeof(Tree));
+    Piece * piece;
+    Tetris * tetris;
+
+    piece = createPiece(rand()%7, 0); //piece "tampon"
+
+    initBoard(board); // création ...
+    newPiece(board, piece); // de board
+    initTree(tree);
+
+    piece = createPiece(rand()%7, 0); //nextpiece
+    tetris = createTetris(board, piece, tree);
+    return tetris;
+}
+
 void tetrisTestRegression()
 {
-    Board * board = (Board *)malloc(sizeof(Board));
+    srand(time(NULL));
+
+    // Variables nécessaires pour la première partie du test
+    /*Board * board = (Board *)malloc(sizeof(Board));
     Piece * piece = NULL;
     Piece * nextpiece = NULL;
     Tree * tree = (Tree *)malloc(sizeof(Tree));
-    Tetris * tetris;
-    int i, j;
+    int i, j;*/
 
-    srand(time(NULL));
+    Tetris * tetris;
+    //Variables nécessaires pour le test sur les étapes du jeu
+    Piece * piece;
+    piece = createPiece(rand() % 7 , 0);
+
+
+    /* Test : Etapes du jeu */
+
+    tetris = startTetris(); // Lancement du tetris
+
+    printf("Current piece : \n kind = %u , orientation = %u \n",
+          tetris->board->currentPiece->kind,
+          tetris->board->currentPiece->orientation);
+    printf("Next piece : \n kind = %u , orientation = %u \n",
+          tetris->nextpiece->kind,
+          tetris->nextpiece->orientation);
+
+    dropCurrentPiece(tetris->board);
+
+    /* Après pose de la currentPiece, la nextPiece devient la currentPiece
+       puis nouvelle nextPiece*/
+    gameStep(tetris);
+
+    // Vérification que le gameStep marche bien
+    printf("Après le gameStep \n");
+    printf("Current piece : \n kind = %u , orientation = %u \n",
+           tetris->board->currentPiece->kind,
+           tetris->board->currentPiece->orientation);
+    printf("Next piece : \n kind = %u , orientation = %u \n",
+            tetris->nextpiece->kind,
+            tetris->nextpiece->orientation);
+
+
+    // Premier Test
 
     /*initBoard(board);
     printf("Création de la board + initialisation ... OK \n");
