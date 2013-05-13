@@ -197,31 +197,34 @@ Bool testRotationPiece(Board * board, const int orientation)
 Bool testLineFilled(Board * board, const unsigned int posY)
 {
     int i;
+    Bool * filled = (Bool *)malloc(sizeof(Bool));
 
     for (i = 0; i < 10; i++)
     {
         if(board->gridge[posY][i] == 0)
         {
-            return FALSE;
+            *filled = FALSE;
+            return *filled;
         }
     }
-
-    return TRUE;
+    *filled = TRUE;
+    return *filled;
 }
 
 Bool testLineEmpty(Board * board, const unsigned int posY)
 {
     int i;
-
+    Bool * empty = (Bool *)malloc(sizeof(Bool));
     for (i = 0; i < 10; i++)
     {
         if(board->gridge[posY][i] != 0)
         {
-            return FALSE;
+            *empty = FALSE;
+            return *empty;
         }
     }
-
-    return TRUE;
+    *empty = TRUE;
+    return *empty;
 }
 
 /* ================ Méthodes ==================  */
@@ -331,15 +334,20 @@ int destructLines(Board * board)
     int i, j;
     int n_lines = 0;
 
-    while(testLineEmpty(board, y) == FALSE )
+    while(testLineEmpty(board, y) == FALSE)
     {
+        printf("Je suis dans le premier while de destructLines");
+        printf("\n");
         while(testLineFilled(board, y) == TRUE)
         {
+            printf("Je suis dans le second while de destructLines");
+            printf("\n");
             for(j = y; j > 0; j--)
             {
                 for(i = 0; i < 20; i++)
                 {
                     board->gridge[i][j] = board->gridge[i-1][j];
+
                 }
             }
 
