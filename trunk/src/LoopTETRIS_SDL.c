@@ -238,9 +238,15 @@ void sdljeuInit(SDL *sdl)
 
     Board * board = (Board *)malloc(sizeof(Board));
     Piece * piece = NULL;
-    Piece * nextpiece = NULL;
+    //Piece * nextpiece = NULL;
     Tree * tree = (Tree *)malloc(sizeof(Tree));
     Tetris * tetris;
+
+    tetris = startTetris(); // Lancement du tetris
+    int destructlines;
+    destructlines = 0;
+
+
     //board = sdl->tetris.board;
     srand(time(NULL));
 
@@ -248,14 +254,21 @@ void sdljeuInit(SDL *sdl)
     printf("Création de la board + initialisation ... OK \n");
 
     piece = createPiece(rand() % 7, 0);
-    nextpiece = createPiece(rand() % 7, 0);
-    printf("Création d'une piece de type : %u et d'orientation : %u \n",
-            piece->kind + 1, piece->orientation + 1);
-    tetris = createTetris(board, piece, tree);
+    //nextpiece = createPiece(rand() % 7, 0);
+
+     printf("Current piece : \n kind = %u , orientation = %u \n",
+          tetris->board->currentPiece->kind,
+          tetris->board->currentPiece->orientation);
+    printf("Next piece : \n kind = %u , orientation = %u \n",
+          tetris->nextpiece->kind,
+          tetris->nextpiece->orientation);
+    /*printf("Création d'une piece de type : %u et d'orientation : %u \n",
+            piece->kind + 1, piece->orientation + 1);*/
+    /*tetris = createTetris(board, piece, tree);*/
     printf("Création du Tetris ... OK \n");
-    newPiece(tetris->board, piece);
+    //newPiece(tetris->board, piece);
     SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
-    SDLdisplaypiece(screen, kind, nextpiece, position1.x+275,position1.y+50);
+    //SDLdisplaypiece(screen, kind, nextpiece, position1.x+275,position1.y+50);
 
 
     //--------------------- BOUCLE -----------------------
@@ -263,7 +276,6 @@ void sdljeuInit(SDL *sdl)
     int tempsPrecedent = 0, tempsActuel = 0;
 
     int next = 1;
-    SDL_EnableKeyRepeat(10, 10);
      while (next)
     {
         //SDL_WaitEvent(&event);
@@ -299,7 +311,7 @@ void sdljeuInit(SDL *sdl)
                     case SDLK_SPACE: // Barre espace
                         dropCurrentPiece(tetris->board);
                         SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
-
+                        gameStep(tetris);
                         break;
                     default:
                     break;
@@ -323,6 +335,16 @@ void sdljeuInit(SDL *sdl)
             tempsPrecedent = tempsActuel; /* Le temps "actuel" devient le temps "precedent" pour nos futurs calculs */
         }
 
+        /* Après pose de la currentPiece, la nextPiece devient la currentPiece
+       puis nouvelle nextPiece*/
+       if(testFallPiece(tetris->board) == TRUE)
+        {
+            printf("On entre dans cette putain de boucle");
+            gameStep(tetris);
+
+        }
+
+        destructlines = destructlines + destructLines(tetris->board);
         /*if(testFallPiece(tetris->board))
         {
             SDL_apply_surface(kind[1], screen, position1.x, position1.y );
