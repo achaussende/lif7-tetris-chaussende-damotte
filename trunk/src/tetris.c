@@ -330,31 +330,40 @@ void rotationPiece(Board * board)
 
 int destructLines(Board * board)
 {
-    int y = 0;
+    int y = 19;
     int i, j;
     int n_lines = 0;
 
     while(testLineEmpty(board, y) == FALSE)
     {
-        printf("Je suis dans le premier while de destructLines");
-        printf("\n");
+
         while(testLineFilled(board, y) == TRUE)
         {
-            printf("Je suis dans le second while de destructLines");
-            printf("\n");
             for(j = y; j > 0; j--)
             {
-                for(i = 0; i < 20; i++)
+                for(i = 0; i < 10; i++)
                 {
-                    board->gridge[i][j] = board->gridge[i-1][j];
+                    board->gridge[j][i] = board->gridge[j-1][i];
 
                 }
             }
 
             n_lines++;
         }
-        y++;
+        y--;
     }
+
+    for(i = 0; i < 20; i++) // affichage grille
+    {
+        for(j = 0; j < 10; j++)
+        {
+            printf("%u ", board->gridge[i][j]);
+        }
+
+        printf("\n");
+    }
+    printf("\n");
+    printf("\n");
     return n_lines;
 }
 
