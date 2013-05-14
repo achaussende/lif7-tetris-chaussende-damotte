@@ -198,16 +198,18 @@ SDL_Surface* SDLdisplaypiece(SDL_Surface* screen, SDL_Surface* gridge, SDL_Surfa
         }
 }
 
-SDLclearpiece(SDL_Surface* screen, Piece * piece , int positionX, int positionY)
+SDLclearpiece(SDL_Surface* screen, SDL_Surface* reset, int positionX, int positionY)
 {
     int i,j;
     for(j = 0; j < 4; j++)
         {
             for(i = 0; i < 4; i++)
             {
-                (PIECES[piece->kind][piece->orientation][j][i])=0;
+                SDL_apply_surface(reset,screen, positionX+(i*20), positionY+(j*20));
+
             }
         }
+
 }
 
 void sdljeuInit(SDL *sdl)
@@ -217,6 +219,7 @@ void sdljeuInit(SDL *sdl)
     SDL_Surface *screen2 = NULL;
     SDL_Surface *gridge = NULL;
     SDL_Surface *kind[8];
+    SDL_Surface *reset = NULL;
     SDL_Rect position1;
 
     /*assert(SDL_Init(SDL_INIT_EVERYTHING)!= -1); */
@@ -236,7 +239,7 @@ void sdljeuInit(SDL *sdl)
     kind[5]=SDL_load_image("../data/piecebleue.bmp");
     kind[6]=SDL_load_image("../data/pieceviolet.bmp");
     //kind[7]=SDL_load_image("../data/piecevide.bmp");
-    kind[7]=IMG_Load("../data/piecevide.png");
+    reset=IMG_Load("../data/piecevide.png");
     screen2 = SDL_load_image("../data/screen.bmp");
 
     // ---------- Essai de Menu ----------------
@@ -392,7 +395,7 @@ void sdljeuInit(SDL *sdl)
        if(isCurrentPieceMovable(tetris->board, posx, posy + 1) == FALSE && testFallPiece(tetris->board) == FALSE)
                {
                    destructlines = destructlines + destructLines(tetris->board);
-                   SDLclearpiece(screen, nextpiece, position1.x+275,position1.y+50);
+                   SDLclearpiece(screen, reset, position1.x+275,position1.y+50);
                    gameStep(tetris);
                    nextpiece = getTetrisNextPiece(tetris);
                    SDLdisplaypiece(screen,gridge, kind, nextpiece, position1.x+275,position1.y+50);
