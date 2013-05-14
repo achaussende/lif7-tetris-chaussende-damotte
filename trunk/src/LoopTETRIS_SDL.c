@@ -334,24 +334,33 @@ void sdljeuInit(SDL *sdl)
             moveCurrentPieceDown(tetris->board);
             SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
             tempsPrecedent = tempsActuel; /* Le temps "actuel" devient le temps "precedent" pour nos futurs calculs */
-            posx = getPosX(tetris->board->currentPiece);
+            /*posx = getPosX(tetris->board->currentPiece);
             posy = getPosY(tetris->board->currentPiece);
             if(isCurrentPieceMovable(tetris->board, posx, posy + 1) == FALSE && testFallPiece(tetris->board) == FALSE)
                {
+                   destructlines = destructlines + destructLines(tetris->board);
                    gameStep(tetris);
-               }
+               }*/
         }
 
         /* Après pose de la currentPiece, la nextPiece devient la currentPiece
        puis nouvelle nextPiece*/
-       if(testFallPiece(tetris->board) == TRUE)
+       //destructlines = destructlines + destructLines(tetris->board);
+       posx = getPosX(tetris->board->currentPiece);
+       posy = getPosY(tetris->board->currentPiece);
+       if(isCurrentPieceMovable(tetris->board, posx, posy + 1) == FALSE && testFallPiece(tetris->board) == FALSE)
+               {
+                   destructlines = destructlines + destructLines(tetris->board);
+                   gameStep(tetris);
+               }
+       /*if(testFallPiece(tetris->board) == TRUE)
         {
             printf("On entre dans cette putain de boucle");
             gameStep(tetris);
 
-        }
+        }*/
 
-        destructlines = destructlines + destructLines(tetris->board);
+
         //SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
         /*if(testFallPiece(tetris->board))
         {
