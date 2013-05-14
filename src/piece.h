@@ -6,7 +6,7 @@
 
 /* Couleur de chaque pièce */
 
-typedef enum {YELLOW = 1, CYAN = 2, GREEN = 3, RED = 4, ORANGE = 5, BLUE = 7, PURPLE = 8} Color;
+typedef enum {YELLOW = 1, CYAN = 2, GREEN = 3, RED = 4, ORANGE = 5, BLUE = 6, PURPLE = 7} Color;
 
 typedef struct
 {
