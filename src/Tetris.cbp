@@ -29,11 +29,13 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="`sdl-config --cflags`" />
 			<Add option="-Wall" />
+			<Add option="`sdl-config --cflags`" />
 		</Compiler>
 		<Linker>
 			<Add option="`sdl-config --libs`" />
+			<Add option="-lSDL_ttf" />
+			<Add option="-lSDL_image" />
 		</Linker>
 		<Unit filename="../data/gridge.bmp" />
 		<Unit filename="../data/piece.bmp" />

@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
 void SDL_apply_surface( SDL_Surface* source, SDL_Surface* destination, int positionX, int positionY )
 {
     /* Make a temporary rectangle to hold the offsets */
@@ -21,24 +22,47 @@ void SDL_apply_surface( SDL_Surface* source, SDL_Surface* destination, int posit
 	SDL_BlitSurface( source, NULL, destination, &offset );
 }
 
-SDL_Surface* SDLChargeImage(const char* nomfichier){
+SDL_Surface* SDL_load_image(const char* filename){
 	/* Temporary storage for the image that's loaded */
 	SDL_Surface* loadedImage = NULL;
 
+    SDL_Surface* optimizedImage = NULL;
+
 	/* Load the image */
-	loadedImage = SDL_LoadBMP( nomfichier );
+	loadedImage = SDL_LoadBMP( filename );
 
 
 	/* If nothing went wrong in loading the image */
-	if ( loadedImage == NULL ) printf("image non chargée ! \n");
+	if ( loadedImage == NULL )
+    {
+        printf("image non chargée ! \n");
+    }
 
+	else
+	{
+	    //Création de l'image optimisée
+        optimizedImage = SDL_DisplayFormat( loadedImage );
 
-	/* Return the optimized image */
-	return loadedImage;
+        //Libération de l'ancienne image
+        SDL_FreeSurface( loadedImage );
+
+        //Si l'image optimisée créée est bonne
+    	if( optimizedImage != NULL )
+    	{
+            //Uint32 colorkey = SDL_MapRGB( optimizedImage->format, 0, 0xFF, 0xFF );
+            Uint32 colorkey = SDL_MapRGB( optimizedImage->format, 255, 255, 255 );
+
+        //On met tous les pixels de couleur R 0, G 0xFF, B 0xFF transparent
+            SDL_SetColorKey( optimizedImage, SDL_RLEACCEL | SDL_SRCCOLORKEY, colorkey );
+        //On retourne l'image optimisée
+        return optimizedImage;
+    	}
+	}
 }
 
 
-SDL_Surface* SDLdisplayscreen(SDL_Surface* screen, SDL_Surface* gridge, SDL_Surface* kind[6], Tetris* tetris, int positionX, int positionY)
+
+SDL_Surface* SDLdisplayscreen(SDL_Surface* screen, SDL_Surface* gridge, SDL_Surface* kind[8], Tetris* tetris, int positionX, int positionY)
 {
     SDL_apply_surface(gridge,screen, positionX, positionY);
     int i,j;
@@ -105,9 +129,9 @@ SDL_Surface* SDLdisplayscreen(SDL_Surface* screen, SDL_Surface* gridge, SDL_Surf
         }
 }
 
-SDL_Surface* SDLdisplaypiece(SDL_Surface* screen, SDL_Surface* kind[6], Piece * piece, int positionX, int positionY)
+SDL_Surface* SDLdisplaypiece(SDL_Surface* screen, SDL_Surface* gridge, SDL_Surface* kind[8], Piece * piece, int positionX, int positionY)
 {
-    // SDL_apply_surface(gridge,screen, positionX, positionY);
+    //SDL_apply_surface(gridge,screen, positionX, positionY);
     int i,j;
     for(j = 0; j < 4; j++)
         {
@@ -163,6 +187,9 @@ SDL_Surface* SDLdisplaypiece(SDL_Surface* screen, SDL_Surface* kind[6], Piece * 
         break;
 
         default:
+        {
+           // SDL_apply_surface(kind[7],screen, positionX+(i*20), positionY+(j*20));
+        }
         break;
                 }
 
@@ -171,6 +198,17 @@ SDL_Surface* SDLdisplaypiece(SDL_Surface* screen, SDL_Surface* kind[6], Piece * 
         }
 }
 
+SDLclearpiece(SDL_Surface* screen, Piece * piece , int positionX, int positionY)
+{
+    int i,j;
+    for(j = 0; j < 4; j++)
+        {
+            for(i = 0; i < 4; i++)
+            {
+                (PIECES[piece->kind][piece->orientation][j][i])=0;
+            }
+        }
+}
 
 void sdljeuInit(SDL *sdl)
 {
@@ -178,7 +216,7 @@ void sdljeuInit(SDL *sdl)
     SDL_Surface *screen = NULL;
     SDL_Surface *screen2 = NULL;
     SDL_Surface *gridge = NULL;
-    SDL_Surface *kind[7];
+    SDL_Surface *kind[8];
     SDL_Rect position1;
 
     /*assert(SDL_Init(SDL_INIT_EVERYTHING)!= -1); */
@@ -187,17 +225,19 @@ void sdljeuInit(SDL *sdl)
 
     // Coloration de la surface ecran en gris
     SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 31, 31, 31));
-    gridge = SDLChargeImage("../data/gridge.bmp");
+    gridge = SDL_load_image("../data/gridge.bmp");
 
 
-    kind[0]=SDLChargeImage("../data/piecejaune.bmp");
-    kind[1]=SDLChargeImage("../data/piececyan.bmp");
-    kind[2]=SDLChargeImage("../data/piecevert.bmp");
-    kind[3]=SDLChargeImage("../data/piecerouge.bmp");
-    kind[4]=SDLChargeImage("../data/pieceorange.bmp");
-    kind[5]=SDLChargeImage("../data/piecebleue.bmp");
-    kind[6]=SDLChargeImage("../data/pieceviolet.bmp");
-    screen2 = SDLChargeImage("../data/screen.bmp");
+    kind[0]=SDL_load_image("../data/piecejaune.bmp");
+    kind[1]=SDL_load_image("../data/piececyan.bmp");
+    kind[2]=SDL_load_image("../data/piecevert.bmp");
+    kind[3]=SDL_load_image("../data/piecerouge.bmp");
+    kind[4]=SDL_load_image("../data/pieceorange.bmp");
+    kind[5]=SDL_load_image("../data/piecebleue.bmp");
+    kind[6]=SDL_load_image("../data/pieceviolet.bmp");
+    //kind[7]=SDL_load_image("../data/piecevide.bmp");
+    kind[7]=IMG_Load("../data/piecevide.png");
+    screen2 = SDL_load_image("../data/screen.bmp");
 
     // ---------- Essai de Menu ----------------
     /*int quit;
@@ -238,7 +278,7 @@ void sdljeuInit(SDL *sdl)
 
     Board * board = (Board *)malloc(sizeof(Board));
     Piece * piece = NULL;
-    //Piece * nextpiece = NULL;
+    Piece * nextpiece = NULL;
     Tree * tree = (Tree *)malloc(sizeof(Tree));
     Tetris * tetris;
 
@@ -269,8 +309,9 @@ void sdljeuInit(SDL *sdl)
     /*tetris = createTetris(board, piece, tree);*/
     printf("Création du Tetris ... OK \n");
     //newPiece(tetris->board, piece);
+    nextpiece = getTetrisNextPiece(tetris);
     SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
-    //SDLdisplaypiece(screen, kind, nextpiece, position1.x+275,position1.y+50);
+    SDLdisplaypiece(screen,gridge, kind, nextpiece, position1.x+275,position1.y+50);
 
 
     //--------------------- BOUCLE -----------------------
@@ -351,7 +392,10 @@ void sdljeuInit(SDL *sdl)
        if(isCurrentPieceMovable(tetris->board, posx, posy + 1) == FALSE && testFallPiece(tetris->board) == FALSE)
                {
                    destructlines = destructlines + destructLines(tetris->board);
+                   SDLclearpiece(screen, nextpiece, position1.x+275,position1.y+50);
                    gameStep(tetris);
+                   nextpiece = getTetrisNextPiece(tetris);
+                   SDLdisplaypiece(screen,gridge, kind, nextpiece, position1.x+275,position1.y+50);
                }
        /*if(testFallPiece(tetris->board) == TRUE)
         {
