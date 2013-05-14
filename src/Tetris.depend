@@ -551,3 +551,83 @@
 	"bool.h"
 	"shapes.h"
 
+1368516607 source:/home/alan/Documents/LIF7/TetrisLIF7/src/LoopTETRIS_SDL.c
+	<time.h>
+	"LoopTETRIS_SDL.h"
+	<SDL/SDL_ttf.h>
+	<SDL/SDL.h>
+	<SDL/SDL_image.h>
+	"SDL.h"
+	<assert.h>
+	<stdlib.h>
+	<stdio.h>
+
+1368515632 /home/alan/Documents/LIF7/TetrisLIF7/src/LoopTETRIS_SDL.h
+	<SDL/SDL_image.h>
+	<SDL/SDL.h>
+	"tetris.h"
+
+1368515632 /home/alan/Documents/LIF7/TetrisLIF7/src/tetris.h
+	"bool.h"
+	"binarytrees.h"
+	"board.h"
+
+1368515632 /home/alan/Documents/LIF7/TetrisLIF7/src/bool.h
+
+1368515632 /home/alan/Documents/LIF7/TetrisLIF7/src/binarytrees.h
+	"player.h"
+
+1368515632 /home/alan/Documents/LIF7/TetrisLIF7/src/player.h
+
+1368515632 /home/alan/Documents/LIF7/TetrisLIF7/src/board.h
+	<time.h>
+	"piece.h"
+
+1368515632 /home/alan/Documents/LIF7/TetrisLIF7/src/piece.h
+	"shapes.h"
+
+1368515632 /home/alan/Documents/LIF7/TetrisLIF7/src/shapes.h
+
+1368515632 source:/home/alan/Documents/LIF7/TetrisLIF7/src/binarytrees.c
+	<stdlib.h>
+	<stdio.h>
+	<assert.h>
+	<string.h>
+	"binarytrees.h"
+
+1368515632 source:/home/alan/Documents/LIF7/TetrisLIF7/src/board.c
+	<stdio.h>
+	<stdlib.h>
+	<assert.h>
+	"board.h"
+
+1368515632 source:/home/alan/Documents/LIF7/TetrisLIF7/src/main.c
+	<stdlib.h>
+	<stdio.h>
+	<time.h>
+	"LoopTETRIS_SDL.h"
+	"tetris.h"
+	<SDL/SDL_ttf.h>
+
+1368515632 source:/home/alan/Documents/LIF7/TetrisLIF7/src/piece.c
+	"piece.h"
+	<stdio.h>
+	<stdlib.h>
+	<assert.h>
+
+1368515632 source:/home/alan/Documents/LIF7/TetrisLIF7/src/player.c
+	<stdio.h>
+	<stdlib.h>
+	<assert.h>
+	<string.h>
+	"player.h"
+
+1368516060 source:/home/alan/Documents/LIF7/TetrisLIF7/src/tetris.c
+	<stdio.h>
+	<stdlib.h>
+	<assert.h>
+	<string.h>
+	"tetris.h"
+	"bool.h"
+	"shapes.h"
+

@@ -353,17 +353,6 @@ int destructLines(Board * board)
         y--;
     }
 
-    for(i = 0; i < 20; i++) // affichage grille
-    {
-        for(j = 0; j < 10; j++)
-        {
-            printf("%u ", board->gridge[i][j]);
-        }
-
-        printf("\n");
-    }
-    printf("\n");
-    printf("\n");
     return n_lines;
 }
 
