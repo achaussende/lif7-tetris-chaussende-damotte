@@ -50,46 +50,46 @@ SDL_Surface* SDLdisplayscreen(SDL_Surface* screen, SDL_Surface* gridge, SDL_Surf
                 {
                      //SDL_apply_surface(kind,screen, positionX+(i*20), positionY+(j*20));
 
-                switch (getKind(tetris->board->currentPiece)) {
+                switch (tetris->board->gridge[j][i]) {
 
-        case 0:
+        case 1:
         {
             SDL_apply_surface(kind[0],screen, positionX+(i*20), positionY+(j*20));
 
         }
         break;
 
-        case 1:
+        case 2:
         {
             SDL_apply_surface(kind[1],screen, positionX+(i*20), positionY+(j*20));
 
         }
         break;
-        case 2:
+        case 3:
         {
             SDL_apply_surface(kind[2],screen, positionX+(i*20), positionY+(j*20));
 
         }
         break;
-        case 3:
+        case 4:
         {
             SDL_apply_surface(kind[3],screen, positionX+(i*20), positionY+(j*20));
 
         }
         break;
-        case 4:
+        case 5:
         {
             SDL_apply_surface(kind[4],screen, positionX+(i*20), positionY+(j*20));
 
         }
         break;
-        case 5:
+        case 6:
         {
             SDL_apply_surface(kind[5],screen, positionX+(i*20), positionY+(j*20));
 
         }
         break;
-        case 6:
+        case 7:
         {
             SDL_apply_surface(kind[6],screen, positionX+(i*20), positionY+(j*20));
 
@@ -245,6 +245,8 @@ void sdljeuInit(SDL *sdl)
     tetris = startTetris(); // Lancement du tetris
     int destructlines;
     destructlines = 0;
+    int posx, posy;
+
 
 
     //board = sdl->tetris.board;
@@ -311,7 +313,6 @@ void sdljeuInit(SDL *sdl)
                     case SDLK_SPACE: // Barre espace
                         dropCurrentPiece(tetris->board);
                         SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
-                        gameStep(tetris);
                         break;
                     default:
                     break;
@@ -333,6 +334,12 @@ void sdljeuInit(SDL *sdl)
             moveCurrentPieceDown(tetris->board);
             SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
             tempsPrecedent = tempsActuel; /* Le temps "actuel" devient le temps "precedent" pour nos futurs calculs */
+            posx = getPosX(tetris->board->currentPiece);
+            posy = getPosY(tetris->board->currentPiece);
+            if(isCurrentPieceMovable(tetris->board, posx, posy + 1) == FALSE && testFallPiece(tetris->board) == FALSE)
+               {
+                   gameStep(tetris);
+               }
         }
 
         /* Après pose de la currentPiece, la nextPiece devient la currentPiece
@@ -345,6 +352,7 @@ void sdljeuInit(SDL *sdl)
         }
 
         destructlines = destructlines + destructLines(tetris->board);
+        //SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
         /*if(testFallPiece(tetris->board))
         {
             SDL_apply_surface(kind[1], screen, position1.x, position1.y );
