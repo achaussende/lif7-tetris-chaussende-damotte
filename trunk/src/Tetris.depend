@@ -551,7 +551,7 @@
 	"bool.h"
 	"shapes.h"
 
-1368530261 source:/home/alan/Documents/LIF7/TetrisLIF7/src/LoopTETRIS_SDL.c
+1368865388 source:/home/alan/Documents/LIF7/TetrisLIF7/src/LoopTETRIS_SDL.c
 	<time.h>
 	"LoopTETRIS_SDL.h"
 	<SDL/SDL_ttf.h>
@@ -562,7 +562,7 @@
 	<stdlib.h>
 	<stdio.h>
 
-1368530066 /home/alan/Documents/LIF7/TetrisLIF7/src/LoopTETRIS_SDL.h
+1368865320 /home/alan/Documents/LIF7/TetrisLIF7/src/LoopTETRIS_SDL.h
 	<SDL/SDL_image.h>
 	<SDL/SDL.h>
 	"tetris.h"

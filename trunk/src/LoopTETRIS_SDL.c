@@ -129,9 +129,9 @@ SDL_Surface* SDLdisplayscreen(SDL_Surface* screen, SDL_Surface* gridge, SDL_Surf
         }
 }
 
-SDL_Surface* SDLdisplaypiece(SDL_Surface* screen, SDL_Surface* gridge, SDL_Surface* kind[8], Piece * piece, int positionX, int positionY)
+SDL_Surface* SDLdisplaypiece(SDL_Surface* screen, SDL_Surface* nextpiecebackground, SDL_Surface* kind[8], Piece * piece, int positionX, int positionY)
 {
-    //SDL_apply_surface(gridge,screen, positionX, positionY);
+    SDL_apply_surface(nextpiecebackground,screen, positionX, positionY);
     int i,j;
     for(j = 0; j < 4; j++)
         {
@@ -198,7 +198,7 @@ SDL_Surface* SDLdisplaypiece(SDL_Surface* screen, SDL_Surface* gridge, SDL_Surfa
         }
 }
 
-SDLclearpiece(SDL_Surface* screen, SDL_Surface* reset, int positionX, int positionY)
+/*SDLclearpiece(SDL_Surface* screen, SDL_Surface* reset, int positionX, int positionY)
 {
     int i,j;
     for(j = 0; j < 4; j++)
@@ -210,7 +210,7 @@ SDLclearpiece(SDL_Surface* screen, SDL_Surface* reset, int positionX, int positi
             }
         }
 
-}
+}*/
 
 void sdljeuInit(SDL *sdl)
 {
@@ -219,7 +219,8 @@ void sdljeuInit(SDL *sdl)
     SDL_Surface *screen2 = NULL;
     SDL_Surface *gridge = NULL;
     SDL_Surface *kind[8];
-    SDL_Surface *reset = NULL;
+    SDL_Surface *nextpiecebackground = NULL;
+    //SDL_Surface *reset = NULL;
     SDL_Rect position1;
 
     /*assert(SDL_Init(SDL_INIT_EVERYTHING)!= -1); */
@@ -239,8 +240,9 @@ void sdljeuInit(SDL *sdl)
     kind[5]=SDL_load_image("../data/piecebleue.bmp");
     kind[6]=SDL_load_image("../data/pieceviolet.bmp");
     //kind[7]=SDL_load_image("../data/piecevide.bmp");
-    reset=IMG_Load("../data/piecevide.png");
+    //reset=IMG_Load("../data/piecevide.png");
     screen2 = SDL_load_image("../data/screen.bmp");
+    nextpiecebackground = SDL_load_image("../data/nextpiece.bmp");
 
     // ---------- Essai de Menu ----------------
     /*int quit;
@@ -314,7 +316,7 @@ void sdljeuInit(SDL *sdl)
     //newPiece(tetris->board, piece);
     nextpiece = getTetrisNextPiece(tetris);
     SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
-    SDLdisplaypiece(screen,gridge, kind, nextpiece, position1.x+275,position1.y+50);
+    SDLdisplaypiece(screen,nextpiecebackground, kind, nextpiece, position1.x+280,position1.y+50);
 
 
     //--------------------- BOUCLE -----------------------
@@ -395,10 +397,10 @@ void sdljeuInit(SDL *sdl)
        if(isCurrentPieceMovable(tetris->board, posx, posy + 1) == FALSE && testFallPiece(tetris->board) == FALSE)
                {
                    destructlines = destructlines + destructLines(tetris->board);
-                   SDLclearpiece(screen, reset, position1.x+275,position1.y+50);
+                   //SDLclearpiece(screen, reset, position1.x+275,position1.y+50);
                    gameStep(tetris);
                    nextpiece = getTetrisNextPiece(tetris);
-                   SDLdisplaypiece(screen,gridge, kind, nextpiece, position1.x+275,position1.y+50);
+                   SDLdisplaypiece(screen,nextpiecebackground, kind, nextpiece, position1.x+280,position1.y+50);
                }
        /*if(testFallPiece(tetris->board) == TRUE)
         {
