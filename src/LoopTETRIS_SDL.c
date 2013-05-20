@@ -3,6 +3,7 @@
 #include <SDL/SDL_ttf.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include <FMOD/fmod.h>
 #include "SDL.h"
 #include <assert.h>
 #include <stdlib.h>
@@ -214,37 +215,49 @@ SDL_Surface* SDLdisplaypiece(SDL_Surface* screen, SDL_Surface* nextpiecebackgrou
 
 void sdljeuInit(SDL *sdl)
 {
-    // ------------------------ INIT -----------------------
+    /* ------------------------ INIT ----------------------- */
+
     SDL_Surface *screen = NULL;
     SDL_Surface *screen2 = NULL;
     SDL_Surface *gridge = NULL;
     SDL_Surface *kind[8];
     SDL_Surface *nextpiecebackground = NULL;
-    //SDL_Surface *reset = NULL;
 
-    // Surfaces Textes
+
+        // Surfaces Textes
     SDL_Surface * text = NULL;
 
-    // Rectangle de position
+        // Rectangle de position
     SDL_Rect position1;
 
+        // FMOD
+    FMOD_SYSTEM *system;
+    FMOD_System_Create(&system);
+
+    FMOD_SOUND *explosion = NULL;
+    FMOD_System_CreateSound(system, "nom_du_son.wav", FMOD_CREATESAMPLE, 0, &explosion);
+
+        //Initialisation de screen
     /*assert(SDL_Init(SDL_INIT_EVERYTHING)!= -1); */
     SDL_Init(SDL_INIT_VIDEO);
     screen = SDL_SetVideoMode(1000, 600, 32, SDL_SWSURFACE| SDL_RESIZABLE | SDL_DOUBLEBUF);
 
-    /* Initialisation de TTF */
-
+        // Initialisation de TTF
     if(TTF_Init() == -1)
     {
         printf("Erreur d'initialisation de TTF_Init : %s\n", TTF_GetError());
         exit(EXIT_FAILURE);
     }
 
-    // Coloration de la surface ecran en gris
+        // Initialisation de FMOD
+            // 32 est le nombre de sons gérés par FMOD
+    FMOD_System_Init(system, 32, FMOD_INIT_NORMAL, NULL);
+
+        // Coloration de la surface ecran en gris
     SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 31, 31, 31));
     gridge = SDL_load_image("../data/gridge.bmp");
 
-
+        //Initialisation de kind avec les images des couleurs des pièces
     kind[0]=SDL_load_image("../data/piecejaune.bmp");
     kind[1]=SDL_load_image("../data/piececyan.bmp");
     kind[2]=SDL_load_image("../data/piecevert.bmp");
@@ -254,10 +267,14 @@ void sdljeuInit(SDL *sdl)
     kind[6]=SDL_load_image("../data/pieceviolet.bmp");
     //kind[7]=SDL_load_image("../data/piecevide.bmp");
     //reset=IMG_Load("../data/piecevide.png");
+
+        //Chargement de l'image d'écran de jeu et la pièce suivante
     screen2 = SDL_load_image("../data/screen.bmp");
     nextpiecebackground = SDL_load_image("../data/nextpiece.bmp");
 
-    // ---------- Essai de Menu ----------------
+
+
+    /* ---------- Essai de Menu ---------------- */
     /*int quit;
     quit = 1;
     SDL_Event event;
@@ -278,6 +295,8 @@ void sdljeuInit(SDL *sdl)
     }
     */
     //-------------------------------------------
+
+
 
     /*  Variables de la SDL */
 
@@ -353,6 +372,9 @@ void sdljeuInit(SDL *sdl)
 
 
     //--------------------- BOUCLE -----------------------
+
+            // Dans la fonction sdljeuboucle ? (à mettre en anglais aussi)
+
     SDL_Event event;
     int tempsPrecedent = 0, tempsActuel = 0;
 
@@ -425,13 +447,15 @@ void sdljeuInit(SDL *sdl)
 
         /* Après pose de la currentPiece, la nextPiece devient la currentPiece
        puis nouvelle nextPiece*/
-       //destructlines = destructlines + destructLines(tetris->board);
+
        posx = getPosX(tetris->board->currentPiece);
        posy = getPosY(tetris->board->currentPiece);
        if(isCurrentPieceMovable(tetris->board, posx, posy + 1) == FALSE && testFallPiece(tetris->board) == FALSE)
                {
                    /* Destruction des lignes et Calcul du score */
                    n_lines = destructLines(tetris->board);
+                   FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE, explosion,
+                                          0, NULL);
                    destructlines = destructlines + n_lines;
                    score = calcScore(score, n_lines);
                    printf("lignes détruites : %u \n score : %u \n", destructlines, score);
@@ -441,6 +465,7 @@ void sdljeuInit(SDL *sdl)
                     SDL_FreeSurface(text);
 
                     text = TTF_RenderText_Blended(font, s_score, colorWhite);
+                    //TTF_RenderText_Shaded(font, s_score, colorWhite); peut aussi marcher comme sur fond uni
 
                    gameStep(tetris);
                    nextpiece = getTetrisNextPiece(tetris);
@@ -466,6 +491,12 @@ void sdljeuInit(SDL *sdl)
     /* Fermeture des polices avant l'arrêt de la TTF
     NB : Toutes les polices doivent être fermées */
     TTF_CloseFont(font);
+
+    /* Fermeture et libération de system et des sons*/
+    FMOD_System_Close(system);
+    FMOD_System_Release(system);
+
+    FMOD_Sound_Release(explosion);
 
     TTF_Quit(); // Arrêt de la TTF
     SDL_Quit(); // Arrêt de la SDL (libération de la mémoire)

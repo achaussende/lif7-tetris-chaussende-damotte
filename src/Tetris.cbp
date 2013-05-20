@@ -36,6 +36,7 @@
 			<Add option="`sdl-config --libs` -lSDL_ttf -lSDL_image" />
 			<Add option="-lSDL_ttf" />
 			<Add option="-lSDL_image" />
+			<Add option="-lfmodex" />
 		</Linker>
 		<Unit filename="../data/gridge.bmp" />
 		<Unit filename="../data/piece.bmp" />
