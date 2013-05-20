@@ -221,11 +221,24 @@ void sdljeuInit(SDL *sdl)
     SDL_Surface *kind[8];
     SDL_Surface *nextpiecebackground = NULL;
     //SDL_Surface *reset = NULL;
+
+    // Surfaces Textes
+    SDL_Surface * text = NULL;
+
+    // Rectangle de position
     SDL_Rect position1;
 
     /*assert(SDL_Init(SDL_INIT_EVERYTHING)!= -1); */
     SDL_Init(SDL_INIT_VIDEO);
     screen = SDL_SetVideoMode(1000, 600, 32, SDL_SWSURFACE| SDL_RESIZABLE | SDL_DOUBLEBUF);
+
+    /* Initialisation de TTF */
+
+    if(TTF_Init() == -1)
+    {
+        printf("Erreur d'initialisation de TTF_Init : %s\n", TTF_GetError());
+        exit(EXIT_FAILURE);
+    }
 
     // Coloration de la surface ecran en gris
     SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 31, 31, 31));
@@ -266,6 +279,8 @@ void sdljeuInit(SDL *sdl)
     */
     //-------------------------------------------
 
+    /*  Variables de la SDL */
+
     SDL_apply_surface(screen2,screen, 0, 0);
 
     position1.x = screen->w / 2 - gridge->w / 2;
@@ -280,20 +295,38 @@ void sdljeuInit(SDL *sdl)
     positionpiece.x = position1.x+(5*20);
     positionpiece.y = position1.y;
 
+    /* Variables pour le TTF */
+
+    TTF_Font * font = NULL ;
+    font = TTF_OpenFont("../data/gameover.ttf", 65);
+
+    /* Couleurs pour les polices TTF */
+    SDL_Color colorBlack = {0 ,0 ,0};
+    SDL_Color colorWhite = {255, 255, 255};
+
+    /* Variables pour le Tetris */
 
     Board * board = (Board *)malloc(sizeof(Board));
     Piece * piece = NULL;
     Piece * nextpiece = NULL;
     Tree * tree = (Tree *)malloc(sizeof(Tree));
     Tetris * tetris;
-
     tetris = startTetris(); // Lancement du tetris
+
     int destructlines;
     destructlines = 0;
+    int n_lines = 0;
     int posx, posy;
+    int score = 0;
+
+    char s_score[20];
+
+    /* Initialisation texte du score */
+    sprintf(s_score, "Score : %u", score);
+    text = TTF_RenderText_Blended(font, s_score, colorWhite);
 
 
-
+    // GROSSE PARTIE A NETTOYER ET COMMENTER !!! (Adrien)
     //board = sdl->tetris.board;
     srand(time(NULL));
 
@@ -380,6 +413,7 @@ void sdljeuInit(SDL *sdl)
             moveCurrentPieceDown(tetris->board);
             SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
             tempsPrecedent = tempsActuel; /* Le temps "actuel" devient le temps "precedent" pour nos futurs calculs */
+
             /*posx = getPosX(tetris->board->currentPiece);
             posy = getPosY(tetris->board->currentPiece);
             if(isCurrentPieceMovable(tetris->board, posx, posy + 1) == FALSE && testFallPiece(tetris->board) == FALSE)
@@ -396,37 +430,45 @@ void sdljeuInit(SDL *sdl)
        posy = getPosY(tetris->board->currentPiece);
        if(isCurrentPieceMovable(tetris->board, posx, posy + 1) == FALSE && testFallPiece(tetris->board) == FALSE)
                {
-                   destructlines = destructlines + destructLines(tetris->board);
-                   //SDLclearpiece(screen, reset, position1.x+275,position1.y+50);
+                   /* Destruction des lignes et Calcul du score */
+                   n_lines = destructLines(tetris->board);
+                   destructlines = destructlines + n_lines;
+                   score = calcScore(score, n_lines);
+                   printf("lignes détruites : %u \n score : %u \n", destructlines, score);
+
+                    /* Affichage du score */
+                    sprintf(s_score, "Score : %u", score);
+                    SDL_FreeSurface(text);
+
+                    text = TTF_RenderText_Blended(font, s_score, colorWhite);
+
                    gameStep(tetris);
                    nextpiece = getTetrisNextPiece(tetris);
                    SDLdisplaypiece(screen,nextpiecebackground, kind, nextpiece, position1.x+280,position1.y+50);
                }
-       /*if(testFallPiece(tetris->board) == TRUE)
-        {
-            printf("On entre dans cette putain de boucle");
-            gameStep(tetris);
-
-        }*/
 
 
-        //SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
-        /*if(testFallPiece(tetris->board))
-        {
-            SDL_apply_surface(kind[1], screen, position1.x, position1.y );
-        }*/
 
         SDL_Flip(screen);
-
+        SDL_apply_surface(text,screen, 0, 0); // Blit de text
     }
-pause();
+    pause();
 
-// -------------------- FREE AND QUIT -----------------------
-SDL_FreeSurface(tetris);
-SDL_FreeSurface(gridge);
-SDL_FreeSurface(kind);
-SDL_FreeSurface(screen);
-SDL_Quit(); // Arrêt de la SDL (libération de la mémoire)
+    // -------------------- FREE AND QUIT -----------------------
+    SDL_FreeSurface(screen);
+    SDL_FreeSurface(screen2);
+    SDL_FreeSurface(gridge);
+    SDL_FreeSurface(*kind);
+    SDL_FreeSurface(nextpiecebackground);
+
+    SDL_FreeSurface(text);
+
+    /* Fermeture des polices avant l'arrêt de la TTF
+    NB : Toutes les polices doivent être fermées */
+    TTF_CloseFont(font);
+
+    TTF_Quit(); // Arrêt de la TTF
+    SDL_Quit(); // Arrêt de la SDL (libération de la mémoire)
 
 }
 
