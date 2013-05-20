@@ -33,7 +33,7 @@
 			<Add option="`sdl-config --cflags`" />
 		</Compiler>
 		<Linker>
-			<Add option="`sdl-config --libs`" />
+			<Add option="`sdl-config --libs` -lSDL_ttf -lSDL_image" />
 			<Add option="-lSDL_ttf" />
 			<Add option="-lSDL_image" />
 		</Linker>
