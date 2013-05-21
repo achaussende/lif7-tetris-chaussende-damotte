@@ -460,7 +460,8 @@ void sdljeuInit(SDL *sdl)
 
         //-------------------------------------------------------------
         tempsActuel = SDL_GetTicks();
-        if (tempsActuel - tempsPrecedent > 1000) /* Si 1000 ms se sont écoulées depuis le dernier tour de boucle */
+
+        if (tempsActuel - tempsPrecedent > 1000-(10*destructlines)) /* Si 1000 ms se sont écoulées depuis le dernier tour de boucle */
         {
             moveCurrentPieceDown(tetris->board);
             SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
@@ -514,7 +515,7 @@ void sdljeuInit(SDL *sdl)
                         FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE,
                                               f_defeat, 0, NULL);
                         textgameover = TTF_RenderText_Blended(font, "GAME OVER ! TRY AGAIN ? Y/N", colorWhite);
-                        SDL_apply_surface(textgameover,screen, 500, 300); // Blit de text
+                        SDL_apply_surface(textgameover,screen, 320, 275); // Blit de text
                    /* int nextgameover = 1;
                      while (nextgameover)
                     {
@@ -560,8 +561,11 @@ void sdljeuInit(SDL *sdl)
     SDL_FreeSurface(gridge);
     SDL_FreeSurface(*kind);
     SDL_FreeSurface(nextpiecebackground);
+    SDL_FreeSurface(scorebackground);
+    SDL_FreeSurface(playerbackground);
 
     SDL_FreeSurface(text);
+    SDL_FreeSurface(textgameover);
 
     /* Fermeture des polices avant l'arrêt de la TTF
     NB : Toutes les polices doivent être fermées */
