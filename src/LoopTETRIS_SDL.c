@@ -226,6 +226,7 @@ void sdljeuInit(SDL *sdl)
 
         // Surfaces Textes
     SDL_Surface * text = NULL;
+    SDL_Surface * textgameover = NULL;
 
         // Rectangle de position
     SDL_Rect position1;
@@ -376,6 +377,7 @@ void sdljeuInit(SDL *sdl)
             // Dans la fonction sdljeuboucle ? (à mettre en anglais aussi)
 
     SDL_Event event;
+    SDL_Event newevent;
     int tempsPrecedent = 0, tempsActuel = 0;
 
     int next = 1;
@@ -469,8 +471,33 @@ void sdljeuInit(SDL *sdl)
                     if(testGameOver(tetris->board) == TRUE)
                     {
                         next=0;
-                        text = TTF_RenderText_Blended(font, "U LOOSE BITCH", colorWhite);
-                        SDL_apply_surface(text,screen, 500, 300); // Blit de text
+
+                        textgameover = TTF_RenderText_Blended(font, "GAME OVER ! TRY AGAIN ? Y/N", colorWhite);
+                        SDL_apply_surface(textgameover,screen, 500, 300); // Blit de text
+                   /* int nextgameover = 1;
+                     while (nextgameover)
+                    {
+                        SDL_WaitEvent(&newevent);
+                        switch(newevent.type)
+                    {
+                        case SDL_QUIT:
+                        nextgameover = 0;
+                        break;
+                    case SDL_KEYUP:
+                    switch(event.key.keysym.sym)
+                    {
+                        case SDLK_y:
+                        sdljeuInit(sdl);
+                        break;
+
+                        case SDLK_n:
+                        break;
+
+                        default:
+                        break;
+                    }
+                    }
+                    }*/
                     }
                    else
                    {
