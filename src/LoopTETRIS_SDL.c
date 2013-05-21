@@ -3,7 +3,7 @@
 #include <SDL/SDL_ttf.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
-#include <FMOD/fmod.h>
+#include "../lib/FMOD/inc/fmod.h"
 #include "SDL.h"
 #include <assert.h>
 #include <stdlib.h>
@@ -466,13 +466,19 @@ void sdljeuInit(SDL *sdl)
 
                     text = TTF_RenderText_Blended(font, s_score, colorWhite);
                     //TTF_RenderText_Shaded(font, s_score, colorWhite); peut aussi marcher comme sur fond uni
-
+                    if(testGameOver(tetris->board) == TRUE)
+                    {
+                        next=0;
+                        text = TTF_RenderText_Blended(font, "U LOOSE BITCH", colorWhite);
+                        SDL_apply_surface(text,screen, 500, 300); // Blit de text
+                    }
+                   else
+                   {
                    gameStep(tetris);
                    nextpiece = getTetrisNextPiece(tetris);
                    SDLdisplaypiece(screen,nextpiecebackground, kind, nextpiece, position1.x+280,position1.y+50);
+                   }
                }
-
-
 
         SDL_Flip(screen);
         SDL_apply_surface(text,screen, 0, 0); // Blit de text
