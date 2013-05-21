@@ -239,6 +239,10 @@ void sdljeuInit(SDL *sdl)
 
     FMOD_SOUND *explosion = NULL;
     FMOD_SOUND *maintheme = NULL;
+    FMOD_SOUND *f_legendary1 = NULL;
+    FMOD_SOUND *f_legendary2 = NULL;
+    FMOD_SOUND *f_defeat = NULL;
+    FMOD_SOUND *f_unstoppable = NULL;
 
 
         //Initialisation de screen
@@ -258,6 +262,16 @@ void sdljeuInit(SDL *sdl)
     FMOD_System_Init(system, 32, FMOD_INIT_NORMAL, NULL);
     FMOD_System_CreateSound(system, "../data/sounds/explode.wav",
                             FMOD_CREATESAMPLE, 0, &explosion);
+        //Initialisation des samples
+    FMOD_System_CreateSound(system, "../data/sounds/f_legendary1.mp3",
+                            FMOD_CREATESAMPLE, 0, &f_legendary1);
+    FMOD_System_CreateSound(system, "../data/sounds/f_legendary2.mp3",
+                            FMOD_CREATESAMPLE, 0, &f_legendary2);
+    FMOD_System_CreateSound(system, "../data/sounds/f_defeat.mp3",
+                            FMOD_CREATESAMPLE, 0, &f_defeat);
+    FMOD_System_CreateSound(system, "../data/sounds/f_unstoppable.mp3",
+                            FMOD_CREATESAMPLE, 0, &f_unstoppable);
+        // Initialisation des musiques
     FMOD_System_CreateSound(system,
                             "../data/sounds/theglitchmob_howtobeeatenbyawoman.mp3",
                             FMOD_SOFTWARE | FMOD_2D
@@ -472,9 +486,20 @@ void sdljeuInit(SDL *sdl)
                    n_lines = destructLines(tetris->board);
                    FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE, explosion,
                                           0, NULL);
+                    if(n_lines != 0)
+                    {
+                        //FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE, explosion2);
+                    }
                    destructlines = destructlines + n_lines;
                    score = calcScore(score, n_lines);
                    printf("lignes détruites : %u \n score : %u \n", destructlines, score);
+
+                    // Répétition du son
+                    /*if(score >= 3000)
+                    {
+                        FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE,
+                                              f_unstoppable, 0, NULL);
+                    }*/
 
                     /* Affichage du score */
                     sprintf(s_score, "%u", score);
@@ -486,6 +511,8 @@ void sdljeuInit(SDL *sdl)
                     {
                         next=0;
 
+                        FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE,
+                                              f_defeat, 0, NULL);
                         textgameover = TTF_RenderText_Blended(font, "GAME OVER ! TRY AGAIN ? Y/N", colorWhite);
                         SDL_apply_surface(textgameover,screen, 500, 300); // Blit de text
                    /* int nextgameover = 1;
@@ -545,6 +572,11 @@ void sdljeuInit(SDL *sdl)
     FMOD_System_Release(system);
 
     FMOD_Sound_Release(explosion);
+    FMOD_Sound_Release(maintheme);
+    FMOD_Sound_Release(f_legendary1);
+    FMOD_Sound_Release(f_legendary2);
+    FMOD_Sound_Release(f_defeat);
+    FMOD_Sound_Release(f_unstoppable);
 
     TTF_Quit(); // Arrêt de la TTF
     SDL_Quit(); // Arrêt de la SDL (libération de la mémoire)
