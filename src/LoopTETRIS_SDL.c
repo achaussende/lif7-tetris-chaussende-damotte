@@ -220,6 +220,8 @@ void sdljeuInit(SDL *sdl)
     SDL_Surface *screen = NULL;
     SDL_Surface *screen2 = NULL;
     SDL_Surface *gridge = NULL;
+    SDL_Surface *scorebackground = NULL;
+    SDL_Surface *playerbackground = NULL;
     SDL_Surface *kind[8];
     SDL_Surface *nextpiecebackground = NULL;
 
@@ -282,7 +284,8 @@ void sdljeuInit(SDL *sdl)
         //Chargement de l'image d'écran de jeu et la pièce suivante
     screen2 = SDL_load_image("../data/screen.bmp");
     nextpiecebackground = SDL_load_image("../data/nextpiece.bmp");
-
+    scorebackground = SDL_load_image("../data/score.bmp");
+    playerbackground = SDL_load_image("../data/score.bmp");
 
 
     /* ---------- Essai de Menu ---------------- */
@@ -317,7 +320,8 @@ void sdljeuInit(SDL *sdl)
 	position1.y = (screen->h / 2 - gridge->h / 2);
 
     SDL_apply_surface(gridge,screen, position1.x, position1.y);
-
+    SDL_apply_surface(scorebackground,screen, position1.x-177, position1.y+84);
+    SDL_apply_surface(playerbackground,screen, position1.x-177, position1.y+19);
     SDL_WM_SetCaption("LegendaryTetris", NULL);
 
     SDL_Rect positionpiece;
@@ -352,7 +356,7 @@ void sdljeuInit(SDL *sdl)
     char s_score[20];
 
     /* Initialisation texte du score */
-    sprintf(s_score, "Score : %u", score);
+    sprintf(s_score, "%u", score);
     text = TTF_RenderText_Blended(font, s_score, colorWhite);
 
 
@@ -473,7 +477,7 @@ void sdljeuInit(SDL *sdl)
                    printf("lignes détruites : %u \n score : %u \n", destructlines, score);
 
                     /* Affichage du score */
-                    sprintf(s_score, "Score : %u", score);
+                    sprintf(s_score, "%u", score);
                     SDL_FreeSurface(text);
 
                     text = TTF_RenderText_Blended(font, s_score, colorWhite);
@@ -518,7 +522,8 @@ void sdljeuInit(SDL *sdl)
                }
 
         SDL_Flip(screen);
-        SDL_apply_surface(text,screen, 0, 0); // Blit de text
+        SDL_apply_surface(scorebackground,screen, position1.x-177, position1.y+84);
+        SDL_apply_surface(text,screen, position1.x-172, position1.y+100); // Blit de text
     }
     pause();
 
