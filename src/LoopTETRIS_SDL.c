@@ -236,7 +236,8 @@ void sdljeuInit(SDL *sdl)
     FMOD_System_Create(&system);
 
     FMOD_SOUND *explosion = NULL;
-    FMOD_System_CreateSound(system, "nom_du_son.wav", FMOD_CREATESAMPLE, 0, &explosion);
+    FMOD_SOUND *maintheme = NULL;
+
 
         //Initialisation de screen
     /*assert(SDL_Init(SDL_INIT_EVERYTHING)!= -1); */
@@ -253,6 +254,15 @@ void sdljeuInit(SDL *sdl)
         // Initialisation de FMOD
             // 32 est le nombre de sons gérés par FMOD
     FMOD_System_Init(system, 32, FMOD_INIT_NORMAL, NULL);
+    FMOD_System_CreateSound(system, "../data/sounds/explode.wav",
+                            FMOD_CREATESAMPLE, 0, &explosion);
+    FMOD_System_CreateSound(system,
+                            "../data/sounds/theglitchmob_howtobeeatenbyawoman.mp3",
+                            FMOD_SOFTWARE | FMOD_2D
+                            | FMOD_CREATESTREAM | FMOD_LOOP_NORMAL, 0, &maintheme);
+            //On active la répétition en boucle puis on joue la musique
+    FMOD_Sound_SetLoopCount(maintheme, -1);
+    FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE, maintheme, 0, NULL);
 
         // Coloration de la surface ecran en gris
     SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 31, 31, 31));
