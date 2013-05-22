@@ -176,6 +176,7 @@ Bool testRotationPiece(Board * board, const int orientation)
     int kind = getKind(board->currentPiece);
     int posx, posy;
     int i,j;
+    int k = 0;
     Bool * rotable = (Bool *)malloc(sizeof(Bool));
     Bool * rotable2 = (Bool *)malloc(sizeof(Bool));
     Bool visited[4][4];
@@ -200,7 +201,80 @@ Bool testRotationPiece(Board * board, const int orientation)
     flood2(board, posx, posy, 2, 1, kind, orientation, rotable, visited);
 
     drawPiece(board);
+    /* Essai de peaufinement de la rotation
+    clearPiece(board);
 
+     for(i = 0; i < 4; i++)
+    {
+        for(j = 0; j < 4; j++)
+        {
+               visited[i][j] = FALSE;
+        }
+
+    }
+    flood2(board, posx, posy, 2, 1, kind, orientation, rotable, visited);
+
+
+    //Si pas de rotation sur place
+    if(*rotable == FALSE)
+    {
+
+        for(i = 0; i < 4; i++)
+        {
+            for(j = 0; j < 4; j++)
+            {
+                   visited[i][j] = FALSE;
+            }
+
+        }
+
+        switch(kind)
+        {
+            case 1 :
+                if(isCurrentPieceMovable(board, posx + 1, posy) == FALSE &&
+                   isCurrentPieceMovable(board, posx - 2, posy) == TRUE)
+                   {
+                       flood2(board, posx - 2, posy, 2, 1, kind, orientation,
+                               rotable, visited);
+                   }
+                else
+                {
+                    if(isCurrentPieceMovable(board, posx - 1, posy) == FALSE &&
+                        isCurrentPieceMovable(board, posx + 2, posy) == TRUE)
+                        {
+                                flood2(board, posx + 2, posy, 2, 1, kind,
+                                       orientation, rotable, visited);
+                        }
+                }
+            break;
+
+            case 0 :
+                *rotable = TRUE;
+            break;
+
+            default :
+                if(isCurrentPieceMovable(board, posx + 1, posy) == FALSE &&
+                   isCurrentPieceMovable(board, posx - 1, posy) == TRUE)
+                   {
+                       flood2(board, posx - 1, posy, 2, 1, kind, orientation,
+                               rotable, visited);
+                   }
+                else
+                {
+                    if(isCurrentPieceMovable(board, posx - 1, posy) == FALSE &&
+                        isCurrentPieceMovable(board, posx + 1, posy) == TRUE)
+                        {
+                                flood2(board, posx + 1, posy, 2, 1, kind,
+                                       orientation, rotable, visited);
+                        }
+            }
+            break;
+        }
+
+    }
+
+    drawPiece(board);
+    */
     return *rotable;
 }
 
