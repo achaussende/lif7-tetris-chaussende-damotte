@@ -456,7 +456,8 @@ void sdljeuInit(SDL *sdl)
                         break;
                     case SDLK_c: // Touche c
                         holdPiece(tetris);
-                        //SDLdisplaypiece(screen,holdpiecebackground, kind, holdpiece, position1.x+280,position1.y+250);
+                        holdpiece = tetris->holdpiece;
+                        SDLdisplaypiece(screen,holdpiecebackground, kind, holdpiece, position1.x+280,position1.y+250);
                         SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
                         break;
                     default:
