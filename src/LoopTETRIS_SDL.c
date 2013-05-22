@@ -371,6 +371,8 @@ void sdljeuInit(SDL *sdl)
     int score = 0;
     int temp = 0;
 
+    int sound_played = 0; //Pour les sons de palier de score
+
     char s_score[20];
 
     /* Initialisation texte du score */
@@ -511,12 +513,26 @@ void sdljeuInit(SDL *sdl)
                    score = calcScore(score, n_lines);
                    printf("lignes détruites : %u \n score : %u \n", destructlines, score);
 
-                    // Répétition du son
-                    /*if(score >= 3000)
+
+                    if(score >= 50000 && sound_played == 0)
                     {
                         FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE,
                                               f_unstoppable, 0, NULL);
-                    }*/
+                        sound_played = 1;
+                    }
+
+                    if(score >= 100000 && sound_played == 1)
+                    {
+                        FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE,
+                                              f_legendary1, 0, NULL);
+                        sound_played = 2;
+                    }
+                    if(score >= 150000 && sound_played == 2)
+                    {
+                        FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE,
+                                              f_legendary2, 0, NULL);
+                        sound_played = 3;
+                    }
 
                     /* Affichage du score */
                     sprintf(s_score, "%u", score);
