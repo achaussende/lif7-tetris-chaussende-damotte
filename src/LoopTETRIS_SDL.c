@@ -224,6 +224,7 @@ void sdljeuInit(SDL *sdl)
     SDL_Surface *playerbackground = NULL;
     SDL_Surface *kind[8];
     SDL_Surface *nextpiecebackground = NULL;
+    SDL_Surface *holdpiecebackground = NULL;
 
 
         // Surfaces Textes
@@ -298,6 +299,7 @@ void sdljeuInit(SDL *sdl)
         //Chargement de l'image d'écran de jeu et la pièce suivante
     screen2 = SDL_load_image("../data/screen.bmp");
     nextpiecebackground = SDL_load_image("../data/nextpiece.bmp");
+    holdpiecebackground = SDL_load_image("../data/nextpiece.bmp");
     scorebackground = SDL_load_image("../data/score.bmp");
     playerbackground = SDL_load_image("../data/score.bmp");
 
@@ -357,6 +359,7 @@ void sdljeuInit(SDL *sdl)
     Board * board = (Board *)malloc(sizeof(Board));
     Piece * piece = NULL;
     Piece * nextpiece = NULL;
+    Piece * holdpiece = NULL;
     Tree * tree = (Tree *)malloc(sizeof(Tree));
     Tetris * tetris;
     tetris = startTetris(); // Lancement du tetris
@@ -398,6 +401,7 @@ void sdljeuInit(SDL *sdl)
     nextpiece = getTetrisNextPiece(tetris);
     SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
     SDLdisplaypiece(screen,nextpiecebackground, kind, nextpiece, position1.x+280,position1.y+50);
+    SDL_apply_surface(holdpiecebackground,screen, position1.x+280,position1.y+250);
 
 
     //--------------------- BOUCLE -----------------------
@@ -443,6 +447,11 @@ void sdljeuInit(SDL *sdl)
                         break;
                     case SDLK_SPACE: // Barre espace
                         dropCurrentPiece(tetris->board);
+                        SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
+                        break;
+                    case SDLK_c: // Touche c
+                        holdPiece(tetris);
+                        //SDLdisplaypiece(screen,holdpiecebackground, kind, holdpiece, position1.x+280,position1.y+250);
                         SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
                         break;
                     default:
