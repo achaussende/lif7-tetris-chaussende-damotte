@@ -30,6 +30,7 @@ typedef struct
 {
 	Board* board;
 	Piece* nextpiece;
+	Piece* holdpiece;
 	Tree * treescores;
 
 } Tetris;
@@ -42,6 +43,8 @@ void setTetrisNextPiece(Tetris * tetris, const Piece * piece);
 Piece * getTetrisNextPiece(const Tetris * tetris);
 void setTetrisTreeScores(Tetris * tetris, const Tree * tree);
 Tree * getTetrisTreeScores(const Tetris * tetris);
+void setTetrisHoldPiece(Tetris * tetris, const Piece * piece);
+Piece * getTetrisHoldPiece(const Tetris * tetris);
 
 
 /* ============ Fonctions de test ============= */
@@ -55,10 +58,11 @@ Bool isCurrentPieceMovable(Board * board, const int x, const int y);
 
 /* ================ Méthodes ==================  */
 
-void initTetris(Tetris * tetris, Board * board, Piece * piece, Tree * tree);
+void initTetris(Tetris * tetris, Board * board, Piece * piece, Piece * holdpiece, Tree * tree);
 void freeTetris(Tetris * tetris);
-Tetris * createTetris(Board * board, Piece * piece, Tree * tree);
+Tetris * createTetris(Board * board, Piece * piece, Piece * holdpiece, Tree * tree);
 void gameStep(Tetris * tetris);
+void holdPiece(Tetris * tetris);
 
 void moveCurrentPieceDown(Board * board);
 void moveCurrentPieceLeft(Board * board);

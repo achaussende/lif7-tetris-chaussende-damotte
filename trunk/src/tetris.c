@@ -96,6 +96,16 @@ Piece * getTetrisNextPiece(const Tetris * tetris)
     return tetris->nextpiece;
 }
 
+void setTetrisHoldPiece(Tetris * tetris, const Piece * piece)
+{
+    tetris->holdpiece = piece;
+}
+
+Piece * getTetrisHoldPiece(const Tetris * tetris)
+{
+    return tetris->holdpiece;
+}
+
 void setTetrisTreeScores(Tetris * tetris, const Tree * tree)
 {
     tetris->treescores = tree;
@@ -231,10 +241,11 @@ Bool testLineEmpty(Board * board, const unsigned int posY)
 
 /* initTetris : initialise les champs de la structure tetris */
 
-void initTetris(Tetris * tetris, Board * board, Piece * piece, Tree * tree)
+void initTetris(Tetris * tetris, Board * board, Piece * piece, Piece * holdpiece, Tree * tree)
 {
     setTetrisBoard(tetris, board);
     setTetrisNextPiece(tetris, piece);
+    setTetrisHoldPiece(tetris, holdpiece);
     setTetrisTreeScores(tetris, tree);
 }
 
@@ -246,11 +257,11 @@ void freeTetris(Tetris * tetris)
     free(tetris);
 }
 
-Tetris * createTetris(Board * board, Piece * piece, Tree * tree)
+Tetris * createTetris(Board * board, Piece * piece, Piece * holdpiece, Tree * tree)
 {
     Tetris * tetris = (Tetris *)malloc(sizeof(Tetris));
 
-    initTetris(tetris, board, piece, tree);
+    initTetris(tetris, board, piece, holdpiece, tree);
 
     return tetris;
 }
@@ -263,6 +274,23 @@ void gameStep(Tetris * tetris)
     freePiece(tetris->board->currentPiece);
     newPiece(tetris->board, tetris->nextpiece);
     setTetrisNextPiece(tetris, piece);
+}
+
+void holdPiece(Tetris * tetris)
+{
+    Piece * piecetemp;
+    if((tetris->holdpiece)==NULL)
+    {
+        setTetrisHoldPiece(tetris, tetris->board->currentPiece);
+        gameStep(tetris);
+    }
+    else
+    {
+        piecetemp = tetris->board->currentPiece;
+        tetris->holdpiece = tetris->board->currentPiece;
+        tetris->holdpiece = piecetemp;
+    }
+    free(piecetemp);
 }
 
 void moveCurrentPieceDown(Board * board)
@@ -548,16 +576,17 @@ Tetris * startTetris()
     Board * board = (Board *)malloc(sizeof(Board));
     Tree * tree = (Tree *)malloc(sizeof(Tree));
     Piece * piece;
+    Piece * holdpiece;
     Tetris * tetris;
 
     piece = createPiece(rand()%7, 0); //piece "tampon"
-
+    holdpiece = NULL;
     initBoard(board); // création ...
     newPiece(board, piece); // de board
     initTree(tree);
 
     piece = createPiece(rand()%7, 0); //nextpiece
-    tetris = createTetris(board, piece, tree);
+    tetris = createTetris(board, piece, holdpiece, tree);
     return tetris;
 }
 
