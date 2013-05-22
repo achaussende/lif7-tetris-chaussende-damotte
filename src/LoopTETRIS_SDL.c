@@ -369,6 +369,7 @@ void sdljeuInit(SDL *sdl)
     int n_lines = 0;
     int posx, posy;
     int score = 0;
+    int temp = 0;
 
     char s_score[20];
 
@@ -428,6 +429,7 @@ void sdljeuInit(SDL *sdl)
                     case SDLK_UP: // Flèche haut
                         rotationPiece(tetris->board);
                         SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
+                        temp = 0;
                         break;
 
                     case SDLK_DOWN: // Flèche bas
@@ -438,16 +440,19 @@ void sdljeuInit(SDL *sdl)
                     case SDLK_RIGHT: // Flèche droite
                         moveCurrentPieceRight(tetris->board);
                         SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
-
+                        temp = 0;
                         break;
+
                     case SDLK_LEFT: // Flèche gauche
                         moveCurrentPieceLeft(tetris->board);
                         SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
-
+                        temp = 0;
                         break;
+
                     case SDLK_SPACE: // Barre espace
                         dropCurrentPiece(tetris->board);
                         SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
+                        temp = 2;
                         break;
                     case SDLK_c: // Touche c
                         holdPiece(tetris);
@@ -475,6 +480,7 @@ void sdljeuInit(SDL *sdl)
             moveCurrentPieceDown(tetris->board);
             SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
             tempsPrecedent = tempsActuel; /* Le temps "actuel" devient le temps "precedent" pour nos futurs calculs */
+            temp++;
 
             /*posx = getPosX(tetris->board->currentPiece);
             posy = getPosY(tetris->board->currentPiece);
@@ -490,7 +496,7 @@ void sdljeuInit(SDL *sdl)
 
        posx = getPosX(tetris->board->currentPiece);
        posy = getPosY(tetris->board->currentPiece);
-       if(isCurrentPieceMovable(tetris->board, posx, posy + 1) == FALSE && testFallPiece(tetris->board) == FALSE)
+       if(isCurrentPieceMovable(tetris->board, posx, posy + 1) == FALSE && testFallPiece(tetris->board) == FALSE && temp == 2)
                {
                    /* Destruction des lignes et Calcul du score */
                    n_lines = destructLines(tetris->board);
