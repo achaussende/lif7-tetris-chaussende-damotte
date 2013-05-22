@@ -78,7 +78,7 @@ void floodFill(Board * board,int i, int j, int px, int py, int k, int o,
 
 void setTetrisBoard(Tetris * tetris, const Board * board)
 {
-    tetris->board = board;
+   tetris->board = board;
 }
 
 Board * getTetrisBoard(const Tetris * tetris)
@@ -164,7 +164,7 @@ Bool isCurrentPieceMovable(Board * board, const int x, const int y)
     flood2(board,x, y, 2, 1, kind, orientation, movable, visited);
 
     drawPiece(board); // On redessine notre pièce
-    movable2 = *movable; // Q : le free nécessaire dans une fonction ?
+    movable2 = *movable;
     free(movable);
 
     return movable2; // On renvoie le résultat
@@ -279,18 +279,47 @@ void gameStep(Tetris * tetris)
 void holdPiece(Tetris * tetris)
 {
     Piece * piecetemp;
-    if((tetris->holdpiece)==NULL)
+    Piece * piece;
+    piece = createPiece(rand()%7, 0);
+
+    if((*tetris).holdpiece == NULL)
     {
+        //On efface la pièce de la grille
+        clearPiece(tetris->board);
+
+        // On passe la currentpiece en hold
         setTetrisHoldPiece(tetris, tetris->board->currentPiece);
-        gameStep(tetris);
+
+        // On remet les coordonnées de la pièce en haut de grille
+        // Et la pièce à son orientation 0
+        setPosX(tetris->holdpiece, 5);
+        setPosY(tetris->holdpiece, 0);
+        setOrientation(tetris->holdpiece, 0);
+
+        //Nextpiece = currentpiece et nouvelle nextpiece
+        newPiece(tetris->board, tetris->nextpiece);
+        setTetrisNextPiece(tetris, piece);
     }
     else
     {
-        piecetemp = tetris->board->currentPiece;
-        tetris->holdpiece = tetris->board->currentPiece;
-        tetris->holdpiece = piecetemp;
+        //On efface la pièce de la grille
+        clearPiece(tetris->board);
+
+         // On stocke l'adresse de la holdpiece
+        piecetemp = tetris->holdpiece;
+
+        // On passe la currentpiece en hold
+        setTetrisHoldPiece(tetris, tetris->board->currentPiece);
+
+        // L'ancienne holdpiece devient la current
+        setCurrentPiece(tetris->board, piecetemp);
+
+        // On remet les coordonnées de la pièce en haut de grille
+        // Et la pièce à son orientation 0
+        setPosX(tetris->holdpiece, 5);
+        setPosY(tetris->holdpiece, 0);
+        setOrientation(tetris->holdpiece, 0);
     }
-    free(piecetemp);
 }
 
 void moveCurrentPieceDown(Board * board)
