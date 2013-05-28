@@ -18,12 +18,14 @@ void flood(Board * board,int i, int j, int px, int py, int k, int o,
                 PIECES[k][o][py][px] != 0)
     {
         visited[py][px] = TRUE;
-        board->gridge[j][i] = color; // On remplit la case de la valeur dans l'aire
+
+        // On remplit la case de la valeur dans l'aire
+        board->gridge[j][i] = color;
 
         flood(board, i -1 , j, px - 1, py, k, o, color, visited); // à gauche
         flood(board, i + 1, j, px + 1, py, k, o, color, visited); // à droite
         flood(board, i, j - 1, px, py - 1, k, o, color, visited); // en haut
-        flood(board, i, j + 1, px, py + 1, k, o, color, visited); // en bas (ces soirées là !)
+        flood(board, i, j + 1, px, py + 1, k, o, color, visited); // en bas
     }
 
 }
