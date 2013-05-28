@@ -1,4 +1,13 @@
 /* shapes.h */
+
+/**
+    \file [shapes.h]
+    \brief 	Contient la déclaration des formes des pièces
+    \author {Damotte Alan, Chaussende Adrien}
+    \version 0.1
+    \date Mars 2013
+*/
+
 #ifndef SHAPES_H
 #define SHAPES_H
 

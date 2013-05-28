@@ -1,4 +1,11 @@
-/* piece.cpp */
+/**
+    \file [piece.c]
+    \brief 	Contient les fonctions, procédures, accesseurs et mutateurs nécessaires à la création d'une pièce
+    \author {Damotte Alan, Chaussende Adrien}
+    \version 1.1
+    \date Avril 2013
+*/
+
 #include "piece.h"
 
 #include <stdio.h>

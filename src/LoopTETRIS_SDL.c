@@ -1,10 +1,17 @@
+/**
+    \file [LoopTETRIS_SDL.c]
+    \brief 	Contient les fonctions d'affichage du jeu via SDL
+    \author {Damotte Alan, Chaussende Adrien}
+    \version 1.1
+    \date Avril-Mai 2013
+*/
+
 #include <time.h>
 #include "LoopTETRIS_SDL.h"
 #include <SDL/SDL_ttf.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include "../lib/FMOD/inc/fmod.h"
-#include "SDL.h"
 #include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -416,6 +423,8 @@ void sdljeuInit(SDL *sdl)
     int tempsPrecedent = 0, tempsActuel = 0;
 
     int next = 1;
+    int change;
+    change = 1;
      while (next)
     {
         //SDL_WaitEvent(&event);
@@ -457,11 +466,19 @@ void sdljeuInit(SDL *sdl)
                         temp = 2;
                         break;
                     case SDLK_c: // Touche c
-                        holdPiece(tetris);
-                        holdpiece = tetris->holdpiece;
-                        SDLdisplaypiece(screen,holdpiecebackground, kind, holdpiece, position1.x+280,position1.y+250);
-                        SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
+                        if (change)
+                        {
+                            holdPiece(tetris);
+                            holdpiece = tetris->holdpiece;
+                            SDLdisplaypiece(screen,holdpiecebackground, kind, holdpiece, position1.x+280,position1.y+250);
+                            SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
+                            change = 0;
+                        }
+
                         break;
+                    case SDLK_ESCAPE: // Bouton ECHAP
+                    sdljeuLibere(&sdl);
+                    break;
                     default:
                     break;
                 }
@@ -499,7 +516,7 @@ void sdljeuInit(SDL *sdl)
 
        posx = getPosX(tetris->board->currentPiece);
        posy = getPosY(tetris->board->currentPiece);
-       if(isCurrentPieceMovable(tetris->board, posx, posy + 1) == FALSE && testFallPiece(tetris->board) == FALSE && temp == 2)
+       if(isCurrentPieceMovable(tetris->board, posx, posy + 1) == FALSE && testFallPiece(tetris->board) == FALSE && temp >= 2)
                {
                    /* Destruction des lignes et Calcul du score */
                    n_lines = destructLines(tetris->board);
@@ -578,6 +595,7 @@ void sdljeuInit(SDL *sdl)
                    gameStep(tetris);
                    nextpiece = getTetrisNextPiece(tetris);
                    SDLdisplaypiece(screen,nextpiecebackground, kind, nextpiece, position1.x+280,position1.y+50);
+                   change = 1;
                    }
                }
 
@@ -587,35 +605,6 @@ void sdljeuInit(SDL *sdl)
     }
     pause();
 
-    // -------------------- FREE AND QUIT -----------------------
-    SDL_FreeSurface(screen);
-    SDL_FreeSurface(screen2);
-    SDL_FreeSurface(gridge);
-    SDL_FreeSurface(*kind);
-    SDL_FreeSurface(nextpiecebackground);
-    SDL_FreeSurface(scorebackground);
-    SDL_FreeSurface(playerbackground);
-
-    SDL_FreeSurface(text);
-    SDL_FreeSurface(textgameover);
-
-    /* Fermeture des polices avant l'arrêt de la TTF
-    NB : Toutes les polices doivent être fermées */
-    TTF_CloseFont(font);
-
-    /* Fermeture et libération de system et des sons*/
-    FMOD_System_Close(system);
-    FMOD_System_Release(system);
-
-    FMOD_Sound_Release(explosion);
-    FMOD_Sound_Release(maintheme);
-    FMOD_Sound_Release(f_legendary1);
-    FMOD_Sound_Release(f_legendary2);
-    FMOD_Sound_Release(f_defeat);
-    FMOD_Sound_Release(f_unstoppable);
-
-    TTF_Quit(); // Arrêt de la TTF
-    SDL_Quit(); // Arrêt de la SDL (libération de la mémoire)
 
 }
 
@@ -628,7 +617,38 @@ void sdljeuBoucle(SDL *sdl)
 
 void sdljeuLibere(SDL *sdl)
 {
+        // -------------------- FREE AND QUIT -----------------------
+    int i=0;
+    SDL_FreeSurface(sdl->screen);
+    SDL_FreeSurface(sdl->screen2);
+    SDL_FreeSurface(sdl->gridge);
+    for (i=0;i<8;i++)
+    {
+        SDL_FreeSurface(sdl->kind[i]);
+    }
+    SDL_FreeSurface(sdl->nextpiecebackground);
+    SDL_FreeSurface(sdl->scorebackground);
+    SDL_FreeSurface(sdl->playerbackground);
 
+    SDL_FreeSurface(sdl->text);
+    SDL_FreeSurface(sdl->textgameover);
+
+    /* Fermeture des polices avant l'arrêt de la TTF
+    NB : Toutes les polices doivent être fermées */
+    TTF_CloseFont(sdl->font);
+
+    /* Fermeture et libération de system et des sons*/
+    FMOD_System_Close(sdl->system);
+    FMOD_System_Release(sdl->system);
+
+    FMOD_Sound_Release(sdl->explosion);
+    FMOD_Sound_Release(sdl->maintheme);
+    FMOD_Sound_Release(sdl->f_legendary1);
+    FMOD_Sound_Release(sdl->f_legendary2);
+    FMOD_Sound_Release(sdl->f_defeat);
+    FMOD_Sound_Release(sdl->f_unstoppable);
+
+    TTF_Quit(); // Arrêt de la TTF
     SDL_Quit(); // Arrêt de la SDL (libération de la mémoire)
 
 }
