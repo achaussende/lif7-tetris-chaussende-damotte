@@ -80,6 +80,7 @@ void floodFill(Board * board,int i, int j, int px, int py, int k, int o,
 
 void setTetrisBoard(Tetris * tetris, const Board * board)
 {
+
    tetris->board = board;
 }
 
@@ -548,7 +549,7 @@ void displayScore_recursion(const Node * node)
     if(node != NULL)
     {
         displayScore_recursion(node->right_child);
-        printf("%s  %u \n",node->value.name, node->value.score);
+        printf("%s  %u \n",node->value->name, node->value->score);
         displayScore_recursion(node->left_child);
     }
 
@@ -571,11 +572,11 @@ void openScoreData(Tree * ptree, const char filename[])
     FILE * f;
     f=fopen(filename, "r");
 
-    Player player;
+    Player * player;
 
     unsigned int nb_elem, score;
     int i;
-    char * nickname = NULL;
+    char * nickname[26];
 
     if(f == NULL)
     {
@@ -584,16 +585,13 @@ void openScoreData(Tree * ptree, const char filename[])
         assert(f);
     }
 
-    assert( fscanf( f , "PS \n%u \nEnd \n", &nb_elem ) == 1 );
+    assert( fscanf( f , "PS \n%u \n", &nb_elem ) == 1 );
 
-
-    initTree(ptree);
-
-    for(i = 0; i < ptree->nb_elements; i++)
+    for(i = 0; i < nb_elem; i++)
     {
-        assert(fscanf(f, "%s %u", nickname, &score) == 2 ||
+        assert(fscanf(f, "%s %u \n", &nickname, &score) == 2 ||
                 strlen(nickname) <= 25);
-        setTreeNb_Elements(ptree, nb_elem);
+        player = malloc(sizeof(Player));
         setName (player, nickname);
         setScore (player, score);
         insertPlayerInTree(ptree, player);
@@ -609,7 +607,7 @@ void saveScoreData_Node(const Node * pnode, FILE * f)
     if(pnode != NULL)
     {
         saveScoreData_Node(pnode->left_child, f);
-        fprintf(f, "%s %u \n", pnode->value.name, pnode->value.score);
+        fprintf(f, "%s %u \n", pnode->value->name, pnode->value->score);
         saveScoreData_Node(pnode->right_child, f);
     }
 }
@@ -642,8 +640,6 @@ void dropCurrentPiece(Board * board)
 {
     int x = getPosX(board->currentPiece);
     int y = getPosY(board->currentPiece);
-
-    int i, j;
 
     // Tant qu'on peut toujours bouger la pièce vers le bas
     while(isCurrentPieceMovable(board, x, y + 1) == TRUE)
@@ -706,13 +702,29 @@ void tetrisTestRegression()
     Tree * tree = (Tree *)malloc(sizeof(Tree));
     int i, j;*/
 
+
     Tetris * tetris;
     //Variables nécessaires pour le test sur les étapes du jeu
-    Piece * piece;
-    piece = createPiece(rand() % 7 , 0);
+    //Piece * piece;
+    //piece = createPiece(rand() % 7 , 0);
 
+    /* Variables nécessaires pour le fichier de scores */
+    char name[26] = "Adrien";
+    char name2[26] ="Alan";
+    Player * player;
+    player = createPlayer(name, 999999999);
 
-    /* Test : Etapes du jeu */
+    /* Test : Fichier de scores */
+    tetris = startTetris();
+
+    openScoreData(tetris->treescores, "scores.txt");
+
+    /*insertPlayerInTree(tetris->treescores, player);
+    player = createPlayer(name2, 500000);
+    insertPlayerInTree(tetris->treescores, player);
+    saveScoreData(tetris->treescores, "scores.txt");*/
+    displayScore(tetris->treescores);
+    /* Test : Etapes du jeu
 
     tetris = startTetris(); // Lancement du tetris
 
@@ -726,7 +738,7 @@ void tetrisTestRegression()
     dropCurrentPiece(tetris->board);
 
     /* Après pose de la currentPiece, la nextPiece devient la currentPiece
-       puis nouvelle nextPiece*/
+       puis nouvelle nextPiece
     gameStep(tetris);
 
     // Vérification que le gameStep marche bien
@@ -737,7 +749,7 @@ void tetrisTestRegression()
     printf("Next piece : \n kind = %u , orientation = %u \n",
             tetris->nextpiece->kind,
             tetris->nextpiece->orientation);
-
+    */
 
     // Premier Test
 
@@ -824,6 +836,6 @@ void tetrisTestRegression()
     printf("\n");
     printf("\n"); */
 
-    freeTetris(tetris);
-    printf("Libération de tetris et de tout ses champs ... OK\n");
+    //freeTetris(tetris);
+    //printf("Libération de tetris et de tout ses champs ... OK\n");
 }
