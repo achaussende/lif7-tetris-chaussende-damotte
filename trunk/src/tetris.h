@@ -1,3 +1,11 @@
+/**
+    \file [tetris.h]
+    \brief 	Contient la déclaration des fonctions, procédures, accesseurs et mutateurs, et la structure d'un tetris, module principal du jeu
+    \author {Damotte Alan, Chaussende Adrien}
+    \version 1.2
+    \date Avril-Mai 2013
+*/
+
 #ifndef TETRIS_H
 #define TETRIS_H
 #include "bool.h"

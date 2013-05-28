@@ -1,3 +1,11 @@
+/**
+    \file [board.c]
+    \brief 	Contient les fonctions, procédures, accesseurs et mutateurs nécessaires à la création d'une board
+    \author {Damotte Alan, Chaussende Adrien}
+    \version 1.0
+    \date Avril 2013
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
