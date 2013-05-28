@@ -7,15 +7,15 @@
 
 typedef struct Node
 {
-    Player value;
+    Player * value;
     struct Node * left_child;
     struct Node * right_child;
 }Node;
 
 /* ====== Node : Mutateurs & Accesseurs ======= */
 
-void setNodeValue (Node * node, const Player player);
-Player getNodeValue(const Node * node);
+void setNodeValue (Node * node, const Player * player);
+Player * getNodeValue(const Node * node);
 
 void setNodeLeft_Child(Node * node, const Node * pnode);
 Node * getNodeLeft_Child(const Node * node);
@@ -25,8 +25,8 @@ Node * getNodeRight_Child(const Node * node);
 
 /* ============= Node : Méthodes ============== */
 
-void initNode(Node * node, const Player player);
-Node * createNode(const Player player);
+void initNode(Node * node, const Player * player);
+Node * createNode(const Player * player);
 
 void freeNode(Node * node);
 
@@ -53,8 +53,8 @@ void initTree (Tree * tree);
 void freeTree_recursion(Node * node);
 void freeTree (Tree * tree);
 
-void insertPlayerInTree_recursion(Node * node, Player player);
-void insertPlayerInTree(Tree * tree, Player player);
+void insertPlayerInTree_recursion(Node ** node, Player * player);
+void insertPlayerInTree(Tree * tree, Player * player);
 
 void deleteTreeMin(Tree * tree);
 

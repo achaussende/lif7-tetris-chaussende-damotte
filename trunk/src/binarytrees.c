@@ -8,12 +8,12 @@
 
 /* ======== Mutateurs et Accesseurs ========== */
 
-void setNodeValue (Node * node, const Player player)
+void setNodeValue (Node * node, const Player * player)
 {
     node->value = player;
 }
 
-Player getNodeValue(const Node * node)
+Player * getNodeValue(const Node * node)
 {
     return node->value;
 }
@@ -60,11 +60,11 @@ unsigned int getTreeNb_Elements(const Tree * tree)
 
 /* ================ Méthodes ================= */
 
-void initNode(Node * node, const Player player)
+void initNode(Node * node, const Player * player)
 {
     /* Vérification fiche joueur valide */
 
-    assert(player.score >= 0 && strlen(player.name)>0);
+    assert(player->score >= 0 && strlen(player->name)>0);
 
     /* Initialisation */
 
@@ -73,7 +73,7 @@ void initNode(Node * node, const Player player)
     setNodeRight_Child(node, NULL);
 }
 
-Node * createNode(const Player player)
+Node * createNode(const Player * player)
 {
     Node * node = (Node *)malloc(sizeof(Node));
 
@@ -85,6 +85,7 @@ void freeNode(Node * node)
 {
     setNodeLeft_Child(node, NULL);
     setNodeRight_Child(node, NULL);
+    free(node->value);
     free(node);
 }
 
@@ -109,27 +110,27 @@ void freeTree (Tree * tree)
     freeTree_recursion(tree->root);
 }
 
-void insertPlayerInTree_recursion(Node * node, Player player)
+void insertPlayerInTree_recursion(Node ** node, Player * player)
 {
-    if(node == NULL)
+    if((*node) == NULL)
     {
-        node = createNode(player);
+        (*node) = createNode(player);
     }
     else
     {
-        if(player.score >= node->value.score)
+        if(player->score >= (*node)->value->score)
         {
-            insertPlayerInTree_recursion(node->right_child, player);
+            insertPlayerInTree_recursion(&((*node)->right_child), player);
         }
         else
         {
-            insertPlayerInTree_recursion(node->left_child, player);
+            insertPlayerInTree_recursion(&((*node)->left_child), player);
         }
     }
 }
-void insertPlayerInTree (Tree * tree, Player player)
+void insertPlayerInTree (Tree * tree, Player * player)
 {
-    insertPlayerInTree_recursion((*tree).root, player);
+    insertPlayerInTree_recursion(&tree->root, player);
     tree->nb_elements++;
 
     if(tree->nb_elements > 50)
