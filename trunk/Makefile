@@ -6,7 +6,7 @@ LIBS= -L./lib/FMOD/lib/ -lSDL -lSDL_ttf -lm -lfmodex
 OBJDIR=obj
 SRCDIR=src
 
-OBJ_FILES= $(OBJDIR)/main.o $(OBJDIR)/LoopTETRIS_SDL.o $(OBJDIR)/tetris.o $(OBJDIR)/board.o $(OBJDIR)/player.o $(OBJDIR)/piece.o $(OBJDIR)/binarytrees.o 
+OBJ_FILES= $(OBJDIR)/main.o $(OBJDIR)/LoopTETRIS_SDL.o $(OBJDIR)/tetris.o $(OBJDIR)/board.o $(OBJDIR)/player.o $(OBJDIR)/piece.o $(OBJDIR)/binarytrees.o $(OBJDIR)/node.o
 
 all: $(EXEC_NAME)
 

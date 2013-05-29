@@ -7,7 +7,7 @@
 $ make
 
 
-** Pour lancer le programme de test de régression
+** Pour lancer le jeu
 $ cd bin
 $ export LD_LIBRARY_PATH=.
 $ ./jeu
