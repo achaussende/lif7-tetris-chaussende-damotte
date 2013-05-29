@@ -1,3 +1,11 @@
+/**
+    \file [node.c]
+    \brief 	Contient les fonctions et structure pour les noeuds des arbres
+    \author {Damotte Alan, Chaussende Adrien}
+    \version 1.1
+    \date Mai 2013
+*/
+
 #include <stdlib.h>
 #include <stdio.h>
 
