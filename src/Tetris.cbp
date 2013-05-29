@@ -57,6 +57,10 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="node.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="node.h" />
 		<Unit filename="piece.c">
 			<Option compilerVar="CC" />
 		</Unit>
