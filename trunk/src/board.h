@@ -38,14 +38,14 @@ typedef struct
 /* Mutateurs & Accesseurs */
 
 /**
-    @fn setCurrentPiece
+
     @brief Mutateur de la piece
     @param une Board et une Piece
 */
 void setCurrentPiece (Board * board, const Piece * piece);
 
 /**
-    @fn getCurrentPiece
+
     @brief Assesseur de la piece
     @param une Board et une Piece
     @return une Piece
@@ -54,13 +54,13 @@ Piece * getCurrentPiece (const Board * board);
 
 /* Autres méthodes */
 /**
-    @fn initBoard
+
     @brief Initialise une Board
     @param une Board
 */
 void initBoard (Board * board);
 /**
-    @fn freeBoard
+
     @brief Free une Board
     @param une Board
 */

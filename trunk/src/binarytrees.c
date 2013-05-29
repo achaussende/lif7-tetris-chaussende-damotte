@@ -1,3 +1,10 @@
+/**
+    \file [binarytrees.c]
+    \brief 	Contient les fonctions et structures nécessaires aux arbres de scores
+    \author {Damotte Alan, Chaussende Adrien}
+    \version 1.1
+    \date Mars-Avril 2013
+*/
 #include <stdlib.h>
 #include <stdio.h>
 

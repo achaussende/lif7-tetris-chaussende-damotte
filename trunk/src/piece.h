@@ -33,14 +33,14 @@ typedef struct
 }Piece;
 
     /**
-        @fn initPiece
+
         @brief Procédure d'initialisation d'une piece
         @param une Piece, un entier kind, une Color, et entier orientation
     */
     void initPiece(Piece * piece, const unsigned int kind, const Color color, const unsigned int orientation);
 
     /**
-        @fn createPiece
+
         @brief Fonction de creation de Piece
         @param un entier kind, un entier orientation
         @return une Piece
@@ -48,21 +48,21 @@ typedef struct
     Piece * createPiece(const unsigned int kind, const unsigned int orientation);
 
     /**
-        @fn freePiece
+
         @brief Procédure de libération d'une piece
         @param une Piece
     */
     void freePiece(Piece * piece);
 
     /**
-        @fn setKind
+
         @brief Mutateur du kind de la piece
         @param une Piece et un entier kind
     */
     void setKind(Piece * piece,int kind);
 
     /**
-        @fn getKind
+
         @brief Assesseur du kind de la piece
         @param une Piece
         @return un entier
@@ -70,14 +70,14 @@ typedef struct
     int getKind(const Piece * piece);
 
     /**
-        @fn setOrientation
+
         @brief Mutateur de l'orientation de la piece
         @param une Piece et un entier orientation
     */
     void setOrientation(Piece * piece,int orientation);
 
     /**
-        @fn getOrientation
+
         @brief Assesseur de l'orientation de la piece
         @param une Piece
         @return un entier
@@ -85,14 +85,14 @@ typedef struct
     int getOrientation(const Piece * piece);
 
     /**
-        @fn setColor
+
         @brief Mutateur de la couleur de la piece
         @param une Piece et une Color
     */
     void setColor(Piece * piece,const Color color);
 
     /**
-        @fn getColor
+
         @brief Assesseur de la couleur de la piece
         @param une Piece
         @return une Color
@@ -100,14 +100,14 @@ typedef struct
     Color getColor(const Piece * piece);
 
     /**
-        @fn setPosX
+
         @brief Mutateur de la position x de la piece
         @param une Piece et un entier
     */
     void setPosX(Piece * piece,const int x);
 
     /**
-        @fn getPosX
+
         @brief Assesseur de la position x de la piece
         @param une Piece
         @return un entier
@@ -115,14 +115,14 @@ typedef struct
     int getPosX(const Piece * piece);
 
     /**
-        @fn setPosY
+
         @brief Mutateur de la position y de la piece
         @param une Piece et un entier
     */
     void setPosY(Piece * piece,const int y);
 
     /**
-        @fn getPosY
+
         @brief Assesseur de la position y de la piece
         @param une Piece
         @return un entier
