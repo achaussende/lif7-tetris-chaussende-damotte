@@ -1,3 +1,10 @@
+/**
+    \file [player.c]
+    \brief 	Contient les fonctions, procédures d'initialisation d'un nouveau joueur
+    \author {Damotte Alan, Chaussende Adrien}
+    \version 0.1
+    \date Mars 2013
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>

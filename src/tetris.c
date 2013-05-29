@@ -1,3 +1,10 @@
+/**
+    \file [tetris.c]
+    \brief 	Contient les fonctions, procédures, accesseurs et mutateurs du tetris
+    \author {Damotte Alan, Chaussende Adrien}
+    \version 2.1
+    \date Avril-Mai 2013
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
