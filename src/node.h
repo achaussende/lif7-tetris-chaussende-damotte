@@ -1,3 +1,11 @@
+/**
+    \file [node.h]
+    \brief 	Contient la déclaration des fonctions et structure pour les noeuds des arbres
+    \author {Damotte Alan, Chaussende Adrien}
+    \version 1.1
+    \date Mai 2013
+*/
+
 #ifndef NODE_H
 #define NODE_H
 
