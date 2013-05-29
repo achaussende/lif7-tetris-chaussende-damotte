@@ -8,9 +8,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <assert.h> /* Pour la fonction assert */
-#include <string.h> /* Pour les fonctions sur les chaines de caractères */
-
 #include "binarytrees.h"
 
 /* ======== Mutateurs et Accesseurs ========== */
