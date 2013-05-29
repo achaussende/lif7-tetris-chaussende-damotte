@@ -1,6 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include <assert.h> /* Pour la fonction assert */
+#include <string.h> /* Pour les fonctions sur les chaines de caractères */
+
 #include "node.h"
 
 /* ======== Mutateurs et Accesseurs ========== */
