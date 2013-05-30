@@ -719,17 +719,22 @@ void tetrisTestRegression()
     char name[26] = "Adrien";
     char name2[26] ="Alan";
     Player * player;
-    player = createPlayer(name, 999999999);
+
+    int i;
 
     /* Test : Fichier de scores */
     tetris = startTetris();
 
-    openScoreData(tetris->treescores, "scores.txt");
+    for(i=1;i<=10;i++)
+    {
+        insertPlayerInTree(tetris->treescores, createPlayer(name2,i*100000));
+    }
 
-    /*insertPlayerInTree(tetris->treescores, player);
-    player = createPlayer(name2, 500000);
+    player = createPlayer(name, 1100000);
     insertPlayerInTree(tetris->treescores, player);
-    saveScoreData(tetris->treescores, "scores.txt");*/
+    //openScoreData(tetris->treescores, "../data/scores.txt");
+    //printf("Nb_elem : %u\n", tetris->treescores->nb_elements);
+    //saveScoreData(tetris->treescores, "../data/scores.txt");
     displayScore(tetris->treescores);
     /* Test : Etapes du jeu
 

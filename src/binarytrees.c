@@ -77,12 +77,14 @@ void insertPlayerInTree (Tree * tree, Player * player)
     insertPlayerInTree_recursion(&tree->root, player);
     tree->nb_elements++;
 
-    if(tree->nb_elements > 50)
+    if(tree->nb_elements > 10)
     {
         deleteTreeMin(tree);
         tree->nb_elements--;
     }
 }
+
+/* deleteTreeMin : on suppose l'arbre avec le nombre maximal d'éléments */
 
 void deleteTreeMin(Tree * tree)
 {
@@ -90,23 +92,30 @@ void deleteTreeMin(Tree * tree)
     n = tree->root;
 
     Node * p;
-    p = NULL;
+    p = n->left_child;
 
-
-    while(n->left_child != NULL)
+    if(p == NULL)
     {
-        n = n->left_child;
-    }
-
-    if(n->right_child == NULL)
-    {
-        freeNode(n);
+        tree->root = n->right_child;
+        free(n);
     }
     else
     {
-        p = n->right_child;
-        n = p;
-        freeNode(p);
+        while(p->left_child != NULL)
+        {
+            n = n->left_child;
+            p = p->left_child;
+        }
 
+        if(p->right_child == NULL)
+        {
+            free(p);
+        }
+        else
+        {
+            n->left_child = p->right_child;
+            free(p);
+        }
     }
+
 }
