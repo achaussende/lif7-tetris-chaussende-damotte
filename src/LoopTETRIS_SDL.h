@@ -33,14 +33,18 @@ typedef struct
     SDL_Surface *playerbackground;
     SDL_Surface *text;
     SDL_Surface *textgameover;
+    SDL_Surface * textpause;
+    SDL_Surface * tuto;
+    SDL_Surface * tuto2;
 
-    SDL_Color colorBlack;
-    SDL_Color colorWhite;
+    SDL_Color *colorBlack;
+    SDL_Color *colorWhite;
 
     SDL_Rect position1;
     SDL_Rect positionpiece;
 
     TTF_Font * font;
+    TTF_Font * font1;
 
 	FMOD_SYSTEM *system;
     FMOD_SOUND *explosion;
