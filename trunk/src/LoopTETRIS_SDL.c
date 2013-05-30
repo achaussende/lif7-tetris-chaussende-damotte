@@ -237,6 +237,9 @@ void sdljeuInit(SDL *sdl)
         // Surfaces Textes
     SDL_Surface * text = NULL;
     SDL_Surface * textgameover = NULL;
+    SDL_Surface * textpause = NULL;
+    SDL_Surface * tuto = NULL;
+    SDL_Surface * tuto2 = NULL;
 
         // Rectangle de position
     SDL_Rect position1;
@@ -357,6 +360,9 @@ void sdljeuInit(SDL *sdl)
     TTF_Font * font = NULL ;
     font = TTF_OpenFont("../data/gameover.ttf", 65);
 
+    TTF_Font * font1 = NULL ;
+    font1 = TTF_OpenFont("../data/gameover.ttf", 30);
+
     /* Couleurs pour les polices TTF */
     SDL_Color colorBlack = {0 ,0 ,0};
     SDL_Color colorWhite = {255, 255, 255};
@@ -392,26 +398,15 @@ void sdljeuInit(SDL *sdl)
     srand(time(NULL));
 
     initBoard(board);
-    printf("Création de la board + initialisation ... OK \n");
 
-    piece = createPiece(rand() % 7, 0);
-    //nextpiece = createPiece(rand() % 7, 0);
-
-     printf("Current piece : \n kind = %u , orientation = %u \n",
-          tetris->board->currentPiece->kind,
-          tetris->board->currentPiece->orientation);
-    printf("Next piece : \n kind = %u , orientation = %u \n",
-          tetris->nextpiece->kind,
-          tetris->nextpiece->orientation);
-    /*printf("Création d'une piece de type : %u et d'orientation : %u \n",
-            piece->kind + 1, piece->orientation + 1);*/
-    /*tetris = createTetris(board, piece, tree);*/
-    printf("Création du Tetris ... OK \n");
-    //newPiece(tetris->board, piece);
     nextpiece = getTetrisNextPiece(tetris);
     SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
     SDLdisplaypiece(screen,nextpiecebackground, kind, nextpiece, position1.x+280,position1.y+50);
     SDL_apply_surface(holdpiecebackground,screen, position1.x+280,position1.y+250);
+    tuto = TTF_RenderText_Blended(font1, "P = Pause", colorWhite);
+    tuto2 = TTF_RenderText_Blended(font1, "C = Hold a line", colorWhite);
+    SDL_apply_surface(tuto,screen, 50,500); // Blit de text
+    SDL_apply_surface(tuto2,screen, 50,520); // Blit de text
 
 
     //--------------------- BOUCLE -----------------------
@@ -419,12 +414,13 @@ void sdljeuInit(SDL *sdl)
             // Dans la fonction sdljeuboucle ? (à mettre en anglais aussi)
 
     SDL_Event event;
-    SDL_Event newevent;
+    /*SDL_Event pauseevent;*/
     int tempsPrecedent = 0, tempsActuel = 0;
 
     int next = 1;
-    int change;
+    int change,pausebutton;
     change = 1;
+    pausebutton=0;
      while (next)
     {
         //SDL_WaitEvent(&event);
@@ -438,34 +434,45 @@ void sdljeuInit(SDL *sdl)
                 switch(event.key.keysym.sym)
                 {
                     case SDLK_UP: // Flèche haut
+                    if (pausebutton==0){
                         rotationPiece(tetris->board);
                         SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
                         temp = 0;
+                    }
                         break;
 
                     case SDLK_DOWN: // Flèche bas
+                    if (pausebutton==0){
                         moveCurrentPieceDown(tetris->board);
                         SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
+                    }
                         break;
 
                     case SDLK_RIGHT: // Flèche droite
+                    if (pausebutton==0){
                         moveCurrentPieceRight(tetris->board);
                         SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
                         temp = 0;
+                    }
                         break;
 
                     case SDLK_LEFT: // Flèche gauche
+                    if (pausebutton==0){
                         moveCurrentPieceLeft(tetris->board);
                         SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
                         temp = 0;
+                    }
                         break;
 
                     case SDLK_SPACE: // Barre espace
+                    if (pausebutton==0){
                         dropCurrentPiece(tetris->board);
                         SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
                         temp = 2;
                         break;
+                    }
                     case SDLK_c: // Touche c
+                    if (pausebutton==0){
                         if (change)
                         {
                             holdPiece(tetris);
@@ -474,10 +481,18 @@ void sdljeuInit(SDL *sdl)
                             SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
                             change = 0;
                         }
+                    }
 
                         break;
+                    case SDLK_p: // Touche p
+                            if(pausebutton==0)
+                                pausebutton=1;
+                            else if(pausebutton==1)
+                                pausebutton=0;
+                        break;
+
                     case SDLK_ESCAPE: // Bouton ECHAP
-                    sdljeuLibere(&sdl);
+                    sdljeuLibere(sdl);
                     break;
                     default:
                     break;
@@ -494,23 +509,29 @@ void sdljeuInit(SDL *sdl)
 
         //-------------------------------------------------------------
         tempsActuel = SDL_GetTicks();
-
-        if (tempsActuel - tempsPrecedent > 1000-(10*destructlines)) /* Si 1000 ms se sont écoulées depuis le dernier tour de boucle */
+        if (pausebutton==0)
         {
-            moveCurrentPieceDown(tetris->board);
-            SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
-            tempsPrecedent = tempsActuel; /* Le temps "actuel" devient le temps "precedent" pour nos futurs calculs */
-            temp++;
+            if (tempsActuel - tempsPrecedent > 1000-(10*destructlines)) /* Si 1000 ms se sont écoulées depuis le dernier tour de boucle */
+            {
+                moveCurrentPieceDown(tetris->board);
+                SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
+                tempsPrecedent = tempsActuel; /* Le temps "actuel" devient le temps "precedent" pour nos futurs calculs */
+                temp++;
 
-            /*posx = getPosX(tetris->board->currentPiece);
-            posy = getPosY(tetris->board->currentPiece);
-            if(isCurrentPieceMovable(tetris->board, posx, posy + 1) == FALSE && testFallPiece(tetris->board) == FALSE)
-               {
-                   destructlines = destructlines + destructLines(tetris->board);
-                   gameStep(tetris);
-               }*/
+                /*posx = getPosX(tetris->board->currentPiece);
+                posy = getPosY(tetris->board->currentPiece);
+                if(isCurrentPieceMovable(tetris->board, posx, posy + 1) == FALSE && testFallPiece(tetris->board) == FALSE)
+                   {
+                       destructlines = destructlines + destructLines(tetris->board);
+                       gameStep(tetris);
+                   }*/
+            }
         }
-
+        else
+        {
+          textpause = TTF_RenderText_Blended(font, "PAUSE", colorWhite);
+          SDL_apply_surface(textpause,screen, 460, 275); // Blit de text
+        }
         /* Après pose de la currentPiece, la nextPiece devient la currentPiece
        puis nouvelle nextPiece*/
 
@@ -632,10 +653,14 @@ void sdljeuLibere(SDL *sdl)
 
     SDL_FreeSurface(sdl->text);
     SDL_FreeSurface(sdl->textgameover);
+    SDL_FreeSurface(sdl->tuto);
+    SDL_FreeSurface(sdl->tuto2);
+    SDL_FreeSurface(sdl->textpause);
 
     /* Fermeture des polices avant l'arrêt de la TTF
     NB : Toutes les polices doivent être fermées */
     TTF_CloseFont(sdl->font);
+    TTF_CloseFont(sdl->font1);
 
     /* Fermeture et libération de system et des sons*/
     FMOD_System_Close(sdl->system);
@@ -671,6 +696,8 @@ void pause()
         switch(event.type)
         {
             case SDL_QUIT:
+                continuer = 0;
+            case SDLK_p:
                 continuer = 0;
         }
     }

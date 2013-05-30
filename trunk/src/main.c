@@ -18,10 +18,10 @@
 int main()
 {
     SDL sdl;
-    sdltestRegression(&sdl);
-    /*sdljeuInit(&sdl);*/
-    /*sdljeuBoucle(&sdl);*/
-    /*sdljeuLibere(&sdl);*/
+    //sdltestRegression(&sdl);
+    sdljeuInit(&sdl);
+    sdljeuBoucle(&sdl);
+    sdljeuLibere(&sdl);
 
     /*tetrisTestRegression();*/
 
