@@ -350,10 +350,10 @@ void sdljeuInit(SDL *sdl)
     SDL_apply_surface(playerbackground,screen, position1.x-177, position1.y+19);
     SDL_WM_SetCaption("LegendaryTetris", NULL);
 
-    SDL_Rect positionpiece;
+    /*SDL_Rect positionpiece;
 
     positionpiece.x = position1.x+(5*20);
-    positionpiece.y = position1.y;
+    positionpiece.y = position1.y;*/
 
     /* Variables pour le TTF */
 
@@ -364,16 +364,16 @@ void sdljeuInit(SDL *sdl)
     font1 = TTF_OpenFont("../data/gameover.ttf", 30);
 
     /* Couleurs pour les polices TTF */
-    SDL_Color colorBlack = {0 ,0 ,0};
+    /* colorBlack = {0 ,0 ,0};*/
     SDL_Color colorWhite = {255, 255, 255};
 
     /* Variables pour le Tetris */
 
     Board * board = (Board *)malloc(sizeof(Board));
-    Piece * piece = NULL;
+    /*Piece * piece = NULL;*/
     Piece * nextpiece = NULL;
     Piece * holdpiece = NULL;
-    Tree * tree = (Tree *)malloc(sizeof(Tree));
+    /*Tree * tree = (Tree *)malloc(sizeof(Tree));*/
     Tetris * tetris;
     tetris = startTetris(); // Lancement du tetris
 
@@ -414,13 +414,14 @@ void sdljeuInit(SDL *sdl)
             // Dans la fonction sdljeuboucle ? (à mettre en anglais aussi)
 
     SDL_Event event;
-    /*SDL_Event pauseevent;*/
+    SDL_Event newevent;
     int tempsPrecedent = 0, tempsActuel = 0;
 
     int next = 1;
-    int change,pausebutton;
+    int change,pausebutton,endgame;
     change = 1;
     pausebutton=0;
+    endgame=0;
      while (next)
     {
         //SDL_WaitEvent(&event);
@@ -580,8 +581,9 @@ void sdljeuInit(SDL *sdl)
                     //TTF_RenderText_Shaded(font, s_score, colorWhite); peut aussi marcher comme sur fond uni
                     if(testGameOver(tetris->board) == TRUE)
                     {
+                        printf("je suis passé ici");
                         next=0;
-
+                        endgame=1;
                         FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE,
                                               f_defeat, 0, NULL);
                         textgameover = TTF_RenderText_Blended(font, "GAME OVER ! TRY AGAIN ? Y/N", colorWhite);
@@ -623,6 +625,31 @@ void sdljeuInit(SDL *sdl)
         SDL_Flip(screen);
         SDL_apply_surface(scorebackground,screen, position1.x-177, position1.y+84);
         SDL_apply_surface(text,screen, position1.x-172, position1.y+100); // Blit de text
+    }
+    while (endgame)
+    {
+        SDL_WaitEvent(&newevent);
+        //if(SDL_PollEvent(&event))
+        switch(newevent.type)
+        {
+            case SDL_QUIT:
+                endgame = 0;
+                break;
+            case SDL_KEYUP:
+                switch(newevent.key.keysym.sym)
+                {
+                    case SDLK_y: // Touche y
+                        sdljeuInit(sdl);
+                    break;
+
+                    case SDLK_n: // Touche n
+                            sdljeuLibere(sdl);
+                    break;
+
+                    default:
+                    break;
+                }
+        }
     }
     pause();
 
