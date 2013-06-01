@@ -240,6 +240,8 @@ void sdljeuInit(SDL *sdl)
     SDL_Surface * textpause = NULL;
     SDL_Surface * tuto = NULL;
     SDL_Surface * tuto2 = NULL;
+    SDL_Surface * textplayername = NULL;
+    SDL_Surface * playername = NULL;
 
         // Rectangle de position
     SDL_Rect position1;
@@ -363,6 +365,9 @@ void sdljeuInit(SDL *sdl)
     TTF_Font * font1 = NULL ;
     font1 = TTF_OpenFont("../data/gameover.ttf", 30);
 
+    TTF_Font * font2 = NULL ;
+    font2 = TTF_OpenFont("../data/gameover.ttf", 30);
+
     /* Couleurs pour les polices TTF */
     /* colorBlack = {0 ,0 ,0};*/
     SDL_Color colorWhite = {255, 255, 255};
@@ -376,6 +381,8 @@ void sdljeuInit(SDL *sdl)
     /*Tree * tree = (Tree *)malloc(sizeof(Tree));*/
     Tetris * tetris;
     tetris = startTetris(); // Lancement du tetris
+    Player * player;
+
 
     int destructlines;
     destructlines = 0;
@@ -408,6 +415,60 @@ void sdljeuInit(SDL *sdl)
     SDL_apply_surface(tuto,screen, 50,500); // Blit de text
     SDL_apply_surface(tuto2,screen, 50,520); // Blit de text
 
+    /* ------------ Boucle de nom de joueur -------------- */
+    textplayername = TTF_RenderText_Blended(font, "Player Name ?", colorWhite);
+    SDL_apply_surface(textplayername,screen, 420, 275); // Blit de text
+
+    int nbLetters = 1;
+    char *playername1;
+    playername1 = (char*)calloc(nbLetters,sizeof(char));
+    playername1[nbLetters-1] = '\0';
+    int begin=1;
+
+    SDL_Event beginevent;
+    while(begin) {
+        SDL_WaitEvent(&beginevent);
+        switch(beginevent.type)
+        {
+            case SDL_QUIT:
+            begin = 0;
+            break;
+
+            case SDL_KEYDOWN:
+            if(beginevent.key.keysym.sym == SDLK_RETURN) {
+            begin= 0;
+
+            }
+
+            else if((beginevent.key.keysym.sym == SDLK_BACKSPACE) && (nbLetters > 1)) {
+            nbLetters--;
+            playername1=(char*)realloc(playername1,nbLetters*sizeof(char));
+            playername1[nbLetters-1] = '\0';
+            playername = TTF_RenderText_Blended(font, playername1, colorWhite);
+            SDL_apply_surface(playername,screen, 420, 300); // Blit de text
+            }
+
+            else {
+            if(beginevent.key.keysym.sym != SDLK_BACKSPACE) {
+            playername1 = (char*)realloc(playername1,(nbLetters + 1)*sizeof(char));
+            playername1[nbLetters-1] = beginevent.key.keysym.sym;
+            playername1[nbLetters] = '\0';
+            nbLetters++;
+      }
+    }
+            playername = TTF_RenderText_Blended(font, playername1, colorWhite);
+            SDL_apply_surface(playername,screen, 420, 300); // Blit de text
+
+      SDL_Flip(screen);
+
+    }
+  }
+  createPlayer(playername1,score);
+  playername = TTF_RenderText_Blended(font2, playername1, colorWhite);
+  SDL_apply_surface(playername,screen, position1.x-172, position1.y+40); // Blit de text
+
+
+    /* Fin boucle nom de joueur */
 
     //--------------------- BOUCLE -----------------------
 
@@ -581,7 +642,7 @@ void sdljeuInit(SDL *sdl)
                     //TTF_RenderText_Shaded(font, s_score, colorWhite); peut aussi marcher comme sur fond uni
                     if(testGameOver(tetris->board) == TRUE)
                     {
-                        printf("je suis passé ici");
+
                         next=0;
                         endgame=1;
                         FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE,
@@ -660,11 +721,14 @@ void sdljeuLibere(SDL *sdl)
     SDL_FreeSurface(sdl->tuto);
     SDL_FreeSurface(sdl->tuto2);
     SDL_FreeSurface(sdl->textpause);
+    SDL_FreeSurface(sdl->textplayername);
+    SDL_FreeSurface(sdl->playername);
 
     /* Fermeture des polices avant l'arrêt de la TTF
     NB : Toutes les polices doivent être fermées */
     TTF_CloseFont(sdl->font);
     TTF_CloseFont(sdl->font1);
+    TTF_CloseFont(sdl->font2);
 
     /* Fermeture et libération de system et des sons*/
     FMOD_System_Close(sdl->system);
