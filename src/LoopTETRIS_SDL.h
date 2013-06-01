@@ -37,7 +37,6 @@ typedef struct
 	SDL_Surface * screen2;
 	SDL_Surface * piece;
 	SDL_Surface * gridge;
-	SDL_Surface * score;
 	SDL_Surface * kind[7];
 	SDL_Surface * nextpiecebackground;
     SDL_Surface * holdpiecebackground;
