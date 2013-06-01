@@ -608,6 +608,7 @@ void sdljeuInit(SDL *sdl)
 
                     case SDLK_ESCAPE: // Bouton ECHAP
                     sdljeuLibere(sdl);
+                    next = 0;
                     break;
 
                     default:
@@ -777,7 +778,7 @@ void sdljeuBoucle(SDL *sdl)
 void sdljeuLibere(SDL *sdl)
 {
     // -------------------- FREE AND QUIT -----------------------
-    int i=0;
+    int i;
 
     SDL_FreeSurface(sdl->gridge);
     for (i=0;i<7;i++)
@@ -806,15 +807,18 @@ void sdljeuLibere(SDL *sdl)
     TTF_CloseFont(sdl->font2);
 
     /* Fermeture et libération de system et des sons*/
-    FMOD_System_Close(sdl->system);
-    FMOD_System_Release(sdl->system);
+
 
     FMOD_Sound_Release(sdl->explosion);
-    FMOD_Sound_Release(sdl->maintheme);
+
     FMOD_Sound_Release(sdl->f_legendary1);
     FMOD_Sound_Release(sdl->f_legendary2);
     FMOD_Sound_Release(sdl->f_defeat);
     FMOD_Sound_Release(sdl->f_unstoppable);
+    FMOD_Sound_Release(sdl->maintheme);
+
+    FMOD_System_Close(sdl->system);
+    FMOD_System_Release(sdl->system);
 
     TTF_Quit(); // Arrêt de la TTF
     SDL_Quit(); // Arrêt de la SDL (libération de la mémoire)
