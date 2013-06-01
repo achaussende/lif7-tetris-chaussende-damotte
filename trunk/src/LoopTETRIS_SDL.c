@@ -751,6 +751,7 @@ void sdljeuInit(SDL *sdl)
                 switch(newevent.key.keysym.sym)
                 {
                     case SDLK_y: // Touche y
+                        FMOD_Sound_Release(sdl->maintheme);
                         sdljeuInit(sdl);
                     break;
 
