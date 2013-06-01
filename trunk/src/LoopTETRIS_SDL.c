@@ -357,8 +357,8 @@ void sdljeuInit(SDL *sdl)
     sdl->screen2 = SDL_load_image("../data/screen.bmp");
     sdl->nextpiecebackground = SDL_load_image("../data/nextpiece.bmp");
     sdl->holdpiecebackground = SDL_load_image("../data/nextpiece.bmp");
-    sdl->scorebackground = SDL_load_image("../data/score.bmp");
-    sdl->playerbackground = SDL_load_image("../data/score.bmp");
+    sdl->scorebackground = SDL_load_image("../data/score2.bmp");
+    sdl->playerbackground = SDL_load_image("../data/score2.bmp");
 
     SDL_WM_SetCaption("LegendaryTetris", NULL);
 
@@ -366,7 +366,7 @@ void sdljeuInit(SDL *sdl)
 
     sdl->font = TTF_OpenFont("../data/gameover.ttf", 65);
     sdl->font1 = TTF_OpenFont("../data/gameover.ttf", 30);
-    sdl->font2 = TTF_OpenFont("../data/gameover.ttf", 30);
+    sdl->font2 = TTF_OpenFont("../data/gameover.ttf", 40);
 
     /* Couleurs pour les polices TTF */
     SDL_Color colorWhite = {255, 255, 255};
@@ -445,14 +445,18 @@ void sdljeuInit(SDL *sdl)
 
             else
             {
+
                 if(beginevent.key.keysym.sym != SDLK_BACKSPACE)
                 {
-                    SDL_FillRect(sdl->screen,&(sdl->positionName),SDL_MapRGB(sdl->screen->format,0,0,0));
-                    SDL_Flip(sdl->screen);
-                    playername1 = (char*)realloc(playername1,(nbLetters + 1)*sizeof(char));
-                    playername1[nbLetters-1] = beginevent.key.keysym.sym;
-                    playername1[nbLetters] = '\0';
-                    nbLetters++;
+                    if(nbLetters<26)
+                    {
+                        SDL_FillRect(sdl->screen,&(sdl->positionName),SDL_MapRGB(sdl->screen->format,0,0,0));
+                        SDL_Flip(sdl->screen);
+                        playername1 = (char*)realloc(playername1,(nbLetters + 1)*sizeof(char));
+                        playername1[nbLetters-1] = beginevent.key.keysym.sym;
+                        playername1[nbLetters] = '\0';
+                        nbLetters++;
+                    }
                 }
             }
             SDL_FillRect(sdl->screen,&(sdl->positionName),SDL_MapRGB(sdl->screen->format,0,0,0));
@@ -471,9 +475,9 @@ void sdljeuInit(SDL *sdl)
 
     SDL_apply_surface(sdl->gridge,sdl->screen, sdl->position1.x,
                       sdl->position1.y);
-    SDL_apply_surface(sdl->scorebackground,sdl->screen, sdl->position1.x-177,
-                      sdl->position1.y+84);
-    SDL_apply_surface(sdl->playerbackground,sdl->screen, sdl->position1.x-177,
+    SDL_apply_surface(sdl->scorebackground,sdl->screen, sdl->position1.x-307,
+                      sdl->position1.y+82);
+    SDL_apply_surface(sdl->playerbackground,sdl->screen, sdl->position1.x-307,
                       sdl->position1.y+19);
 
     nextpiece = getTetrisNextPiece(sdl->tetris);
@@ -496,7 +500,7 @@ void sdljeuInit(SDL *sdl)
                                              colorWhite);
     /* Blit du nom du joueur */
     SDL_apply_surface(sdl->playername, sdl->screen,
-                      sdl->position1.x-172, sdl->position1.y+40);
+                      sdl->position1.x-295, sdl->position1.y+40);
 
 
     /* Fin boucle nom de joueur */
@@ -724,9 +728,9 @@ void sdljeuInit(SDL *sdl)
 
         SDL_Flip(sdl->screen);
         SDL_apply_surface(sdl->scorebackground, sdl->screen,
-                          sdl->position1.x-177, sdl->position1.y+84);
+                          sdl->position1.x-307, sdl->position1.y+82);
         /* Blit de text */
-        SDL_apply_surface(sdl->text, sdl->screen, sdl->position1.x-172,
+        SDL_apply_surface(sdl->text, sdl->screen, sdl->position1.x-295,
                           sdl->position1.y+100);
     }
 
