@@ -732,16 +732,12 @@ void sdljeuBoucle(SDL *sdl)
                 switch(newevent.key.keysym.sym)
                 {
                     case SDLK_y: // Touche y
-<<<<<<< .mine
+
                     FMOD_Sound_Release(sdl->maintheme);
                     sdljeuLibere(sdl);
                     sdljeuInit(sdl);
                     sdljeuBoucle(sdl);
 
-=======
-                        FMOD_Sound_Release(sdl->maintheme);
-                        sdljeuInit(sdl);
->>>>>>> .r118
                     break;
 
                     case SDLK_n: // Touche n
