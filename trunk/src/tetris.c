@@ -337,6 +337,7 @@ void freeTetris(Tetris * tetris)
 {
     freeBoard(tetris->board);
     freePiece(tetris->nextpiece);
+    freePiece(tetris->holdpiece);
     freeTree(tetris->treescores);
     free(tetris);
 }
@@ -664,7 +665,7 @@ Bool testGameOver(Board * board)
 
     for(i = 0; i < 10; ++i)
     {
-        if(board->gridge[0][i] != FREE) // Si il y a un bloc sur la première ligne de l'aire
+        if(board->gridge[1][i] != FREE) // Si il y a un bloc sur la première ligne de l'aire
         {
             return TRUE; // C'est que la partie est finie
         }
@@ -687,10 +688,11 @@ Tetris * startTetris()
     Piece * holdpiece;
     Tetris * tetris;
 
-    piece = createPiece(rand()%7, 0); //piece "tampon"
+    /*piece = createPiece(rand()%7, 0) ; //currentPiece */
     holdpiece = NULL;
+
     initBoard(board); // création ...
-    newPiece(board, piece); // de board
+    newPiece(board, createPiece(rand()%7, 0)); // de board
     initTree(tree);
 
     piece = createPiece(rand()%7, 0); //nextpiece
@@ -716,13 +718,13 @@ void tetrisTestRegression()
     //piece = createPiece(rand() % 7 , 0);
 
     /* Variables nécessaires pour le fichier de scores */
-    char name[26] = "Adrien";
+    /*char name[26] = "Adrien";
     char name2[26] ="Alan";
     Player * player;
 
-    int i;
+    int i; */
 
-    /* Test : Fichier de scores */
+    /* Test : Fichier de scores
     tetris = startTetris();
 
     for(i=1;i<=10;i++)
@@ -735,8 +737,9 @@ void tetrisTestRegression()
     //openScoreData(tetris->treescores, "../data/scores.txt");
     //printf("Nb_elem : %u\n", tetris->treescores->nb_elements);
     //saveScoreData(tetris->treescores, "../data/scores.txt");
-    displayScore(tetris->treescores);
-    /* Test : Etapes du jeu
+    displayScore(tetris->treescores);*/
+
+    /* Test : Etapes du jeu */
 
     tetris = startTetris(); // Lancement du tetris
 
@@ -750,7 +753,7 @@ void tetrisTestRegression()
     dropCurrentPiece(tetris->board);
 
     /* Après pose de la currentPiece, la nextPiece devient la currentPiece
-       puis nouvelle nextPiece
+       puis nouvelle nextPiece */
     gameStep(tetris);
 
     // Vérification que le gameStep marche bien
@@ -761,7 +764,7 @@ void tetrisTestRegression()
     printf("Next piece : \n kind = %u , orientation = %u \n",
             tetris->nextpiece->kind,
             tetris->nextpiece->orientation);
-    */
+    freeTetris(tetris);
 
     // Premier Test
 

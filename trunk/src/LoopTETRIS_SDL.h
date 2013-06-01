@@ -20,42 +20,43 @@
 */
 typedef struct
 {
-	Tetris tetris;
-	SDL_Surface* screen;
-	SDL_Surface* screen2;
-	SDL_Surface* piece;
-	SDL_Surface* gridge;
-	SDL_Surface* score;
-	SDL_Surface* kind[8];
-	SDL_Surface *nextpiecebackground;
-    SDL_Surface *holdpiecebackground;
-    SDL_Surface *scorebackground;
-    SDL_Surface *playerbackground;
-    SDL_Surface *text;
-    SDL_Surface *textgameover;
+
+	FMOD_SYSTEM * system;
+    FMOD_SOUND * explosion;
+    FMOD_SOUND * maintheme;
+    FMOD_SOUND * f_legendary1;
+    FMOD_SOUND * f_legendary2;
+    FMOD_SOUND * f_defeat;
+    FMOD_SOUND * f_unstoppable;
+
+    SDL_Rect position1;
+    SDL_Rect positionpiece;
+    SDL_Rect positionName;
+
+	SDL_Surface * screen;
+	SDL_Surface * screen2;
+	SDL_Surface * piece;
+	SDL_Surface * gridge;
+	SDL_Surface * score;
+	SDL_Surface * kind[7];
+	SDL_Surface * nextpiecebackground;
+    SDL_Surface * holdpiecebackground;
+    SDL_Surface * scorebackground;
+    SDL_Surface * playerbackground;
+    SDL_Surface * text;
+    SDL_Surface * textgameover;
     SDL_Surface * textpause;
     SDL_Surface * tuto;
     SDL_Surface * tuto2;
     SDL_Surface * textplayername;
     SDL_Surface * playername;
 
-    SDL_Color *colorBlack;
-    SDL_Color *colorWhite;
-
-    SDL_Rect position1;
-    SDL_Rect positionpiece;
+	Tetris * tetris;
 
     TTF_Font * font;
     TTF_Font * font1;
     TTF_Font * font2;
 
-	FMOD_SYSTEM *system;
-    FMOD_SOUND *explosion;
-    FMOD_SOUND *maintheme;
-    FMOD_SOUND *f_legendary1;
-    FMOD_SOUND *f_legendary2;
-    FMOD_SOUND *f_defeat;
-    FMOD_SOUND *f_unstoppable;
 }SDL;
 
 /**

@@ -70,7 +70,7 @@ SDL_Surface* SDL_load_image(const char* filename){
 
 
 
-SDL_Surface* SDLdisplayscreen(SDL_Surface* screen, SDL_Surface* gridge, SDL_Surface* kind[8], Tetris* tetris, int positionX, int positionY)
+SDL_Surface* SDLdisplayscreen(SDL_Surface* screen, SDL_Surface* gridge, SDL_Surface* kind[7], Tetris* tetris, int positionX, int positionY)
 {
     SDL_apply_surface(gridge,screen, positionX, positionY);
     int i,j;
@@ -137,7 +137,7 @@ SDL_Surface* SDLdisplayscreen(SDL_Surface* screen, SDL_Surface* gridge, SDL_Surf
         }
 }
 
-SDL_Surface* SDLdisplaypiece(SDL_Surface* screen, SDL_Surface* nextpiecebackground, SDL_Surface* kind[8], Piece * piece, int positionX, int positionY)
+SDL_Surface* SDLdisplaypiece(SDL_Surface* screen, SDL_Surface* nextpiecebackground, SDL_Surface* kind[7], Piece * piece, int positionX, int positionY)
 {
     SDL_apply_surface(nextpiecebackground,screen, positionX, positionY);
     int i,j;
@@ -150,55 +150,63 @@ SDL_Surface* SDLdisplaypiece(SDL_Surface* screen, SDL_Surface* nextpiecebackgrou
 
                 switch (getKind(piece)) {
 
-        case 0:
-        {
-            SDL_apply_surface(kind[0],screen, positionX+(i*20), positionY+(j*20));
+                case 0:
+                {
+                    SDL_apply_surface(kind[0],screen, positionX+(i*20),
+                                       positionY+(j*20));
 
-        }
-        break;
+                }
+                break;
 
-        case 1:
-        {
-            SDL_apply_surface(kind[1],screen, positionX+(i*20), positionY+(j*20));
+                case 1:
+                {
+                    SDL_apply_surface(kind[1],screen, positionX+(i*20),
+                                       positionY+(j*20));
 
-        }
-        break;
-        case 2:
-        {
-            SDL_apply_surface(kind[2],screen, positionX+(i*20), positionY+(j*20));
+                }
+                break;
+                case 2:
+                {
+                    SDL_apply_surface(kind[2],screen, positionX+(i*20),
+                                       positionY+(j*20));
 
-        }
-        break;
-        case 3:
-        {
-            SDL_apply_surface(kind[3],screen, positionX+(i*20), positionY+(j*20));
+                }
+                break;
+                case 3:
+                {
+                    SDL_apply_surface(kind[3],screen, positionX+(i*20),
+                                       positionY+(j*20));
 
-        }
-        break;
-        case 4:
-        {
-            SDL_apply_surface(kind[4],screen, positionX+(i*20), positionY+(j*20));
+                }
+                break;
+                case 4:
+                {
+                    SDL_apply_surface(kind[4],screen, positionX+(i*20),
+                                       positionY+(j*20));
 
-        }
-        break;
-        case 5:
-        {
-            SDL_apply_surface(kind[5],screen, positionX+(i*20), positionY+(j*20));
+                }
+                break;
+                case 5:
+                {
+                    SDL_apply_surface(kind[5],screen, positionX+(i*20),
+                                       positionY+(j*20));
 
-        }
-        break;
-        case 6:
-        {
-            SDL_apply_surface(kind[6],screen, positionX+(i*20), positionY+(j*20));
+                }
+                break;
+                case 6:
+                {
+                    SDL_apply_surface(kind[6],screen, positionX+(i*20),
+                                       positionY+(j*20));
 
-        }
-        break;
+                }
+                break;
 
-        default:
-        {
-           // SDL_apply_surface(kind[7],screen, positionX+(i*20), positionY+(j*20));
-        }
-        break;
+                default:
+                {
+                   /* SDL_apply_surface(kind[7],screen, positionX+(i*20),
+                                         positionY+(j*20));*/
+                }
+                break;
                 }
 
             }
@@ -222,46 +230,85 @@ SDL_Surface* SDLdisplaypiece(SDL_Surface* screen, SDL_Surface* nextpiecebackgrou
 
 void sdljeuInit(SDL *sdl)
 {
+    /* Rappel des champs de sdl */
+    /*
+        Tetris tetris;
+	SDL_Surface * screen;
+	SDL_Surface * screen2;
+	SDL_Surface * piece;
+	SDL_Surface * gridge;
+	SDL_Surface * score;
+	SDL_Surface * kind[7];
+	SDL_Surface * nextpiecebackground;
+    SDL_Surface * holdpiecebackground;
+    SDL_Surface * scorebackground;
+    SDL_Surface * playerbackground;
+    SDL_Surface * text;
+    SDL_Surface * textgameover;
+    SDL_Surface * textpause;
+    SDL_Surface * tuto;
+    SDL_Surface * tuto2;
+    SDL_Surface * textplayername;
+    SDL_Surface * playername;
+
+    SDL_Color * colorBlack;
+    SDL_Color * colorWhite;
+
+    SDL_Rect position1;
+    SDL_Rect positionpiece;
+
+    TTF_Font * font;
+    TTF_Font * font1;
+    TTF_Font * font2;
+
+	FMOD_SYSTEM * system;
+    FMOD_SOUND * explosion;
+    FMOD_SOUND * maintheme;
+    FMOD_SOUND * f_legendary1;
+    FMOD_SOUND * f_legendary2;
+    FMOD_SOUND * f_defeat;
+    FMOD_SOUND * f_unstoppable;
+    */
+
     /* ------------------------ INIT ----------------------- */
 
-    SDL_Surface *screen = NULL;
-    SDL_Surface *screen2 = NULL;
-    SDL_Surface *gridge = NULL;
-    SDL_Surface *scorebackground = NULL;
-    SDL_Surface *playerbackground = NULL;
-    SDL_Surface *kind[8];
-    SDL_Surface *nextpiecebackground = NULL;
-    SDL_Surface *holdpiecebackground = NULL;
+    /* Initialisation des champs de sdl*/
+        /* SDL Surfaces */
+    sdl->screen = NULL;
+    sdl->screen2 = NULL;
+    sdl->gridge = NULL;
+    sdl->scorebackground = NULL;
+    sdl->playerbackground = NULL;
+    sdl->nextpiecebackground = NULL;
+    sdl->holdpiecebackground = NULL;
 
 
-        // Surfaces Textes
-    SDL_Surface * text = NULL;
-    SDL_Surface * textgameover = NULL;
-    SDL_Surface * textpause = NULL;
-    SDL_Surface * tuto = NULL;
-    SDL_Surface * tuto2 = NULL;
-    SDL_Surface * textplayername = NULL;
-    SDL_Surface * playername = NULL;
+        /* Surfaces pour le texte */
+    sdl->text = NULL;
+    sdl->textgameover = NULL;
+    sdl->textpause = NULL;
+    sdl->tuto = NULL;
+    sdl->tuto2 = NULL;
+    sdl->textplayername = NULL;
+    sdl->playername = NULL;
 
         // Rectangle de position
-    SDL_Rect position1;
+    //SDL_Rect position1;
 
         // FMOD
-    FMOD_SYSTEM *system;
-    FMOD_System_Create(&system);
+    FMOD_System_Create(&sdl->system);
 
-    FMOD_SOUND *explosion = NULL;
-    FMOD_SOUND *maintheme = NULL;
-    FMOD_SOUND *f_legendary1 = NULL;
-    FMOD_SOUND *f_legendary2 = NULL;
-    FMOD_SOUND *f_defeat = NULL;
-    FMOD_SOUND *f_unstoppable = NULL;
+    sdl->explosion = NULL;
+    sdl->maintheme = NULL;
+    sdl->f_legendary1 = NULL;
+    sdl->f_legendary2 = NULL;
+    sdl->f_defeat = NULL;
+    sdl->f_unstoppable = NULL;
 
 
         //Initialisation de screen
-    /*assert(SDL_Init(SDL_INIT_EVERYTHING)!= -1); */
     SDL_Init(SDL_INIT_VIDEO);
-    screen = SDL_SetVideoMode(1000, 600, 32, SDL_SWSURFACE| SDL_RESIZABLE | SDL_DOUBLEBUF);
+    sdl->screen = SDL_SetVideoMode(1000, 600, 32, SDL_SWSURFACE| SDL_RESIZABLE | SDL_DOUBLEBUF);
 
         // Initialisation de TTF
     if(TTF_Init() == -1)
@@ -272,117 +319,67 @@ void sdljeuInit(SDL *sdl)
 
         // Initialisation de FMOD
             // 32 est le nombre de sons gérés par FMOD
-    FMOD_System_Init(system, 32, FMOD_INIT_NORMAL, NULL);
-    FMOD_System_CreateSound(system, "../data/sounds/explode.wav",
-                            FMOD_CREATESAMPLE, 0, &explosion);
+    FMOD_System_Init(sdl->system, 32, FMOD_INIT_NORMAL, NULL);
+    FMOD_System_CreateSound(sdl->system, "../data/sounds/explode.wav",
+                            FMOD_CREATESAMPLE, 0, &(sdl->explosion));
         //Initialisation des samples
-    FMOD_System_CreateSound(system, "../data/sounds/f_legendary1.mp3",
-                            FMOD_CREATESAMPLE, 0, &f_legendary1);
-    FMOD_System_CreateSound(system, "../data/sounds/f_legendary2.mp3",
-                            FMOD_CREATESAMPLE, 0, &f_legendary2);
-    FMOD_System_CreateSound(system, "../data/sounds/f_defeat.mp3",
-                            FMOD_CREATESAMPLE, 0, &f_defeat);
-    FMOD_System_CreateSound(system, "../data/sounds/f_unstoppable.mp3",
-                            FMOD_CREATESAMPLE, 0, &f_unstoppable);
+    FMOD_System_CreateSound(sdl->system, "../data/sounds/f_legendary1.mp3",
+                            FMOD_CREATESAMPLE, 0, &(sdl->f_legendary1));
+    FMOD_System_CreateSound(sdl->system, "../data/sounds/f_legendary2.mp3",
+                            FMOD_CREATESAMPLE, 0, &(sdl->f_legendary2));
+    FMOD_System_CreateSound(sdl->system, "../data/sounds/f_defeat.mp3",
+                            FMOD_CREATESAMPLE, 0, &(sdl->f_defeat));
+    FMOD_System_CreateSound(sdl->system, "../data/sounds/f_unstoppable.mp3",
+                            FMOD_CREATESAMPLE, 0, &(sdl->f_unstoppable));
         // Initialisation des musiques
-    FMOD_System_CreateSound(system,
+    FMOD_System_CreateSound(sdl->system,
                             "../data/sounds/theglitchmob_howtobeeatenbyawoman.mp3",
                             FMOD_SOFTWARE | FMOD_2D
-                            | FMOD_CREATESTREAM | FMOD_LOOP_NORMAL, 0, &maintheme);
+                            | FMOD_CREATESTREAM | FMOD_LOOP_NORMAL, 0, &(sdl->maintheme));
             //On active la répétition en boucle puis on joue la musique
-    FMOD_Sound_SetLoopCount(maintheme, -1);
-    FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE, maintheme, 0, NULL);
+    FMOD_Sound_SetLoopCount(sdl->maintheme, -1);
+    FMOD_System_PlaySound(sdl->system, FMOD_CHANNEL_FREE, sdl->maintheme, 0, NULL);
 
         // Coloration de la surface ecran en gris
-    SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 31, 31, 31));
-    gridge = SDL_load_image("../data/gridge.bmp");
+    SDL_FillRect(sdl->screen, NULL, SDL_MapRGB(sdl->screen->format, 0, 0, 0));
+    sdl->gridge = SDL_load_image("../data/gridge.bmp");
 
         //Initialisation de kind avec les images des couleurs des pièces
-    kind[0]=SDL_load_image("../data/piecejaune.bmp");
-    kind[1]=SDL_load_image("../data/piececyan.bmp");
-    kind[2]=SDL_load_image("../data/piecevert.bmp");
-    kind[3]=SDL_load_image("../data/piecerouge.bmp");
-    kind[4]=SDL_load_image("../data/pieceorange.bmp");
-    kind[5]=SDL_load_image("../data/piecebleue.bmp");
-    kind[6]=SDL_load_image("../data/pieceviolet.bmp");
-    //kind[7]=SDL_load_image("../data/piecevide.bmp");
-    //reset=IMG_Load("../data/piecevide.png");
+    sdl->kind[0]=SDL_load_image("../data/piecejaune.bmp");
+    sdl->kind[1]=SDL_load_image("../data/piececyan.bmp");
+    sdl->kind[2]=SDL_load_image("../data/piecevert.bmp");
+    sdl->kind[3]=SDL_load_image("../data/piecerouge.bmp");
+    sdl->kind[4]=SDL_load_image("../data/pieceorange.bmp");
+    sdl->kind[5]=SDL_load_image("../data/piecebleue.bmp");
+    sdl->kind[6]=SDL_load_image("../data/pieceviolet.bmp");
 
         //Chargement de l'image d'écran de jeu et la pièce suivante
-    screen2 = SDL_load_image("../data/screen.bmp");
-    nextpiecebackground = SDL_load_image("../data/nextpiece.bmp");
-    holdpiecebackground = SDL_load_image("../data/nextpiece.bmp");
-    scorebackground = SDL_load_image("../data/score.bmp");
-    playerbackground = SDL_load_image("../data/score.bmp");
+    sdl->screen2 = SDL_load_image("../data/screen.bmp");
+    sdl->nextpiecebackground = SDL_load_image("../data/nextpiece.bmp");
+    sdl->holdpiecebackground = SDL_load_image("../data/nextpiece.bmp");
+    sdl->scorebackground = SDL_load_image("../data/score.bmp");
+    sdl->playerbackground = SDL_load_image("../data/score.bmp");
 
-
-    /* ---------- Essai de Menu ---------------- */
-    /*int quit;
-    quit = 1;
-    SDL_Event event;
-    while(quit)
-    {
-        if( event.type == SDL_MOUSEBUTTONDOWN )
-        {
-          //les coordonnées de la souris
-          int x = event.button.x;
-          int y = event.button.y;
-
-          if ((x>245)&& (x<395) && (y>120) && (y<180))
-
-
-            if ( SDL_BUTTON_LEFT)
-              quit = 0;
-        }
-    }
-    */
-    //-------------------------------------------
-
-
-
-    /*  Variables de la SDL */
-
-    SDL_apply_surface(screen2,screen, 0, 0);
-
-    position1.x = screen->w / 2 - gridge->w / 2;
-	position1.y = (screen->h / 2 - gridge->h / 2);
-
-    SDL_apply_surface(gridge,screen, position1.x, position1.y);
-    SDL_apply_surface(scorebackground,screen, position1.x-177, position1.y+84);
-    SDL_apply_surface(playerbackground,screen, position1.x-177, position1.y+19);
     SDL_WM_SetCaption("LegendaryTetris", NULL);
-
-    /*SDL_Rect positionpiece;
-
-    positionpiece.x = position1.x+(5*20);
-    positionpiece.y = position1.y;*/
 
     /* Variables pour le TTF */
 
-    TTF_Font * font = NULL ;
-    font = TTF_OpenFont("../data/gameover.ttf", 65);
-
-    TTF_Font * font1 = NULL ;
-    font1 = TTF_OpenFont("../data/gameover.ttf", 30);
-
-    TTF_Font * font2 = NULL ;
-    font2 = TTF_OpenFont("../data/gameover.ttf", 30);
+    sdl->font = TTF_OpenFont("../data/gameover.ttf", 65);
+    sdl->font1 = TTF_OpenFont("../data/gameover.ttf", 30);
+    sdl->font2 = TTF_OpenFont("../data/gameover.ttf", 30);
 
     /* Couleurs pour les polices TTF */
-    /* colorBlack = {0 ,0 ,0};*/
     SDL_Color colorWhite = {255, 255, 255};
 
-    /* Variables pour le Tetris */
+    /* Lancement du Tetris */
+    sdl->tetris = startTetris();
+
+    /* Variables temporaires */
 
     Board * board = (Board *)malloc(sizeof(Board));
-    /*Piece * piece = NULL;*/
     Piece * nextpiece = NULL;
     Piece * holdpiece = NULL;
-    /*Tree * tree = (Tree *)malloc(sizeof(Tree));*/
-    Tetris * tetris;
-    tetris = startTetris(); // Lancement du tetris
     Player * player;
-
 
     int destructlines;
     destructlines = 0;
@@ -397,36 +394,31 @@ void sdljeuInit(SDL *sdl)
 
     /* Initialisation texte du score */
     sprintf(s_score, "%u", score);
-    text = TTF_RenderText_Blended(font, s_score, colorWhite);
+    sdl->text = TTF_RenderText_Blended(sdl->font, s_score, colorWhite);
 
-
-    // GROSSE PARTIE A NETTOYER ET COMMENTER !!! (Adrien)
-    //board = sdl->tetris.board;
     srand(time(NULL));
 
-    initBoard(board);
-
-    nextpiece = getTetrisNextPiece(tetris);
-    SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
-    SDLdisplaypiece(screen,nextpiecebackground, kind, nextpiece, position1.x+280,position1.y+50);
-    SDL_apply_surface(holdpiecebackground,screen, position1.x+280,position1.y+250);
-    tuto = TTF_RenderText_Blended(font1, "P = Pause", colorWhite);
-    tuto2 = TTF_RenderText_Blended(font1, "C = Hold a line", colorWhite);
-    SDL_apply_surface(tuto,screen, 50,500); // Blit de text
-    SDL_apply_surface(tuto2,screen, 50,520); // Blit de text
-
     /* ------------ Boucle de nom de joueur -------------- */
-    textplayername = TTF_RenderText_Blended(font, "Player Name ?", colorWhite);
-    SDL_apply_surface(textplayername,screen, 420, 275); // Blit de text
+    sdl->textplayername = TTF_RenderText_Blended(sdl->font, "Player Name ?",
+                                                 colorWhite);
+    /* Blit de text */
+    SDL_apply_surface(sdl->textplayername, sdl->screen, 420, 275);
+
+    sdl->positionName.x = 420;
+    sdl->positionName.y = 320;
+
+    SDL_Event beginevent;
 
     int nbLetters = 1;
+    int begin=1;
+
     char *playername1;
     playername1 = (char*)calloc(nbLetters,sizeof(char));
     playername1[nbLetters-1] = '\0';
-    int begin=1;
 
-    SDL_Event beginevent;
-    while(begin) {
+
+    while(begin)
+    {
         SDL_WaitEvent(&beginevent);
         switch(beginevent.type)
         {
@@ -435,44 +427,81 @@ void sdljeuInit(SDL *sdl)
             break;
 
             case SDL_KEYDOWN:
-            if(beginevent.key.keysym.sym == SDLK_RETURN) {
-            begin= 0;
+            if(beginevent.key.keysym.sym == SDLK_RETURN)
+            {
+                begin = 0;
+            }
+            else if((beginevent.key.keysym.sym == SDLK_BACKSPACE) && (nbLetters > 1))
+            {
+                SDL_FillRect(sdl->screen,&(sdl->positionName),SDL_MapRGB(sdl->screen->format,0,0,0));
+                nbLetters--;
 
+                playername1=(char*)realloc(playername1,nbLetters*sizeof(char));
+                playername1[nbLetters-1] = '\0';
+
+                sdl->playername = TTF_RenderText_Solid(sdl->font,playername1,colorWhite);
+                SDL_BlitSurface(sdl->playername,NULL,sdl->screen,&(sdl->positionName));
             }
 
-            else if((beginevent.key.keysym.sym == SDLK_BACKSPACE) && (nbLetters > 1)) {
-            nbLetters--;
-            playername1=(char*)realloc(playername1,nbLetters*sizeof(char));
-            playername1[nbLetters-1] = '\0';
-            playername = TTF_RenderText_Blended(font, playername1, colorWhite);
-            SDL_apply_surface(playername,screen, 420, 300); // Blit de text
+            else
+            {
+                if(beginevent.key.keysym.sym != SDLK_BACKSPACE)
+                {
+                    SDL_FillRect(sdl->screen,&(sdl->positionName),SDL_MapRGB(sdl->screen->format,0,0,0));
+                    SDL_Flip(sdl->screen);
+                    playername1 = (char*)realloc(playername1,(nbLetters + 1)*sizeof(char));
+                    playername1[nbLetters-1] = beginevent.key.keysym.sym;
+                    playername1[nbLetters] = '\0';
+                    nbLetters++;
+                }
             }
+            SDL_FillRect(sdl->screen,&(sdl->positionName),SDL_MapRGB(sdl->screen->format,0,0,0));
+            sdl->playername = TTF_RenderText_Solid(sdl->font,playername1,colorWhite);
+            SDL_BlitSurface(sdl->playername,NULL,sdl->screen,&(sdl->positionName));
 
-            else {
-            if(beginevent.key.keysym.sym != SDLK_BACKSPACE) {
-            playername1 = (char*)realloc(playername1,(nbLetters + 1)*sizeof(char));
-            playername1[nbLetters-1] = beginevent.key.keysym.sym;
-            playername1[nbLetters] = '\0';
-            nbLetters++;
-      }
+            SDL_Flip(sdl->screen);
+        }
     }
-            playername = TTF_RenderText_Blended(font, playername1, colorWhite);
-            SDL_apply_surface(playername,screen, 420, 300); // Blit de text
 
-      SDL_Flip(screen);
 
-    }
-  }
-  createPlayer(playername1,score);
-  playername = TTF_RenderText_Blended(font2, playername1, colorWhite);
-  SDL_apply_surface(playername,screen, position1.x-172, position1.y+40); // Blit de text
+    SDL_apply_surface(sdl->screen2,sdl->screen, 0, 0);
+
+    sdl->position1.x = sdl->screen->w / 2 - sdl->gridge->w / 2;
+	sdl->position1.y = (sdl->screen->h / 2 - sdl->gridge->h / 2);
+
+    SDL_apply_surface(sdl->gridge,sdl->screen, sdl->position1.x,
+                      sdl->position1.y);
+    SDL_apply_surface(sdl->scorebackground,sdl->screen, sdl->position1.x-177,
+                      sdl->position1.y+84);
+    SDL_apply_surface(sdl->playerbackground,sdl->screen, sdl->position1.x-177,
+                      sdl->position1.y+19);
+
+    nextpiece = getTetrisNextPiece(sdl->tetris);
+
+    SDLdisplayscreen(sdl->screen, sdl->gridge, sdl->kind, sdl->tetris,
+                     sdl->position1.x, sdl->position1.y);
+    SDLdisplaypiece(sdl->screen, sdl->nextpiecebackground, sdl->kind, nextpiece,
+                    sdl->position1.x+280, sdl->position1.y+50);
+    SDL_apply_surface(sdl->holdpiecebackground, sdl->screen,
+                      sdl->position1.x+280, sdl->position1.y+250);
+
+    sdl->tuto = TTF_RenderText_Blended(sdl->font1, "P = Pause", colorWhite);
+    sdl->tuto2 = TTF_RenderText_Blended(sdl->font1, "C = Hold a line", colorWhite);
+
+    SDL_apply_surface(sdl->tuto, sdl->screen, 50, 500); /* Blit de tuto */
+    SDL_apply_surface(sdl->tuto2, sdl->screen, 50, 520); /* Blit de tuto2 */
+
+    createPlayer(playername1,score);
+    sdl->playername = TTF_RenderText_Blended(sdl->font2, playername1,
+                                             colorWhite);
+    /* Blit du nom du joueur */
+    SDL_apply_surface(sdl->playername, sdl->screen,
+                      sdl->position1.x-172, sdl->position1.y+40);
 
 
     /* Fin boucle nom de joueur */
 
-    //--------------------- BOUCLE -----------------------
-
-            // Dans la fonction sdljeuboucle ? (à mettre en anglais aussi)
+    /*--------------------- BOUCLE -----------------------*/
 
     SDL_Event event;
     SDL_Event newevent;
@@ -483,9 +512,9 @@ void sdljeuInit(SDL *sdl)
     change = 1;
     pausebutton=0;
     endgame=0;
-     while (next)
+
+    while (next)
     {
-        //SDL_WaitEvent(&event);
         if(SDL_PollEvent(&event))
         switch(event.type)
         {
@@ -496,66 +525,87 @@ void sdljeuInit(SDL *sdl)
                 switch(event.key.keysym.sym)
                 {
                     case SDLK_UP: // Flèche haut
-                    if (pausebutton==0){
-                        rotationPiece(tetris->board);
-                        SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
+                    if (pausebutton == 0)
+                    {
+                        rotationPiece(sdl->tetris->board);
+                        SDLdisplayscreen(sdl->screen, sdl->gridge, sdl->kind,
+                                         sdl->tetris, sdl->position1.x,
+                                         sdl->position1.y);
                         temp = 0;
                     }
                         break;
 
                     case SDLK_DOWN: // Flèche bas
-                    if (pausebutton==0){
-                        moveCurrentPieceDown(tetris->board);
-                        SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
+                    if (pausebutton == 0)
+                    {
+                        moveCurrentPieceDown(sdl->tetris->board);
+                        SDLdisplayscreen(sdl->screen, sdl->gridge, sdl->kind,
+                                         sdl->tetris, sdl->position1.x,
+                                         sdl->position1.y);
                     }
                         break;
 
                     case SDLK_RIGHT: // Flèche droite
-                    if (pausebutton==0){
-                        moveCurrentPieceRight(tetris->board);
-                        SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
+                    if (pausebutton == 0)
+                    {
+                        moveCurrentPieceRight(sdl->tetris->board);
+                        SDLdisplayscreen(sdl->screen, sdl->gridge, sdl->kind,
+                                         sdl->tetris, sdl->position1.x,
+                                         sdl->position1.y);
                         temp = 0;
                     }
                         break;
 
                     case SDLK_LEFT: // Flèche gauche
-                    if (pausebutton==0){
-                        moveCurrentPieceLeft(tetris->board);
-                        SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
+                    if (pausebutton == 0){
+                        moveCurrentPieceLeft(sdl->tetris->board);
+                        SDLdisplayscreen(sdl->screen, sdl->gridge, sdl->kind,
+                                         sdl->tetris, sdl->position1.x,
+                                         sdl->position1.y);
                         temp = 0;
                     }
                         break;
 
                     case SDLK_SPACE: // Barre espace
-                    if (pausebutton==0){
-                        dropCurrentPiece(tetris->board);
-                        SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
+                    if (pausebutton == 0){
+                        dropCurrentPiece(sdl->tetris->board);
+                        SDLdisplayscreen(sdl->screen, sdl->gridge, sdl->kind,
+                                         sdl->tetris, sdl->position1.x,
+                                         sdl->position1.y);;
                         temp = 2;
                         break;
                     }
                     case SDLK_c: // Touche c
-                    if (pausebutton==0){
+                    if (pausebutton == 0){
                         if (change)
                         {
-                            holdPiece(tetris);
-                            holdpiece = tetris->holdpiece;
-                            SDLdisplaypiece(screen,holdpiecebackground, kind, holdpiece, position1.x+280,position1.y+250);
-                            SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
+                            holdPiece(sdl->tetris);
+                            holdpiece = getTetrisHoldPiece(sdl->tetris);
+                            SDLdisplaypiece(sdl->screen,
+                                            sdl->holdpiecebackground,
+                                            sdl->kind, holdpiece,
+                                            sdl->position1.x+280,
+                                            sdl->position1.y+250);
+                            SDLdisplayscreen(sdl->screen, sdl->gridge,
+                                             sdl->kind,
+                                             sdl->tetris, sdl->position1.x,
+                                             sdl->position1.y);
                             change = 0;
                         }
                     }
 
                         break;
                     case SDLK_p: // Touche p
-                            if(pausebutton==0)
-                                pausebutton=1;
-                            else if(pausebutton==1)
-                                pausebutton=0;
+                            if(pausebutton == 0)
+                                pausebutton = 1;
+                            else if(pausebutton == 1)
+                                pausebutton = 0;
                         break;
 
                     case SDLK_ESCAPE: // Bouton ECHAP
                     sdljeuLibere(sdl);
                     break;
+
                     default:
                     break;
                 }
@@ -571,12 +621,16 @@ void sdljeuInit(SDL *sdl)
 
         //-------------------------------------------------------------
         tempsActuel = SDL_GetTicks();
-        if (pausebutton==0)
+        if (pausebutton == 0)
         {
-            if (tempsActuel - tempsPrecedent > 1000-(10*destructlines)) /* Si 1000 ms se sont écoulées depuis le dernier tour de boucle */
+            /* Si 1000 ms se sont écoulées depuis le dernier tour de boucle */
+
+            if (tempsActuel - tempsPrecedent > 1000-(10*destructlines))
             {
-                moveCurrentPieceDown(tetris->board);
-                SDLdisplayscreen(screen,gridge, kind, tetris, position1.x,position1.y);
+                moveCurrentPieceDown(sdl->tetris->board);
+                SDLdisplayscreen(sdl->screen, sdl->gridge, sdl->kind,
+                                 sdl->tetris, sdl->position1.x,
+                                 sdl->position1.y);
                 tempsPrecedent = tempsActuel; /* Le temps "actuel" devient le temps "precedent" pour nos futurs calculs */
                 temp++;
 
@@ -591,79 +645,94 @@ void sdljeuInit(SDL *sdl)
         }
         else
         {
-          textpause = TTF_RenderText_Blended(font, "PAUSE", colorWhite);
-          SDL_apply_surface(textpause,screen, 460, 275); // Blit de text
+          sdl->textpause = TTF_RenderText_Blended(sdl->font, "PAUSE", colorWhite);
+          SDL_apply_surface(sdl->textpause, sdl->screen, 460, 275); // Blit de text
         }
+
         /* Après pose de la currentPiece, la nextPiece devient la currentPiece
-       puis nouvelle nextPiece*/
+           puis nouvelle nextPiece*/
 
-       posx = getPosX(tetris->board->currentPiece);
-       posy = getPosY(tetris->board->currentPiece);
-       if(isCurrentPieceMovable(tetris->board, posx, posy + 1) == FALSE && testFallPiece(tetris->board) == FALSE && temp >= 2)
-               {
-                   /* Destruction des lignes et Calcul du score */
-                   n_lines = destructLines(tetris->board);
-                   FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE, explosion,
-                                          0, NULL);
-                    if(n_lines != 0)
-                    {
-                        //FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE, explosion2);
-                    }
-                   destructlines = destructlines + n_lines;
-                   score = calcScore(score, n_lines);
-                   printf("lignes détruites : %u \n score : %u \n", destructlines, score);
+        posx = getPosX(sdl->tetris->board->currentPiece);
+        posy = getPosY(sdl->tetris->board->currentPiece);
+        if(isCurrentPieceMovable(sdl->tetris->board, posx, posy + 1) == FALSE
+           &&
+           testFallPiece(sdl->tetris->board) == FALSE && temp >= 2)
+        {
+           /* Destruction des lignes et Calcul du score */
+           n_lines = destructLines(sdl->tetris->board);
+           FMOD_System_PlaySound(sdl->system, FMOD_CHANNEL_FREE, sdl->explosion,
+                                  0, NULL);
+            if(n_lines != 0)
+            {
+                //FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE, explosion2);
+            }
+           destructlines = destructlines + n_lines;
+           score = calcScore(score, n_lines);
+           printf("lignes détruites : %u \n score : %u \n", destructlines,
+                  score);
 
 
-                    if(score >= 50000 && sound_played == 0)
-                    {
-                        FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE,
-                                              f_unstoppable, 0, NULL);
-                        sound_played = 1;
-                    }
+            if(score >= 50000 && sound_played == 0)
+            {
+                FMOD_System_PlaySound(sdl->system, FMOD_CHANNEL_FREE,
+                                      sdl->f_unstoppable, 0, NULL);
+                sound_played = 1;
+            }
 
-                    if(score >= 100000 && sound_played == 1)
-                    {
-                        FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE,
-                                              f_legendary1, 0, NULL);
-                        sound_played = 2;
-                    }
-                    if(score >= 150000 && sound_played == 2)
-                    {
-                        FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE,
-                                              f_legendary2, 0, NULL);
-                        sound_played = 3;
-                    }
+            if(score >= 100000 && sound_played == 1)
+            {
+                FMOD_System_PlaySound(sdl->system, FMOD_CHANNEL_FREE,
+                                      sdl->f_legendary1, 0, NULL);
+                sound_played = 2;
+            }
+            if(score >= 150000 && sound_played == 2)
+            {
+                FMOD_System_PlaySound(sdl->system, FMOD_CHANNEL_FREE,
+                                      sdl->f_legendary2, 0, NULL);
+                sound_played = 3;
+            }
 
-                    /* Affichage du score */
-                    sprintf(s_score, "%u", score);
-                    SDL_FreeSurface(text);
+            /* Affichage du score */
+            sprintf(s_score, "%u", score);
+            SDL_FreeSurface(sdl->text);
 
-                    text = TTF_RenderText_Blended(font, s_score, colorWhite);
-                    //TTF_RenderText_Shaded(font, s_score, colorWhite); peut aussi marcher comme sur fond uni
-                    if(testGameOver(tetris->board) == TRUE)
-                    {
+            sdl->text = TTF_RenderText_Blended(sdl->font, s_score, colorWhite);
 
-                        next=0;
-                        endgame=1;
-                        FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE,
-                                              f_defeat, 0, NULL);
-                        textgameover = TTF_RenderText_Blended(font, "GAME OVER ! TRY AGAIN ? Y/N", colorWhite);
-                        SDL_apply_surface(textgameover,screen, 320, 275); // Blit de text
-                    }
-                   else
-                   {
-                   gameStep(tetris);
-                   nextpiece = getTetrisNextPiece(tetris);
-                   SDLdisplaypiece(screen,nextpiecebackground, kind, nextpiece, position1.x+280,position1.y+50);
-                   change = 1;
-                   }
-               }
+            if(testGameOver(sdl->tetris->board) == TRUE)
+            {
+                next=0;
+                endgame=1;
+                FMOD_System_PlaySound(sdl->system, FMOD_CHANNEL_FREE,
+                                      sdl->f_defeat, 0, NULL);
+                sdl->textgameover = TTF_RenderText_Blended(sdl->font,
+                                    "GAME OVER ! TRY AGAIN ? Y/N",
+                                    colorWhite);
 
-        SDL_Flip(screen);
-        SDL_apply_surface(scorebackground,screen, position1.x-177, position1.y+84);
-        SDL_apply_surface(text,screen, position1.x-172, position1.y+100); // Blit de text
+                /* Blit de textgameover */
+                SDL_apply_surface(sdl->textgameover, sdl->screen, 320, 275);
+            }
+            else
+            {
+                gameStep(sdl->tetris);
+                nextpiece = getTetrisNextPiece(sdl->tetris);
+                SDLdisplaypiece(sdl->screen, sdl->nextpiecebackground,
+                                sdl->kind, nextpiece, sdl->position1.x+280,
+                                sdl->position1.y+50);
+                change = 1;
+            }
+        }
+
+        SDL_Flip(sdl->screen);
+        SDL_apply_surface(sdl->scorebackground, sdl->screen,
+                          sdl->position1.x-177, sdl->position1.y+84);
+        /* Blit de text */
+        SDL_apply_surface(sdl->text, sdl->screen, sdl->position1.x-172,
+                          sdl->position1.y+100);
     }
+
+
     /* Boucle de nouvelle partie */
+
     while (endgame)
     {
         SDL_WaitEvent(&newevent);
@@ -705,10 +774,9 @@ void sdljeuLibere(SDL *sdl)
 {
     // -------------------- FREE AND QUIT -----------------------
     int i=0;
-    SDL_FreeSurface(sdl->screen);
-    SDL_FreeSurface(sdl->screen2);
+
     SDL_FreeSurface(sdl->gridge);
-    for (i=0;i<8;i++)
+    for (i=0;i<7;i++)
     {
         SDL_FreeSurface(sdl->kind[i]);
     }
@@ -723,6 +791,9 @@ void sdljeuLibere(SDL *sdl)
     SDL_FreeSurface(sdl->textpause);
     SDL_FreeSurface(sdl->textplayername);
     SDL_FreeSurface(sdl->playername);
+
+    SDL_FreeSurface(sdl->screen);
+    SDL_FreeSurface(sdl->screen2);
 
     /* Fermeture des polices avant l'arrêt de la TTF
     NB : Toutes les polices doivent être fermées */
