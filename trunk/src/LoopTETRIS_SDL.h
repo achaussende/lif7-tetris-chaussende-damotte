@@ -36,6 +36,8 @@ typedef struct
     SDL_Surface * textpause;
     SDL_Surface * tuto;
     SDL_Surface * tuto2;
+    SDL_Surface * textplayername;
+    SDL_Surface * playername;
 
     SDL_Color *colorBlack;
     SDL_Color *colorWhite;
@@ -45,6 +47,7 @@ typedef struct
 
     TTF_Font * font;
     TTF_Font * font1;
+    TTF_Font * font2;
 
 	FMOD_SYSTEM *system;
     FMOD_SOUND *explosion;
