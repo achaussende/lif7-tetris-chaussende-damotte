@@ -564,6 +564,7 @@ void displayScore_recursion(const Node * node)
 }
 void displayScore(const Tree * scoreTree)
 {
+    printf("Tableau de scores :\n\n");
     if(scoreTree->root == NULL)
     {
         printf("Pas encore de scores etablis."); // à remplacer par la fonction d'affichage adaptée
@@ -593,20 +594,29 @@ void openScoreData(Tree * ptree, const char filename[])
         assert(f);
     }
 
-    assert( fscanf( f , "PS \n%u \n", &nb_elem ) == 1 );
-
-    for(i = 0; i < nb_elem; i++)
+    if(fscanf( f , "PS \n%u \n", &nb_elem ) == 1 )
     {
-        assert(fscanf(f, "%s %u \n", &nickname, &score) == 2 ||
-                strlen(nickname) <= 25);
-        player = malloc(sizeof(Player));
-        setName (player, nickname);
-        setScore (player, score);
-        insertPlayerInTree(ptree, player);
+        for(i = 0; i < nb_elem; i++)
+        {
+            assert(fscanf(f, "%s %u \n", &nickname, &score) == 2 ||
+                    strlen(nickname) <= 25);
+            player = malloc(sizeof(Player));
+            setName (player, nickname);
+            setScore (player, score);
+            insertPlayerInTree(ptree, player);
+
+        }
+        printf("Lecture des scores %s ... OK \n", filename);
+    }
+    else
+    {
+        printf("Fichier de scores vide \n");
     }
 
+
+
     fclose(f);
-    printf("Lecture des scores %s ... OK \n", filename);
+
 }
 
 
@@ -702,7 +712,6 @@ Tetris * startTetris()
 
 void tetrisTestRegression()
 {
-    srand(time(NULL));
 
     // Variables nécessaires pour la première partie du test
     /*Board * board = (Board *)malloc(sizeof(Board));
@@ -718,13 +727,13 @@ void tetrisTestRegression()
     //piece = createPiece(rand() % 7 , 0);
 
     /* Variables nécessaires pour le fichier de scores */
-    /*char name[26] = "Adrien";
+    char name[26] = "Adrien";
     char name2[26] ="Alan";
     Player * player;
 
-    int i; */
+    int i;
 
-    /* Test : Fichier de scores
+    /* Test : Fichier de scores */
     tetris = startTetris();
 
     for(i=1;i<=10;i++)
@@ -736,12 +745,12 @@ void tetrisTestRegression()
     insertPlayerInTree(tetris->treescores, player);
     //openScoreData(tetris->treescores, "../data/scores.txt");
     //printf("Nb_elem : %u\n", tetris->treescores->nb_elements);
-    //saveScoreData(tetris->treescores, "../data/scores.txt");
-    displayScore(tetris->treescores);*/
+    saveScoreData(tetris->treescores, "../data/scores.txt");
+    displayScore(tetris->treescores);
 
     /* Test : Etapes du jeu */
 
-    tetris = startTetris(); // Lancement du tetris
+    /*tetris = startTetris(); // Lancement du tetris
 
     printf("Current piece : \n kind = %u , orientation = %u \n",
           tetris->board->currentPiece->kind,
@@ -750,11 +759,11 @@ void tetrisTestRegression()
           tetris->nextpiece->kind,
           tetris->nextpiece->orientation);
 
-    dropCurrentPiece(tetris->board);
+    dropCurrentPiece(tetris->board); */
 
     /* Après pose de la currentPiece, la nextPiece devient la currentPiece
        puis nouvelle nextPiece */
-    gameStep(tetris);
+    /*gameStep(tetris);
 
     // Vérification que le gameStep marche bien
     printf("Après le gameStep \n");
@@ -764,7 +773,7 @@ void tetrisTestRegression()
     printf("Next piece : \n kind = %u , orientation = %u \n",
             tetris->nextpiece->kind,
             tetris->nextpiece->orientation);
-    freeTetris(tetris);
+    freeTetris(tetris); */
 
     // Premier Test
 

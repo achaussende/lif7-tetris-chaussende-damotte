@@ -110,6 +110,7 @@ void deleteTreeMin(Tree * tree)
         if(p->right_child == NULL)
         {
             free(p);
+            n->left_child = NULL;
         }
         else
         {

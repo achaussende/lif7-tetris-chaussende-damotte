@@ -288,7 +288,7 @@ void openScoreData(Tree * ptree, const char filename[]);
 
 /**
     @brief Procédure d'écriture d'une score dans un fichier (récursive)
-    @param un TNode et un FILE
+    @param un Node et un FILE
 */
 void saveScoreData_Node(const Node * pnode, FILE * f);
 

@@ -18,7 +18,7 @@
 /* const int PIVOT_X = 1;
 const int PIVOT_Y = 2; */
 
-static int PIECES[7][4][4][4] =
+  static int PIECES[7][4][4][4] =
 {
     { // O
         {
