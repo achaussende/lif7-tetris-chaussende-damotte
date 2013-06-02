@@ -737,6 +737,7 @@ void sdlgameLoop(SDL *sdl)
                     sdlgameFree(sdl);
                     sdlgameInit(sdl);
                     sdlgameLoop(sdl);
+                    return;
                     break;
 
                     case SDLK_n: // Touche n
@@ -763,8 +764,6 @@ void sdlgameFree(SDL *sdl)
     freeTetris(sdl->tetris);
     sdl->tetris=NULL;
 
-    SDL_FreeSurface(sdl->gridge);
-    sdl->gridge=NULL;
     for (i=0;i<7;i++)
     {
         SDL_FreeSurface(sdl->kind[i]);
@@ -794,6 +793,9 @@ void sdlgameFree(SDL *sdl)
     sdl->textplayername=NULL;
     SDL_FreeSurface(sdl->playername);
     sdl->playername=NULL;
+
+    SDL_FreeSurface(sdl->gridge);
+    sdl->gridge=NULL;
 
     SDL_FreeSurface(sdl->screen);
     sdl->screen=NULL;
