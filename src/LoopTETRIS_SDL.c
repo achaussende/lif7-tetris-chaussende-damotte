@@ -234,7 +234,7 @@ SDL_Surface* SDLdisplaypiece(SDL_Surface* screen,
 
 }*/
 
-void sdljeuInit(SDL *sdl)
+void sdlgameInit(SDL *sdl)
 {
     /* Initialisation des champs de sdl*/
         /* SDL Surfaces */
@@ -352,7 +352,7 @@ void sdljeuInit(SDL *sdl)
 }
 
 
-void sdljeuBoucle(SDL *sdl)
+void sdlgameLoop(SDL *sdl)
 {
     /* Variables temporaires */
 
@@ -395,7 +395,7 @@ void sdljeuBoucle(SDL *sdl)
 
     sdl->positionName.x = 420;
     sdl->positionName.y = 320;
-
+    SDL_Flip(sdl->screen);
     while(begin)
     {
         SDL_WaitEvent(&beginevent);
@@ -435,7 +435,6 @@ void sdljeuBoucle(SDL *sdl)
                     {
                         SDL_FillRect(sdl->screen,&(sdl->positionName),
                                      SDL_MapRGB(sdl->screen->format,0,0,0));
-                        SDL_Flip(sdl->screen);
                         playername1 = (char*)realloc(playername1,(nbLetters + 1)*sizeof(char));
 
                         playername1[nbLetters-1] = beginevent.key.keysym.sym;
@@ -718,7 +717,8 @@ void sdljeuBoucle(SDL *sdl)
 
 
     /* Boucle de nouvelle partie */
-
+    if(endgame==1)
+    {
     while (endgame)
     {
         SDL_WaitEvent(&newevent);
@@ -733,15 +733,14 @@ void sdljeuBoucle(SDL *sdl)
                 {
                     case SDLK_y: // Touche y
 
-                    FMOD_Sound_Release(sdl->maintheme);
-                    sdljeuLibere(sdl);
-                    sdljeuInit(sdl);
-                    sdljeuBoucle(sdl);
-
+                    /*FMOD_Sound_Release(sdl->maintheme);*/
+                    sdlgameFree(sdl);
+                    sdlgameInit(sdl);
+                    sdlgameLoop(sdl);
                     break;
 
                     case SDLK_n: // Touche n
-                            return;
+                        endgame=0;
                     break;
 
                     default:
@@ -749,59 +748,88 @@ void sdljeuBoucle(SDL *sdl)
                 }
         }
     }
-    pause();
+    }
+    /*pause();*/
 
 
 }
 
 
-void sdljeuLibere(SDL *sdl)
+void sdlgameFree(SDL *sdl)
 {
     // -------------------- FREE AND QUIT -----------------------
     int i;
 
     freeTetris(sdl->tetris);
+    sdl->tetris=NULL;
 
     SDL_FreeSurface(sdl->gridge);
+    sdl->gridge=NULL;
     for (i=0;i<7;i++)
     {
         SDL_FreeSurface(sdl->kind[i]);
+        sdl->kind[i]=NULL;
     }
     SDL_FreeSurface(sdl->piece);
+    sdl->piece=NULL;
     SDL_FreeSurface(sdl->nextpiecebackground);
+    sdl->nextpiecebackground=NULL;
     SDL_FreeSurface(sdl->scorebackground);
+    sdl->scorebackground=NULL;
     SDL_FreeSurface(sdl->playerbackground);
+    sdl->playerbackground=NULL;
     SDL_FreeSurface(sdl->holdpiecebackground);
+    sdl->holdpiecebackground=NULL;
     SDL_FreeSurface(sdl->text);
+    sdl->text=NULL;
     SDL_FreeSurface(sdl->textgameover);
+    sdl->textgameover=NULL;
     SDL_FreeSurface(sdl->tuto);
+    sdl->tuto=NULL;
     SDL_FreeSurface(sdl->tuto2);
+    sdl->tuto2=NULL;
     SDL_FreeSurface(sdl->textpause);
+    sdl->textpause=NULL;
     SDL_FreeSurface(sdl->textplayername);
+    sdl->textplayername=NULL;
     SDL_FreeSurface(sdl->playername);
+    sdl->playername=NULL;
 
     SDL_FreeSurface(sdl->screen);
+    sdl->screen=NULL;
     SDL_FreeSurface(sdl->screen2);
+    sdl->screen2=NULL;
 
     /* Fermeture des polices avant l'arrêt de la TTF
     NB : Toutes les polices doivent être fermées */
     TTF_CloseFont(sdl->font);
+    sdl->font=NULL;
     TTF_CloseFont(sdl->font1);
+    sdl->font1=NULL;
     TTF_CloseFont(sdl->font2);
+    sdl->font2=NULL;
 
     /* Fermeture et libération de system et des sons*/
 
 
     FMOD_Sound_Release(sdl->explosion);
+    sdl->explosion=NULL;
 
     FMOD_Sound_Release(sdl->f_legendary1);
+    sdl->f_legendary1=NULL;
     FMOD_Sound_Release(sdl->f_legendary2);
+    sdl->f_legendary2=NULL;
     FMOD_Sound_Release(sdl->f_defeat);
+    sdl->f_defeat=NULL;
     FMOD_Sound_Release(sdl->f_unstoppable);
+    sdl->f_unstoppable=NULL;
     FMOD_Sound_Release(sdl->maintheme);
+    sdl->maintheme=NULL;
 
     FMOD_System_Close(sdl->system);
     FMOD_System_Release(sdl->system);
+    sdl->system=NULL;
+
 
     TTF_Quit(); // Arrêt de la TTF
     SDL_Quit(); // Arrêt de la SDL (libération de la mémoire)
@@ -810,9 +838,9 @@ void sdljeuLibere(SDL *sdl)
 
 void sdltestRegression(SDL *sdl)
 {
-    sdljeuInit(sdl);
-    sdljeuBoucle(sdl);
-    sdljeuLibere(sdl);
+    sdlgameInit(sdl);
+    sdlgameLoop(sdl);
+    sdlgameFree(sdl);
 
 }
 

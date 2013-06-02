@@ -63,21 +63,21 @@ typedef struct
         @brief Procédure d'initialisation d'une SDL
         @param une SDL
 */
-void sdljeuInit(SDL *sdl);
+void sdlgameInit(SDL *sdl);
 
 /**
 
         @brief Boucle SDL
         @param une SDL
 */
-void sdljeuBoucle(SDL *sdl);
+void sdlgameLoop(SDL *sdl);
 
 /**
 
         @brief Procédure de libération d'une SDL
         @param une SDL
 */
-void sdljeuLibere(SDL *sdl);
+void sdlgameFree(SDL *sdl);
 
 /**
 
