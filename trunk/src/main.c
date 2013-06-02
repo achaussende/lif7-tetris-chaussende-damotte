@@ -15,9 +15,9 @@ int main()
 {
     SDL sdl;
 
-    sdljeuInit(&sdl);
-    sdljeuBoucle(&sdl);
-    sdljeuLibere(&sdl);
+    sdlgameInit(&sdl);
+    sdlgameLoop(&sdl);
+    sdlgameFree(&sdl);
 
     //tetrisTestRegression();
 
