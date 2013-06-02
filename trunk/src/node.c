@@ -73,6 +73,6 @@ void freeNode(Node * node)
 {
     setNodeLeft_Child(node, NULL);
     setNodeRight_Child(node, NULL);
-    free(node->value);
+    freePlayer(node->value);
     free(node);
 }

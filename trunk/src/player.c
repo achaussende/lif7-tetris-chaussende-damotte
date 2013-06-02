@@ -65,3 +65,8 @@ Player * createPlayer(const char * name, unsigned int score)
 
     return player;
 }
+
+void freePlayer(Player * player)
+{
+    free(player);
+}

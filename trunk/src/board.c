@@ -42,7 +42,7 @@ void initBoard (Board * board)
 
 void freeBoard (Board * board)
 {
-    initBoard(board); //mets toutes les cases de gridge à 0
     freePiece(board->currentPiece);
+    initBoard(board); //mets toutes les cases de gridge à 0 et currentPiece NULL
     free(board);
 }

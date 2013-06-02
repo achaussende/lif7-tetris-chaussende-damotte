@@ -43,7 +43,7 @@ void freeTree_recursion(Node * node)
     {
         freeTree_recursion(node->left_child);
         freeTree_recursion(node->right_child);
-        free(node);
+        freeNode(node);
     }
 }
 

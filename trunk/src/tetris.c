@@ -188,17 +188,14 @@ Bool testRotationPiece(Board * board, const int orientation)
     int i,j;
     int k = 0;
     Bool * rotable = (Bool *)malloc(sizeof(Bool));
-    Bool * rotable2 = (Bool *)malloc(sizeof(Bool));
+    Bool rotable2;
     Bool visited[4][4];
 
     posx = getPosX(board->currentPiece);
     posy = getPosY(board->currentPiece);
     *rotable = TRUE;
-    *rotable2 =TRUE;
 
     clearPiece(board);
-
-    *rotable = TRUE;
 
     for(i = 0; i < 4; i++)
     {
@@ -211,114 +208,43 @@ Bool testRotationPiece(Board * board, const int orientation)
     flood2(board, posx, posy, 2, 1, kind, orientation, rotable, visited);
 
     drawPiece(board);
-    /* Essai de peaufinement de la rotation
-    clearPiece(board);
 
-     for(i = 0; i < 4; i++)
-    {
-        for(j = 0; j < 4; j++)
-        {
-               visited[i][j] = FALSE;
-        }
-
-    }
-    flood2(board, posx, posy, 2, 1, kind, orientation, rotable, visited);
-
-
-    //Si pas de rotation sur place
-    if(*rotable == FALSE)
-    {
-
-        for(i = 0; i < 4; i++)
-        {
-            for(j = 0; j < 4; j++)
-            {
-                   visited[i][j] = FALSE;
-            }
-
-        }
-
-        switch(kind)
-        {
-            case 1 :
-                if(isCurrentPieceMovable(board, posx + 1, posy) == FALSE &&
-                   isCurrentPieceMovable(board, posx - 2, posy) == TRUE)
-                   {
-                       flood2(board, posx - 2, posy, 2, 1, kind, orientation,
-                               rotable, visited);
-                   }
-                else
-                {
-                    if(isCurrentPieceMovable(board, posx - 1, posy) == FALSE &&
-                        isCurrentPieceMovable(board, posx + 2, posy) == TRUE)
-                        {
-                                flood2(board, posx + 2, posy, 2, 1, kind,
-                                       orientation, rotable, visited);
-                        }
-                }
-            break;
-
-            case 0 :
-                *rotable = TRUE;
-            break;
-
-            default :
-                if(isCurrentPieceMovable(board, posx + 1, posy) == FALSE &&
-                   isCurrentPieceMovable(board, posx - 1, posy) == TRUE)
-                   {
-                       flood2(board, posx - 1, posy, 2, 1, kind, orientation,
-                               rotable, visited);
-                   }
-                else
-                {
-                    if(isCurrentPieceMovable(board, posx - 1, posy) == FALSE &&
-                        isCurrentPieceMovable(board, posx + 1, posy) == TRUE)
-                        {
-                                flood2(board, posx + 1, posy, 2, 1, kind,
-                                       orientation, rotable, visited);
-                        }
-            }
-            break;
-        }
-
-    }
-
-    drawPiece(board);
-    */
-    return *rotable;
+    rotable2 = *rotable;
+    free(rotable);
+    return rotable2;
 }
 
 Bool testLineFilled(Board * board, const unsigned int posY)
 {
     int i;
-    Bool * filled = (Bool *)malloc(sizeof(Bool));
+    Bool filled;
 
     for (i = 0; i < 10; i++)
     {
         if(board->gridge[posY][i] == 0)
         {
-            *filled = FALSE;
-            return *filled;
+            filled = FALSE;
+            return filled;
         }
     }
-    *filled = TRUE;
-    return *filled;
+    filled = TRUE;
+    return filled;
 }
 
 Bool testLineEmpty(Board * board, const unsigned int posY)
 {
     int i;
-    Bool * empty = (Bool *)malloc(sizeof(Bool));
+    Bool empty;
     for (i = 0; i < 10; i++)
     {
         if(board->gridge[posY][i] != 0)
         {
-            *empty = FALSE;
-            return *empty;
+            empty = FALSE;
+            return empty;
         }
     }
-    *empty = TRUE;
-    return *empty;
+    empty = TRUE;
+    return empty;
 }
 
 /* ================ Méthodes ==================  */

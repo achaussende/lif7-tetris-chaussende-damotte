@@ -23,14 +23,14 @@ typedef struct
 /**
 
         @brief mutateur du nom d'un joueur
-        @param un Player et un char
+        @param un pointeur sur Player et un char
 */
 void setName (Player * player, const char * name);
 
 /**
 
         @brief assesseur du nom d'un joueur
-        @param un Player
+        @param un pointeur sur Player
         @return un char
 */
 char * getName (const Player * player);
@@ -38,15 +38,15 @@ char * getName (const Player * player);
 /**
 
         @brief mutateur du score d'un joueur
-        @param un Player et int score
+        @param un pointeur Player et un entier naturel score
 */
 void setScore (Player * player, unsigned int score);
 
 /**
 
         @brief assesseur du score d'un joueur
-        @param un Player
-        @return un int score
+        @param un pointeur sur Player
+        @return un entier score
 */
 unsigned int getScore (const Player * player);
 
@@ -55,7 +55,7 @@ unsigned int getScore (const Player * player);
 /**
 
         @brief méthode d'initialisation d'un joueur
-        @param un Player, un char pour le nom et un int score
+        @param un pointeur sur Player, un char pour le nom et un int score
 */
 void initPlayer(Player * player, const char * name, unsigned int score);
 
@@ -63,8 +63,14 @@ void initPlayer(Player * player, const char * name, unsigned int score);
 
         @brief méthode de création d'un joueur
         @param un char pour le nom et un int score
-        @return un Player
+        @return un pointeur sur Player
 */
 Player * createPlayer(const char * name, unsigned int score);
 
+/**
+
+        @brief méthode de libération d'un joueur
+        @param un pointeur sur Player
+*/
+void freePlayer(Player * player);
 #endif
