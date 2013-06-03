@@ -618,9 +618,9 @@ Bool testGameOver(Board * board)
     return FALSE;
 }
 
-/* startGame : renvoie un pointeur sur Tetris. Crée une structure tetris
+/* startTetris : renvoie un pointeur sur Tetris. Crée une structure tetris
 avec une board initialisée (gridge vide, et une nouvelle currentPiece),
-nextpiece créée, et un arbre initialisé */
+nextpiece créée, holdpiece vide et un arbre initialisé */
 
 Tetris * startTetris()
 {
