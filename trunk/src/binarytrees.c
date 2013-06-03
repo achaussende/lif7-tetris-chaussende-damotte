@@ -32,6 +32,7 @@ unsigned int getTreeNb_Elements(const Tree * tree)
 {
     return tree->nb_elements;
 }
+
 void initTree (Tree * tree)
 {
     setTreeRoot(tree, NULL);
@@ -51,6 +52,7 @@ void freeTree_recursion(Node * node)
 void freeTree (Tree * tree)
 {
     freeTree_recursion(tree->root);
+    free(tree);
 }
 
 /* ================ Méthodes ================= */

@@ -521,10 +521,14 @@ void sdlgameLoop(SDL *sdl)
 
     SDL_apply_surface(sdl->tuto, sdl->screen, 50, 500); /* Blit de tuto */
     SDL_apply_surface(sdl->tuto2, sdl->screen, 50, 520); /* Blit de tuto2 */
+<<<<<<< .mine
+    SDL_FreeSurface(sdl->playername);
+=======
     SDL_apply_surface(sdl->tuto3, sdl->screen, 50, 540); /* Blit de tuto3 */
 
     /* Création du joueur avec le pseudo récupéré*/
     createPlayer(playername1,score);
+>>>>>>> .r128
     sdl->playername = TTF_RenderText_Blended(sdl->font2, playername1,
                                              colorWhite);
     /* Blit du nom du joueur */
@@ -798,6 +802,7 @@ void sdlgameLoop(SDL *sdl)
 
                     case SDLK_n: /* Touche n */
                         endgame=0;
+                        return;
                     break;
 
                     default:
@@ -806,6 +811,14 @@ void sdlgameLoop(SDL *sdl)
         }
     }
     }
+<<<<<<< .mine
+
+    free(playername1);
+    /*pause();*/
+
+
+=======
+>>>>>>> .r128
 }
 
 
