@@ -1,0 +1,11 @@
+<map id="shapes.h" name="shapes.h">
+<area shape="rect" id="node3" href="$piece_8h.html" title="Contient la déclaration des fonctions, procédures, accesseurs et mutateurs, et la structure d&#39;une piè..." alt="" coords="163,83,227,112"/>
+<area shape="rect" id="node17" href="$tetris_8c.html" title="Contient les fonctions, procédures, accesseurs et mutateurs du tetris." alt="" coords="233,315,295,344"/>
+<area shape="rect" id="node5" href="$board_8h.html" title="Contient la déclaration des fonctions, procédures, accesseurs et mutateurs, et la structure d&#39;une boa..." alt="" coords="75,160,139,189"/>
+<area shape="rect" id="node19" href="$piece_8c.html" title="Contient les fonctions, procédures, accesseurs et mutateurs nécessaires à la création d&#39;une pièce..." alt="" coords="163,160,227,189"/>
+<area shape="rect" id="node7" href="$board_8c.html" title="Contient les fonctions, procédures, accesseurs et mutateurs nécessaires à la création d&#39;une board..." alt="" coords="48,237,112,267"/>
+<area shape="rect" id="node9" href="$tetris_8h.html" title="Contient la déclaration des fonctions, procédures, accesseurs et mutateurs, et la structure d&#39;un tetr..." alt="" coords="136,237,197,267"/>
+<area shape="rect" id="node11" href="$LoopTETRIS__SDL_8h.html" title="Contient la déclaration des fonctions et structures nécessaires à l&#39;affichage du jeu." alt="" coords="68,315,209,344"/>
+<area shape="rect" id="node13" href="$LoopTETRIS__SDL_8c.html" title="Contient les fonctions d&#39;affichage du jeu via SDL." alt="" coords="5,392,147,421"/>
+<area shape="rect" id="node15" href="$main_8c.html" title="Main du jeu." alt="" coords="171,392,232,421"/>
+</map>

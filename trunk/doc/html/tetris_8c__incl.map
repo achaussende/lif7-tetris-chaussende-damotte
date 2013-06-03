@@ -1,0 +1,10 @@
+<map id="tetris.c" name="tetris.c">
+<area shape="rect" id="node11" href="$tetris_8h.html" title="Contient la déclaration des fonctions, procédures, accesseurs et mutateurs, et la structure d&#39;un tetr..." alt="" coords="360,83,421,112"/>
+<area shape="rect" id="node25" href="$shapes_8h.html" title="Contient la déclaration des formes des pièces." alt="" coords="440,315,515,344"/>
+<area shape="rect" id="node13" href="$bool_8h.html" title="Déclaration du type booléen." alt="" coords="211,160,267,189"/>
+<area shape="rect" id="node15" href="$binarytrees_8h.html" title="Contient la déclaration des fonctions et structure nécessaires aux arbres de scores." alt="" coords="291,160,387,189"/>
+<area shape="rect" id="node21" href="$board_8h.html" title="Contient la déclaration des fonctions, procédures, accesseurs et mutateurs, et la structure d&#39;une boa..." alt="" coords="411,160,475,189"/>
+<area shape="rect" id="node17" href="$node_8h.html" title="Contient la déclaration des fonctions et structure pour les noeuds des arbres." alt="" coords="308,237,369,267"/>
+<area shape="rect" id="node19" href="$player_8h.html" title="Contient la déclaration des fonctions, procédures d&#39;initialisation d&#39;un nouveau joueur." alt="" coords="305,315,372,344"/>
+<area shape="rect" id="node23" href="$piece_8h.html" title="Contient la déclaration des fonctions, procédures, accesseurs et mutateurs, et la structure d&#39;une piè..." alt="" coords="411,237,475,267"/>
+</map>

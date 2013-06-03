@@ -1,0 +1,8 @@
+<map id="board.h" name="board.h">
+<area shape="rect" id="node3" href="$board_8c.html" title="Contient les fonctions, procédures, accesseurs et mutateurs nécessaires à la création d&#39;une board..." alt="" coords="83,83,147,112"/>
+<area shape="rect" id="node5" href="$tetris_8h.html" title="Contient la déclaration des fonctions, procédures, accesseurs et mutateurs, et la structure d&#39;un tetr..." alt="" coords="171,83,232,112"/>
+<area shape="rect" id="node7" href="$LoopTETRIS__SDL_8h.html" title="Contient la déclaration des fonctions et structures nécessaires à l&#39;affichage du jeu." alt="" coords="68,160,209,189"/>
+<area shape="rect" id="node13" href="$tetris_8c.html" title="Contient les fonctions, procédures, accesseurs et mutateurs du tetris." alt="" coords="233,160,295,189"/>
+<area shape="rect" id="node9" href="$LoopTETRIS__SDL_8c.html" title="Contient les fonctions d&#39;affichage du jeu via SDL." alt="" coords="5,237,147,267"/>
+<area shape="rect" id="node11" href="$main_8c.html" title="Main du jeu." alt="" coords="171,237,232,267"/>
+</map>

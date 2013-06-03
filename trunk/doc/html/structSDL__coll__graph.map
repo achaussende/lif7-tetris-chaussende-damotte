@@ -1,0 +1,8 @@
+<map id="SDL" name="SDL">
+<area shape="rect" id="node2" href="$structTetris.html" title="Structure d&#39;un Tetris." alt="" coords="86,304,140,333"/>
+<area shape="rect" id="node4" href="$structBoard.html" title="Structure d&#39;une Board." alt="" coords="85,205,141,235"/>
+<area shape="rect" id="node6" href="$structPiece.html" title="Structure d&#39;une Piece." alt="" coords="13,104,66,133"/>
+<area shape="rect" id="node9" href="$structTree.html" title="Structure d&#39;un Arbre." alt="" coords="165,205,213,235"/>
+<area shape="rect" id="node11" href="$structNode.html" title="Structure d&#39;un Noeud." alt="" coords="162,104,216,133"/>
+<area shape="rect" id="node14" href="$structPlayer.html" title="Structure d&#39;un Player." alt="" coords="160,5,218,35"/>
+</map>
