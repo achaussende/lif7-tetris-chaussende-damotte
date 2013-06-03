@@ -1,3 +1,35 @@
+/* Documentation tag for Doxygen
+ */
+
+/*! \mainpage TETRIS Documentation
+ *
+ * \section intro_sec Introduction
+ *
+ *
+ * This is the Tetris documentation
+ *
+ * Authors : CHAUSSENDE Adrien and DAMOTTE Alan
+ *
+ * Date : 2013
+ *
+ * Design : Alan DAMOTTE
+ *
+ * All rigts reserved
+ *
+ * Un grand merci aux encadrants de LIF7 (Lyon1) qui nous ont permis de mener ce projet à terme
+ *
+ * \section install_sec Installation
+ *
+ * \subsection tools_subsec Tools required:
+ * - SDL packets, FMOD
+ *
+ * \subsection running Running the program
+ * See the README.txt in the main folder
+ *
+ * <BR><BR>
+ *
+ */
+
 /**
     \file [LoopTETRIS_SDL.c]
     \brief 	Contient les fonctions d'affichage du jeu via SDL

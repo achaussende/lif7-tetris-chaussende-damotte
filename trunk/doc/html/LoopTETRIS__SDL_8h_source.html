@@ -67,7 +67,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -124,49 +124,48 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00048"></a><span class="lineno"><a class="code" href="structSDL.html#aa2f513b93c503600a0dfea9b0f9c23da">   48</a></span>&#160;    SDL_Surface * <a class="code" href="structSDL.html#aa2f513b93c503600a0dfea9b0f9c23da">textpause</a>;</div>
 <div class="line"><a name="l00049"></a><span class="lineno"><a class="code" href="structSDL.html#a7f7c309b8a711e33f94c5bb17640ec83">   49</a></span>&#160;    SDL_Surface * <a class="code" href="structSDL.html#a7f7c309b8a711e33f94c5bb17640ec83">tuto</a>;</div>
 <div class="line"><a name="l00050"></a><span class="lineno"><a class="code" href="structSDL.html#aeebfd9c49f496dfd185434cd5e1563b7">   50</a></span>&#160;    SDL_Surface * <a class="code" href="structSDL.html#aeebfd9c49f496dfd185434cd5e1563b7">tuto2</a>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="code" href="structSDL.html#ae9159461c946991c3a4a201f43e57c24">   51</a></span>&#160;    SDL_Surface * <a class="code" href="structSDL.html#ae9159461c946991c3a4a201f43e57c24">entername</a>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="code" href="structSDL.html#a7d522295031d8bfe01e7e2e06d2e8206">   52</a></span>&#160;    SDL_Surface * <a class="code" href="structSDL.html#a7d522295031d8bfe01e7e2e06d2e8206">textplayername</a>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="code" href="structSDL.html#af63ad428075f385fd8befe5748e9d072">   53</a></span>&#160;    SDL_Surface * <a class="code" href="structSDL.html#af63ad428075f385fd8befe5748e9d072">playername</a>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="code" href="structSDL.html#a3fd883bf8eee672c386495db63d9f40b">   55</a></span>&#160;        <a class="code" href="structTetris.html" title="Structure d&#39;un Tetris.">Tetris</a> * <a class="code" href="structSDL.html#a3fd883bf8eee672c386495db63d9f40b">tetris</a>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="code" href="structSDL.html#a5cf692ee145d0b68ce5ab9a74646a94e">   57</a></span>&#160;    TTF_Font * <a class="code" href="structSDL.html#a5cf692ee145d0b68ce5ab9a74646a94e">font</a>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="code" href="structSDL.html#a44c4e0ed553977ac5eda6282b9d1b845">   58</a></span>&#160;    TTF_Font * <a class="code" href="structSDL.html#a44c4e0ed553977ac5eda6282b9d1b845">font1</a>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="code" href="structSDL.html#a80f708210e988acfd217ce5eb45653af">   59</a></span>&#160;    TTF_Font * <a class="code" href="structSDL.html#a80f708210e988acfd217ce5eb45653af">font2</a>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}<a class="code" href="structSDL.html" title="Structure d&#39;une SDL.">SDL</a>;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keywordtype">void</span> <a class="code" href="LoopTETRIS__SDL_8c.html#afdb9f52dac75fe10312b0ba336939ba6" title="Procédure d&#39;initialisation d&#39;une SDL.">sdlgameInit</a>(<a class="code" href="structSDL.html" title="Structure d&#39;une SDL.">SDL</a> *sdl);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordtype">void</span> <a class="code" href="LoopTETRIS__SDL_8c.html#a0fd83de58188c99eb96f52340edf61dd" title="Boucle SDL.">sdlgameLoop</a>(<a class="code" href="structSDL.html" title="Structure d&#39;une SDL.">SDL</a> *sdl);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="keywordtype">void</span> <a class="code" href="LoopTETRIS__SDL_8c.html#a37021b84de60771fd722709067427877" title="Procédure de libération d&#39;une SDL.">sdlgameFree</a>(<a class="code" href="structSDL.html" title="Structure d&#39;une SDL.">SDL</a> *sdl);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">void</span> <a class="code" href="LoopTETRIS__SDL_8h.html#a9616dd5ddd7a1808f1afca881c2ec83e" title="Procédure d&#39;affichage d&#39;une SDL.">sdljeuAff</a>(<a class="code" href="structSDL.html" title="Structure d&#39;une SDL.">SDL</a> *sdl);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordtype">void</span> <a class="code" href="LoopTETRIS__SDL_8c.html#ac4e12f0e544aed898a36076a932e9df3" title="Procédure d&#39;application de surface.">SDL_apply_surface</a>( SDL_Surface* source, SDL_Surface* destination,</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                       <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y );</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;SDL_Surface *<a class="code" href="LoopTETRIS__SDL_8c.html#aaf9c7736cab0f3cecd284f5fdb0b1683" title="Fonction de chargement d&#39;image dans une SDL_surface.">SDL_load_image</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* filename );</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;SDL_Surface* <a class="code" href="LoopTETRIS__SDL_8c.html#a4605aeeb53d27c04ef1c237dbb7b48f4">SDLdisplayscreen</a>(SDL_Surface* screen, SDL_Surface* gridge,</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                              SDL_Surface* kind[8], <a class="code" href="structTetris.html" title="Structure d&#39;un Tetris.">Tetris</a>* tetris,</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                              <span class="keywordtype">int</span> positionX, <span class="keywordtype">int</span> positionY);</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;SDL_Surface* <a class="code" href="LoopTETRIS__SDL_8c.html#a7d34f328dceb9421afb82db49887a925">SDLdisplaypiece</a>(SDL_Surface* screen,</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                             SDL_Surface* nextholdpiecebackground,</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                             SDL_Surface* kind[8], <a class="code" href="structPiece.html" title="Structure d&#39;une Piece.">Piece</a> * piece,</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                             <span class="keywordtype">int</span> positionX, <span class="keywordtype">int</span> positionY);</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="code" href="structSDL.html#a5b35e7f74b9a28215c798d058fefa11c">   51</a></span>&#160;    SDL_Surface * <a class="code" href="structSDL.html#a5b35e7f74b9a28215c798d058fefa11c">tuto3</a>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="code" href="structSDL.html#ae9159461c946991c3a4a201f43e57c24">   52</a></span>&#160;    SDL_Surface * <a class="code" href="structSDL.html#ae9159461c946991c3a4a201f43e57c24">entername</a>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="code" href="structSDL.html#a7d522295031d8bfe01e7e2e06d2e8206">   53</a></span>&#160;    SDL_Surface * <a class="code" href="structSDL.html#a7d522295031d8bfe01e7e2e06d2e8206">textplayername</a>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="code" href="structSDL.html#af63ad428075f385fd8befe5748e9d072">   54</a></span>&#160;    SDL_Surface * <a class="code" href="structSDL.html#af63ad428075f385fd8befe5748e9d072">playername</a>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="code" href="structSDL.html#a3fd883bf8eee672c386495db63d9f40b">   56</a></span>&#160;        <a class="code" href="structTetris.html" title="Structure d&#39;un Tetris.">Tetris</a> * <a class="code" href="structSDL.html#a3fd883bf8eee672c386495db63d9f40b">tetris</a>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="code" href="structSDL.html#a5cf692ee145d0b68ce5ab9a74646a94e">   58</a></span>&#160;    TTF_Font * <a class="code" href="structSDL.html#a5cf692ee145d0b68ce5ab9a74646a94e">font</a>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="code" href="structSDL.html#a44c4e0ed553977ac5eda6282b9d1b845">   59</a></span>&#160;    TTF_Font * <a class="code" href="structSDL.html#a44c4e0ed553977ac5eda6282b9d1b845">font1</a>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="code" href="structSDL.html#a80f708210e988acfd217ce5eb45653af">   60</a></span>&#160;    TTF_Font * <a class="code" href="structSDL.html#a80f708210e988acfd217ce5eb45653af">font2</a>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}<a class="code" href="structSDL.html" title="Structure d&#39;une SDL.">SDL</a>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keywordtype">void</span> <a class="code" href="LoopTETRIS__SDL_8c.html#afdb9f52dac75fe10312b0ba336939ba6" title="Procédure d&#39;initialisation d&#39;une SDL.">sdlgameInit</a>(<a class="code" href="structSDL.html" title="Structure d&#39;une SDL.">SDL</a> *sdl);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keywordtype">void</span> <a class="code" href="LoopTETRIS__SDL_8c.html#a0fd83de58188c99eb96f52340edf61dd" title="Boucle SDL.">sdlgameLoop</a>(<a class="code" href="structSDL.html" title="Structure d&#39;une SDL.">SDL</a> *sdl);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keywordtype">void</span> <a class="code" href="LoopTETRIS__SDL_8c.html#a37021b84de60771fd722709067427877" title="Procédure de libération d&#39;une SDL.">sdlgameFree</a>(<a class="code" href="structSDL.html" title="Structure d&#39;une SDL.">SDL</a> *sdl);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keywordtype">void</span> <a class="code" href="LoopTETRIS__SDL_8c.html#ac4e12f0e544aed898a36076a932e9df3" title="Procédure d&#39;application de surface.">SDL_apply_surface</a>( SDL_Surface* source, SDL_Surface* destination,</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                       <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y );</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;SDL_Surface *<a class="code" href="LoopTETRIS__SDL_8c.html#aaf9c7736cab0f3cecd284f5fdb0b1683" title="Fonction de chargement d&#39;image dans une SDL_surface.">SDL_load_image</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* filename );</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;SDL_Surface* <a class="code" href="LoopTETRIS__SDL_8c.html#a4605aeeb53d27c04ef1c237dbb7b48f4">SDLdisplayscreen</a>(SDL_Surface* screen, SDL_Surface* gridge,</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                              SDL_Surface* kind[8], <a class="code" href="structTetris.html" title="Structure d&#39;un Tetris.">Tetris</a>* tetris,</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                              <span class="keywordtype">int</span> positionX, <span class="keywordtype">int</span> positionY);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;SDL_Surface* <a class="code" href="LoopTETRIS__SDL_8c.html#a7d34f328dceb9421afb82db49887a925">SDLdisplaypiece</a>(SDL_Surface* screen,</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                             SDL_Surface* nextholdpiecebackground,</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                             SDL_Surface* kind[8], <a class="code" href="structPiece.html" title="Structure d&#39;une Piece.">Piece</a> * piece,</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                             <span class="keywordtype">int</span> positionX, <span class="keywordtype">int</span> positionY);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keywordtype">void</span> <a class="code" href="LoopTETRIS__SDL_8c.html#a7167f5c196fc5e167bfabde1a730e81d" title="Fonction de pause.">pause</a>();</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="keywordtype">void</span> <a class="code" href="LoopTETRIS__SDL_8c.html#a7167f5c196fc5e167bfabde1a730e81d" title="Fonction de pause.">pause</a>();</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="keywordtype">void</span> <a class="code" href="LoopTETRIS__SDL_8c.html#a1aa28adf428dfd8443ca3be0aa1ec629" title="procédure de test regression">sdltestRegression</a>(<a class="code" href="structSDL.html" title="Structure d&#39;une SDL.">SDL</a> *sdl);</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="keywordtype">void</span> <a class="code" href="LoopTETRIS__SDL_8c.html#a1aa28adf428dfd8443ca3be0aa1ec629" title="procédure de test regression">sdltestRegression</a>(<a class="code" href="structSDL.html" title="Structure d&#39;une SDL.">SDL</a> *sdl);</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 3 2013 14:48:19 for Tetris by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Jun 3 2013 15:47:26 for Tetris by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

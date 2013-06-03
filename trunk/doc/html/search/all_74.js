@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['tetris_20documentation',['TETRIS Documentation',['../index.html',1,'']]],
   ['testfallpiece',['testFallPiece',['../tetris_8c.html#ae6734214f4efa53e0811cf029cc98e65',1,'testFallPiece(Board *board):&#160;tetris.c'],['../tetris_8h.html#ae6734214f4efa53e0811cf029cc98e65',1,'testFallPiece(Board *board):&#160;tetris.c']]],
   ['testgameover',['testGameOver',['../tetris_8c.html#ad50f119343a1d2899f82fbbe04a8cb3a',1,'testGameOver(Board *board):&#160;tetris.c'],['../tetris_8h.html#ad50f119343a1d2899f82fbbe04a8cb3a',1,'testGameOver(Board *board):&#160;tetris.c']]],
   ['testlineempty',['testLineEmpty',['../tetris_8c.html#aa9a922a50f43a3a0ce6c89a4f6f1d936',1,'testLineEmpty(Board *board, const unsigned int posY):&#160;tetris.c'],['../tetris_8h.html#aa9a922a50f43a3a0ce6c89a4f6f1d936',1,'testLineEmpty(Board *board, const unsigned int posY):&#160;tetris.c']]],
@@ -17,5 +18,6 @@ var searchData=
   ['treescores',['treescores',['../structTetris.html#ad4b14105fcf57828c4b2d6dd95730a36',1,'Tetris']]],
   ['true',['TRUE',['../bool_8h.html#a39db6982619d623273fad8a383489309aa82764c3079aea4e60c80e45befbb839',1,'bool.h']]],
   ['tuto',['tuto',['../structSDL.html#a7f7c309b8a711e33f94c5bb17640ec83',1,'SDL']]],
-  ['tuto2',['tuto2',['../structSDL.html#aeebfd9c49f496dfd185434cd5e1563b7',1,'SDL']]]
+  ['tuto2',['tuto2',['../structSDL.html#aeebfd9c49f496dfd185434cd5e1563b7',1,'SDL']]],
+  ['tuto3',['tuto3',['../structSDL.html#a5b35e7f74b9a28215c798d058fefa11c',1,'SDL']]]
 ];
