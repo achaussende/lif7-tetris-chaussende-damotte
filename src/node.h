@@ -1,6 +1,7 @@
 /**
     \file [node.h]
-    \brief 	Contient la déclaration des fonctions et structure pour les noeuds des arbres
+    \brief 	Contient la déclaration des fonctions et
+    structure pour les noeuds des arbres
     \author {Damotte Alan, Chaussende Adrien}
     \version 1.1
     \date Mai 2013
@@ -29,45 +30,45 @@ typedef struct Node
 /**
 
         @brief mutateur de valeur d'un noeud
-        @param un Node et un Player
+        @param pointeur sur un Node et pointeur sur un Player
 */
 void setNodeValue (Node * node, const Player * player);
 
 /**
 
         @brief assesseur de la valeur d'un noeud
-        @param un Node
-        @return un Player
+        @param pointeur sur un Node
+        @return pointeur sur un Player
 */
 Player * getNodeValue(const Node * node);
 
 /**
 
         @brief mutateur de valeur du fils gauche d'un noeud
-        @param un Node et un pointeur sur Noeud
+        @param pointeur sur un Node et un pointeur sur Noeud
 */
 void setNodeLeft_Child(Node * node, const Node * pnode);
 
 /**
 
         @brief assesseur de la valeur du fils gauche d'un noeud
-        @param un Node
-        @return un Node
+        @param pointeur sur un Node
+        @return pointeur sur un Node
 */
 Node * getNodeLeft_Child(const Node * node);
 
 /**
 
         @brief mutateur de valeur du fils droit d'un noeud
-        @param un Node et un pointeur sur Noeud
+        @param pointeur sur un Node et un pointeur sur Noeud
 */
 void setNodeRight_Child(Node * node, const Node * pnode);
 
 /**
 
         @brief assesseur de la valeur du fils droit d'un noeud
-        @param un Node
-        @return un Node
+        @param pointeur sur un Node
+        @return pointeur sur un Node
 */
 Node * getNodeRight_Child(const Node * node);
 
@@ -75,22 +76,22 @@ Node * getNodeRight_Child(const Node * node);
 /**
 
         @brief méthode d'initialisation d'un noeud
-        @param un Node et un Player
+        @param pointeur sur un Node et pointeur sur un Player
 */
 void initNode(Node * node, const Player * player);
 
 /**
 
         @brief méthode de création d'un noeud
-        @param un Player
-        @return un Node
+        @param pointeur sur un Player
+        @return pointeur sur un Node
 */
 Node * createNode(const Player * player);
 
 /**
 
         @brief méthode de libération d'un noeud
-        @param un Node
+        @param pointeur sur un Node
 */
 void freeNode(Node * node);
 

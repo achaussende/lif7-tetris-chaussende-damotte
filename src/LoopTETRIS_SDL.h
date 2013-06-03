@@ -1,6 +1,7 @@
 /**
     \file [LoopTETRIS_SDL.h]
-    \brief 	Contient la déclaration des fonctions et structures nécessaires à l'affichage du jeu
+    \brief 	Contient la déclaration des fonctions et
+    structures nécessaires à l'affichage du jeu
     \author {Damotte Alan, Chaussende Adrien}
     \version 1.1
     \date Avril-Mai 2013
@@ -47,6 +48,8 @@ typedef struct
     SDL_Surface * textpause;
     SDL_Surface * tuto;
     SDL_Surface * tuto2;
+    SDL_Surface * tuto3;
+    SDL_Surface * entername;
     SDL_Surface * textplayername;
     SDL_Surface * playername;
 
@@ -61,58 +64,71 @@ typedef struct
 /**
 
         @brief Procédure d'initialisation d'une SDL
-        @param une SDL
+        @param pointeur sur une SDL
 */
 void sdlgameInit(SDL *sdl);
 
 /**
 
         @brief Boucle SDL
-        @param une SDL
+        @param pointeur sur une SDL
 */
 void sdlgameLoop(SDL *sdl);
 
 /**
 
         @brief Procédure de libération d'une SDL
-        @param une SDL
+        @param pointeur sur une SDL
 */
 void sdlgameFree(SDL *sdl);
 
 /**
 
         @brief Procédure d'affichage d'une SDL
-        @param une SDL
+        @param pointeur sur une SDL
 */
 void sdljeuAff(SDL *sdl);
 
 /**
 
         @brief Procédure d'application de surface
-        @param une SDL_surface source, une SDL_surface destination, int x, int y
+        @param pointeur sur une SDL_surface source,
+        pointeur sur une SDL_surface destination,
+        entier pour coordonnées x, entier pour coordonnées y
 */
-void SDL_apply_surface( SDL_Surface* source, SDL_Surface* destination, int x, int y );
+void SDL_apply_surface( SDL_Surface* source, SDL_Surface* destination,
+                       int x, int y );
 
 /**
 
         @brief Fonction de chargement d'image dans une SDL_surface
-        @param une chaine de caractères de nom de fichier
+        @param pointeur sur une chaine de caractères de nom de fichier
 */
 SDL_Surface *SDL_load_image(const char* filename );
 
 /**
 
         @brief Fonction d'affichage de la grille de jeu (10x20)
-        @param deux SDL_surfaces screen et gridge, un tableau de SDL_Surface pour le kind, un Tetris, deux entiers de position
+        @param deux pointeurs sur  SDL_surfaces screen et gridge,
+        pointeur sur un tableau de SDL_Surface pour le kind,
+        pointeur sur un Tetris, deux entiers de position
 */
-SDL_Surface* SDLdisplayscreen(SDL_Surface* screen, SDL_Surface* gridge, SDL_Surface* kind[8], Tetris* tetris, int positionX, int positionY);
+SDL_Surface* SDLdisplayscreen(SDL_Surface* screen, SDL_Surface* gridge,
+                              SDL_Surface* kind[8], Tetris* tetris,
+                              int positionX, int positionY);
 
 /**
 
         @brief Fonction d'affichage d'une pièce dans un tableau 4x4
-        @param deux SDL_surfaces screen et nextholdpiecebakcground, un tableau de SDL_Surface pour le kind, une Piece, deux entiers de position
+        @param deux pointeurs sur SDL_surfaces screen et
+        nextholdpiecebakcground,
+        pointeur sur un tableau de SDL_Surface pour le kind,
+        pointeur sur une Piece, deux entiers de position
 */
-SDL_Surface* SDLdisplaypiece(SDL_Surface* screen, SDL_Surface* nextholdpiecebackground, SDL_Surface* kind[8], Piece * piece, int positionX, int positionY);
+SDL_Surface* SDLdisplaypiece(SDL_Surface* screen,
+                             SDL_Surface* nextholdpiecebackground,
+                             SDL_Surface* kind[8], Piece * piece,
+                             int positionX, int positionY);
 
 /**
 
@@ -123,7 +139,7 @@ void pause();
 /**
 
         @brief procédure de test regression
-        @param une SDL
+        @param pointeur sur une SDL
 */
 void sdltestRegression(SDL *sdl);
 

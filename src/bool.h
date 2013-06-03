@@ -13,6 +13,8 @@
     @enum Bool
 */
 
-typedef enum {FALSE = 0, TRUE = 1} Bool; // Définition d'un type booléen : Vrai = 1, Faux = 0
+/* Définition d'un type booléen : Vrai = 1, Faux = 0*/
+typedef enum {FALSE = 0, TRUE = 1} Bool;
+
 
 #endif

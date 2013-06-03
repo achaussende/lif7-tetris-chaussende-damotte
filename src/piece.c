@@ -1,19 +1,20 @@
 /**
     \file [piece.c]
-    \brief 	Contient les fonctions, procédures, accesseurs et mutateurs nécessaires à la création d'une pièce
+    \brief 	Contient les fonctions, procédures,
+    accesseurs et mutateurs nécessaires à la création d'une pièce
     \author {Damotte Alan, Chaussende Adrien}
     \version 1.1
     \date Avril 2013
 */
 
 #include "piece.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 
 
-void initPiece(Piece * piece, unsigned int kind, const Color color, unsigned int orientation)
+void initPiece(Piece * piece, unsigned int kind, const Color color,
+               unsigned int orientation)
 {
     setColor(piece, color);
     setKind(piece, kind);

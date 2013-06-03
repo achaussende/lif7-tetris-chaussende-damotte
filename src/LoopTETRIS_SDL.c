@@ -49,21 +49,22 @@ SDL_Surface* SDL_load_image(const char* filename){
 
 	else
 	{
-	    //Création de l'image optimisée
+	    /*Création de l'image optimisée*/
         optimizedImage = SDL_DisplayFormat( loadedImage );
 
-        //Libération de l'ancienne image
+        /*Libération de l'ancienne image*/
         SDL_FreeSurface( loadedImage );
 
-        //Si l'image optimisée créée est bonne
+        /*Si l'image optimisée créée est bonne*/
     	if( optimizedImage != NULL )
     	{
-            //Uint32 colorkey = SDL_MapRGB( optimizedImage->format, 0, 0xFF, 0xFF );
-            Uint32 colorkey = SDL_MapRGB( optimizedImage->format, 255, 255, 255 );
+            Uint32 colorkey = SDL_MapRGB( optimizedImage->format,
+                                         255, 255, 255 );
 
-        //On met tous les pixels de couleur R 0, G 0xFF, B 0xFF transparent
-            SDL_SetColorKey( optimizedImage, SDL_RLEACCEL | SDL_SRCCOLORKEY, colorkey );
-        //On retourne l'image optimisée
+        /*On met tous les pixels de couleur R 0, G 0xFF, B 0xFF transparent*/
+            SDL_SetColorKey( optimizedImage,
+                            SDL_RLEACCEL | SDL_SRCCOLORKEY, colorkey );
+        /*On retourne l'image optimisée*/
         return optimizedImage;
     	}
 	}
@@ -83,50 +84,56 @@ SDL_Surface* SDLdisplayscreen(SDL_Surface* screen, SDL_Surface* gridge,
             {
                 if ((tetris->board->gridge[j][i])!=0)
                 {
-                     //SDL_apply_surface(kind,screen, positionX+(i*20), positionY+(j*20));
 
                 switch (tetris->board->gridge[j][i]) {
 
         case 1:
         {
-            SDL_apply_surface(kind[0],screen, positionX+(i*20), positionY+(j*20));
+            SDL_apply_surface(kind[0],screen, positionX+(i*20),
+                              positionY+(j*20));
 
         }
         break;
 
         case 2:
         {
-            SDL_apply_surface(kind[1],screen, positionX+(i*20), positionY+(j*20));
+            SDL_apply_surface(kind[1],screen, positionX+(i*20),
+                              positionY+(j*20));
 
         }
         break;
         case 3:
         {
-            SDL_apply_surface(kind[2],screen, positionX+(i*20), positionY+(j*20));
+            SDL_apply_surface(kind[2],screen, positionX+(i*20),
+                              positionY+(j*20));
 
         }
         break;
         case 4:
         {
-            SDL_apply_surface(kind[3],screen, positionX+(i*20), positionY+(j*20));
+            SDL_apply_surface(kind[3],screen, positionX+(i*20),
+                              positionY+(j*20));
 
         }
         break;
         case 5:
         {
-            SDL_apply_surface(kind[4],screen, positionX+(i*20), positionY+(j*20));
+            SDL_apply_surface(kind[4],screen, positionX+(i*20),
+                              positionY+(j*20));
 
         }
         break;
         case 6:
         {
-            SDL_apply_surface(kind[5],screen, positionX+(i*20), positionY+(j*20));
+            SDL_apply_surface(kind[5],screen, positionX+(i*20),
+                              positionY+(j*20));
 
         }
         break;
         case 7:
         {
-            SDL_apply_surface(kind[6],screen, positionX+(i*20), positionY+(j*20));
+            SDL_apply_surface(kind[6],screen, positionX+(i*20),
+                              positionY+(j*20));
 
         }
         break;
@@ -208,10 +215,6 @@ SDL_Surface* SDLdisplaypiece(SDL_Surface* screen,
                 break;
 
                 default:
-                {
-                   /* SDL_apply_surface(kind[7],screen, positionX+(i*20),
-                                         positionY+(j*20));*/
-                }
                 break;
                 }
 
@@ -219,20 +222,6 @@ SDL_Surface* SDLdisplaypiece(SDL_Surface* screen,
         }
         }
 }
-
-/*SDLclearpiece(SDL_Surface* screen, SDL_Surface* reset, int positionX, int positionY)
-{
-    int i,j;
-    for(j = 0; j < 4; j++)
-        {
-            for(i = 0; i < 4; i++)
-            {
-                SDL_apply_surface(reset,screen, positionX+(i*20), positionY+(j*20));
-
-            }
-        }
-
-}*/
 
 void sdlgameInit(SDL *sdl)
 {
@@ -255,7 +244,9 @@ void sdlgameInit(SDL *sdl)
     sdl->textpause = NULL;
     sdl->tuto = NULL;
     sdl->tuto2 = NULL;
+    sdl->tuto3 = NULL;
     sdl->textplayername = NULL;
+    sdl->entername = NULL;
     sdl->playername = NULL;
 
         /* Rectangle de position */
@@ -315,13 +306,14 @@ void sdlgameInit(SDL *sdl)
 
             /* On active la répétition en boucle puis on joue la musique */
     FMOD_Sound_SetLoopCount(sdl->maintheme, -1);
-    FMOD_System_PlaySound(sdl->system, FMOD_CHANNEL_FREE, sdl->maintheme, 0, NULL);
+    FMOD_System_PlaySound(sdl->system, FMOD_CHANNEL_FREE,
+                          sdl->maintheme, 0, NULL);
 
         /* Coloration de la surface ecran en gris */
     SDL_FillRect(sdl->screen, NULL, SDL_MapRGB(sdl->screen->format, 0, 0, 0));
     sdl->gridge = SDL_load_image("../data/gridge.bmp");
 
-        //Initialisation de kind avec les images des couleurs des pièces
+        /*Initialisation de kind avec les images des couleurs des pièces*/
     sdl->kind[0]=SDL_load_image("../data/piecejaune.bmp");
     sdl->kind[1]=SDL_load_image("../data/piececyan.bmp");
     sdl->kind[2]=SDL_load_image("../data/piecevert.bmp");
@@ -330,7 +322,8 @@ void sdlgameInit(SDL *sdl)
     sdl->kind[5]=SDL_load_image("../data/piecebleue.bmp");
     sdl->kind[6]=SDL_load_image("../data/pieceviolet.bmp");
 
-        //Chargement de l'image d'écran de jeu et la pièce suivante
+        /*Chargement de l'image d'écran de jeu et
+        des fonds pièce suivante et pièce retenue*/
     sdl->screen2 = SDL_load_image("../data/screen.bmp");
     sdl->nextpiecebackground = SDL_load_image("../data/nextpiece.bmp");
     sdl->holdpiecebackground = SDL_load_image("../data/nextpiece.bmp");
@@ -381,6 +374,8 @@ void sdlgameLoop(SDL *sdl)
     /* ------------ Boucle de nom de joueur -------------- */
     sdl->textplayername = TTF_RenderText_Blended(sdl->font, "Player Name ?",
                                                  colorWhite);
+    sdl->entername = TTF_RenderText_Blended(sdl->font,
+                        "Please type your name :", colorWhite);
     /* Blit de text */
     SDL_apply_surface(sdl->textplayername, sdl->screen, 420, 275);
 
@@ -408,7 +403,14 @@ void sdlgameLoop(SDL *sdl)
             case SDL_KEYDOWN:
             if(beginevent.key.keysym.sym == SDLK_RETURN)
             {
-                begin = 0;
+                if(nbLetters>1)
+                {
+                    begin = 0;
+                }
+                else
+                {
+                     SDL_apply_surface(sdl->entername, sdl->screen, 100, 320);
+                }
             }
             else if((beginevent.key.keysym.sym == SDLK_BACKSPACE) &&
                     (nbLetters > 1))
@@ -417,11 +419,12 @@ void sdlgameLoop(SDL *sdl)
                              SDL_MapRGB(sdl->screen->format,0,0,0));
                 nbLetters--;
 
-                playername1=(char*)realloc(playername1, nbLetters*sizeof(char));
+                playername1=(char*)realloc(playername1,
+                                           nbLetters*sizeof(char));
                 playername1[nbLetters-1] = '\0';
 
                 sdl->playername = TTF_RenderText_Solid(sdl->font,
-                                                       playername1, colorWhite);
+                                                    playername1, colorWhite);
                 SDL_BlitSurface(sdl->playername, NULL, sdl->screen,
                                 &(sdl->positionName));
             }
@@ -435,7 +438,8 @@ void sdlgameLoop(SDL *sdl)
                     {
                         SDL_FillRect(sdl->screen,&(sdl->positionName),
                                      SDL_MapRGB(sdl->screen->format,0,0,0));
-                        playername1 = (char*)realloc(playername1,(nbLetters + 1)*sizeof(char));
+                        playername1 = (char*)realloc(playername1,
+                                            (nbLetters + 1)*sizeof(char));
 
                         playername1[nbLetters-1] = beginevent.key.keysym.sym;
                         playername1[nbLetters] = '\0';
@@ -454,7 +458,7 @@ void sdlgameLoop(SDL *sdl)
         }
     }
 
-
+    /*Blit de surface de l'écran de jeu */
     SDL_apply_surface(sdl->screen2,sdl->screen, 0, 0);
 
     sdl->position1.x = sdl->screen->w / 2 - sdl->gridge->w / 2;
@@ -467,21 +471,27 @@ void sdlgameLoop(SDL *sdl)
     SDL_apply_surface(sdl->playerbackground,sdl->screen, sdl->position1.x-307,
                       sdl->position1.y+19);
 
+    /*Initialisation de la pièce suivante et affichage */
     nextpiece = getTetrisNextPiece(sdl->tetris);
 
     SDLdisplayscreen(sdl->screen, sdl->gridge, sdl->kind, sdl->tetris,
                      sdl->position1.x, sdl->position1.y);
-    SDLdisplaypiece(sdl->screen, sdl->nextpiecebackground, sdl->kind, nextpiece,
-                    sdl->position1.x+280, sdl->position1.y+50);
+    SDLdisplaypiece(sdl->screen, sdl->nextpiecebackground, sdl->kind,
+                    nextpiece,sdl->position1.x+280, sdl->position1.y+50);
     SDL_apply_surface(sdl->holdpiecebackground, sdl->screen,
                       sdl->position1.x+280, sdl->position1.y+250);
 
     sdl->tuto = TTF_RenderText_Blended(sdl->font1, "P = Pause", colorWhite);
-    sdl->tuto2 = TTF_RenderText_Blended(sdl->font1, "C = Hold a line", colorWhite);
+    sdl->tuto2 = TTF_RenderText_Blended(sdl->font1, "C = Hold a line",
+                                         colorWhite);
+    sdl->tuto3 = TTF_RenderText_Blended(sdl->font1, "F1 = Surrender",
+                                         colorWhite);
 
     SDL_apply_surface(sdl->tuto, sdl->screen, 50, 500); /* Blit de tuto */
     SDL_apply_surface(sdl->tuto2, sdl->screen, 50, 520); /* Blit de tuto2 */
+    SDL_apply_surface(sdl->tuto3, sdl->screen, 50, 540); /* Blit de tuto3 */
 
+    /* Création du joueur avec le pseudo récupéré*/
     createPlayer(playername1,score);
     sdl->playername = TTF_RenderText_Blended(sdl->font2, playername1,
                                              colorWhite);
@@ -515,7 +525,7 @@ void sdlgameLoop(SDL *sdl)
             case SDL_KEYUP:
                 switch(event.key.keysym.sym)
                 {
-                    case SDLK_UP: // Flèche haut
+                    case SDLK_UP: /* Flèche haut */
                     if (pausebutton == 0)
                     {
                         rotationPiece(sdl->tetris->board);
@@ -526,7 +536,7 @@ void sdlgameLoop(SDL *sdl)
                     }
                         break;
 
-                    case SDLK_DOWN: // Flèche bas
+                    case SDLK_DOWN: /* Flèche bas */
                     if (pausebutton == 0)
                     {
                         moveCurrentPieceDown(sdl->tetris->board);
@@ -536,7 +546,7 @@ void sdlgameLoop(SDL *sdl)
                     }
                         break;
 
-                    case SDLK_RIGHT: // Flèche droite
+                    case SDLK_RIGHT: /* Flèche droite */
                     if (pausebutton == 0)
                     {
                         moveCurrentPieceRight(sdl->tetris->board);
@@ -547,7 +557,7 @@ void sdlgameLoop(SDL *sdl)
                     }
                         break;
 
-                    case SDLK_LEFT: // Flèche gauche
+                    case SDLK_LEFT: /* Flèche gauche */
                     if (pausebutton == 0){
                         moveCurrentPieceLeft(sdl->tetris->board);
                         SDLdisplayscreen(sdl->screen, sdl->gridge, sdl->kind,
@@ -557,7 +567,7 @@ void sdlgameLoop(SDL *sdl)
                     }
                         break;
 
-                    case SDLK_SPACE: // Barre espace
+                    case SDLK_SPACE: /* Barre espace */
                     if (pausebutton == 0){
                         dropCurrentPiece(sdl->tetris->board);
                         SDLdisplayscreen(sdl->screen, sdl->gridge, sdl->kind,
@@ -566,7 +576,7 @@ void sdlgameLoop(SDL *sdl)
                         temp = 2;
                         break;
                     }
-                    case SDLK_c: // Touche c
+                    case SDLK_c: /* Touche c */
                     if (pausebutton == 0){
                         if (change)
                         {
@@ -586,15 +596,27 @@ void sdlgameLoop(SDL *sdl)
                     }
 
                         break;
-                    case SDLK_p: // Touche p
+                    case SDLK_p: /* Touche p */
                             if(pausebutton == 0)
                                 pausebutton = 1;
                             else if(pausebutton == 1)
                                 pausebutton = 0;
                         break;
 
-                    case SDLK_ESCAPE: // Bouton ECHAP
+                    case SDLK_ESCAPE: /* Bouton ECHAP */
                     next = 0;
+                    return;
+                    break;
+                    case SDLK_F1: /* Bouton F1 = surrender */
+                    /* Enregistrement du score */
+                    player = createPlayer(playername1, score);
+                    insertPlayerInTree(sdl->tetris->treescores, player);
+                    saveScoreData(sdl->tetris->treescores,
+                                  "../data/scores.txt");
+                    displayScore(sdl->tetris->treescores);
+                    sdlgameFree(sdl);
+                    sdlgameInit(sdl);
+                    sdlgameLoop(sdl);
                     return;
                     break;
 
@@ -608,11 +630,11 @@ void sdlgameLoop(SDL *sdl)
                 break;
         }
 
-        //------------ TEST LIGNE REMPLIE et NOUVELLE PIECE -----------
-        //destructLines(tetris->board);
+/* Fin du switch principal*/
 
-        //-------------------------------------------------------------
         tempsActuel = SDL_GetTicks();
+        /*Si le jeu n'est pas en pause,
+        on déplace la pièce vers le bas toutes les x secondes */
         if (pausebutton == 0)
         {
             /* Si 1000 ms se sont écoulées depuis le dernier tour de boucle */
@@ -623,14 +645,17 @@ void sdlgameLoop(SDL *sdl)
                 SDLdisplayscreen(sdl->screen, sdl->gridge, sdl->kind,
                                  sdl->tetris, sdl->position1.x,
                                  sdl->position1.y);
-                tempsPrecedent = tempsActuel; /* Le temps "actuel" devient le temps "precedent" pour nos futurs calculs */
+                tempsPrecedent = tempsActuel; /* Le temps "actuel" devient
+                le temps "precedent" pour nos futurs calculs */
                 temp++;
             }
         }
         else
         {
-          sdl->textpause = TTF_RenderText_Blended(sdl->font, "PAUSE", colorWhite);
-          SDL_apply_surface(sdl->textpause, sdl->screen, 460, 275); // Blit de text
+          sdl->textpause = TTF_RenderText_Blended(sdl->font, "PAUSE",
+                                                  colorWhite);
+          /*Blit de text*/
+          SDL_apply_surface(sdl->textpause, sdl->screen, 460, 275);
         }
 
         /* Après pose de la currentPiece, la nextPiece devient la currentPiece
@@ -644,8 +669,8 @@ void sdlgameLoop(SDL *sdl)
         {
            /* Destruction des lignes et Calcul du score */
            n_lines = destructLines(sdl->tetris->board);
-           FMOD_System_PlaySound(sdl->system, FMOD_CHANNEL_FREE, sdl->explosion,
-                                  0, NULL);
+           FMOD_System_PlaySound(sdl->system, FMOD_CHANNEL_FREE,
+                                 sdl->explosion, 0, NULL);
 
            destructlines = destructlines + n_lines;
            score = calcScore(score, n_lines);
@@ -692,7 +717,8 @@ void sdlgameLoop(SDL *sdl)
                 /* Enregistrement du score */
                     player = createPlayer(playername1, score);
                     insertPlayerInTree(sdl->tetris->treescores, player);
-                    saveScoreData(sdl->tetris->treescores, "../data/scores.txt");
+                    saveScoreData(sdl->tetris->treescores,
+                                  "../data/scores.txt");
                     displayScore(sdl->tetris->treescores);
 
             }
@@ -722,7 +748,6 @@ void sdlgameLoop(SDL *sdl)
     while (endgame)
     {
         SDL_WaitEvent(&newevent);
-        //if(SDL_PollEvent(&event))
         switch(newevent.type)
         {
             case SDL_QUIT:
@@ -731,16 +756,15 @@ void sdlgameLoop(SDL *sdl)
             case SDL_KEYUP:
                 switch(newevent.key.keysym.sym)
                 {
-                    case SDLK_y: // Touche y
+                    case SDLK_y: /* Touche y */
 
-                    /*FMOD_Sound_Release(sdl->maintheme);*/
                     sdlgameFree(sdl);
                     sdlgameInit(sdl);
                     sdlgameLoop(sdl);
                     return;
                     break;
 
-                    case SDLK_n: // Touche n
+                    case SDLK_n: /* Touche n */
                         endgame=0;
                     break;
 
@@ -750,15 +774,12 @@ void sdlgameLoop(SDL *sdl)
         }
     }
     }
-    /*pause();*/
-
-
 }
 
 
 void sdlgameFree(SDL *sdl)
 {
-    // -------------------- FREE AND QUIT -----------------------
+    /* -------------------- FREE AND QUIT ----------------------- */
     int i;
 
     freeTetris(sdl->tetris);
@@ -787,8 +808,12 @@ void sdlgameFree(SDL *sdl)
     sdl->tuto=NULL;
     SDL_FreeSurface(sdl->tuto2);
     sdl->tuto2=NULL;
+    SDL_FreeSurface(sdl->tuto3);
+    sdl->tuto3=NULL;
     SDL_FreeSurface(sdl->textpause);
     sdl->textpause=NULL;
+    SDL_FreeSurface(sdl->entername);
+    sdl->entername=NULL;
     SDL_FreeSurface(sdl->textplayername);
     sdl->textplayername=NULL;
     SDL_FreeSurface(sdl->playername);
@@ -833,8 +858,8 @@ void sdlgameFree(SDL *sdl)
     sdl->system=NULL;
 
 
-    TTF_Quit(); // Arrêt de la TTF
-    SDL_Quit(); // Arrêt de la SDL (libération de la mémoire)
+    TTF_Quit(); /* Arrêt de la TTF */
+    SDL_Quit(); /* Arrêt de la SDL (libération de la mémoire) */
 
 }
 
