@@ -405,7 +405,7 @@ int destructLines(Board * board)
     int i, j;
     int n_lines = 0;
 
-    while(testLineEmpty(board, y) == FALSE)
+    while(testLineEmpty(board, y) == FALSE && y >= 0)
     {
 
         while(testLineFilled(board, y) == TRUE)
@@ -632,7 +632,6 @@ Tetris * startTetris()
     Piece * holdpiece;
     Tetris * tetris;
 
-    /*piece = createPiece(rand()%7, 0) ; /*currentPiece */
     holdpiece = NULL;
 
     initBoard(board); /* création ...*/
@@ -648,44 +647,40 @@ void tetrisTestRegression()
 {
 
     /* Variables nécessaires pour la première partie du test*/
-    /*Board * board = (Board *)malloc(sizeof(Board));
+    Board * board = (Board *)malloc(sizeof(Board));
     Piece * piece = NULL;
     Piece * nextpiece = NULL;
+    Piece * holdpiece = NULL;
     Tree * tree = (Tree *)malloc(sizeof(Tree));
-    int i, j;*/
+    int i, j;
 
 
     Tetris * tetris;
-    /*Variables nécessaires pour le test sur les étapes du jeu */
-    /*Piece * piece;*/
-    /*piece = createPiece(rand() % 7 , 0);*/
 
-    /* Variables nécessaires pour le fichier de scores */
-    char name[26] = "Adrien";
-    char name2[26] ="Alan";
-    Player * player;
+    /* Premier Test */
 
-    int i;
+    piece = createPiece(rand() % 7, 0);
+    nextpiece = createPiece(rand() % 7, 0);
+    holdpiece = createPiece(rand() % 7, 0);
 
-    /* Test : Fichier de scores */
-    tetris = startTetris();
+    printf("Test des fonctions de créations.\n");
+    initBoard(board);
+    printf("Création de la board + initialisation ... OK \n");
+    setCurrentPiece(board, piece);
 
-    for(i=1;i<=10;i++)
-    {
-        insertPlayerInTree(tetris->treescores, createPlayer(name2,i*100000));
-    }
+    printf("Création d'une piece de type : %u et d'orientation : %u \n",
+            piece->kind, piece->orientation);
+    tetris = createTetris(board, nextpiece, holdpiece, tree);
+    printf("Création du Tetris ... OK \n");
 
-    player = createPlayer(name, 1100000);
-    insertPlayerInTree(tetris->treescores, player);
-    /*openScoreData(tetris->treescores, "../data/scores.txt");*/
-    /*printf("Nb_elem : %u\n", tetris->treescores->nb_elements);*/
-    saveScoreData(tetris->treescores, "../data/scores.txt");
-    displayScore(tetris->treescores);
+    freeTetris(tetris);
+    printf("Libération de tetris et de tout ses champs ... OK\n");
 
     /* Test : Etapes du jeu */
+    printf("Test des étapes de jeu \n");
+    tetris = startTetris(); /*Lancement du tetris */
+    printf("Lancement du tetris ... OK. \n");
 
-    /*tetris = startTetris(); /*Lancement du tetris */
-    /*
     printf("Current piece : \n kind = %u , orientation = %u \n",
           tetris->board->currentPiece->kind,
           tetris->board->currentPiece->orientation);
@@ -693,13 +688,33 @@ void tetrisTestRegression()
           tetris->nextpiece->kind,
           tetris->nextpiece->orientation);
 
-    dropCurrentPiece(tetris->board); */
+    for(i = 0; i < 20; i++) // Affichage de la grille
+    {
+        for(j = 0; j < 10; j++)
+        {
+            printf("%u ", tetris->board->gridge[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+
+    dropCurrentPiece(tetris->board);
+
+    for(i = 0; i < 20; i++) // Affichage de la grille
+    {
+        for(j = 0; j < 10; j++)
+        {
+            printf("%u ", tetris->board->gridge[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
 
     /* Après pose de la currentPiece, la nextPiece devient la currentPiece
        puis nouvelle nextPiece */
-    /*gameStep(tetris);
+    gameStep(tetris);
 
-    /* Vérification que le gameStep marche bien
+    /* Vérification que le gameStep marche bien */
     printf("Après le gameStep \n");
     printf("Current piece : \n kind = %u , orientation = %u \n",
            tetris->board->currentPiece->kind,
@@ -707,20 +722,9 @@ void tetrisTestRegression()
     printf("Next piece : \n kind = %u , orientation = %u \n",
             tetris->nextpiece->kind,
             tetris->nextpiece->orientation);
-    freeTetris(tetris); */
 
-    /* Premier Test */
 
-    /*initBoard(board);
-    printf("Création de la board + initialisation ... OK \n");
-
-    nextpiece = createPiece(rand() % 7, 0);
-    printf("Création d'une piece de type : %u et d'orientation : %u \n",
-            piece->kind, piece->orientation);
-    tetris = createTetris(board, piece, tree);
-    printf("Création du Tetris ... OK \n");
-
-   for(i = 0; i < 20; i++)
+    for(i = 0; i < 20; i++) // Affichage de la grille
     {
         for(j = 0; j < 10; j++)
         {
@@ -729,71 +733,88 @@ void tetrisTestRegression()
         printf("\n");
     }
     printf("\n");
-    for(i = 0; i < 4; i++)
-    {
-        for(j = 0; j < 4; j++)
-        {
-            printf("%u ", PIECES[piece->kind][piece->orientation][i][j]);
-        }
 
-        printf("\n");
-    }
-    printf("\n");
-    newPiece(tetris->board, piece);
-
-    for(i = 0; i < 20; i++)
-    {
-        for(j = 0; j < 10; j++)
-        {
-            printf("%u ", tetris->board->gridge[i][j]);
-        }
-
-        printf("\n");
-    }
-    printf("\n");
-    printf("\n");
+    printf("On bouge la piece vers le bas. \n");
     moveCurrentPieceDown(tetris->board);
 
-    for(i = 0; i < 20; i++)
+    for(i = 0; i < 20; i++) // Affichage de la grille
     {
         for(j = 0; j < 10; j++)
         {
             printf("%u ", tetris->board->gridge[i][j]);
         }
-
         printf("\n");
     }
     printf("\n");
+
+    printf("On bouge la pièce vers la gauche. \n");
+    moveCurrentPieceLeft(tetris->board);
+
+    for(i = 0; i < 20; i++) // Affichage de la grille
+    {
+        for(j = 0; j < 10; j++)
+        {
+            printf("%u ", tetris->board->gridge[i][j]);
+        }
+        printf("\n");
+    }
     printf("\n");
+
+    printf("On bouge la pièce vers la droite. \n");
     moveCurrentPieceRight(tetris->board);
 
-    for(i = 0; i < 20; i++)
+    for(i = 0; i < 20; i++) // Affichage de la grille
     {
         for(j = 0; j < 10; j++)
         {
             printf("%u ", tetris->board->gridge[i][j]);
         }
-
         printf("\n");
     }
     printf("\n");
-    printf("\n");
 
-   dropCurrentPiece(tetris->board);
-   rotationPiece(tetris->board);
+    printf("On fait tourner la pièce.\n");
+    rotationPiece(tetris->board);
 
-    for(i = 0; i < 20; i++)
+    for(i = 0; i < 20; i++) // Affichage de la grille
     {
         for(j = 0; j < 10; j++)
         {
             printf("%u ", tetris->board->gridge[i][j]);
         }
-
         printf("\n");
     }
     printf("\n");
-    printf("\n"); */
 
-    /*freeTetris(tetris);*/
-    /*printf("Libération de tetris et de tout ses champs ... OK\n");*/
+    freeTetris(tetris);
+
+    printf("Libération de tetris et de tout ses champs ... OK\n");
+
+    /* Variables nécessaires pour le fichier de scores */
+    char name[26] = "Adrien";
+    char name2[26] ="Alan";
+    Player * player = NULL;
+
+    /* Test : Fichier de scores */
+    tetris = startTetris();
+    printf("Lancement de Tetris ... OK.\n");
+
+    for(i=1;i<=10;i++)
+    {
+        player = createPlayer(name2,i*100000);
+        insertPlayerInTree(tetris->treescores, player);
+    }
+
+    player = createPlayer(name, 1100000);
+    insertPlayerInTree(tetris->treescores, player);
+    saveScoreData(tetris->treescores, "../data/scores.txt");
+    printf("Scores correctement sauvés.\n");
+    freeTree(tetris->treescores);
+    printf("Libération de l'arbre de scores.\n");
+    tetris->treescores = malloc(sizeof(Tree));
+    initTree(tetris->treescores);
+    openScoreData(tetris->treescores, "../data/scores.txt");
+    displayScore(tetris->treescores);
+
+    freeTetris(tetris);
 }

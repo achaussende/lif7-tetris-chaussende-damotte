@@ -1,9 +1,13 @@
 PS 
-6 
-alan 0 
-alan 0 
-adrien 3000 
-alan 18000 
-alanthebest 31000 
-alan 70000 
+10 
+Alan 200000 
+Alan 300000 
+Alan 400000 
+Alan 500000 
+Alan 600000 
+Alan 700000 
+Alan 800000 
+Alan 900000 
+Alan 1000000 
+Adrien 1100000 
 End 
