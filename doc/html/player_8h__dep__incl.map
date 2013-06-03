@@ -1,0 +1,12 @@
+<map id="player.h" name="player.h">
+<area shape="rect" id="node3" href="$node_8h.html" title="Contient la déclaration des fonctions et structure pour les noeuds des arbres." alt="" coords="169,83,231,112"/>
+<area shape="rect" id="node21" href="$player_8c.html" title="Contient les fonctions, procédures d&#39;initialisation d&#39;un nouveau joueur." alt="" coords="255,83,321,112"/>
+<area shape="rect" id="node5" href="$binarytrees_8h.html" title="Contient la déclaration des fonctions et structure nécessaires aux arbres de scores." alt="" coords="101,160,197,189"/>
+<area shape="rect" id="node19" href="$node_8c.html" title="Contient les fonctions et structure pour les noeuds des arbres." alt="" coords="221,160,283,189"/>
+<area shape="rect" id="node7" href="$binarytrees_8c.html" title="Contient les fonctions et structures nécessaires aux arbres de scores." alt="" coords="51,237,147,267"/>
+<area shape="rect" id="node9" href="$tetris_8h.html" title="Contient la déclaration des fonctions, procédures, accesseurs et mutateurs, et la structure d&#39;un tetr..." alt="" coords="171,237,232,267"/>
+<area shape="rect" id="node11" href="$LoopTETRIS__SDL_8h.html" title="Contient la déclaration des fonctions et structures nécessaires à l&#39;affichage du jeu." alt="" coords="68,315,209,344"/>
+<area shape="rect" id="node17" href="$tetris_8c.html" title="Contient les fonctions, procédures, accesseurs et mutateurs du tetris." alt="" coords="233,315,295,344"/>
+<area shape="rect" id="node13" href="$LoopTETRIS__SDL_8c.html" title="Contient les fonctions d&#39;affichage du jeu via SDL." alt="" coords="5,392,147,421"/>
+<area shape="rect" id="node15" href="$main_8c.html" title="Main du jeu." alt="" coords="171,392,232,421"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="Tree" name="Tree">
+<area shape="rect" id="node2" href="$structNode.html" title="Structure d&#39;un Noeud." alt="" coords="8,104,61,133"/>
+<area shape="rect" id="node5" href="$structPlayer.html" title="Structure d&#39;un Player." alt="" coords="5,5,64,35"/>
+</map>
