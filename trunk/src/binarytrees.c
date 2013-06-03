@@ -52,6 +52,7 @@ void freeTree_recursion(Node * node)
 void freeTree (Tree * tree)
 {
     freeTree_recursion(tree->root);
+    tree->nb_elements = 0;
     free(tree);
 }
 

@@ -481,6 +481,7 @@ void sdlgameLoop(SDL *sdl)
             }
             SDL_FillRect(sdl->screen,&(sdl->positionName),
                          SDL_MapRGB(sdl->screen->format,0,0,0));
+            SDL_FreeSurface(sdl->playername);
             sdl->playername = TTF_RenderText_Solid(sdl->font,
                                                    playername1,colorWhite);
             SDL_BlitSurface(sdl->playername, NULL,
@@ -521,14 +522,11 @@ void sdlgameLoop(SDL *sdl)
 
     SDL_apply_surface(sdl->tuto, sdl->screen, 50, 500); /* Blit de tuto */
     SDL_apply_surface(sdl->tuto2, sdl->screen, 50, 520); /* Blit de tuto2 */
-<<<<<<< .mine
+
     SDL_FreeSurface(sdl->playername);
-=======
+
     SDL_apply_surface(sdl->tuto3, sdl->screen, 50, 540); /* Blit de tuto3 */
 
-    /* Création du joueur avec le pseudo récupéré*/
-    createPlayer(playername1,score);
->>>>>>> .r128
     sdl->playername = TTF_RenderText_Blended(sdl->font2, playername1,
                                              colorWhite);
     /* Blit du nom du joueur */
@@ -811,14 +809,11 @@ void sdlgameLoop(SDL *sdl)
         }
     }
     }
-<<<<<<< .mine
+
 
     free(playername1);
     /*pause();*/
 
-
-=======
->>>>>>> .r128
 }
 
 
