@@ -84,13 +84,6 @@ void sdlgameFree(SDL *sdl);
 
 /**
 
-        @brief Procédure d'affichage d'une SDL
-        @param pointeur sur une SDL
-*/
-void sdljeuAff(SDL *sdl);
-
-/**
-
         @brief Procédure d'application de surface
         @param pointeur sur une SDL_surface source,
         pointeur sur une SDL_surface destination,

@@ -7,5 +7,6 @@ var searchData=
   ['textplayername',['textplayername',['../structSDL.html#a7d522295031d8bfe01e7e2e06d2e8206',1,'SDL']]],
   ['treescores',['treescores',['../structTetris.html#ad4b14105fcf57828c4b2d6dd95730a36',1,'Tetris']]],
   ['tuto',['tuto',['../structSDL.html#a7f7c309b8a711e33f94c5bb17640ec83',1,'SDL']]],
-  ['tuto2',['tuto2',['../structSDL.html#aeebfd9c49f496dfd185434cd5e1563b7',1,'SDL']]]
+  ['tuto2',['tuto2',['../structSDL.html#aeebfd9c49f496dfd185434cd5e1563b7',1,'SDL']]],
+  ['tuto3',['tuto3',['../structSDL.html#a5b35e7f74b9a28215c798d058fefa11c',1,'SDL']]]
 ];
