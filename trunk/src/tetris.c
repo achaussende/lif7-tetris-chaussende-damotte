@@ -1,6 +1,7 @@
 /**
     \file [tetris.c]
-    \brief 	Contient les fonctions, procédures, accesseurs et mutateurs du tetris
+    \brief 	Contient les fonctions, procédures, accesseurs et
+    mutateurs du tetris
     \author {Damotte Alan, Chaussende Adrien}
     \version 2.1
     \date Avril-Mai 2013
@@ -11,7 +12,6 @@
 #include <string.h>
 
 #include "tetris.h"
-#include "bool.h"
 #include "shapes.h"
 
 
@@ -26,13 +26,13 @@ void flood(Board * board,int i, int j, int px, int py, int k, int o,
     {
         visited[py][px] = TRUE;
 
-        // On remplit la case de la valeur dans l'aire
+        /* On remplit la case de la valeur dans l'aire*/
         board->gridge[j][i] = color;
 
-        flood(board, i -1 , j, px - 1, py, k, o, color, visited); // à gauche
-        flood(board, i + 1, j, px + 1, py, k, o, color, visited); // à droite
-        flood(board, i, j - 1, px, py - 1, k, o, color, visited); // en haut
-        flood(board, i, j + 1, px, py + 1, k, o, color, visited); // en bas
+        flood(board, i -1 , j, px - 1, py, k, o, color, visited); /*à gauche*/
+        flood(board, i + 1, j, px + 1, py, k, o, color, visited); /*à droite*/
+        flood(board, i, j - 1, px, py - 1, k, o, color, visited); /*en haut*/
+        flood(board, i, j + 1, px, py + 1, k, o, color, visited); /*en bas*/
     }
 
 }
@@ -151,13 +151,14 @@ Bool isCurrentPieceMovable(Board * board, const int x, const int y)
     int l, m;
     Bool visited[4][4];
     Bool * movable = (Bool *)malloc(sizeof(Bool));
-    *movable = TRUE; // On suppose au départ qu'on peut bouger la pièce
+    *movable = TRUE; /* On suppose au départ qu'on peut bouger la pièce*/
     Bool movable2;
 
-    kind = getKind(board->currentPiece); // On récupère le type ...
-    orientation = getOrientation(board->currentPiece); // ... et l'orientation de la pièce
+    kind = getKind(board->currentPiece); /* On récupère le type ...*/
+    /* ... et l'orientation de la pièce*/
+    orientation = getOrientation(board->currentPiece);
 
-    clearPiece(board); // D'abord on efface la pièce courante
+    clearPiece(board); /* D'abord on efface la pièce courante*/
 
    /* On initialise le tableau visited pour le flood fill */
 
@@ -173,11 +174,11 @@ Bool isCurrentPieceMovable(Board * board, const int x, const int y)
    /* On fait notre flood fill */
     flood2(board,x, y, 2, 1, kind, orientation, movable, visited);
 
-    drawPiece(board); // On redessine notre pièce
+    drawPiece(board); /* On redessine notre pièce*/
     movable2 = *movable;
     free(movable);
 
-    return movable2; // On renvoie le résultat
+    return movable2; /* On renvoie le résultat */
 }
 
 
@@ -251,7 +252,8 @@ Bool testLineEmpty(Board * board, const unsigned int posY)
 
 /* initTetris : initialise les champs de la structure tetris */
 
-void initTetris(Tetris * tetris, Board * board, Piece * piece, Piece * holdpiece, Tree * tree)
+void initTetris(Tetris * tetris, Board * board, Piece * piece,
+                Piece * holdpiece, Tree * tree)
 {
     setTetrisBoard(tetris, board);
     setTetrisNextPiece(tetris, piece);
@@ -268,7 +270,8 @@ void freeTetris(Tetris * tetris)
     free(tetris);
 }
 
-Tetris * createTetris(Board * board, Piece * piece, Piece * holdpiece, Tree * tree)
+Tetris * createTetris(Board * board, Piece * piece, Piece * holdpiece,
+                      Tree * tree)
 {
     Tetris * tetris = (Tetris *)malloc(sizeof(Tetris));
 
@@ -295,38 +298,38 @@ void holdPiece(Tetris * tetris)
 
     if((*tetris).holdpiece == NULL)
     {
-        //On efface la pièce de la grille
+        /*On efface la pièce de la grille*/
         clearPiece(tetris->board);
 
-        // On passe la currentpiece en hold
+        /* On passe la currentpiece en hold*/
         setTetrisHoldPiece(tetris, tetris->board->currentPiece);
 
-        // On remet les coordonnées de la pièce en haut de grille
-        // Et la pièce à son orientation 0
+        /* On remet les coordonnées de la pièce en haut de grille */
+        /* Et la pièce à son orientation 0*/
         setPosX(tetris->holdpiece, 5);
         setPosY(tetris->holdpiece, 0);
         setOrientation(tetris->holdpiece, 0);
 
-        //Nextpiece = currentpiece et nouvelle nextpiece
+        /*Nextpiece = currentpiece et nouvelle nextpiece*/
         newPiece(tetris->board, tetris->nextpiece);
         setTetrisNextPiece(tetris, piece);
     }
     else
     {
-        //On efface la pièce de la grille
+        /*On efface la pièce de la grille */
         clearPiece(tetris->board);
 
-         // On stocke l'adresse de la holdpiece
+         /* On stocke l'adresse de la holdpiece */
         piecetemp = tetris->holdpiece;
 
-        // On passe la currentpiece en hold
+        /* On passe la currentpiece en hold */
         setTetrisHoldPiece(tetris, tetris->board->currentPiece);
 
-        // L'ancienne holdpiece devient la current
+        /* L'ancienne holdpiece devient la current */
         setCurrentPiece(tetris->board, piecetemp);
 
-        // On remet les coordonnées de la pièce en haut de grille
-        // Et la pièce à son orientation 0
+        /* On remet les coordonnées de la pièce en haut de grille */
+        /* Et la pièce à son orientation 0 */
         setPosX(tetris->holdpiece, 5);
         setPosY(tetris->holdpiece, 0);
         setOrientation(tetris->holdpiece, 0);
@@ -337,8 +340,8 @@ void moveCurrentPieceDown(Board * board)
 {
     int y = getPosY(board->currentPiece);
     int x = getPosX(board->currentPiece);
-
-    if(isCurrentPieceMovable(board, x , y + 1) == TRUE) /* Si on peut bouger la pièce vers le bas*/
+    /* Si on peut bouger la pièce vers le bas*/
+    if(isCurrentPieceMovable(board, x , y + 1) == TRUE)
     {
         clearPiece(board); /* On efface la pièce de son ancienne position */
         setPosY(board->currentPiece, y + 1); /* On incrémente son ordonnée */
@@ -446,7 +449,8 @@ void newPiece(Board * board,Piece * piece)
 {
     setPosX(piece, 5); /* On donne à la pièce les coordonnées ...*/
     setPosY(piece, 0); /* de l'origine */
-    setCurrentPiece(board, piece); /* On déclare cette pièce comme pièce courante de l'aire de jeu*/
+    /* On déclare cette pièce comme pièce courante de l'aire de jeu*/
+    setCurrentPiece(board, piece);
     drawPiece(board); /* On la dessine*/
 
 }
@@ -493,7 +497,8 @@ void displayScore(const Tree * scoreTree)
     printf("Tableau de scores :\n\n");
     if(scoreTree->root == NULL)
     {
-        printf("Pas encore de scores etablis."); // à remplacer par la fonction d'affichage adaptée
+        /*à remplacer par la fonction d'affichage adaptée*/
+        printf("Pas encore de scores etablis.");
     }
     else
     {
@@ -564,12 +569,14 @@ void saveScoreData(const Tree * ptree, const char filename[])
 
     if(f == NULL)
     {
-        printf("Erreur lors de l'ouverture du fichier de scores %s\n", filename);
+        printf("Erreur lors de l'ouverture du fichier de scores %s\n",
+               filename);
         assert( f );
     }
 
-    fprintf(f, "PS \n"); //Players et scores
-    fprintf(f, "%u \n", getTreeNb_Elements(ptree) ); // Nombres de Players/Scores
+    fprintf(f, "PS \n"); /*Players et scores*/
+    /* Nombres de Players/Scores*/
+    fprintf(f, "%u \n", getTreeNb_Elements(ptree) );
     saveScoreData_Node(ptree->root, f);
     fprintf(f, "End \n");
 
@@ -585,7 +592,7 @@ void dropCurrentPiece(Board * board)
     int x = getPosX(board->currentPiece);
     int y = getPosY(board->currentPiece);
 
-    // Tant qu'on peut toujours bouger la pièce vers le bas
+    /* Tant qu'on peut toujours bouger la pièce vers le bas */
     while(isCurrentPieceMovable(board, x, y + 1) == TRUE)
     {
         clearPiece(board);
@@ -601,9 +608,10 @@ Bool testGameOver(Board * board)
 
     for(i = 0; i < 10; ++i)
     {
-        if(board->gridge[1][i] != FREE) // Si il y a un bloc sur la première ligne de l'aire
+        /* Si il y a un bloc sur la première ligne de l'aire */
+        if(board->gridge[1][i] != FREE)
         {
-            return TRUE; // C'est que la partie est finie
+            return TRUE; /* C'est que la partie est finie */
         }
     }
 
@@ -624,14 +632,14 @@ Tetris * startTetris()
     Piece * holdpiece;
     Tetris * tetris;
 
-    /*piece = createPiece(rand()%7, 0) ; //currentPiece */
+    /*piece = createPiece(rand()%7, 0) ; /*currentPiece */
     holdpiece = NULL;
 
-    initBoard(board); // création ...
-    newPiece(board, createPiece(rand()%7, 0)); // de board
+    initBoard(board); /* création ...*/
+    newPiece(board, createPiece(rand()%7, 0)); /* de board */
     initTree(tree);
 
-    piece = createPiece(rand()%7, 0); //nextpiece
+    piece = createPiece(rand()%7, 0); /*nextpiece */
     tetris = createTetris(board, piece, holdpiece, tree);
     return tetris;
 }
@@ -639,7 +647,7 @@ Tetris * startTetris()
 void tetrisTestRegression()
 {
 
-    // Variables nécessaires pour la première partie du test
+    /* Variables nécessaires pour la première partie du test*/
     /*Board * board = (Board *)malloc(sizeof(Board));
     Piece * piece = NULL;
     Piece * nextpiece = NULL;
@@ -648,9 +656,9 @@ void tetrisTestRegression()
 
 
     Tetris * tetris;
-    //Variables nécessaires pour le test sur les étapes du jeu
-    //Piece * piece;
-    //piece = createPiece(rand() % 7 , 0);
+    /*Variables nécessaires pour le test sur les étapes du jeu */
+    /*Piece * piece;*/
+    /*piece = createPiece(rand() % 7 , 0);*/
 
     /* Variables nécessaires pour le fichier de scores */
     char name[26] = "Adrien";
@@ -669,15 +677,15 @@ void tetrisTestRegression()
 
     player = createPlayer(name, 1100000);
     insertPlayerInTree(tetris->treescores, player);
-    //openScoreData(tetris->treescores, "../data/scores.txt");
-    //printf("Nb_elem : %u\n", tetris->treescores->nb_elements);
+    /*openScoreData(tetris->treescores, "../data/scores.txt");*/
+    /*printf("Nb_elem : %u\n", tetris->treescores->nb_elements);*/
     saveScoreData(tetris->treescores, "../data/scores.txt");
     displayScore(tetris->treescores);
 
     /* Test : Etapes du jeu */
 
-    /*tetris = startTetris(); // Lancement du tetris
-
+    /*tetris = startTetris(); /*Lancement du tetris */
+    /*
     printf("Current piece : \n kind = %u , orientation = %u \n",
           tetris->board->currentPiece->kind,
           tetris->board->currentPiece->orientation);
@@ -691,7 +699,7 @@ void tetrisTestRegression()
        puis nouvelle nextPiece */
     /*gameStep(tetris);
 
-    // Vérification que le gameStep marche bien
+    /* Vérification que le gameStep marche bien
     printf("Après le gameStep \n");
     printf("Current piece : \n kind = %u , orientation = %u \n",
            tetris->board->currentPiece->kind,
@@ -701,7 +709,7 @@ void tetrisTestRegression()
             tetris->nextpiece->orientation);
     freeTetris(tetris); */
 
-    // Premier Test
+    /* Premier Test */
 
     /*initBoard(board);
     printf("Création de la board + initialisation ... OK \n");
@@ -712,7 +720,7 @@ void tetrisTestRegression()
     tetris = createTetris(board, piece, tree);
     printf("Création du Tetris ... OK \n");
 
-   for(i = 0; i < 20; i++) // affichage grille
+   for(i = 0; i < 20; i++)
     {
         for(j = 0; j < 10; j++)
         {
@@ -721,7 +729,7 @@ void tetrisTestRegression()
         printf("\n");
     }
     printf("\n");
-    for(i = 0; i < 4; i++) //affichage pièce créée
+    for(i = 0; i < 4; i++)
     {
         for(j = 0; j < 4; j++)
         {
@@ -733,7 +741,7 @@ void tetrisTestRegression()
     printf("\n");
     newPiece(tetris->board, piece);
 
-    for(i = 0; i < 20; i++) // affichage grille
+    for(i = 0; i < 20; i++)
     {
         for(j = 0; j < 10; j++)
         {
@@ -746,7 +754,7 @@ void tetrisTestRegression()
     printf("\n");
     moveCurrentPieceDown(tetris->board);
 
-    for(i = 0; i < 20; i++) // affichage grille
+    for(i = 0; i < 20; i++)
     {
         for(j = 0; j < 10; j++)
         {
@@ -759,7 +767,7 @@ void tetrisTestRegression()
     printf("\n");
     moveCurrentPieceRight(tetris->board);
 
-    for(i = 0; i < 20; i++) // affichage grille
+    for(i = 0; i < 20; i++)
     {
         for(j = 0; j < 10; j++)
         {
@@ -774,7 +782,7 @@ void tetrisTestRegression()
    dropCurrentPiece(tetris->board);
    rotationPiece(tetris->board);
 
-    for(i = 0; i < 20; i++) // affichage grille
+    for(i = 0; i < 20; i++)
     {
         for(j = 0; j < 10; j++)
         {
@@ -786,6 +794,6 @@ void tetrisTestRegression()
     printf("\n");
     printf("\n"); */
 
-    //freeTetris(tetris);
-    //printf("Libération de tetris et de tout ses champs ... OK\n");
+    /*freeTetris(tetris);*/
+    /*printf("Libération de tetris et de tout ses champs ... OK\n");*/
 }

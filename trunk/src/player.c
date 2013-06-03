@@ -1,6 +1,7 @@
 /**
     \file [player.c]
-    \brief 	Contient les fonctions, procédures d'initialisation d'un nouveau joueur
+    \brief 	Contient les fonctions, procédures
+    d'initialisation d'un nouveau joueur
     \author {Damotte Alan, Chaussende Adrien}
     \version 0.1
     \date Mars 2013
@@ -32,7 +33,7 @@ char * getName (const Player * player)
     return player->name;
 }
 
-void setScore (Player * player, unsigned int score)
+void setScore (Player * player, const unsigned int score)
 {
     player->score = score;
 }
@@ -44,7 +45,7 @@ unsigned int getScore (const Player * player)
 
 /* Méthodes */
 
-void initPlayer(Player * player, const char * name, unsigned int score)
+void initPlayer(Player * player, const char * name, const unsigned int score)
 {
     if(player == NULL)
     {
@@ -57,7 +58,7 @@ void initPlayer(Player * player, const char * name, unsigned int score)
     }
 }
 
-Player * createPlayer(const char * name, unsigned int score)
+Player * createPlayer(const char * name, const unsigned int score)
 {
     Player * player = (Player*)malloc(sizeof(Player));
 

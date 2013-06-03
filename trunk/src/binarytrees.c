@@ -1,6 +1,7 @@
 /**
     \file [binarytrees.c]
-    \brief 	Contient les fonctions et structures nécessaires aux arbres de scores
+    \brief 	Contient les fonctions et structures
+    nécessaires aux arbres de scores
     \author {Damotte Alan, Chaussende Adrien}
     \version 1.1
     \date Mars-Avril 2013

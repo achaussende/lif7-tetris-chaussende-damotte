@@ -19,7 +19,7 @@ int main()
     sdlgameLoop(&sdl);
     sdlgameFree(&sdl);
 
-    //tetrisTestRegression();
+    /*tetrisTestRegression();*/
 
     return 0;
 }

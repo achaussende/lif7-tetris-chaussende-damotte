@@ -1,5 +1,4 @@
 /* shapes.h */
-
 /**
     \file [shapes.h]
     \brief 	Contient la déclaration des formes des pièces
@@ -11,16 +10,9 @@
 #ifndef SHAPES_H
 #define SHAPES_H
 
-//const int NB_KINDS = 7; // Le nombre de types de pièces qu'on a
-//const int NB_ROTATIONS = 4; // Le nombre de rotations de chaque pièce
-//const int SIZE = 4; // La taille de la matrice de chaque rotation
-
-/* const int PIVOT_X = 1;
-const int PIVOT_Y = 2; */
-
   static int PIECES[7][4][4][4] =
 {
-    { // O
+    { /* O*/
         {
             {0, 0, 0, 0},
             {0, 1, 2, 0},
@@ -50,7 +42,7 @@ const int PIVOT_Y = 2; */
         }
     },
 
-    { // I
+    { /* I */
         {
             {0, 0, 0, 0},
             {1, 1, 2, 1},
@@ -80,7 +72,7 @@ const int PIVOT_Y = 2; */
         }
     },
 
-    { // S
+    { /* S */
         {
             {0, 0, 0, 0},
             {0, 0, 2, 1},
@@ -110,7 +102,7 @@ const int PIVOT_Y = 2; */
         }
     },
 
-    { // Z
+    { /* Z */
         {
             {0, 0, 0, 0},
             {0, 1, 2, 0},
@@ -140,7 +132,7 @@ const int PIVOT_Y = 2; */
         }
     },
 
-    { // L
+    { /* L */
         {
             {0, 0, 0, 0},
             {0, 1, 2, 1},
@@ -170,7 +162,7 @@ const int PIVOT_Y = 2; */
         }
     },
 
-    { // J
+    { /* J */
         {
             {0, 0, 0, 0},
             {0, 1, 2, 1},
@@ -200,7 +192,7 @@ const int PIVOT_Y = 2; */
         }
     },
 
-    { // T
+    { /* T*/
         {
             {0, 0, 0, 0},
             {0, 1, 2, 1},

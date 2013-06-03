@@ -1,6 +1,7 @@
 /**
     \file [board.c]
-    \brief 	Contient les fonctions, procédures, accesseurs et mutateurs nécessaires à la création d'une board
+    \brief 	Contient les fonctions, procédures,
+    accesseurs et mutateurs nécessaires à la création d'une board
     \author {Damotte Alan, Chaussende Adrien}
     \version 1.0
     \date Avril 2013
@@ -36,13 +37,14 @@ void initBoard (Board * board)
         }
     }
 
-    setCurrentPiece(board, NULL); // Pas de pièce de courante
+    setCurrentPiece(board, NULL); /* Pas de pièce de courante*/
 
 }
 
 void freeBoard (Board * board)
 {
     freePiece(board->currentPiece);
-    initBoard(board); //mets toutes les cases de gridge à 0 et currentPiece NULL
+    /*mets toutes les cases de gridge à 0 et currentPiece NULL*/
+    initBoard(board);
     free(board);
 }
