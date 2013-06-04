@@ -811,8 +811,6 @@ void sdlgameLoop(SDL *sdl)
     }
     }
 
-
-    free(playername1);
     /*pause();*/
 
 }
