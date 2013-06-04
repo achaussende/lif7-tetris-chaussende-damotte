@@ -294,10 +294,11 @@ void holdPiece(Tetris * tetris)
 {
     Piece * piecetemp;
     Piece * piece;
-    piece = createPiece(rand()%7, 0);
 
     if((*tetris).holdpiece == NULL)
     {
+
+        piece = createPiece(rand()%7, 0);
         /*On efface la pièce de la grille*/
         clearPiece(tetris->board);
 
@@ -333,6 +334,7 @@ void holdPiece(Tetris * tetris)
         setPosX(tetris->holdpiece, 5);
         setPosY(tetris->holdpiece, 0);
         setOrientation(tetris->holdpiece, 0);
+
     }
 }
 
