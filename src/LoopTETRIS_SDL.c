@@ -416,8 +416,8 @@ void sdlgameLoop(SDL *sdl)
     int nbLetters = 1;
     int begin=1;
 
-    char *playername1;
-    playername1 = (char*)calloc(nbLetters,sizeof(char));
+    char playername1[26];
+    /*playername1 = (char*)calloc(nbLetters,sizeof(char));*/
     playername1[nbLetters-1] = '\0';
 
     sdl->positionName.x = 420;
@@ -451,8 +451,8 @@ void sdlgameLoop(SDL *sdl)
                              SDL_MapRGB(sdl->screen->format,0,0,0));
                 nbLetters--;
 
-                playername1=(char*)realloc(playername1,
-                                           nbLetters*sizeof(char));
+                /*playername1=(char*)realloc(playername1,
+                                           nbLetters*sizeof(char));*/
                 playername1[nbLetters-1] = '\0';
 
                 sdl->playername = TTF_RenderText_Solid(sdl->font,
@@ -470,8 +470,8 @@ void sdlgameLoop(SDL *sdl)
                     {
                         SDL_FillRect(sdl->screen,&(sdl->positionName),
                                      SDL_MapRGB(sdl->screen->format,0,0,0));
-                        playername1 = (char*)realloc(playername1,
-                                            (nbLetters + 1)*sizeof(char));
+                        /*playername1 = (char*)realloc(playername1,
+                                            (nbLetters + 1)*sizeof(char));*/
 
                         playername1[nbLetters-1] = beginevent.key.keysym.sym;
                         playername1[nbLetters] = '\0';
@@ -648,6 +648,7 @@ void sdlgameLoop(SDL *sdl)
                     saveScoreData(sdl->tetris->treescores,
                                   "../data/scores.txt");
                     displayScore(sdl->tetris->treescores);
+
                     sdlgameFree(sdl);
                     sdlgameInit(sdl);
                     sdlgameLoop(sdl);
