@@ -656,6 +656,11 @@ void tetrisTestRegression()
     Tree * tree = (Tree *)malloc(sizeof(Tree));
     int i, j;
 
+    /* Variables nécessaires pour le fichier de scores */
+    char name[26] = "Adrien";
+    char name2[26] ="Alan";
+    Player * player = NULL;
+
 
     Tetris * tetris;
 
@@ -792,10 +797,7 @@ void tetrisTestRegression()
 
     printf("Libération de tetris et de tout ses champs ... OK\n");
 
-    /* Variables nécessaires pour le fichier de scores */
-    char name[26] = "Adrien";
-    char name2[26] ="Alan";
-    Player * player = NULL;
+
 
     /* Test : Fichier de scores */
     tetris = startTetris();

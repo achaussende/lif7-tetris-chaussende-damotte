@@ -113,13 +113,13 @@ void deleteTreeMin(Tree * tree)
 
         if(p->right_child == NULL)
         {
-            free(p);
+            freeNode(p);
             n->left_child = NULL;
         }
         else
         {
             n->left_child = p->right_child;
-            free(p);
+            freeNode(p);
         }
     }
 
