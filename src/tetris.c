@@ -800,6 +800,8 @@ void tetrisTestRegression()
 
 
     /* Test : Fichier de scores */
+
+    printf("Test : Fichier de scores.\n");
     tetris = startTetris();
     printf("Lancement de Tetris ... OK.\n");
 
